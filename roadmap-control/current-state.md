@@ -1,9 +1,9 @@
 # CURRENT STATE V3 — EMBEDDED/FIRMWARE ROADMAP
 
 **Document ID:** `CURRENT_STATE_V3`
-**Version:** `3.0.0`
+**Version:** `3.0.1`
 **State type:** Operational snapshot — mô tả thực tế hiện tại, không tự tạo luật mới
-**Generated at:** `2026-08-09 02:57 +07:00`
+**Generated at:** `2026-08-09 05:59 +07:00`
 **Timezone:** `Asia/Ho_Chi_Minh`
 **Owner:** Trần Lê Minh
 **Status:** `FROZEN — PRE-SPRINT-0 BASELINE`
@@ -16,11 +16,15 @@
 |---|---|---|---|
 | 1 | `SYSTEM_SPEC_V3.md` — `3.0.0` | `FROZEN BASELINE` | Luật tối cao: PASS, evidence, AI integrity, recovery, state model |
 | 2 | `EMBEDDED_ROADMAP_V3.1.docx` — `3.1.0` | `FROZEN ROADMAP BASELINE` | Học gì, khi nào, gate, deadline, project/career milestones |
-| 3 | `MASTER_PROMPT_V3.md` — `3.0.0` | `FROZEN CANDIDATE` | Cách ChatGPT vận hành roadmap |
-| 4 | `CURRENT_STATE_V3.md` — `3.0.0` | `ACTIVE` | Trạng thái thực tế hiện tại |
-| 5 | Repo / logs / tests / captures | `ACTIVE` — Pre-Sprint-0 repo/control-plane evidence | Bằng chứng thực tế |
+| 3 | `MASTER_PROMPT_V3.md` — `3.0.2` | `FROZEN BASELINE` | Cách ChatGPT vận hành roadmap |
+| 4 | `CURRENT_STATE_V3` — physical path `roadmap-control/current-state.md` — `3.0.1` | `ACTIVE` | Trạng thái thực tế hiện tại |
+| 5 | `ROADMAP_REVIEW_LOG.md` — `1.0.1` | `ACTIVE / NON-AUTHORITATIVE` | Review checkpoint, concern và change proposal dựa evidence |
+| 6 | Repo / logs / tests / captures | `ACTIVE` — Pre-Sprint-0 repo/control-plane evidence | Bằng chứng thực tế |
 
 **Quy tắc:** nếu file này mâu thuẫn với ba tầng phía trên, file này phải được sửa để phản ánh đúng luật; không dùng `CURRENT_STATE` để thay đổi roadmap.
+
+**Canonical live repo:** `https://github.com/MinhSit/embedded-firmware-journey-v3`
+**Physical path của state này:** `roadmap-control/current-state.md`
 
 ---
 
@@ -67,6 +71,10 @@ NOT_ACTIVE.
 Critical Path Risk:
 LOW.
 Pre-Sprint-0 infrastructure polish phải dừng; chỉ mở lại nếu phát hiện defect thật.
+
+Roadmap Review:
+NOT_DUE. `CP-00 — Sprint 0 Exit` chỉ DUE khi Sprint 0 technical preflight đã tới exit decision hoặc trước transition sang Week 1.
+Review source: `docs/system/ROADMAP_REVIEW_LOG.md` — `1.0.1`.
 
 Exact Next Action:
 Chờ lệnh explicit `START SPRINT 0`. Khi bắt đầu, update CURRENT_STATE sang Sprint 0 và thực thi technical preflight theo roadmap.
@@ -481,6 +489,12 @@ main
 
 Hardening evidence commit:
 `b613d64` — `chore(repo): finalize pre-Sprint-0 repository hardening`
+
+Latest observed repository HEAD before this consistency snapshot:
+`0e28385` — `fix(system): integrate roadmap review checkpoints into boot`
+
+Current-state self-reference rule:
+Commit chứa chính snapshot này không thể được biết trước khi commit; sau khi commit/push, dùng `git rev-parse HEAD` làm current repo HEAD. Freeze evidence commit `b613d64` vẫn giữ nguyên vai trò lịch sử.
 
 Observed freeze state:
 working tree clean;
@@ -946,13 +960,14 @@ Theo thứ tự:
 1. SYSTEM_SPEC_V3.md
 2. EMBEDDED_ROADMAP_V3.1.docx
 3. MASTER_PROMPT_V3.md
-4. CURRENT_STATE_V3.md
-5. roadmap-control/competency-ledger.md
-6. roadmap-control/ai-usage-log.md
-7. roadmap-control/daily-log.md
-8. weekly scorecard gần nhất
-9. relevant source/tests/evidence
-10. repo commit/release liên quan
+4. roadmap-control/current-state.md
+5. docs/system/ROADMAP_REVIEW_LOG.md
+6. roadmap-control/competency-ledger.md
+7. roadmap-control/ai-usage-log.md
+8. roadmap-control/daily-log.md
+9. weekly scorecard gần nhất trong roadmap-control/weekly-scorecards/
+10. relevant source/tests/evidence
+11. repo commit/release liên quan
 ```
 
 Historical reference if needed:
@@ -982,6 +997,7 @@ Cập nhật `CURRENT_STATE_V3.md` sau:
 - `GATE`;
 - `RETEST`;
 - `WEEKLY REVIEW`;
+- formal `ROADMAP REVIEW` / review entry làm thay đổi review status;
 - `RECOVERY`;
 - artifact release/tag;
 - build/test baseline change;
@@ -1086,10 +1102,14 @@ Roadmap:
 EMBEDDED_ROADMAP_V3.1.docx — 3.1.0
 
 Master Prompt:
-MASTER_PROMPT_V3.md — 3.0.0
+MASTER_PROMPT_V3.md — 3.0.2
 
 Current State:
-CURRENT_STATE_V3.md — 3.0.0
+roadmap-control/current-state.md — CURRENT_STATE_V3 3.0.1
+
+Roadmap Review Log:
+docs/system/ROADMAP_REVIEW_LOG.md — 1.0.1
+Status: NOT_DUE; next checkpoint CP-00 at Sprint 0 Exit.
 
 Calendar:
 PRE-SPRINT-0 — 09/08/2026
@@ -1174,6 +1194,6 @@ Do NOT start Week 1 before Sprint 0 mandatory technical preflight is truthfully 
 
 ---
 
-**End of CURRENT_STATE_V3 3.0.0**
+**End of CURRENT_STATE_V3 3.0.1**
 
 **NEXT ACTION recorded in this state:** wait for explicit `START SPRINT 0`; then update state and begin Sprint 0 technical preflight.
