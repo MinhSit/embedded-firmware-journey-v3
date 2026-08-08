@@ -3,10 +3,10 @@
 **Document ID:** `CURRENT_STATE_V3`  
 **Version:** `3.0.0`  
 **State type:** Operational snapshot — mô tả thực tế hiện tại, không tự tạo luật mới  
-**Generated at:** `2026-08-09 01:26 +07:00`  
+**Generated at:** `2026-08-09 02:09 +07:00`  
 **Timezone:** `Asia/Ho_Chi_Minh`  
 **Owner:** Trần Lê Minh  
-**Status:** `ACTIVE BASELINE — PRE-SPRINT-0 EXECUTION`
+**Status:** `ACTIVE — SPRINT 0 PREFLIGHT`
 
 ---
 
@@ -18,7 +18,7 @@
 | 2 | `EMBEDDED_ROADMAP_V3.1.docx` — `3.1.0` | `FROZEN ROADMAP BASELINE` | Học gì, khi nào, gate, deadline, project/career milestones |
 | 3 | `MASTER_PROMPT_V3.md` — `3.0.0` | `FROZEN CANDIDATE` | Cách ChatGPT vận hành roadmap |
 | 4 | `CURRENT_STATE_V3.md` — `3.0.0` | `ACTIVE` | Trạng thái thực tế hiện tại |
-| 5 | Repo / logs / tests / captures | Chưa bootstrap V3 | Bằng chứng thực tế |
+| 5 | Repo / logs / tests / captures | `ACTIVE` — Sprint 0 Block 1 complete | Bằng chứng thực tế |
 
 **Quy tắc:** nếu file này mâu thuẫn với ba tầng phía trên, file này phải được sửa để phản ánh đúng luật; không dùng `CURRENT_STATE` để thay đổi roadmap.
 
@@ -31,19 +31,23 @@ Calendar Position:
 Sprint 0 — 09/08/2026 — Khởi tạo V3 và tái xác minh.
 
 Execution Position:
-Sprint 0 / Block 1 — CHƯA BẮT ĐẦU dưới hệ thống V3.
+Sprint 0 / Block 2 — STM32 preflight — NOT_STARTED.
 
 Artifact Position:
-V3: chưa có artifact PASS.
-Pre-V3: có artifact/setup cũ dùng làm reference lịch sử, nhưng phải revalidate trong Sprint 0 trước khi nhập vào baseline V3.
+Sprint 0 / Block 1 — V3 repository + roadmap control plane — ARTIFACT_PASS.
+Repo đã được khởi tạo sạch, commit, push lên `origin/main`; các control files bắt buộc hiện đã có.
+Pre-V3 artifacts/setup vẫn chỉ là historical reference và chưa được nhập làm competency evidence.
 
 Competency Position:
 Không có competency V3 nào được xác minh.
 Week 1 pre-V3 C evidence = COMPETENCY_UNVERIFIED / RETEST REQUIRED.
 
 Last Artifact PASS:
-V3: NONE.
-Historical pre-V3 setup/hardware evidence exists; pending Sprint 0 revalidation.
+Sprint 0 / Block 1 — repository + control plane bootstrap.
+Evidence:
+- `8a1f6f3` — `chore(repo): bootstrap V3 roadmap control structure`
+- `2435ec4` — `chore(repo): complete Sprint 0 control files`
+- `main` đã push và đồng bộ với `origin/main` tại thời điểm snapshot.
 
 Last Competency PASS:
 V3: NONE.
@@ -64,8 +68,7 @@ Critical Path Risk:
 LOW hiện tại; chuyển MEDIUM nếu Sprint 0 không đóng được các blocker bắt buộc trước Week 1.
 
 Exact Next Action:
-Tạo thư mục/repo V3 mới và tạo các control files tối thiểu:
-current-state.md, daily-log.md, competency-ledger.md, ai-usage-log.md.
+Ở phiên học tiếp theo, kết nối Nucleo-F446RE bằng USB data cable và xác minh Windows/ST-Link nhận board trước khi mở STM32CubeIDE.
 ```
 
 ---
@@ -85,16 +88,25 @@ Next calendar position: Week 1 / Day 1 — 2026-08-10
 ## 2.2 Execution Position — vị trí đang thực sự làm
 
 ```text
-Sprint 0 / Block 1
+Sprint 0 / Block 2 — STM32 preflight
 Status: NOT_STARTED
-Reason: CURRENT_STATE V3 đang được tạo trước khi bắt đầu bootstrap repo.
+Reason: Block 1 repository/control-plane bootstrap đã PASS; bước thực thi tiếp theo là tái xác minh STM32 build/flash/debug.
 ```
 
 ## 2.3 Artifact Position — sản phẩm gần nhất có evidence
 
 ```text
 V3 artifact position:
-NONE YET
+Sprint 0 / Block 1 — ARTIFACT_PASS
+
+Evidence:
+- Repo: `https://github.com/MinhSit/embedded-firmware-journey-v3`
+- Branch: `main`
+- Commit `8a1f6f3`
+- Commit `2435ec4`
+- Required control files present, including `daily-log.md`
+- Working tree clean after push
+- `origin/main` synchronized at the time of evidence capture
 
 Historical/pre-V3 artifact state:
 REFERENCE_ONLY until Sprint 0 revalidation.
@@ -212,7 +224,7 @@ Retest using a fresh AI-0 gate.
 | Pre-V3 Week 1 code | `CONTAMINATED FOR COMPETENCY` | Giữ reference; không dùng làm independent evidence |
 | Pre-V3 Week 1 tests | `ARTIFACT REFERENCE` | Có thể học từ test design nhưng fresh exercises/gate phải độc lập |
 | Pre-V3 commit history | `HISTORICAL` | Archive nếu cần; không dùng commit count để claim competency |
-| Sprint 0 setup | `NOT_STARTED` | AI-1/AI-2 setup; AI-3 chỉ sau attempt nếu cần debug |
+| Sprint 0 setup | `IN_PROGRESS` | Block 1 PASS; AI-1/AI-2 setup, AI-3 chỉ sau attempt nếu cần debug |
 | Week 1 V3 practice | `PLANNED` | AI-1/AI-2 mặc định; AI-3 sau meaningful attempt |
 | Week 1 V3 gate | `PLANNED` | AI-0 |
 
@@ -224,25 +236,56 @@ Retest using a fresh AI-0 gate.
 
 > **Đến cuối ngày 09/08/2026, môi trường V3 phải đủ sạch và tái hiện được để Week 1 bắt đầu ngày 10/08 mà không mang theo competency PASS giả từ attempt cũ.**
 
+## 5.1.1 Evidence vừa xác nhận — Repo Bootstrap
+
+```text
+Local root:
+D:\embedded-firmware-journey-v3
+
+Remote:
+https://github.com/MinhSit/embedded-firmware-journey-v3
+
+Branch:
+main
+
+Commits:
+8a1f6f3 — chore(repo): bootstrap V3 roadmap control structure
+2435ec4 — chore(repo): complete Sprint 0 control files
+
+Observed Git state after push:
+HEAD -> main
+origin/main synchronized
+working tree clean
+```
+
+Đây là **artifact/bootstrap evidence**, không phải competency evidence.
+
 ## 5.2 Sprint 0 Checklist
 
 ### Block 1 — Repo/control plane
 
-- [ ] Tạo repo V3 mới.
-- [ ] Tạo `.gitignore`.
-- [ ] Tạo `secrets.example`.
-- [ ] Tạo `roadmap-control/`.
-- [ ] Đưa `CURRENT_STATE_V3.md` vào repo với tên ổn định.
-- [ ] Tạo `daily-log.md`.
-- [ ] Tạo `competency-ledger.md`.
-- [ ] Tạo `ai-usage-log.md`.
-- [ ] Tạo `weekly-scorecards/`.
-- [ ] Tạo `recovery/`.
-- [ ] Ghi source-of-truth versions.
-- [ ] Initial commit.
-- [ ] Git push.
+- [x] Tạo repo V3 mới.
+- [x] Tạo `.gitignore`.
+- [x] Tạo `secrets.example`.
+- [x] Tạo `roadmap-control/`.
+- [x] Đưa `CURRENT_STATE_V3.md` vào repo với tên ổn định `roadmap-control/current-state.md`.
+- [x] Tạo `daily-log.md`.
+- [x] Tạo `competency-ledger.md`.
+- [x] Tạo `ai-usage-log.md`.
+- [x] Tạo `weekly-scorecards/`.
+- [x] Tạo `recovery/`.
+- [x] Ghi source-of-truth versions.
+- [x] Initial commit.
+- [x] Git push.
 
-**Status:** `NOT_STARTED`.
+**Status:** `PASS`.
+
+**Evidence:**
+- Repo: `https://github.com/MinhSit/embedded-firmware-journey-v3`
+- `8a1f6f3` — bootstrap V3 roadmap control structure.
+- `2435ec4` — complete Sprint 0 control files.
+- Branch `main` tracked and pushed to `origin/main`.
+- Working tree clean after push.
 
 ### Block 2 — STM32 preflight
 
@@ -302,8 +345,8 @@ Retest using a fresh AI-0 gate.
 
 ## 6.1 Mandatory exit criteria
 
-- [ ] V3 repo tồn tại và push được.
-- [ ] Control files tồn tại.
+- [x] V3 repo tồn tại và push được.
+- [x] Control files tồn tại.
 - [ ] STM32 build/flash/debug được revalidated.
 - [ ] ESP32 build/flash/monitor được revalidated.
 - [ ] Host compiler/test được revalidated.
@@ -319,19 +362,26 @@ Retest using a fresh AI-0 gate.
 
 ```text
 Completed:
-CURRENT_STATE_V3 baseline created.
+- CURRENT_STATE_V3 baseline created.
+- V3 repository created and pushed.
+- `main` branch active and tracked on `origin/main`.
+- Core folder structure created.
+- System documents stored in `docs/system/`.
+- Required roadmap-control files created.
+- `evidence/sprint-00/` initialized.
+- Bootstrap commits `8a1f6f3` and `2435ec4` pushed.
 
 Missing:
-V3 repo bootstrap;
-STM32 revalidation;
-ESP32 revalidation;
-host test;
-UART/logic analyzer revalidation;
-ARM GCC check;
-CMake check;
-inventory/fallback;
-final preflight evidence;
-initial V3 commit/push.
+- STM32 revalidation;
+- ESP32 revalidation;
+- host compiler/test revalidation;
+- UART verification;
+- logic analyzer verification;
+- ARM GCC check;
+- CMake check;
+- toolchain version audit;
+- inventory/fallback confirmation;
+- final Sprint 0 state close.
 ```
 
 ## 6.3 Exit decision
@@ -341,7 +391,7 @@ Current decision:
 NOT_READY_TO_PASS
 
 Reason:
-Sprint 0 execution chưa diễn ra dưới V3.
+Sprint 0 Block 1 đã PASS, nhưng Block 2–5 và các preflight evidence bắt buộc vẫn chưa hoàn tất.
 ```
 
 ---
@@ -352,22 +402,40 @@ Sprint 0 execution chưa diễn ra dưới V3.
 
 ```text
 Repo URL:
-TBD — chưa tạo tại thời điểm snapshot.
+https://github.com/MinhSit/embedded-firmware-journey-v3
+
+Local root:
+D:\embedded-firmware-journey-v3
 
 Repository status:
-NOT_CREATED / NOT_BOOTSTRAPPED.
+ACTIVE — BOOTSTRAPPED
 
-Expected default branch:
+Default branch:
 main
 
 Current branch:
-N/A
+main
 
 Current commit:
-N/A
+2435ec4 — `chore(repo): complete Sprint 0 control files`
+
+Previous bootstrap commit:
+8a1f6f3 — `chore(repo): bootstrap V3 roadmap control structure`
+
+Remote:
+origin
+
+Remote URL:
+https://github.com/MinhSit/embedded-firmware-journey-v3.git
+
+Remote tracking:
+`main` -> `origin/main`
+
+Remote status at snapshot:
+SYNCHRONIZED
 
 Current release:
-N/A
+N/A — Sprint 0
 ```
 
 ## 7.2 Historical pre-V3 repository
@@ -536,7 +604,6 @@ None known at snapshot time.
 
 ## 11.2 P1 blockers / missing setup evidence
 
-- V3 repository chưa tạo.
 - V3 build/test commands chưa được khóa.
 - ARM GCC chưa được xác minh.
 - CMake chưa được xác minh.
@@ -638,7 +705,6 @@ Current risk:
 LOW.
 
 Escalate to MEDIUM if:
-- V3 repo/control files not ready by end Sprint 0;
 - host compiler/test unavailable;
 - STM32 or ESP32 baseline unexpectedly broken;
 - essential hardware issue blocks Week 1 preparation.
@@ -716,7 +782,7 @@ Nếu có thi, bệnh, việc gia đình hoặc giới hạn thực tế, cập 
 
 | Mốc | Ngày | Trạng thái hiện tại |
 |---|---:|---|
-| Sprint 0 exit | 09/08/2026 | `IN_PROGRESS / NOT EXECUTED YET` |
+| Sprint 0 exit | 09/08/2026 | `IN_PROGRESS — Block 1 PASS; Blocks 2–5 open` |
 | Week 1 start | 10/08/2026 | `PLANNED` |
 | Foundation MCU gate | 06/09/2026 | `PLANNED` |
 | Data Logger v1.0 | 11/10/2026 | `PLANNED` |
@@ -842,7 +908,7 @@ Không dùng old repo để tự động kết luận competency.
 
 **Expected duration:** 5–15 phút.
 
-Sau đó action kế tiếp phải được lấy từ Sprint 0 Block 1, không tự nhảy sang C exercises.
+Sau khi state này được cập nhật vào repo, action kế tiếp phải được lấy từ Sprint 0 Block 2 — STM32 preflight; không tự nhảy sang C exercises.
 
 ---
 
@@ -968,10 +1034,11 @@ Calendar:
 Sprint 0 — 09/08/2026
 
 Execution:
-Sprint 0 / Block 1 — NOT_STARTED
+Sprint 0 / Block 2 — STM32 preflight — NOT_STARTED
 
 Artifact:
-No V3 artifact PASS yet.
+Sprint 0 / Block 1 repository/control-plane bootstrap — ARTIFACT_PASS.
+Evidence commits: `8a1f6f3`, `2435ec4`.
 
 Competency:
 No V3 competency PASS.
@@ -985,10 +1052,10 @@ v1.0 — 14/12/2026
 Roadmap close — 12/01/2027
 
 Main immediate gap:
-V3 repo + preflight not yet executed.
+STM32/ESP32/toolchain/hardware preflight chưa được tái xác minh dưới V3.
 
 Exact next action:
-Create V3 repo + roadmap-control/ and place this state file as roadmap-control/current-state.md.
+Ở phiên tiếp theo, kết nối Nucleo-F446RE bằng USB data cable và xác minh ST-Link/Windows nhận board.
 ```
 
 ---
@@ -1016,7 +1083,8 @@ ACTIVE / ON BASELINE
 
 System status:
 V3 documents assembled.
-Operational repo bootstrap pending.
+Operational repository/control-plane bootstrap completed and pushed.
+Sprint 0 hardware/toolchain preflight remains open.
 
 Sprint 0:
 NOT YET PASSED.
@@ -1025,7 +1093,8 @@ Week 1:
 NOT_STARTED.
 
 Artifact confidence:
-Historical setup evidence exists, but V3 reproducibility not yet revalidated.
+Repository/control-plane bootstrap is reproducible and recorded.
+Historical hardware/toolchain setup evidence still requires Sprint 0 revalidation before being accepted into the V3 baseline.
 
 Competency confidence:
 No V3 competency has been independently verified.
@@ -1045,4 +1114,4 @@ Do not start Week 1 before Sprint 0 mandatory bootstrap/preflight is truthfully 
 
 **End of CURRENT_STATE_V3 3.0.0**
 
-**NEXT ACTION recorded in this state:** create the V3 repo/control directory and place this file at `roadmap-control/current-state.md`.
+**NEXT ACTION recorded in this state:** ở phiên học tiếp theo, kết nối Nucleo-F446RE bằng USB data cable và xác minh Windows/ST-Link nhận board trước khi mở STM32CubeIDE.
