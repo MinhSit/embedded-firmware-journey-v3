@@ -1,13 +1,13 @@
 # ROADMAP REVIEW LOG — EMBEDDED/FIRMWARE ROADMAP V3.1
 
-**Document ID:** `ROADMAP_REVIEW_LOG`  
-**Version:** `1.0.0`  
-**Status:** `ACTIVE REVIEW LOG — NON-AUTHORITATIVE`  
-**Created:** `2026-08-09`  
-**Timezone:** `Asia/Ho_Chi_Minh`  
-**Reviewed roadmap:** `EMBEDDED_ROADMAP_V3.1.docx`  
-**System authority:** `SYSTEM_SPEC_V3.md 3.0.0`  
-**Execution authority:** `MASTER_PROMPT_V3.md 3.0.0`  
+**Document ID:** `ROADMAP_REVIEW_LOG`
+**Version:** `1.0.0`
+**Status:** `ACTIVE REVIEW LOG — NON-AUTHORITATIVE`
+**Created:** `2026-08-09`
+**Timezone:** `Asia/Ho_Chi_Minh`
+**Reviewed roadmap:** `EMBEDDED_ROADMAP_V3.1.docx`
+**System authority:** `SYSTEM_SPEC_V3.md 3.0.0`
+**Execution authority:** `MASTER_PROMPT_V3.md 3.0.1`
 **Intended repo path:** `docs/system/ROADMAP_REVIEW_LOG.md`
 
 ---
@@ -174,23 +174,23 @@ CLOSED
 # 6. REVIEW SEVERITY
 
 ## R0 — Cosmetic
-Wording/layout/formatting không đổi behavior.  
+Wording/layout/formatting không đổi behavior.
 **Default:** không chặn execution.
 
 ## R1 — Operational friction
-Day pack/logging/tool workflow gây phiền nhưng không ảnh hưởng gate.  
+Day pack/logging/tool workflow gây phiền nhưng không ảnh hưởng gate.
 **Default:** chỉnh operational detail, không rewrite roadmap core.
 
 ## R2 — Learning design risk
-Prerequisite, practice, workload, evidence hoặc AI workflow có khả năng làm learning yếu.  
+Prerequisite, practice, workload, evidence hoặc AI workflow có khả năng làm learning yếu.
 **Default:** collect evidence + review tại checkpoint gần nhất.
 
 ## R3 — Critical path risk
-Milestone có nguy cơ không khả thi, prerequisite block downstream, repeated structural failure.  
+Milestone có nguy cơ không khả thi, prerequisite block downstream, repeated structural failure.
 **Default:** formal review ngay.
 
 ## R4 — System defect
-PASS semantics/AI integrity/evidence authority tự mâu thuẫn hoặc false-PASS có tính hệ thống.  
+PASS semantics/AI integrity/evidence authority tự mâu thuẫn hoặc false-PASS có tính hệ thống.
 **Default:** formal System Spec amendment process.
 
 ---
@@ -766,8 +766,8 @@ Chỉ cho real operating-system defect.
 **Các item dưới đây là hypothesis/watch item, KHÔNG phải defect đã xác nhận.**
 
 ## RR-001 — Workload realism
-Status: `OBSERVING`  
-Severity: `R2`  
+Status: `OBSERVING`
+Severity: `R2`
 First review: `CP-01`
 
 Collect:
@@ -784,8 +784,8 @@ quality near end of day
 If repeated hard-limit pressure → confirm load/scope review.
 
 ## RR-002 — Evidence/bookkeeping overhead
-Status: `OBSERVING`  
-Severity: `R1`  
+Status: `OBSERVING`
+Severity: `R1`
 First review: `CP-01`
 
 Collect:
@@ -804,8 +804,8 @@ do not weaken competency evidence
 ```
 
 ## RR-003 — AI tutoring workflow effectiveness
-Status: `OBSERVING`  
-Severity: `R2`  
+Status: `OBSERVING`
+Severity: `R2`
 First review: `CP-01`
 
 Collect:
@@ -823,8 +823,8 @@ Interpret carefully:
 - AI-4 because prerequisite absent → sequencing issue.
 
 ## RR-004 — Consolidated survival/core checklist
-Status: `HYPOTHESIS`  
-Severity: `R1/R2`  
+Status: `HYPOTHESIS`
+Severity: `R1/R2`
 Target: `CP-02`
 
 Question:
@@ -838,8 +838,8 @@ Preferred answer if useful:
 > create a derived checklist; do not change curriculum unless competency thật sự thiếu.
 
 ## RR-005 — Industry reality / legacy-code simulation
-Status: `HYPOTHESIS`  
-Severity: `R2`  
+Status: `HYPOTHESIS`
+Severity: `R2`
 Target: `CP-02 → CP-04`
 
 Potential bounded exercises:
@@ -854,8 +854,8 @@ explain maintenance trade-off
 Không thêm nếu phải cắt P0.
 
 ## RR-006 — Project spec granularity
-Status: `HYPOTHESIS`  
-Severity: `R2`  
+Status: `HYPOTHESIS`
+Severity: `R2`
 Target: `CP-03`
 
 If project needs more detail:
@@ -873,11 +873,11 @@ Preferred response:
 > create project-local spec before editing roadmap.
 
 ## RR-007 — Mock internship/work-ticket simulation
-Status: `DEFERRED`  
-Severity: `R1/R2`  
+Status: `DEFERRED`
+Severity: `R1/R2`
 Target: `CP-06`
 
-Roadmap cuối đã có live coding, mocks, project defense, walkthrough.  
+Roadmap cuối đã có live coding, mocks, project defense, walkthrough.
 Chỉ thêm bounded ticket simulation nếu actual evidence cho thấy còn gap:
 
 ```text
@@ -891,8 +891,8 @@ demo/explain
 ```
 
 ## RR-008 — Recovery/buffer sufficiency
-Status: `WATCH`  
-Severity: `R2`  
+Status: `WATCH`
+Severity: `R2`
 Target: every checkpoint
 
 Current system đã có:
@@ -907,8 +907,8 @@ no all-nighter
 Không thêm “buffer week” nếu chưa có evidence.
 
 ## RR-009 — Hardware/toolchain dependency
-Status: `OBSERVING`  
-Severity: `R2`  
+Status: `OBSERVING`
+Severity: `R2`
 Target: `CP-00`
 
 Sprint 0 phải resolve:
@@ -925,8 +925,8 @@ inventory/fallback
 Nếu CP-00 PASS → close.
 
 ## RR-010 — Career timing realism
-Status: `DEFERRED`  
-Severity: `R2`  
+Status: `DEFERRED`
+Severity: `R2`
 Target: `CP-03+`
 
 Dùng actual:
@@ -944,9 +944,9 @@ Chỉ đổi timing bằng pipeline evidence.
 ---
 # 17. BASELINE REVIEW — PRE-EXECUTION
 
-**Review ID:** `RV-000`  
-**Date:** `2026-08-09`  
-**Stage:** `Pre-Sprint-0`  
+**Review ID:** `RV-000`
+**Date:** `2026-08-09`
+**Stage:** `Pre-Sprint-0`
 **Evidence:** document/system audit only; chưa có V3 execution data.
 
 ## Strengths đã có trong baseline
@@ -988,6 +988,12 @@ CONTINUE EMBEDDED_ROADMAP_V3.1
 ```
 
 ## Next formal review
+```text
+CP-00 — Sprint 0 Exit — before transition to Week 1
+```
+
+After CP-00 completes successfully:
+
 ```text
 CP-01 — End of Week 1 — 16/08/2026
 ```
@@ -1065,7 +1071,7 @@ END DAY
 Review log không được ăn thời gian học.
 
 ## Non-checkpoint weekly review
-Dùng `WEEKLY REVIEW` bình thường.  
+Dùng `WEEKLY REVIEW` bình thường.
 Chỉ thêm review item nếu concern lặp lại và có khả năng structural.
 
 ## Formal checkpoint
@@ -1249,6 +1255,7 @@ Default giữa các checkpoint:
 
 > **Execute V3.1. Collect evidence. Change only the minimum necessary when a real defect is demonstrated.**
 
-**Current decision:** `CONTINUE EMBEDDED_ROADMAP_V3.1`  
-**Next formal review:** `CP-01 — 16/08/2026`  
+**Current decision:** `CONTINUE EMBEDDED_ROADMAP_V3.1`
+**Next formal review:** `CP-00 — Sprint 0 Exit — before transition to Week 1`
+**After CP-00 PASS:** `CP-01 — End of Week 1 — 16/08/2026`
 **Early exception:** `R3/R4 structural/system defect`
