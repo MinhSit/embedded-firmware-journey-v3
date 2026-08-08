@@ -3,10 +3,10 @@
 **Document ID:** `CURRENT_STATE_V3`
 **Version:** `3.0.0`
 **State type:** Operational snapshot — mô tả thực tế hiện tại, không tự tạo luật mới
-**Generated at:** `2026-08-09 02:44 +07:00`
+**Generated at:** `2026-08-09 02:57 +07:00`
 **Timezone:** `Asia/Ho_Chi_Minh`
 **Owner:** Trần Lê Minh
-**Status:** `ACTIVE — PRE-SPRINT-0 REPOSITORY/SYSTEM HARDENING`
+**Status:** `FROZEN — PRE-SPRINT-0 BASELINE`
 
 ---
 
@@ -31,11 +31,12 @@ Calendar Position:
 PRE-SPRINT-0 — 09/08/2026 — repository/system hardening trước khi chính thức START SPRINT 0.
 
 Execution Position:
-PRE-SPRINT-0 / Repository hardening — IN_PROGRESS.
-Line-ending policy đã xác minh PASS; UTF-8 BOM cleanup và `dependencies.lock` policy đã sửa local, chưa commit.
+PRE-SPRINT-0 / Repository hardening — PASS / FROZEN.
+Final hardening commit `b613d64` đã push; working tree clean; `main` synchronized với `origin/main`.
 
 Artifact Position:
-Pre-Sprint-0 repository/control-plane đã tồn tại và được push.
+Pre-Sprint-0 repository/control-plane baseline đã hoàn tất và freeze.
+Evidence commit: `b613d64` — `chore(repo): finalize pre-Sprint-0 repository hardening`.
 Đây là setup/operational evidence, KHÔNG phải Sprint 0 technical evidence và KHÔNG phải competency evidence.
 
 Competency Position:
@@ -44,16 +45,18 @@ Week 1 pre-V3 C evidence = COMPETENCY_UNVERIFIED / RETEST REQUIRED.
 
 Last Artifact PASS:
 Không có Sprint 0 technical ARTIFACT_PASS.
-Pre-Sprint-0 repository setup có evidence trên `main`; HEAD remote đã quan sát trước state update: `e7ca365`.
+Pre-Sprint-0 repository/system hardening PASS tại evidence commit `b613d64`.
 
 Last Competency PASS:
 V3: NONE.
 
 Current Outcome:
-Freeze repository/system baseline sạch, ít nhiễu, reproducible và đúng bookkeeping trước khi chính thức bắt đầu Sprint 0.
+Pre-Sprint-0 repository/system baseline đã freeze sạch, ít nhiễu, reproducible và đúng bookkeeping.
+Hệ thống sẵn sàng chuyển sang Sprint 0 khi có lệnh explicit `START SPRINT 0`.
 
 Current Gate:
-PRE-SPRINT0-FREEZE — operational setup gate, không phải competency gate.
+PRE-SPRINT0-FREEZE — PASS / FROZEN.
+Gate này là operational setup gate, không phải competency gate.
 
 Schedule Variance:
 NOT_COUNTED — Sprint 0 chưa chính thức bắt đầu.
@@ -62,10 +65,11 @@ Recovery Status:
 NOT_ACTIVE.
 
 Critical Path Risk:
-LOW; hardening phải dừng ngay sau freeze để không biến infrastructure polish thành trì hoãn technical work.
+LOW.
+Pre-Sprint-0 infrastructure polish phải dừng; chỉ mở lại nếu phát hiện defect thật.
 
 Exact Next Action:
-Thay `roadmap-control/current-state.md` bằng bản state đã cập nhật này, audit diff, rồi tiếp tục final Pre-Sprint-0 checks trước khi commit/freeze.
+Chờ lệnh explicit `START SPRINT 0`. Khi bắt đầu, update CURRENT_STATE sang Sprint 0 và thực thi technical preflight theo roadmap.
 ```
 
 ---
@@ -86,8 +90,8 @@ Next calendar position: Sprint 0 — chỉ sau explicit START SPRINT 0
 
 ```text
 PRE-SPRINT-0 / Repository hardening
-Status: IN_PROGRESS
-Reason: repo/control plane đã bootstrap và push; đang dọn EOL/encoding/git policy/state trước khi freeze.
+Status: PASS / FROZEN
+Reason: repo/control plane đã bootstrap, hardening đã hoàn tất, commit `b613d64` đã push, working tree sạch và `main` synchronized với `origin/main`.
 ```
 
 ## 2.3 Artifact Position — sản phẩm gần nhất có evidence
@@ -98,14 +102,14 @@ NO SPRINT-0 TECHNICAL ARTIFACT YET
 
 Pre-Sprint-0 setup evidence:
 - repo `embedded-firmware-journey-v3` tồn tại;
-- `main` sync remote tại checkpoint `e7ca365`;
 - control files tồn tại;
 - `.gitattributes` policy áp `eol=lf`;
 - local Git config đã xác minh `core.autocrlf=false`, `core.eol=lf`, `core.safecrlf=false`;
 - tracked files kiểm tra không có unintended CRLF;
-- 17 tracked files có BOM đã được cleanup local và audit lại không còn BOM;
-- `.gitignore` local đã bỏ unconditional `dependencies.lock` ignore;
-- các thay đổi hardening local hiện CHƯA commit tại thời điểm snapshot.
+- 17 tracked files từng có BOM đã được cleanup và audit lại không còn BOM;
+- `.gitignore` đã bỏ unconditional `dependencies.lock` ignore;
+- final hardening evidence commit: `b613d64` — `chore(repo): finalize pre-Sprint-0 repository hardening`;
+- working tree sạch và `main` synchronized với `origin/main` tại freeze evidence capture.
 
 Historical/pre-V3 artifact state:
 REFERENCE_ONLY until Sprint 0 revalidation.
@@ -223,7 +227,7 @@ Retest using a fresh AI-0 gate.
 | Pre-V3 Week 1 code | `CONTAMINATED FOR COMPETENCY` | Giữ reference; không dùng làm independent evidence |
 | Pre-V3 Week 1 tests | `ARTIFACT REFERENCE` | Có thể học từ test design nhưng fresh exercises/gate phải độc lập |
 | Pre-V3 commit history | `HISTORICAL` | Archive nếu cần; không dùng commit count để claim competency |
-| Pre-Sprint-0 repo/system hardening | `IN_PROGRESS` | AI được phép xử lý bookkeeping/operation; không tạo competency PASS |
+| Pre-Sprint-0 repo/system hardening | `PASS / FROZEN` | AI được phép xử lý bookkeeping/operation; không tạo competency PASS |
 | Sprint 0 technical setup | `NOT_STARTED` | Chỉ bắt đầu sau explicit START SPRINT 0 |
 | Week 1 V3 practice | `PLANNED` | AI-1/AI-2 mặc định; AI-3 sau meaningful attempt |
 | Week 1 V3 gate | `PLANNED` | AI-0 |
@@ -258,11 +262,11 @@ Retest using a fresh AI-0 gate.
 - [x] Không có unintended tracked CRLF.
 - [x] UTF-8 BOM cleanup đã PASS local.
 - [x] `dependencies.lock` không còn bị ignore global trong repo.
-- [ ] Update CURRENT_STATE về đúng PRE-SPRINT-0.
-- [ ] Final audit + commit/push hardening.
-- [ ] Freeze Pre-Sprint-0.
+- [x] Update CURRENT_STATE về đúng PRE-SPRINT-0.
+- [x] Final audit + commit/push hardening.
+- [x] Freeze Pre-Sprint-0.
 
-**Status:** `IN_PROGRESS — near freeze`.
+**Status:** `PASS / FROZEN`.
 
 **Known repository checkpoints:**
 - `8a1f6f3` — bootstrap V3 roadmap control structure.
@@ -379,7 +383,44 @@ Sprint 0 chưa được START. Chỉ đánh giá `SPRINT-0-EXIT` sau explicit ST
 
 ---
 
-# 6.4 PRE-SPRINT-0 HARDENING AUDIT — CURRENT LOCAL EVIDENCE
+# 6.4 PRE-SPRINT-0 HARDENING AUDIT — FINAL EVIDENCE
+
+## Freeze Evidence
+
+```text
+Decision:
+PASS / FROZEN
+
+Evidence commit:
+b613d64 — chore(repo): finalize pre-Sprint-0 repository hardening
+
+Final observed local state:
+working tree clean
+
+Branch:
+main
+
+Remote tracking:
+origin/main synchronized
+
+Tracked CRLF audit:
+PASS — no unintended i/crlf or w/crlf output
+
+UTF-8 BOM audit:
+PASS — no BOM files reported
+
+Whitespace audit:
+PASS — git diff --check clean before hardening commit
+
+dependencies.lock policy:
+PASS — not globally ignored
+```
+
+**Integrity note:** đây là repository/setup evidence בלבד; không phải Sprint 0 technical PASS và không phải competency PASS.
+
+---
+
+# 6.5 PRE-SPRINT-0 HARDENING AUDIT — DETAIL HISTORY
 
 ```text
 EOL policy:
@@ -405,10 +446,13 @@ ESP-IDF dependency-lock policy:
 PASS locally — `dependencies.lock` is no longer globally ignored.
 
 Working tree:
-INTENTIONALLY DIRTY — Pre-Sprint-0 hardening changes are not committed yet.
+CLEAN after final hardening commit.
 
 Commit/push:
-PENDING final semantic diff audit.
+PASS — `b613d64` pushed to `origin/main`.
+
+Branch sync:
+PASS — `main` synchronized with `origin/main` at freeze evidence capture.
 ```
 
 **Integrity note:** các PASS ở subsection này là repository hygiene/setup PASS; không phải Sprint 0 technical PASS và không phải competency PASS.
@@ -427,7 +471,7 @@ Local root:
 D:\embedded-firmware-journey-v3
 
 Repository status:
-ACTIVE — PRE-SPRINT-0 HARDENING
+ACTIVE — PRE-SPRINT-0 BASELINE FROZEN
 
 Default branch:
 main
@@ -435,11 +479,17 @@ main
 Current branch:
 main
 
-Observed remote HEAD before this state update:
-e7ca365 — `chore(repo): define editor text conventions`
+Hardening evidence commit:
+`b613d64` — `chore(repo): finalize pre-Sprint-0 repository hardening`
 
-Current local hardening state:
-UNCOMMITTED intentional changes exist for BOM cleanup and `.gitignore` dependency-lock policy; this state replacement will join that same Pre-Sprint-0 hardening change set.
+Observed freeze state:
+working tree clean;
+HEAD = `b613d64`;
+`main` synchronized with `origin/main`;
+no unintended tracked CRLF.
+
+Freeze-record note:
+This CURRENT_STATE update records the freeze decision. It does not need to contain its own future commit hash.
 
 Current release:
 N/A
@@ -611,8 +661,8 @@ None known at snapshot time.
 
 ## 11.2 P1 blockers / missing setup evidence
 
-- Pre-Sprint-0 hardening chưa freeze/commit hoàn tất.
 - V3 build/test commands chưa được khóa vì Sprint 0 chưa bắt đầu.
+- Không còn Pre-Sprint-0 repository blocker nào được biết tại thời điểm freeze.
 - ARM GCC chưa được xác minh.
 - CMake chưa được xác minh.
 - Hardware/toolchain historical values chưa được revalidated.
@@ -684,13 +734,13 @@ Sprint 0 planned for 09/08/2026 after Pre-Sprint-0 freeze.
 Week 1 planned start — 10/08/2026.
 
 Current:
-Still PRE-SPRINT-0 at snapshot time.
+PRE-SPRINT-0 FROZEN.
 
 Variance:
 NOT_COUNTED until explicit Sprint 0 start.
 
 Reason:
-Repository/system hardening is being treated as setup rather than silently claiming Sprint 0 execution.
+Repository/system hardening đã hoàn tất như setup, không được tính thành Sprint 0 technical execution.
 ```
 
 ## 14.2 Recovery
@@ -794,7 +844,8 @@ Nếu có thi, bệnh, việc gia đình hoặc giới hạn thực tế, cập 
 
 | Mốc | Ngày | Trạng thái hiện tại |
 |---|---:|---|
-| Sprint 0 exit | 09/08/2026 | `NOT_STARTED — waits for Pre-Sprint-0 freeze + explicit START` |
+| Pre-Sprint-0 freeze | 09/08/2026 | `PASS / FROZEN` |
+| Sprint 0 exit | 09/08/2026 | `NOT_STARTED — waits for explicit START SPRINT 0` |
 | Week 1 start | 10/08/2026 | `PLANNED` |
 | Foundation MCU gate | 06/09/2026 | `PLANNED` |
 | Data Logger v1.0 | 11/10/2026 | `PLANNED` |
@@ -916,11 +967,9 @@ Không dùng old repo để tự động kết luận competency.
 
 # 23. EXACT NEXT ACTION
 
-> **Thay `roadmap-control/current-state.md` bằng bản cập nhật này, kiểm tra diff chỉ chứa state correction hợp lệ, rồi hoàn tất final Pre-Sprint-0 audit trước khi commit/freeze.**
+> **Không làm thêm repository infrastructure polish. Chờ lệnh explicit `START SPRINT 0`; khi bắt đầu, cập nhật state rồi thực thi Sprint 0 technical preflight.**
 
-**Expected duration:** 5–15 phút.
-
-Không bắt đầu hardware/toolchain preflight và không tự nhảy sang C exercises trước khi Pre-Sprint-0 được freeze.
+Không bắt đầu Week 1/C exercises trước khi Sprint 0 mandatory technical preflight được đóng đúng chuẩn.
 
 ---
 
@@ -1046,10 +1095,10 @@ Calendar:
 PRE-SPRINT-0 — 09/08/2026
 
 Execution:
-Repository/System Hardening — IN_PROGRESS
+PRE-SPRINT-0 Repository/System Hardening — PASS / FROZEN
 
 Artifact:
-Pre-Sprint-0 repo/control-plane setup evidence exists; no Sprint 0 technical ARTIFACT_PASS yet.
+Pre-Sprint-0 repo/control-plane baseline PASS at `b613d64`; no Sprint 0 technical ARTIFACT_PASS yet.
 
 Competency:
 No V3 competency PASS.
@@ -1063,10 +1112,10 @@ v1.0 — 14/12/2026
 Roadmap close — 12/01/2027
 
 Main immediate gap:
-Finish/freeze intentional repository hardening; Sprint 0 technical preflight has not started.
+Sprint 0 technical preflight has not started.
 
 Exact next action:
-Replace `roadmap-control/current-state.md` with the corrected Pre-Sprint-0 state and audit the diff.
+Wait for explicit `START SPRINT 0`; then transition state and begin Sprint 0 technical preflight.
 ```
 
 ---
@@ -1094,8 +1143,8 @@ ACTIVE / ON BASELINE
 
 System status:
 V3 documents assembled.
-Repository/control-plane bootstrap exists.
-Pre-Sprint-0 hardening is IN_PROGRESS and not yet frozen.
+Repository/control-plane baseline exists.
+Pre-Sprint-0 hardening is PASS / FROZEN at evidence commit `b613d64`.
 
 Sprint 0:
 NOT_STARTED.
@@ -1114,10 +1163,11 @@ AI integrity:
 Known pre-V3 Week 1 contamination is explicitly recorded rather than hidden.
 
 Critical path:
-Currently protected only if Pre-Sprint-0 hardening is frozen promptly and does not expand into endless infrastructure polish.
+Protected. Pre-Sprint-0 hardening is frozen; infrastructure polish is closed unless a real defect appears.
 
 Decision:
-Finish Pre-Sprint-0 freeze.
+PRE-SPRINT-0 = FROZEN.
+SPRINT 0 = NOT_STARTED.
 Do NOT start Sprint 0 until the owner explicitly starts it.
 Do NOT start Week 1 before Sprint 0 mandatory technical preflight is truthfully closed.
 ```
@@ -1126,4 +1176,4 @@ Do NOT start Week 1 before Sprint 0 mandatory technical preflight is truthfully 
 
 **End of CURRENT_STATE_V3 3.0.0**
 
-**NEXT ACTION recorded in this state:** replace `roadmap-control/current-state.md` with this corrected Pre-Sprint-0 state, audit the diff, then finish the bounded hardening/freeze sequence.
+**NEXT ACTION recorded in this state:** wait for explicit `START SPRINT 0`; then update state and begin Sprint 0 technical preflight.
