@@ -1,4 +1,4 @@
-﻿# Learning
+# Learning
 
 Weekly learner-owned exercises, notes, starter code and competency practice live here.
 

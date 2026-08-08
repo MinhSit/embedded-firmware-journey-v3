@@ -1,4 +1,4 @@
-﻿# COMPETENCY LEDGER — V3
+# COMPETENCY LEDGER — V3
 
 Artifact evidence and competency evidence are tracked separately.
 

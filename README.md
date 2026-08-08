@@ -1,4 +1,4 @@
-﻿ # Embedded Firmware Journey V3
+ # Embedded Firmware Journey V3
 
 Hành trình học Embedded/Firmware theo hướng competency-first: ưu tiên năng lực thật, kiểm thử có bằng chứng và khả năng giải thích độc lập.
 

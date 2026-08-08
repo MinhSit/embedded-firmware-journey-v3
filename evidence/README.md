@@ -1,4 +1,4 @@
-﻿# Evidence
+# Evidence
 
 Only intentionally useful evidence belongs here.
 

@@ -1,4 +1,4 @@
-﻿# Sprint 0 Evidence — 2026-08-09
+# Sprint 0 Evidence — 2026-08-09
 
 Store only curated evidence generated during Sprint 0:
 

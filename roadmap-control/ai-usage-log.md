@@ -1,4 +1,4 @@
-﻿# AI USAGE LOG — V3
+# AI USAGE LOG — V3
 
 Log only material assistance that may affect implementation provenance or competency verification.
 

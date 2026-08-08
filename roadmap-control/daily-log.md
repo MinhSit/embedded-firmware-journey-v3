@@ -1,4 +1,4 @@
-﻿# DAILY LOG — V3
+# DAILY LOG — V3
 
 Do not change this schema casually.
 

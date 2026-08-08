@@ -1,4 +1,4 @@
-﻿# RECOVERY RECORDS
+# RECOVERY RECORDS
 
 Create a recovery file only when Recovery Mode is actually activated.
 

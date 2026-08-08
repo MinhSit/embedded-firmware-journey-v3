@@ -1,12 +1,12 @@
 # CURRENT STATE V3 — EMBEDDED/FIRMWARE ROADMAP
 
-**Document ID:** `CURRENT_STATE_V3`  
-**Version:** `3.0.0`  
-**State type:** Operational snapshot — mô tả thực tế hiện tại, không tự tạo luật mới  
-**Generated at:** `2026-08-09 02:09 +07:00`  
-**Timezone:** `Asia/Ho_Chi_Minh`  
-**Owner:** Trần Lê Minh  
-**Status:** `ACTIVE — SPRINT 0 PREFLIGHT`
+**Document ID:** `CURRENT_STATE_V3`
+**Version:** `3.0.0`
+**State type:** Operational snapshot — mô tả thực tế hiện tại, không tự tạo luật mới
+**Generated at:** `2026-08-09 02:44 +07:00`
+**Timezone:** `Asia/Ho_Chi_Minh`
+**Owner:** Trần Lê Minh
+**Status:** `ACTIVE — PRE-SPRINT-0 REPOSITORY/SYSTEM HARDENING`
 
 ---
 
@@ -18,7 +18,7 @@
 | 2 | `EMBEDDED_ROADMAP_V3.1.docx` — `3.1.0` | `FROZEN ROADMAP BASELINE` | Học gì, khi nào, gate, deadline, project/career milestones |
 | 3 | `MASTER_PROMPT_V3.md` — `3.0.0` | `FROZEN CANDIDATE` | Cách ChatGPT vận hành roadmap |
 | 4 | `CURRENT_STATE_V3.md` — `3.0.0` | `ACTIVE` | Trạng thái thực tế hiện tại |
-| 5 | Repo / logs / tests / captures | `ACTIVE` — Sprint 0 Block 1 complete | Bằng chứng thực tế |
+| 5 | Repo / logs / tests / captures | `ACTIVE` — Pre-Sprint-0 repo/control-plane evidence | Bằng chứng thực tế |
 
 **Quy tắc:** nếu file này mâu thuẫn với ba tầng phía trên, file này phải được sửa để phản ánh đúng luật; không dùng `CURRENT_STATE` để thay đổi roadmap.
 
@@ -28,47 +28,44 @@
 
 ```text
 Calendar Position:
-Sprint 0 — 09/08/2026 — Khởi tạo V3 và tái xác minh.
+PRE-SPRINT-0 — 09/08/2026 — repository/system hardening trước khi chính thức START SPRINT 0.
 
 Execution Position:
-Sprint 0 / Block 2 — STM32 preflight — NOT_STARTED.
+PRE-SPRINT-0 / Repository hardening — IN_PROGRESS.
+Line-ending policy đã xác minh PASS; UTF-8 BOM cleanup và `dependencies.lock` policy đã sửa local, chưa commit.
 
 Artifact Position:
-Sprint 0 / Block 1 — V3 repository + roadmap control plane — ARTIFACT_PASS.
-Repo đã được khởi tạo sạch, commit, push lên `origin/main`; các control files bắt buộc hiện đã có.
-Pre-V3 artifacts/setup vẫn chỉ là historical reference và chưa được nhập làm competency evidence.
+Pre-Sprint-0 repository/control-plane đã tồn tại và được push.
+Đây là setup/operational evidence, KHÔNG phải Sprint 0 technical evidence và KHÔNG phải competency evidence.
 
 Competency Position:
 Không có competency V3 nào được xác minh.
 Week 1 pre-V3 C evidence = COMPETENCY_UNVERIFIED / RETEST REQUIRED.
 
 Last Artifact PASS:
-Sprint 0 / Block 1 — repository + control plane bootstrap.
-Evidence:
-- `8a1f6f3` — `chore(repo): bootstrap V3 roadmap control structure`
-- `2435ec4` — `chore(repo): complete Sprint 0 control files`
-- `main` đã push và đồng bộ với `origin/main` tại thời điểm snapshot.
+Không có Sprint 0 technical ARTIFACT_PASS.
+Pre-Sprint-0 repository setup có evidence trên `main`; HEAD remote đã quan sát trước state update: `e7ca365`.
 
 Last Competency PASS:
 V3: NONE.
 
 Current Outcome:
-Kết thúc 09/08 với repo V3 sạch + toolchain/hardware preflight tái hiện được + old competency claims được ghi đúng trạng thái + Week 1 Day 1 sẵn sàng bắt đầu ngày 10/08.
+Freeze repository/system baseline sạch, ít nhiễu, reproducible và đúng bookkeeping trước khi chính thức bắt đầu Sprint 0.
 
 Current Gate:
-SPRINT-0-EXIT — bootstrap/revalidation gate, không phải competency gate.
+PRE-SPRINT0-FREEZE — operational setup gate, không phải competency gate.
 
 Schedule Variance:
-0 ngày so với baseline V3 tại thời điểm tạo file.
+NOT_COUNTED — Sprint 0 chưa chính thức bắt đầu.
 
 Recovery Status:
 NOT_ACTIVE.
 
 Critical Path Risk:
-LOW hiện tại; chuyển MEDIUM nếu Sprint 0 không đóng được các blocker bắt buộc trước Week 1.
+LOW; hardening phải dừng ngay sau freeze để không biến infrastructure polish thành trì hoãn technical work.
 
 Exact Next Action:
-Ở phiên học tiếp theo, kết nối Nucleo-F446RE bằng USB data cable và xác minh Windows/ST-Link nhận board trước khi mở STM32CubeIDE.
+Thay `roadmap-control/current-state.md` bằng bản state đã cập nhật này, audit diff, rồi tiếp tục final Pre-Sprint-0 checks trước khi commit/freeze.
 ```
 
 ---
@@ -79,34 +76,36 @@ Exact Next Action:
 
 ```text
 Date: 2026-08-09
-Roadmap position: Sprint 0
-Phase: V3 Bootstrap / Revalidation
-Planned focused load: 6–8 giờ
-Next calendar position: Week 1 / Day 1 — 2026-08-10
+Roadmap position: PRE-SPRINT-0
+Phase: Repository/System Hardening
+Planned focused load: bounded setup only; không tính là Sprint 0 technical load
+Next calendar position: Sprint 0 — chỉ sau explicit START SPRINT 0
 ```
 
 ## 2.2 Execution Position — vị trí đang thực sự làm
 
 ```text
-Sprint 0 / Block 2 — STM32 preflight
-Status: NOT_STARTED
-Reason: Block 1 repository/control-plane bootstrap đã PASS; bước thực thi tiếp theo là tái xác minh STM32 build/flash/debug.
+PRE-SPRINT-0 / Repository hardening
+Status: IN_PROGRESS
+Reason: repo/control plane đã bootstrap và push; đang dọn EOL/encoding/git policy/state trước khi freeze.
 ```
 
 ## 2.3 Artifact Position — sản phẩm gần nhất có evidence
 
 ```text
 V3 artifact position:
-Sprint 0 / Block 1 — ARTIFACT_PASS
+NO SPRINT-0 TECHNICAL ARTIFACT YET
 
-Evidence:
-- Repo: `https://github.com/MinhSit/embedded-firmware-journey-v3`
-- Branch: `main`
-- Commit `8a1f6f3`
-- Commit `2435ec4`
-- Required control files present, including `daily-log.md`
-- Working tree clean after push
-- `origin/main` synchronized at the time of evidence capture
+Pre-Sprint-0 setup evidence:
+- repo `embedded-firmware-journey-v3` tồn tại;
+- `main` sync remote tại checkpoint `e7ca365`;
+- control files tồn tại;
+- `.gitattributes` policy áp `eol=lf`;
+- local Git config đã xác minh `core.autocrlf=false`, `core.eol=lf`, `core.safecrlf=false`;
+- tracked files kiểm tra không có unintended CRLF;
+- 17 tracked files có BOM đã được cleanup local và audit lại không còn BOM;
+- `.gitignore` local đã bỏ unconditional `dependencies.lock` ignore;
+- các thay đổi hardening local hiện CHƯA commit tại thời điểm snapshot.
 
 Historical/pre-V3 artifact state:
 REFERENCE_ONLY until Sprint 0 revalidation.
@@ -224,45 +223,22 @@ Retest using a fresh AI-0 gate.
 | Pre-V3 Week 1 code | `CONTAMINATED FOR COMPETENCY` | Giữ reference; không dùng làm independent evidence |
 | Pre-V3 Week 1 tests | `ARTIFACT REFERENCE` | Có thể học từ test design nhưng fresh exercises/gate phải độc lập |
 | Pre-V3 commit history | `HISTORICAL` | Archive nếu cần; không dùng commit count để claim competency |
-| Sprint 0 setup | `IN_PROGRESS` | Block 1 PASS; AI-1/AI-2 setup, AI-3 chỉ sau attempt nếu cần debug |
+| Pre-Sprint-0 repo/system hardening | `IN_PROGRESS` | AI được phép xử lý bookkeeping/operation; không tạo competency PASS |
+| Sprint 0 technical setup | `NOT_STARTED` | Chỉ bắt đầu sau explicit START SPRINT 0 |
 | Week 1 V3 practice | `PLANNED` | AI-1/AI-2 mặc định; AI-3 sau meaningful attempt |
 | Week 1 V3 gate | `PLANNED` | AI-0 |
 
 ---
 
-# 5. SPRINT 0 — CURRENT OPERATION
+# 5. PRE-SPRINT-0 — CURRENT OPERATION
 
 ## 5.1 Mục tiêu duy nhất
 
-> **Đến cuối ngày 09/08/2026, môi trường V3 phải đủ sạch và tái hiện được để Week 1 bắt đầu ngày 10/08 mà không mang theo competency PASS giả từ attempt cũ.**
+> **Freeze repository/system baseline sạch, đúng policy và đúng state trước khi bắt đầu Sprint 0; không dùng setup work để tạo competency PASS giả.**
 
-## 5.1.1 Evidence vừa xác nhận — Repo Bootstrap
+## 5.2 Pre-Sprint-0 checklist + Sprint 0 future blocks
 
-```text
-Local root:
-D:\embedded-firmware-journey-v3
-
-Remote:
-https://github.com/MinhSit/embedded-firmware-journey-v3
-
-Branch:
-main
-
-Commits:
-8a1f6f3 — chore(repo): bootstrap V3 roadmap control structure
-2435ec4 — chore(repo): complete Sprint 0 control files
-
-Observed Git state after push:
-HEAD -> main
-origin/main synchronized
-working tree clean
-```
-
-Đây là **artifact/bootstrap evidence**, không phải competency evidence.
-
-## 5.2 Sprint 0 Checklist
-
-### Block 1 — Repo/control plane
+### Block 1 — Pre-Sprint-0 repo/control plane
 
 - [x] Tạo repo V3 mới.
 - [x] Tạo `.gitignore`.
@@ -277,17 +253,26 @@ working tree clean
 - [x] Ghi source-of-truth versions.
 - [x] Initial commit.
 - [x] Git push.
+- [x] `.gitattributes` + `.editorconfig` được thêm.
+- [x] Local Git EOL config được xác minh.
+- [x] Không có unintended tracked CRLF.
+- [x] UTF-8 BOM cleanup đã PASS local.
+- [x] `dependencies.lock` không còn bị ignore global trong repo.
+- [ ] Update CURRENT_STATE về đúng PRE-SPRINT-0.
+- [ ] Final audit + commit/push hardening.
+- [ ] Freeze Pre-Sprint-0.
 
-**Status:** `PASS`.
+**Status:** `IN_PROGRESS — near freeze`.
 
-**Evidence:**
-- Repo: `https://github.com/MinhSit/embedded-firmware-journey-v3`
+**Known repository checkpoints:**
 - `8a1f6f3` — bootstrap V3 roadmap control structure.
-- `2435ec4` — complete Sprint 0 control files.
-- Branch `main` tracked and pushed to `origin/main`.
-- Working tree clean after push.
+- `2435ec4` — complete control files.
+- `205b53a` — enforce consistent line endings.
+- `e7ca365` — define editor text conventions.
 
-### Block 2 — STM32 preflight
+`e918a5f` từng ghi state tiến vào Sprint 0 quá sớm; classification đó được supersede bởi state này.
+
+### Future Sprint 0 / Block 2 — STM32 preflight
 
 - [ ] Nucleo-F446RE được nhận diện đúng.
 - [ ] STM32 project baseline build.
@@ -299,7 +284,7 @@ working tree clean
 
 **Status:** `NOT_STARTED UNDER V3`.
 
-### Block 3 — ESP32 preflight
+### Future Sprint 0 / Block 3 — ESP32 preflight
 
 - [ ] ESP-IDF version được pin.
 - [ ] `hello_world` hoặc baseline project build.
@@ -309,7 +294,7 @@ working tree clean
 
 **Status:** `NOT_STARTED UNDER V3`.
 
-### Block 4 — Host/tooling/measurement
+### Future Sprint 0 / Block 4 — Host/tooling/measurement
 
 - [ ] Git hoạt động.
 - [ ] Host GCC/C compiler hoạt động.
@@ -323,7 +308,7 @@ working tree clean
 
 **Status:** `NOT_STARTED UNDER V3`.
 
-### Block 5 — Inventory/fallback/state close
+### Future Sprint 0 / Block 5 — Inventory/fallback/state close
 
 - [ ] Board/module/cable inventory.
 - [ ] 3.3 V / common ground / pinout safety note.
@@ -338,15 +323,15 @@ working tree clean
 
 ---
 
-# 6. SPRINT 0 EXIT GATE
+# 6. FUTURE SPRINT 0 EXIT GATE — NOT ACTIVE YET
 
-**Gate ID:** `SPRINT-0-EXIT`  
+**Gate ID:** `SPRINT-0-EXIT`
 **Gate type:** Operational/bootstrap — không phải competency gate.
 
 ## 6.1 Mandatory exit criteria
 
-- [x] V3 repo tồn tại và push được.
-- [x] Control files tồn tại.
+- [x] V3 repo tồn tại và push được — Pre-Sprint-0 prerequisite.
+- [x] Control files tồn tại — Pre-Sprint-0 prerequisite.
 - [ ] STM32 build/flash/debug được revalidated.
 - [ ] ESP32 build/flash/monitor được revalidated.
 - [ ] Host compiler/test được revalidated.
@@ -361,38 +346,72 @@ working tree clean
 ## 6.2 Current gate progress
 
 ```text
-Completed:
-- CURRENT_STATE_V3 baseline created.
-- V3 repository created and pushed.
-- `main` branch active and tracked on `origin/main`.
-- Core folder structure created.
-- System documents stored in `docs/system/`.
-- Required roadmap-control files created.
-- `evidence/sprint-00/` initialized.
-- Bootstrap commits `8a1f6f3` and `2435ec4` pushed.
+Completed before Sprint 0:
+- V3 repository/control plane created and pushed.
+- EOL policy configured and locally verified.
+- UTF-8 BOM cleanup performed locally and re-audited.
+- `.gitignore` dependency-lock policy corrected locally.
+- Old competency evidence remains explicitly unverified.
 
-Missing:
-- STM32 revalidation;
-- ESP32 revalidation;
-- host compiler/test revalidation;
-- UART verification;
-- logic analyzer verification;
-- ARM GCC check;
-- CMake check;
-- toolchain version audit;
-- inventory/fallback confirmation;
-- final Sprint 0 state close.
+Sprint 0 technical work:
+NOT_STARTED.
+
+Future Sprint 0 missing:
+STM32 revalidation;
+ESP32 revalidation;
+host test;
+UART/logic analyzer revalidation;
+ARM GCC check;
+CMake check;
+inventory/fallback;
+final Sprint 0 preflight evidence.
 ```
 
 ## 6.3 Exit decision
 
 ```text
 Current decision:
-NOT_READY_TO_PASS
+NOT_ACTIVE
 
 Reason:
-Sprint 0 Block 1 đã PASS, nhưng Block 2–5 và các preflight evidence bắt buộc vẫn chưa hoàn tất.
+Sprint 0 chưa được START. Chỉ đánh giá `SPRINT-0-EXIT` sau explicit START SPRINT 0 và technical preflight.
 ```
+
+---
+
+# 6.4 PRE-SPRINT-0 HARDENING AUDIT — CURRENT LOCAL EVIDENCE
+
+```text
+EOL policy:
+PASS
+
+Local Git config:
+core.autocrlf=false
+core.eol=lf
+core.safecrlf=false
+
+Tracked CRLF audit:
+PASS — no unintended i/crlf or w/crlf observed.
+
+UTF-8 BOM audit:
+17 tracked files initially detected with BOM.
+BOM removed locally.
+Re-audit result: PASS — no BOM files reported.
+
+Whitespace audit after BOM cleanup / .gitignore edit:
+PASS — `git diff --check` produced no output.
+
+ESP-IDF dependency-lock policy:
+PASS locally — `dependencies.lock` is no longer globally ignored.
+
+Working tree:
+INTENTIONALLY DIRTY — Pre-Sprint-0 hardening changes are not committed yet.
+
+Commit/push:
+PENDING final semantic diff audit.
+```
+
+**Integrity note:** các PASS ở subsection này là repository hygiene/setup PASS; không phải Sprint 0 technical PASS và không phải competency PASS.
 
 ---
 
@@ -408,7 +427,7 @@ Local root:
 D:\embedded-firmware-journey-v3
 
 Repository status:
-ACTIVE — BOOTSTRAPPED
+ACTIVE — PRE-SPRINT-0 HARDENING
 
 Default branch:
 main
@@ -416,26 +435,14 @@ main
 Current branch:
 main
 
-Current commit:
-2435ec4 — `chore(repo): complete Sprint 0 control files`
+Observed remote HEAD before this state update:
+e7ca365 — `chore(repo): define editor text conventions`
 
-Previous bootstrap commit:
-8a1f6f3 — `chore(repo): bootstrap V3 roadmap control structure`
-
-Remote:
-origin
-
-Remote URL:
-https://github.com/MinhSit/embedded-firmware-journey-v3.git
-
-Remote tracking:
-`main` -> `origin/main`
-
-Remote status at snapshot:
-SYNCHRONIZED
+Current local hardening state:
+UNCOMMITTED intentional changes exist for BOM cleanup and `.gitignore` dependency-lock policy; this state replacement will join that same Pre-Sprint-0 hardening change set.
 
 Current release:
-N/A — Sprint 0
+N/A
 ```
 
 ## 7.2 Historical pre-V3 repository
@@ -604,7 +611,8 @@ None known at snapshot time.
 
 ## 11.2 P1 blockers / missing setup evidence
 
-- V3 build/test commands chưa được khóa.
+- Pre-Sprint-0 hardening chưa freeze/commit hoàn tất.
+- V3 build/test commands chưa được khóa vì Sprint 0 chưa bắt đầu.
 - ARM GCC chưa được xác minh.
 - CMake chưa được xác minh.
 - Hardware/toolchain historical values chưa được revalidated.
@@ -672,17 +680,17 @@ None — V3 starts clean at Sprint 0.
 
 ```text
 Baseline:
-Sprint 0 — 09/08/2026
-Week 1 start — 10/08/2026
+Sprint 0 planned for 09/08/2026 after Pre-Sprint-0 freeze.
+Week 1 planned start — 10/08/2026.
 
 Current:
-On baseline.
+Still PRE-SPRINT-0 at snapshot time.
 
 Variance:
-0 days.
+NOT_COUNTED until explicit Sprint 0 start.
 
 Reason:
-V3 reset intentionally starts today.
+Repository/system hardening is being treated as setup rather than silently claiming Sprint 0 execution.
 ```
 
 ## 14.2 Recovery
@@ -705,7 +713,8 @@ Current risk:
 LOW.
 
 Escalate to MEDIUM if:
-- host compiler/test unavailable;
+- Pre-Sprint-0 hardening is allowed to expand beyond finite freeze criteria;
+- host compiler/test unavailable after Sprint 0 starts;
 - STM32 or ESP32 baseline unexpectedly broken;
 - essential hardware issue blocks Week 1 preparation.
 
@@ -717,7 +726,7 @@ Escalate to HIGH only if:
 
 # 15. WEEKLY SCORECARD
 
-Sprint 0 không phải full technical week; chưa chấm như weekly competency gate.
+Pre-Sprint-0 không phải technical week và không được chấm như weekly competency gate. Sprint 0 cũng chưa bắt đầu.
 
 ```text
 Output:        N/A until Sprint 0 close
@@ -728,7 +737,7 @@ Health:        N/A
 Career:        N/A
 ```
 
-Sau Sprint 0, chỉ record exit status và preflight evidence.
+Sau khi Sprint 0 thực sự diễn ra, chỉ record exit status và preflight evidence.
 
 Week 1 mới bắt đầu scorecard tuần chính thức.
 
@@ -758,7 +767,10 @@ Follow EMBEDDED_ROADMAP_V3.1 weekly cards beginning after foundation work.
 # 17. HEALTH / LOAD
 
 ```text
-Sprint 0 planned load:
+Pre-Sprint-0 hardening load:
+bounded setup only; stop after freeze.
+
+Future Sprint 0 planned load:
 6–8 focused hours.
 
 Available focused hours today:
@@ -782,7 +794,7 @@ Nếu có thi, bệnh, việc gia đình hoặc giới hạn thực tế, cập 
 
 | Mốc | Ngày | Trạng thái hiện tại |
 |---|---:|---|
-| Sprint 0 exit | 09/08/2026 | `IN_PROGRESS — Block 1 PASS; Blocks 2–5 open` |
+| Sprint 0 exit | 09/08/2026 | `NOT_STARTED — waits for Pre-Sprint-0 freeze + explicit START` |
 | Week 1 start | 10/08/2026 | `PLANNED` |
 | Foundation MCU gate | 06/09/2026 | `PLANNED` |
 | Data Logger v1.0 | 11/10/2026 | `PLANNED` |
@@ -904,11 +916,11 @@ Không dùng old repo để tự động kết luận competency.
 
 # 23. EXACT NEXT ACTION
 
-> **Tạo V3 repo/thư mục làm việc mới, tạo `roadmap-control/`, rồi đặt bản `CURRENT_STATE_V3.md` này vào đó dưới tên `roadmap-control/current-state.md`.**
+> **Thay `roadmap-control/current-state.md` bằng bản cập nhật này, kiểm tra diff chỉ chứa state correction hợp lệ, rồi hoàn tất final Pre-Sprint-0 audit trước khi commit/freeze.**
 
 **Expected duration:** 5–15 phút.
 
-Sau khi state này được cập nhật vào repo, action kế tiếp phải được lấy từ Sprint 0 Block 2 — STM32 preflight; không tự nhảy sang C exercises.
+Không bắt đầu hardware/toolchain preflight và không tự nhảy sang C exercises trước khi Pre-Sprint-0 được freeze.
 
 ---
 
@@ -1031,14 +1043,13 @@ Current State:
 CURRENT_STATE_V3.md — 3.0.0
 
 Calendar:
-Sprint 0 — 09/08/2026
+PRE-SPRINT-0 — 09/08/2026
 
 Execution:
-Sprint 0 / Block 2 — STM32 preflight — NOT_STARTED
+Repository/System Hardening — IN_PROGRESS
 
 Artifact:
-Sprint 0 / Block 1 repository/control-plane bootstrap — ARTIFACT_PASS.
-Evidence commits: `8a1f6f3`, `2435ec4`.
+Pre-Sprint-0 repo/control-plane setup evidence exists; no Sprint 0 technical ARTIFACT_PASS yet.
 
 Competency:
 No V3 competency PASS.
@@ -1052,10 +1063,10 @@ v1.0 — 14/12/2026
 Roadmap close — 12/01/2027
 
 Main immediate gap:
-STM32/ESP32/toolchain/hardware preflight chưa được tái xác minh dưới V3.
+Finish/freeze intentional repository hardening; Sprint 0 technical preflight has not started.
 
 Exact next action:
-Ở phiên tiếp theo, kết nối Nucleo-F446RE bằng USB data cable và xác minh ST-Link/Windows nhận board.
+Replace `roadmap-control/current-state.md` with the corrected Pre-Sprint-0 state and audit the diff.
 ```
 
 ---
@@ -1083,18 +1094,18 @@ ACTIVE / ON BASELINE
 
 System status:
 V3 documents assembled.
-Operational repository/control-plane bootstrap completed and pushed.
-Sprint 0 hardware/toolchain preflight remains open.
+Repository/control-plane bootstrap exists.
+Pre-Sprint-0 hardening is IN_PROGRESS and not yet frozen.
 
 Sprint 0:
-NOT YET PASSED.
+NOT_STARTED.
 
 Week 1:
 NOT_STARTED.
 
 Artifact confidence:
-Repository/control-plane bootstrap is reproducible and recorded.
-Historical hardware/toolchain setup evidence still requires Sprint 0 revalidation before being accepted into the V3 baseline.
+Pre-Sprint-0 repo setup is evidenced.
+Hardware/toolchain reproducibility is still unverified under V3 because Sprint 0 has not started.
 
 Competency confidence:
 No V3 competency has been independently verified.
@@ -1103,15 +1114,16 @@ AI integrity:
 Known pre-V3 Week 1 contamination is explicitly recorded rather than hidden.
 
 Critical path:
-Currently protected if Sprint 0 is completed today.
+Currently protected only if Pre-Sprint-0 hardening is frozen promptly and does not expand into endless infrastructure polish.
 
 Decision:
-Proceed with Sprint 0.
-Do not start Week 1 before Sprint 0 mandatory bootstrap/preflight is truthfully closed.
+Finish Pre-Sprint-0 freeze.
+Do NOT start Sprint 0 until the owner explicitly starts it.
+Do NOT start Week 1 before Sprint 0 mandatory technical preflight is truthfully closed.
 ```
 
 ---
 
 **End of CURRENT_STATE_V3 3.0.0**
 
-**NEXT ACTION recorded in this state:** ở phiên học tiếp theo, kết nối Nucleo-F446RE bằng USB data cable và xác minh Windows/ST-Link nhận board trước khi mở STM32CubeIDE.
+**NEXT ACTION recorded in this state:** replace `roadmap-control/current-state.md` with this corrected Pre-Sprint-0 state, audit the diff, then finish the bounded hardening/freeze sequence.

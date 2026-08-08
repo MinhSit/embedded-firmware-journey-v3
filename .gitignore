@@ -1,4 +1,4 @@
-﻿# ============================================================
+# ============================================================
 # Embedded Firmware Journey V3
 # ============================================================
 
@@ -59,7 +59,6 @@ venv/
 sdkconfig
 sdkconfig.old
 managed_components/
-dependencies.lock
 
 # If a reproducible sdkconfig.defaults is used, COMMIT that file.
 

@@ -1,4 +1,4 @@
-﻿# SPRINT 0 PREFLIGHT — 2026-08-09
+# SPRINT 0 PREFLIGHT — 2026-08-09
 
 Status values:
 

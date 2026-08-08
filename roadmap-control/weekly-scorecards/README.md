@@ -1,4 +1,4 @@
-﻿# WEEKLY SCORECARDS
+# WEEKLY SCORECARDS
 
 Create one file per completed week.
 

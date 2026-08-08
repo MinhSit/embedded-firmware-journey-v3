@@ -1,4 +1,4 @@
-﻿# Captures
+# Captures
 
 Curated and sanitized logic-analyzer / protocol captures.
 
