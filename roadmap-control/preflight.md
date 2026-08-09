@@ -24,7 +24,7 @@ Initial commit:
 Pre-Sprint-0 baseline history exists; Sprint 0 host smoke evidence commit `477b4c0`.
 
 Remote push:
-PASS — `477b4c0` pushed to `origin/main`.
+PASS — repository push/pull path revalidated throughout Sprint 0.
 
 Status:
 PASS
@@ -58,7 +58,9 @@ ST-Link status:
 PASS — ST-LINK FW `V2J48M35`, target voltage `3.30 V`, SWD 4000 KHz.
 
 Evidence:
-`evidence/sprint-00/preflight-summary.md`; source project reused from historical repo only as a preflight test vehicle.
+- `evidence/sprint-00/preflight-summary.md`
+- `evidence/sprint-00/captures/stm32-debug-breakpoint-evidence.jpg`
+- source project reused from historical repo only as a preflight test vehicle.
 
 Status:
 PASS
@@ -179,7 +181,9 @@ Capture performed:
 PASS — D0 captured STM32 PA5 blink signal. Observed approximately 0.5 s HIGH / 0.5 s LOW, about 1 s period and ~50% duty cycle, matching the preflight firmware behavior.
 
 Evidence:
-`evidence/sprint-00/preflight-summary.md`; screenshot supplied during Sprint 0 session.
+- `evidence/sprint-00/preflight-summary.md`
+- `evidence/sprint-00/captures/stm32-pa5-logic-capture-evidence.jpg`
+- `evidence/sprint-00/captures/README.md`
 
 Status:
 PASS
@@ -238,13 +242,13 @@ CMake checked:
 PASS
 
 Inventory complete:
-PENDING FINAL BOOKKEEPING UPDATE
+PASS — see `roadmap-control/inventory.md`.
 
 Old competency claims marked UNVERIFIED:
 PASS — Week 1 pre-V3 competency remains `COMPETENCY_UNVERIFIED / RETEST REQUIRED`.
 
 Week 1 Day 1 ready:
-PENDING FINAL EXIT REVIEW
+PASS — no P0 operational/tooling/hardware blocker remains. This is readiness only, not competency PASS.
 
 Decision:
-PENDING CP-00 EXIT REVIEW
+CONTINUE — Sprint 0 closed operationally. See `evidence/sprint-00/cp-00-review.md`.
