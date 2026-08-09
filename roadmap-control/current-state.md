@@ -1,12 +1,12 @@
 # CURRENT STATE V3 — EMBEDDED/FIRMWARE ROADMAP
 
 **Document ID:** `CURRENT_STATE_V3`
-**Version:** `3.0.2`
+**Version:** `3.0.3`
 **State type:** Operational snapshot — mô tả thực tế hiện tại, không tự tạo luật mới
-**Generated at:** `2026-08-09 19:10 +07:00`
+**Generated at:** `2026-08-09 20:11 +07:00`
 **Timezone:** `Asia/Ho_Chi_Minh`
 
-**Status:** `SPRINT-0 EXIT REVIEW`
+**Status:** `SPRINT-0 CLOSED`
 
 ---
 
@@ -20,7 +20,7 @@ Execution Position:
 Sprint 0 operational validation complete.
 
 Gate Position:
-CP-00 — Sprint 0 Exit Review.
+CP-00 — Sprint 0 Exit Review completed.
 
 Decision:
 CONTINUE.
@@ -46,6 +46,9 @@ Required operational paths:
 
 Evidence summary:
 `evidence/sprint-00/preflight-summary.md`
+
+CP-00 review:
+`evidence/sprint-00/cp-00-review.md`
 
 ---
 
@@ -85,7 +88,7 @@ Optional modules do not block the critical path.
 Transition:
 
 ```text
-SPRINT 0 EXIT REVIEW
+SPRINT 0 CLOSED
         |
         v
 WEEK 1 DAY 1
@@ -102,3 +105,6 @@ First Week 1 work must start with fresh independent C validation according to AI
 
 Reason:
 Operational environment is validated and no hardware/tooling blocker remains.
+
+Next formal review:
+`CP-01 — End of Week 1 — 16/08/2026`
