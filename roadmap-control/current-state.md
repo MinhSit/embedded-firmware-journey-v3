@@ -1,9 +1,9 @@
 # CURRENT STATE V3 — EMBEDDED/FIRMWARE ROADMAP
 
 **Document ID:** `CURRENT_STATE_V3`
-**Version:** `3.0.4`
+**Version:** `3.0.5`
 **State type:** Operational snapshot — mô tả thực tế hiện tại, không tự tạo luật mới
-**Generated at:** `2026-08-09 21:11 +07:00`
+**Generated at:** `2026-08-09 22:29 +07:00`
 **Timezone:** `Asia/Ho_Chi_Minh`
 
 **Status:** `SPRINT-0 CLOSED`
@@ -13,10 +13,10 @@
 # 0. Source of Truth
 
 ```text
-SYSTEM_SPEC_V3.md              3.0.0  FROZEN BASELINE
-EMBEDDED_ROADMAP_V3.1.docx     3.1.0  FROZEN ROADMAP BASELINE
-MASTER_PROMPT_V3.md             3.0.2  FROZEN BASELINE
-roadmap-control/current-state.md 3.0.4 ACTIVE OPERATIONAL STATE
+SYSTEM_SPEC_V3.md                3.0.0  FROZEN BASELINE
+EMBEDDED_ROADMAP_V3.1.docx       3.1.0  FROZEN ROADMAP BASELINE
+MASTER_PROMPT_V3.md               3.0.2  FROZEN BASELINE
+roadmap-control/current-state.md  3.0.5  ACTIVE OPERATIONAL STATE
 Canonical repo: https://github.com/MinhSit/embedded-firmware-journey-v3
 ```
 
@@ -45,7 +45,7 @@ Week 1 technical learning has not started under V3 yet.
 
 ```text
 Sprint 0 operational/bootstrap artifacts: PASS
-Latest closure/evidence head: 95afe2b
+Latest verified repo head before this state synchronization: 5a66ed0
 ```
 
 Primary evidence:
@@ -53,6 +53,7 @@ Primary evidence:
 - `evidence/sprint-00/preflight-summary.md`
 - `evidence/sprint-00/cp-00-review.md`
 - `evidence/sprint-00/captures/`
+- `roadmap-control/tool-versions.md`
 
 ## Competency Position
 
@@ -128,10 +129,21 @@ P0 blockers:
 NONE
 ```
 
-Known non-blocking items:
-- MPU6050 electrical/I2C function: `NOT_TESTED` until sensor phase;
-- exact Windows / STM32CubeIDE / STM32CubeMX / PulseView application versions: not all separately pinned;
-- optional CAN transceiver: not currently confirmed in inventory.
+Tool/application metadata baseline:
+
+```text
+Windows 10 Pro 10.0.19045 build 19045 64-bit — VERIFIED
+STM32CubeIDE 2.2.0 build 29186_20260626_0934 (UTC) — VERIFIED
+STM32CubeMX 6.18.1 — VERIFIED
+PulseView 0.5.0-git-e2fe9df — VERIFIED
+Wireshark 4.6.5 x64 — VERIFIED INSTALLATION/VERSION
+```
+
+Known deferred/non-blocking items:
+- MPU6050 electrical/I2C function: `NOT_TESTED`; verify in the sensor/I2C phase before making sensor-function claims.
+- ESP32 detected flash size is 4 MB while the historical preflight binary header used 2 MB; resolve project flash configuration when the clean ESP32 project baseline is created.
+- CAN transceiver is not currently confirmed in inventory; physical CAN remains optional, and any physical-bus claim requires hardware/evidence at the CAN phase.
+- Wireshark packet-capture workflow is deferred until the network/protocol phase; only installation/version is currently claimed.
 
 Recovery:
 
@@ -163,6 +175,7 @@ Required Sprint 0 operational paths:
 | UART | PASS |
 | Logic analyzer | PASS |
 | Hardware inventory/fallback | PASS |
+| Tool/application version baseline | PASS |
 
 Detailed versions and limitations remain in:
 - `roadmap-control/tool-versions.md`
@@ -172,7 +185,7 @@ Detailed versions and limitations remain in:
 
 # 6. Current Command / Result
 
-Last verified local repository result reported on 2026-08-09:
+Last verified local repository result reported on 2026-08-09 before this state synchronization:
 
 ```text
 git status
@@ -180,12 +193,10 @@ git status
 → nothing to commit, working tree clean
 
 git log -3 --oneline
+→ 5a66ed0 docs(tools): pin verified application versions
+→ 5140808 docs(state): restore required V3 state fields
 → 95afe2b chore(evidence): normalize capture image extensions
-→ 08d22c9 docs(review): close Sprint 0 dependency review
-→ e06d98b docs(state): close sprint-00 transition state
 ```
-
-Remote commit `95afe2b` preserves the capture bytes and normalizes their extension from `.jpg` to `.png`; evidence references were updated consistently.
 
 ---
 
@@ -195,6 +206,8 @@ Remote commit `95afe2b` preserves the capture bytes and normalizes their extensi
 CP-00: CONTINUE
 SPRINT-0: CLOSED
 WEEK 1 ENTRY: READY
+P0 BLOCKERS: NONE
+RECOVERY: NOT ACTIVE
 ```
 
 This means operational readiness only. It does not mean Embedded C competency PASS.
