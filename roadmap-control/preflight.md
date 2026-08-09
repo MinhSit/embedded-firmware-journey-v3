@@ -59,7 +59,7 @@ PASS — ST-LINK FW `V2J48M35`, target voltage `3.30 V`, SWD 4000 KHz.
 
 Evidence:
 - `evidence/sprint-00/preflight-summary.md`
-- `evidence/sprint-00/captures/stm32-debug-breakpoint-evidence.jpg`
+- `evidence/sprint-00/captures/stm32-debug-breakpoint-evidence.png`
 - source project reused from historical repo only as a preflight test vehicle.
 
 Status:
@@ -182,7 +182,7 @@ PASS — D0 captured STM32 PA5 blink signal. Observed approximately 0.5 s HIGH /
 
 Evidence:
 - `evidence/sprint-00/preflight-summary.md`
-- `evidence/sprint-00/captures/stm32-pa5-logic-capture-evidence.jpg`
+- `evidence/sprint-00/captures/stm32-pa5-logic-capture-evidence.png`
 - `evidence/sprint-00/captures/README.md`
 
 Status:

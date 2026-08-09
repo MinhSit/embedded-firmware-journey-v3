@@ -5,7 +5,7 @@ These captures do NOT establish Embedded/Firmware competency.
 
 ## Files
 
-### `stm32-debug-breakpoint-evidence.jpg`
+### `stm32-debug-breakpoint-evidence.png`
 
 STM32CubeIDE debug evidence.
 
@@ -21,7 +21,7 @@ Supports:
 - STM32 flash/debug path revalidation.
 - `SPRINT-0-EXIT` operational evidence.
 
-### `stm32-pa5-logic-capture-evidence.jpg`
+### `stm32-pa5-logic-capture-evidence.png`
 
 PulseView logic-analyzer capture of the STM32 PA5 blink signal.
 

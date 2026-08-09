@@ -10,7 +10,7 @@ Review source: `docs/system/ROADMAP_REVIEW_LOG.md` — CP-00.
 
 | Requirement | Result | Evidence |
 |---|---|---|
-| STM32 build/flash/debug | PASS | `preflight-summary.md`, `captures/stm32-debug-breakpoint-evidence.jpg` |
+| STM32 build/flash/debug | PASS | `preflight-summary.md`, `captures/stm32-debug-breakpoint-evidence.png` |
 | ESP32 build/flash/monitor | PASS | `preflight-summary.md` |
 | Host compiler/test | PASS | `tests/host/smoke.c`, `preflight-summary.md` |
 | UART/measurement path | PASS | ESP-IDF monitor evidence + logic-analyzer capture |
@@ -20,8 +20,8 @@ Review source: `docs/system/ROADMAP_REVIEW_LOG.md` — CP-00.
 
 ## Visual Evidence
 
-- `evidence/sprint-00/captures/stm32-debug-breakpoint-evidence.jpg`
-- `evidence/sprint-00/captures/stm32-pa5-logic-capture-evidence.jpg`
+- `evidence/sprint-00/captures/stm32-debug-breakpoint-evidence.png`
+- `evidence/sprint-00/captures/stm32-pa5-logic-capture-evidence.png`
 - `evidence/sprint-00/captures/README.md`
 
 ## Decision
