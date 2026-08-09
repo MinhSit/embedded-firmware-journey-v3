@@ -908,11 +908,13 @@ no all-nighter
 Không thêm “buffer week” nếu chưa có evidence.
 
 ## RR-009 — Hardware/toolchain dependency
-Status: `OBSERVING`
+Status: `CLOSED`
 Severity: `R2`
 Target: `CP-00`
+Closed: `2026-08-09 — CP-00 PASS / CONTINUE`
+Evidence: `evidence/sprint-00/cp-00-review.md`, `evidence/sprint-00/preflight-summary.md`, `roadmap-control/preflight.md`, `roadmap-control/inventory.md`, `roadmap-control/tool-versions.md`.
 
-Sprint 0 phải resolve:
+Sprint 0 resolved:
 ```text
 STM32
 ESP32
@@ -923,7 +925,8 @@ CMake
 inventory/fallback
 ```
 
-Nếu CP-00 PASS → close.
+Closure:
+No P0 hardware/toolchain blocker remains for Week 1 entry. Functional status not tested for optional/deferred hardware remains explicitly unclaimed.
 
 ## RR-010 — Career timing realism
 Status: `DEFERRED`
@@ -1000,6 +1003,69 @@ CP-01 — End of Week 1 — 16/08/2026
 ```
 
 Exception: review sớm nếu R3/R4.
+
+---
+
+## RV-001 — CP-00 Sprint 0 Exit
+
+Date: `2026-08-09`
+Calendar Position: `Sprint 0 exit`
+Execution Position: `Sprint 0 operational validation complete`
+Roadmap version: `EMBEDDED_ROADMAP_V3.1`
+Relevant commit: `e06d98b` — Sprint 0 transition state closed before this review-log update.
+
+### Inputs
+Current State: `SPRINT-0 CLOSED`; CP-00 operational result `CONTINUE`.
+Weekly scorecard: `N/A` — Sprint 0 bootstrap, not Week 1 weekly learning review.
+Gate: `CP-00`; detailed checklist in `evidence/sprint-00/cp-00-review.md`.
+AI usage: Sprint 0 setup/bookkeeping assistance logged in `roadmap-control/ai-usage-log.md`; no competency PASS created.
+Schedule variance: no calendar slip observed; Week 1 start remains `2026-08-10`.
+Health/load: actual focused hours not reliably recorded for Sprint 0; no structural workload conclusion from this checkpoint.
+Career data: `N/A`.
+Other evidence: `roadmap-control/preflight.md`, `roadmap-control/inventory.md`, `roadmap-control/tool-versions.md`, `evidence/sprint-00/preflight-summary.md`, visual captures under `evidence/sprint-00/captures/`.
+
+### Active review items
+RR-009: `CLOSED` — required hardware/toolchain paths verified or explicitly bounded/deferred.
+RR-002: remains `OBSERVING` — Sprint 0 closure produced noticeable bookkeeping friction; one bootstrap day is not enough to confirm a system defect. Recheck at CP-01 and favor consolidated AI-assisted bookkeeping.
+RR-008: remains `WATCH` — no new evidence requiring schedule/recovery change.
+
+### Findings
+Curriculum Coverage:      UNKNOWN
+Sequencing/Prerequisite:  OK
+Workload:                 UNKNOWN
+Learning Depth:           UNKNOWN
+AI Workflow:              OK
+Evidence Overhead:        WATCH
+Industry Relevance:       UNKNOWN
+Project Value:            UNKNOWN
+Career Fit:               UNKNOWN
+Health/Sustainability:    UNKNOWN
+
+### Defects confirmed
+NONE.
+
+### Operational adjustments
+- Consolidate bookkeeping updates instead of repeated micro-edits.
+- Preserve evidence integrity while minimizing duplicate manual maintenance.
+- Do not add repository-management work unless a real execution need appears.
+
+### Change requests opened
+NONE.
+
+### Decision
+`CONTINUE V3.1`
+
+No Sprint 0 recovery and no roadmap/system revision are justified.
+
+### Files affected
+- `docs/system/ROADMAP_REVIEW_LOG.md`
+- Sprint 0 closure already reflected in live state/evidence files.
+
+### Next formal review
+`CP-01 — End of Week 1 — 16/08/2026`, when execution actually reaches Week 1 close.
+
+### Exact next action
+On `2026-08-10`, start `WEEK 1 DAY 1 — Embedded C Foundation` with fresh independent C validation under the V3 AI-integrity rules.
 
 ---
 # 18. REVIEW ENTRY TEMPLATE
@@ -1269,6 +1335,6 @@ Default giữa các checkpoint:
 > **Execute V3.1. Collect evidence. Change only the minimum necessary when a real defect is demonstrated.**
 
 **Current decision:** `CONTINUE EMBEDDED_ROADMAP_V3.1`
-**Next formal review:** `CP-00 — Sprint 0 Exit — before transition to Week 1`
-**After CP-00 PASS:** `CP-01 — End of Week 1 — 16/08/2026`
+**Last completed formal review:** `RV-001 — CP-00 Sprint 0 Exit — 09/08/2026`
+**Next formal review:** `CP-01 — End of Week 1 — 16/08/2026`
 **Early exception:** `R3/R4 structural/system defect`
