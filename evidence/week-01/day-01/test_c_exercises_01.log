@@ -1,0 +1,30 @@
+﻿Date: 2026-08-10
+Week/Day: Week 01 / Day 01
+What: Host test for c_exercises_01 pointer/array exercises
+Toolchain: Host GCC 14.2.0
+
+Expected:
+- Build succeeds with -std=c17 -Wall -Wextra -Wpedantic -Werror
+- Tests run: 46
+- Tests failed: 0
+- Result: PASS
+
+AI level: AI-3
+AI usage: Theory, hints, and review/debug after learner attempts; no full core solution accepted.
+Evidence class: E2 - execution evidence
+Competency claim: NONE - practice evidence only; Week 1 competency requires fresh AI-0 gate.
+Known limitations: Host practice only; this log does not prove independent competency.
+
+=== BUILD ===
+Command:
+gcc -std=c17 -Wall -Wextra -Wpedantic -Werror learning/week-01/day-01/c_exercises_01.c tests/host/test_c_exercises_01.c -o tests/host/test_c_exercises_01.exe
+
+Build exit code: 0
+
+=== TEST ===
+Command: .\tests\host\test_c_exercises_01.exe
+
+Tests run:    46
+Tests failed: 0
+RESULT: PASS
+Test exit code: 0
