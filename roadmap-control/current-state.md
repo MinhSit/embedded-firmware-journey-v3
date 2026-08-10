@@ -16,7 +16,7 @@
 SYSTEM_SPEC_V3.md                3.0.0  FROZEN BASELINE
 EMBEDDED_ROADMAP_V3.1.docx       3.1.0  FROZEN ROADMAP BASELINE
 MASTER_PROMPT_V3.md               3.0.2  FROZEN BASELINE
-roadmap-control/current-state.md  3.0.5  ACTIVE OPERATIONAL STATE
+roadmap-control/current-state.md  3.0.6  ACTIVE OPERATIONAL STATE
 Canonical repo: https://github.com/MinhSit/embedded-firmware-journey-v3
 ```
 
