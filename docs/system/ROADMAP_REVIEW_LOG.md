@@ -1,13 +1,13 @@
 # ROADMAP REVIEW LOG — EMBEDDED/FIRMWARE ROADMAP V3.1
 
 **Document ID:** `ROADMAP_REVIEW_LOG`
-**Version:** `1.0.1`
+**Version:** `1.0.2`
 **Status:** `ACTIVE REVIEW LOG — NON-AUTHORITATIVE`
 **Created:** `2026-08-09`
 **Timezone:** `Asia/Ho_Chi_Minh`
 **Reviewed roadmap:** `EMBEDDED_ROADMAP_V3.1.docx`
 **System authority:** `SYSTEM_SPEC_V3.md 3.0.0`
-**Execution authority:** `MASTER_PROMPT_V3.md 3.0.2`
+**Execution authority:** `MASTER_PROMPT_V3.md 3.0.3`
 **Intended repo path:** `docs/system/ROADMAP_REVIEW_LOG.md`
 **Canonical live repo:** `https://github.com/MinhSit/embedded-firmware-journey-v3`
 
@@ -1338,6 +1338,16 @@ AI không được silently redefine roadmap.
 ```text
 Change:
 Synchronize execution authority with MASTER_PROMPT_V3 3.0.2 and pin canonical live repo.
+
+Behavior impact:
+NONE to review checkpoints, severity, change-control or roadmap semantics.
+```
+
+# 23.2 VERSION NOTE — 1.0.2
+
+```text
+Change:
+Synchronize execution authority with MASTER_PROMPT_V3 3.0.3 active operational layer discovery clarification.
 
 Behavior impact:
 NONE to review checkpoints, severity, change-control or roadmap semantics.

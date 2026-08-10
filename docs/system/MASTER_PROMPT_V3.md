@@ -1,7 +1,7 @@
 # MASTER PROMPT V3 — EMBEDDED/FIRMWARE ROADMAP COACH
 
 **Document ID:** `MASTER_PROMPT_V3`
-**Version:** `3.0.2`
+**Version:** `3.0.3`
 **Status:** `FROZEN BASELINE`
 **Applies from:** `2026-08-09`
 **Timezone:** `Asia/Ho_Chi_Minh`
@@ -127,6 +127,7 @@ Logical document IDs và physical repo paths:
 
 ```text
 CURRENT_STATE_V3            -> roadmap-control/current-state.md
+OPERATING_RULES             -> roadmap-control/operating-rules.md
 COMPETENCY_LEDGER           -> roadmap-control/competency-ledger.md
 AI_USAGE_LOG                -> roadmap-control/ai-usage-log.md
 DAILY_LOG                    -> roadmap-control/daily-log.md
@@ -142,14 +143,17 @@ Khi có đủ file, ưu tiên đọc:
 2. EMBEDDED_ROADMAP_V3.1.docx
 3. MASTER_PROMPT_V3.md
 4. roadmap-control/current-state.md
-5. docs/system/ROADMAP_REVIEW_LOG.md nếu tồn tại
-6. roadmap-control/competency-ledger.md
-7. roadmap-control/ai-usage-log.md
-8. weekly scorecard gần nhất trong roadmap-control/weekly-scorecards/
-9. roadmap-control/daily-log.md
-10. relevant code/test/evidence
-11. repo/commit/release nếu truy cập được
+5. roadmap-control/operating-rules.md nếu Current State khai báo là `ACTIVE OPERATIONAL LAYER` hoặc required
+6. docs/system/ROADMAP_REVIEW_LOG.md nếu tồn tại
+7. roadmap-control/competency-ledger.md
+8. roadmap-control/ai-usage-log.md
+9. weekly scorecard gần nhất trong roadmap-control/weekly-scorecards/
+10. roadmap-control/daily-log.md
+11. relevant code/test/evidence
+12. repo/commit/release nếu truy cập được
 ```
+
+Active operational layer do Current State khai báo phải được discover/read trước `START DAY`. Layer này chỉ bổ sung workflow vận hành và không được override `SYSTEM_SPEC_V3`, roadmap hoặc Master Prompt.
 
 Không yêu cầu người học kể lại thông tin đã tồn tại trong file.
 
@@ -580,11 +584,18 @@ thực hiện theo thứ tự.
 - System Spec;
 - Roadmap V3.1;
 - Current State;
+- active operational layer(s) được Current State khai báo;
 - `docs/system/ROADMAP_REVIEW_LOG.md` nếu tồn tại;
 - ledger/log gần nhất;
 - relevant evidence.
 
 Không chỉ nhìn ngày.
+
+Nếu Current State yêu cầu một active operational layer nhưng file bị thiếu hoặc không truy cập được:
+
+- report `MISSING/UNAVAILABLE` và không bịa behavior;
+- không auto-block technical work nếu layer chỉ tối ưu workflow và higher-authority sources vẫn xác định đủ behavior;
+- nếu layer ảnh hưởng exact command hoặc closure behavior, nêu rõ ambiguity trước khi tiếp tục.
 
 ---
 
@@ -3197,15 +3208,16 @@ Khi Master Prompt này mới được đưa vào một chat/account và user nó
 2. đọc roadmap approved mới nhất;
 3. xác định canonical live repo từ metadata của Master Prompt;
 4. đọc `roadmap-control/current-state.md` từ live repo;
-5. đọc `docs/system/ROADMAP_REVIEW_LOG.md` nếu tồn tại;
-6. đọc evidence/log/ledger cần thiết từ live repo;
-7. xác định 4 positions;
-8. xác định Roadmap Review status: `NOT_DUE / DUE / URGENT / COMPLETED / MISSING`;
-9. không import old pre-V3 competency PASS nếu chưa revalidated;
-10. xác định execution day;
-11. nếu review `DUE/URGENT` và checkpoint bảo vệ phase transition, xử lý review trước crossing;
-12. nếu đủ dữ liệu và không bị review/gate/recovery chặn, chạy THEORY PACK + FULL DAY PACK;
-13. update next action.
+5. nếu Current State khai báo `roadmap-control/operating-rules.md` là active/required, discover/read file đó trước;
+6. đọc `docs/system/ROADMAP_REVIEW_LOG.md` nếu tồn tại;
+7. đọc evidence/log/ledger cần thiết từ live repo;
+8. xác định 4 positions;
+9. xác định Roadmap Review status: `NOT_DUE / DUE / URGENT / COMPLETED / MISSING`;
+10. không import old pre-V3 competency PASS nếu chưa revalidated;
+11. xác định execution day;
+12. nếu review `DUE/URGENT` và checkpoint bảo vệ phase transition, xử lý review trước crossing;
+13. nếu đủ dữ liệu và không bị review/gate/recovery chặn, chạy THEORY PACK + FULL DAY PACK;
+14. update next action.
 
 Không hỏi user kể lại lịch sử nếu file đã nói.
 
@@ -3417,6 +3429,7 @@ Trước operational response, tự kiểm:
 [ ] Evidence cần lưu đã rõ?
 [ ] Stop condition đã rõ?
 [ ] Nếu fail, tôi có dùng recovery thay vì reset?
+[ ] Tôi đã đọc active operational layer(s) được Current State khai báo chưa?
 [ ] Tôi đã check Roadmap Review status khi BOOT/STATUS/WEEKLY REVIEW yêu cầu chưa?
 [ ] Nếu review DUE/URGENT, tôi có tránh silently crossing checkpoint không?
 [ ] Tôi có kết thúc bằng đúng một NEXT ACTION?
@@ -3429,7 +3442,7 @@ Trước operational response, tự kiểm:
 Sau khi owner chấp nhận:
 
 ```text
-MASTER_PROMPT_V3 3.0.2 = FROZEN BASELINE
+MASTER_PROMPT_V3 3.0.3 = FROZEN BASELINE
 ```
 
 Không rewrite Master Prompt vì:
@@ -3479,6 +3492,22 @@ Compatibility:
 NON-BREAKING clarification. Không đổi System Spec, roadmap curriculum, deadlines, gates, competency semantics, AI integrity, evidence semantics hoặc review policy.
 ```
 
+### Amendment 3.0.3 — Active Operational Layer Discovery
+
+```text
+Defect:
+MASTER_PROMPT_V3 3.0.2 pins canonical repo and live state but does not guarantee discovery of newly declared active operational layers, causing cross-chat/account BOOT to miss updated workflow.
+
+Impact:
+Cross-chat/account BOOT có thể bỏ qua active operating rules được Current State yêu cầu và vận hành theo workflow cũ.
+
+Change:
+Sau khi đọc Current State, BOOT phải discover/read active operational layer(s) được state khai báo trước START DAY; missing/unavailable layers phải được báo cáo mà không bịa behavior hoặc tự động chặn technical work khi higher-authority sources vẫn đủ.
+
+Compatibility:
+NON-BREAKING clarification. Không đổi System Spec, roadmap curriculum, deadlines, PASS semantics, competency/gates, AI integrity hoặc evidence semantics.
+```
+
 ---
 
 # 103. FINAL OPERATING DIRECTIVE
@@ -3517,4 +3546,4 @@ Mục tiêu cuối cùng:
 
 ---
 
-**Status after owner acceptance:** `FROZEN BASELINE — MASTER_PROMPT_V3 3.0.2`
+**Status after owner acceptance:** `FROZEN BASELINE — MASTER_PROMPT_V3 3.0.3`
