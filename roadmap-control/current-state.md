@@ -1,12 +1,12 @@
 # CURRENT STATE V3 — EMBEDDED/FIRMWARE ROADMAP
 
 **Document ID:** `CURRENT_STATE_V3`
-**Version:** `3.0.5`
+**Version:** `3.0.6`
 **State type:** Operational snapshot — mô tả thực tế hiện tại, không tự tạo luật mới
-**Generated at:** `2026-08-09 22:29 +07:00`
+**Generated at:** `2026-08-10 22:12 +07:00`
 **Timezone:** `Asia/Ho_Chi_Minh`
 
-**Status:** `SPRINT-0 CLOSED`
+**Status:** `WEEK 1 ACTIVE — W01D01 CLOSED`
 
 ---
 
@@ -29,8 +29,8 @@ If this file conflicts with a higher-authority source, the higher-authority sour
 ## Calendar Position
 
 ```text
-2026-08-09 — Sprint 0 complete.
-Official Week 1 starts 2026-08-10.
+2026-08-10 — Week 1 / Day 1 complete.
+Week 1 is active.
 ```
 
 ## Execution Position
@@ -38,14 +38,18 @@ Official Week 1 starts 2026-08-10.
 ```text
 SPRINT 0 — CLOSED
 CP-00 operational/bootstrap validation complete.
-Week 1 technical learning has not started under V3 yet.
+W01D01 — CLOSED / LEARNING-PRACTICE PASS.
+Next execution position: W01D02.
 ```
 
 ## Artifact Position
 
 ```text
 Sprint 0 operational/bootstrap artifacts: PASS
-Latest verified repo head before this state synchronization: 5a66ed0
+W01D01 host-practice artifact: PASS
+Host tests: 46/46 PASS
+Artifact commit: aff3d4d
+Daily-log commit: ab4a578
 ```
 
 Primary evidence:
@@ -54,12 +58,16 @@ Primary evidence:
 - `evidence/sprint-00/cp-00-review.md`
 - `evidence/sprint-00/captures/`
 - `roadmap-control/tool-versions.md`
+- `learning/week-01/day-01/`
+- `roadmap-control/daily-log.md`
 
 ## Competency Position
 
 ```text
 V3 competency PASS: NONE
-Week 1 pre-V3 C: COMPETENCY_UNVERIFIED / RETEST REQUIRED
+W01-C-FOUND: COMPETENCY_UNVERIFIED
+W01D01 learning/practice: PASS
+Fresh Week 1 AI-0 competency gate: REQUIRED
 ```
 
 No Sprint 0 artifact or setup result is competency evidence.
@@ -104,6 +112,12 @@ Sprint 0:
 - provenance is recorded in `roadmap-control/ai-usage-log.md`;
 - competency impact from Sprint 0 assistance: `NONE`.
 
+W01D01:
+- highest material assistance level: `AI-3` for theory, hints, post-attempt review/debug and evidence workflow;
+- full core implementation provided by AI: `NO`;
+- learning/practice and artifact evidence: `PASS`;
+- competency impact: `W01-C-FOUND` remains `COMPETENCY_UNVERIFIED` pending a fresh AI-0 Week 1 gate.
+
 Pre-V3 Week 1:
 
 ```text
@@ -119,8 +133,8 @@ Required: fresh Week 1 AI-0 verification
 Schedule variance:
 
 ```text
-ON SCHEDULE — no known calendar slip at Sprint 0 exit.
-Week 1 remains scheduled to start 2026-08-10.
+ON SCHEDULE.
+W01D01 completed on 2026-08-10; next execution is W01D02.
 ```
 
 P0 blockers:
@@ -185,17 +199,15 @@ Detailed versions and limitations remain in:
 
 # 6. Current Command / Result
 
-Last verified local repository result reported on 2026-08-09 before this state synchronization:
+Last verified W01D01 repository evidence before this state synchronization:
 
 ```text
-git status
-→ branch main up to date with origin/main
-→ nothing to commit, working tree clean
+Host tests
+→ 46/46 PASS
 
-git log -3 --oneline
-→ 5a66ed0 docs(tools): pin verified application versions
-→ 5140808 docs(state): restore required V3 state fields
-→ 95afe2b chore(evidence): normalize capture image extensions
+git log -2 --oneline
+→ ab4a578 docs(log): close W01D01
+→ aff3d4d feat(w01d01): complete pointer array const exercises
 ```
 
 ---
@@ -205,21 +217,22 @@ git log -3 --oneline
 ```text
 CP-00: CONTINUE
 SPRINT-0: CLOSED
-WEEK 1 ENTRY: READY
+W01D01 LEARNING/PRACTICE: PASS
+W01-C-FOUND: COMPETENCY_UNVERIFIED
 P0 BLOCKERS: NONE
 RECOVERY: NOT ACTIVE
 ```
 
-This means operational readiness only. It does not mean Embedded C competency PASS.
+W01D01 PASS is a learning/practice and artifact result only. It does not mean Embedded C competency PASS.
 
 ---
 
 # 8. Exact Next Action
 
-On `2026-08-10`, open the primary roadmap chat and send:
+Proceed to:
 
 ```text
-START WEEK 1 DAY 1
+START WEEK 1 DAY 2
 ```
 
-Then begin the fresh Embedded C foundation diagnostic/learning flow under the V3 AI-integrity rules.
+Begin W01D02 under the V3 AI-integrity rules. Keep `W01-C-FOUND` unverified until the fresh Week 1 AI-0 competency gate passes.
