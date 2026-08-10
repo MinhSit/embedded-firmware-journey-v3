@@ -785,9 +785,34 @@ quality near end of day
 If repeated hard-limit pressure → confirm load/scope review.
 
 ## RR-002 — Evidence/bookkeeping overhead
-Status: `OBSERVING`
+Status: `DEFECT_CONFIRMED`
 Severity: `R1`
 First review: `CP-01`
+
+Confirmed: `2026-08-11` from W01D01 operational evidence.
+
+Evidence:
+```text
+W01D01 closure required repeated commit/log/state/provenance correction cycles.
+The late provenance correction caused additional bookkeeping commits after the technical artifact already passed 46/46 tests.
+This consumed learning time without changing artifact behavior or competency status.
+```
+
+Owner decision:
+```text
+APPROVED — apply the minimum operational workflow fix now.
+Do not rewrite frozen SYSTEM_SPEC, ROADMAP, or MASTER_PROMPT.
+```
+
+Minimum change:
+```text
+Add roadmap-control/operating-rules.md.
+Consolidate END DAY bookkeeping and provenance before one closure commit.
+Default to at most two commits/day and one pre-commit audit.
+Keep evidence/competency requirements intact.
+Keep the current daily-log schema unchanged.
+DEFER per-day log files to CP-01 if friction repeats.
+```
 
 Collect:
 ```text

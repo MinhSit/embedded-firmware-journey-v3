@@ -1,9 +1,9 @@
 # CURRENT STATE V3 — EMBEDDED/FIRMWARE ROADMAP
 
 **Document ID:** `CURRENT_STATE_V3`
-**Version:** `3.0.7`
+**Version:** `3.0.8`
 **State type:** Operational snapshot — mô tả thực tế hiện tại, không tự tạo luật mới
-**Generated at:** `2026-08-10 23:38 +07:00`
+**Generated at:** `2026-08-11 00:04 +07:00`
 **Timezone:** `Asia/Ho_Chi_Minh`
 
 **Status:** `WEEK 1 ACTIVE — W01D01 CLOSED`
@@ -16,7 +16,8 @@
 SYSTEM_SPEC_V3.md                3.0.0  FROZEN BASELINE
 EMBEDDED_ROADMAP_V3.1.docx       3.1.0  FROZEN ROADMAP BASELINE
 MASTER_PROMPT_V3.md               3.0.2  FROZEN BASELINE
-roadmap-control/current-state.md  3.0.7  ACTIVE OPERATIONAL STATE
+roadmap-control/current-state.md  3.0.8  ACTIVE OPERATIONAL STATE
+roadmap-control/operating-rules.md        ACTIVE OPERATIONAL LAYER
 Canonical repo: https://github.com/MinhSit/embedded-firmware-journey-v3
 ```
 
@@ -240,7 +241,7 @@ W01D01 PASS is a learning/practice and artifact result only. It does not mean Em
 Proceed to:
 
 ```text
-START WEEK 1 DAY 2
+BOOT
 ```
 
-Begin W01D02 under the V3 AI-integrity rules. Keep `W01-C-FOUND` unverified until the fresh Week 1 AI-0 competency gate passes.
+`BOOT` must read the live state and start/resume W01D02 under `roadmap-control/operating-rules.md` and the V3 AI-integrity rules. The user does not need to enter a Week/Day command manually. Keep `W01-C-FOUND` unverified until the fresh Week 1 AI-0 competency gate passes.
