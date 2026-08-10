@@ -82,7 +82,8 @@ Actual: 5h26m
 
 What I personally implemented, reasoned about, measured, or explained:
 
-- Tự implement E01–E07:
+- Tự implement E01–E05 và E07. Với E06, learner đã có meaningful attempt trước review; AI sau đó exposed exact implementation line `*slot = target;`, nên E06 không được dùng làm independent competency evidence.
+- Function coverage E01–E07:
   - `swap_int`
   - `sum_ints`
   - `max_int`
@@ -234,4 +235,4 @@ Closure criteria:
 
 ### 12. Next Action
 
-Start `WEEK 1 DAY 2` under V3 AI-integrity rules; keep W01-C-FOUND unverified until the fresh AI-0 gate.
+BOOT

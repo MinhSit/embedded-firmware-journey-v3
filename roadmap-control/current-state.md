@@ -1,247 +1,96 @@
 # CURRENT STATE V3 — EMBEDDED/FIRMWARE ROADMAP
 
 **Document ID:** `CURRENT_STATE_V3`
-**Version:** `3.0.9`
-**State type:** Operational snapshot — mô tả thực tế hiện tại, không tự tạo luật mới
-**Generated at:** `2026-08-11 00:30 +07:00`
+**Version:** `3.0.10`
+**State type:** Operational snapshot — describes reality and creates no new policy
+**Generated at:** `2026-08-11 01:04 +07:00`
 **Timezone:** `Asia/Ho_Chi_Minh`
-
-**Status:** `WEEK 1 ACTIVE — W01D01 CLOSED`
-
----
-
-# 0. Source of Truth
-
-```text
-SYSTEM_SPEC_V3.md                3.0.0  FROZEN BASELINE
-EMBEDDED_ROADMAP_V3.1.docx       3.1.0  FROZEN ROADMAP BASELINE
-MASTER_PROMPT_V3.md               3.0.3  FROZEN BASELINE
-roadmap-control/current-state.md  3.0.9  ACTIVE OPERATIONAL STATE
-roadmap-control/operating-rules.md        ACTIVE OPERATIONAL LAYER
-Canonical repo: https://github.com/MinhSit/embedded-firmware-journey-v3
-```
-
-If this file conflicts with a higher-authority source, the higher-authority source wins and this state must be corrected.
+**Status:** `WEEK 1 ACTIVE — W01D01 CLOSED — W01D02 NEXT`
 
 ---
 
-# 1. State Snapshot
+## Authority
 
-## Calendar Position
+- **System Spec version:** `SYSTEM_SPEC_V3 3.0.0`
+- **Roadmap version:** `EMBEDDED_ROADMAP_V3.1 3.1.0`
+- **Master Prompt version:** `MASTER_PROMPT_V3 3.0.3`
+- **Current State version:** `3.0.10`
+- **Active operational layer:** `roadmap-control/operating-rules.md`
 
-```text
-2026-08-10 — Week 1 / Day 1 complete.
-Week 1 is active.
-```
+If this file conflicts with a higher-authority source, the higher-authority source wins.
 
-## Execution Position
+## Positions
 
-```text
-SPRINT 0 — CLOSED
-CP-00 operational/bootstrap validation complete.
-W01D01 — CLOSED / LEARNING-PRACTICE PASS.
-Next execution position: W01D02.
-```
+- **Calendar position:** `2026-08-11 — Week 1 / Day 2`
+- **Execution position:** `W01D02 — NOT STARTED / NEXT EXECUTION`
+- **Artifact position:** `W01D01 c_exercises_01 — ARTIFACT_PASS; build PASS; 46/46 host tests PASS`
+- **Competency position:** `W01-C-FOUND — COMPETENCY_UNVERIFIED`
+- **Last artifact PASS:** `W01D01 c_exercises_01` (`aff3d4d`), evidence at `evidence/week-01/day-01/test_c_exercises_01.log`
+- **Last competency PASS:** `NONE UNDER V3`
 
-## Artifact Position
+## Competency and AI Integrity
 
-```text
-Sprint 0 operational/bootstrap artifacts: PASS
-W01D01 host-practice artifact: PASS
-Host tests: 46/46 PASS
-Artifact commit: aff3d4d
-Daily-log commit: ab4a578
-W01D01 provenance correction: AI-4 due bounded E06 implementation exposure
-```
+- **Competencies verified:** `NONE UNDER V3`
+- **Competencies unverified:** `W01-C-FOUND — Embedded C foundation`
+- **Competencies invalidated/retest required:** Pre-V3 Week 1 evidence is historical/reference only; W01D01 E06 had bounded AI-4 implementation exposure. A fresh Week 1 AI-0 gate is required.
+- **Current AI mode:** `NONE — W01D02 has not started; BOOT must declare the task AI mode before work begins`
+- **AI-contaminated evidence:** W01D01 E06 `retarget_pointer` exposed exact line `*slot = target;`; W01D01 remains valid learning/practice and artifact evidence, not independent competency evidence.
 
-Primary evidence:
-- `roadmap-control/preflight.md`
-- `evidence/sprint-00/preflight-summary.md`
-- `evidence/sprint-00/cp-00-review.md`
-- `evidence/sprint-00/captures/`
-- `roadmap-control/tool-versions.md`
-- `learning/week-01/day-01/`
-- `evidence/week-01/day-01/test_c_exercises_01.log`
-- `roadmap-control/daily-log.md`
-- `roadmap-control/ai-usage-log.md`
+## Outcome and Gates
 
-## Competency Position
+- **Current outcome:** `W01D01 CLOSED — learning/practice PASS; W01D02 NOT STARTED`
+- **Current gate:** `Week 1 Embedded C independent gate — AI-0 — REQUIRED / NOT YET ATTEMPTED`
+- **Gate completed:** `CP-00 Sprint 0 operational/bootstrap gate — CONTINUE (2026-08-09); competency gates completed: NONE UNDER V3`
+- **Gate missing:** `Fresh Week 1 AI-0 gate for W01-C-FOUND`
 
-```text
-V3 competency PASS: NONE
-W01-C-FOUND: COMPETENCY_UNVERIFIED
-W01D01 learning/practice: PASS
-Fresh Week 1 AI-0 competency gate: REQUIRED
-```
+## Repository
 
-No Sprint 0 artifact or W01D01 practice result is competency evidence by itself.
+- **Repo URL:** `https://github.com/MinhSit/embedded-firmware-journey-v3`
+- **Branch:** `main`
+- **Commit:** State base commit `f973b9ae5b0d0f0b4004b77767ca6ce0019e46f7`; current HEAD must be resolved from the repository at BOOT.
+- **Release:** `NONE — no Git tag present at state generation`
 
----
+## Latest Build and Test
 
-# 2. Gate State
+- **Build command:** `gcc -std=c17 -Wall -Wextra -Wpedantic -Werror learning/week-01/day-01/c_exercises_01.c tests/host/test_c_exercises_01.c -o tests/host/test_c_exercises_01.exe`
+- **Latest build result:** `PASS — exit code 0, no warning/error under configured flags`
+- **Test command:** `.\tests\host\test_c_exercises_01.exe`
+- **Latest test result:** `46 / 46 PASS — exit code 0`
 
-Last valid operational gate:
+## Hardware and Toolchain
 
-```text
-CP-00 — Sprint 0 Exit
-Result: CONTINUE
-Date: 2026-08-09
-```
+- **Hardware working:** Nucleo-F446RE, ESP32-WROOM-32 dev board, USB data cable, and 8-channel logic analyzer — Sprint 0 `PASS`.
+- **Hardware missing/broken:** Broken hardware: `NONE confirmed`. Optional CAN transceiver: `NO`. MPU6050 and jumper wires are present but `NOT_TESTED` electrically.
+- **Toolchain versions:** Git `2.49.0.windows.1`; Host GCC `14.2.0`; ARM GCC `13.3.1 / 14.3.1`; CMake `4.0.3`; Python `3.12.0`; ESP-IDF `v6.0.2`; STM32CubeIDE `2.2.0`; STM32CubeMX `6.18.1`; ST-Link `V2J48M35`; PulseView `0.5.0-git-e2fe9df`; Wireshark `4.6.5 x64`.
 
-Last valid competency gate:
+## Blockers and Deferred Work
 
-```text
-NONE UNDER V3
-```
+- **Open blockers:** `NONE`; P0 blocker: `NONE`.
+- **Known bugs:** `NONE unresolved in the W01D01 artifact`.
+- **Technical debt:** Verify MPU6050 at the sensor/I2C phase; resolve ESP32 4 MB detected flash versus historical 2 MB project header when creating the clean ESP32 baseline; verify optional physical CAN hardware before any physical-bus claim; validate Wireshark capture workflow in the network/protocol phase.
+- **Carry-over:** `NONE from W01D01`; W01D02 is the next scheduled execution, not recovery carry-over.
 
-Next competency gate:
+## Schedule, Load, and Risk
 
-```text
-Week 1 Embedded C independent gate
-AI mode: AI-0
-```
+- **Schedule variance:** `0 days — ON SCHEDULE`; W01D01 completed 2026-08-10 and W01D02 is next on 2026-08-11.
+- **Recovery status:** `NOT ACTIVE`
+- **Critical path risk:** `NONE currently identified`; no P0 blocker and the protected deadline is unchanged.
+- **Weekly scorecard:** `NOT YET DUE — Week 1 closes 2026-08-16`
+- **Career pipeline:** `N/A — no career task scheduled for W01D02 in the roadmap`
+- **Health/load:** W01D01 focused time `5h26m`; no health issue is recorded.
 
-Next formal roadmap review:
+## Forward Control
 
-```text
-CP-01 — End of Week 1 — 2026-08-16
-```
-
----
-
-# 3. AI Integrity / Contamination
-
-Sprint 0:
-- bounded setup/test infrastructure and bookkeeping used material AI assistance;
-- provenance is recorded in `roadmap-control/ai-usage-log.md`;
-- competency impact from Sprint 0 assistance: `NONE`.
-
-W01D01:
-- highest material assistance level: `AI-4`;
-- reason: after a meaningful learner attempt on E06 `retarget_pointer`, AI exposed the exact implementation line `*slot = target;`;
-- scope of AI-4: bounded to E06 implementation exposure, not a full exercise-set solution;
-- full core solution provided by AI: `NO`;
-- learning/practice and artifact evidence: `PASS`;
-- competency impact: W01D01 practice must not be promoted to independent competency evidence; `W01-C-FOUND` remains `COMPETENCY_UNVERIFIED` pending a fresh AI-0 Week 1 gate.
-
-Pre-V3 Week 1:
-
-```text
-Status: CONTAMINATED FOR INDEPENDENT COMPETENCY EVIDENCE
-Treatment: historical/reference only
-Required: fresh Week 1 AI-0 verification
-```
-
----
-
-# 4. Schedule / Blockers / Recovery
-
-Schedule variance:
-
-```text
-ON SCHEDULE.
-W01D01 completed on 2026-08-10; next execution is W01D02.
-```
-
-P0 blockers:
-
-```text
-NONE
-```
-
-Tool/application metadata baseline:
-
-```text
-Windows 10 Pro 10.0.19045 build 19045 64-bit — VERIFIED
-STM32CubeIDE 2.2.0 build 29186_20260626_0934 (UTC) — VERIFIED
-STM32CubeMX 6.18.1 — VERIFIED
-PulseView 0.5.0-git-e2fe9df — VERIFIED
-Wireshark 4.6.5 x64 — VERIFIED INSTALLATION/VERSION
-```
-
-Known deferred/non-blocking items:
-- MPU6050 electrical/I2C function: `NOT_TESTED`; verify in the sensor/I2C phase before making sensor-function claims.
-- ESP32 detected flash size is 4 MB while the historical preflight binary header used 2 MB; resolve project flash configuration when the clean ESP32 project baseline is created.
-- CAN transceiver is not currently confirmed in inventory; physical CAN remains optional, and any physical-bus claim requires hardware/evidence at the CAN phase.
-- Wireshark packet-capture workflow is deferred until the network/protocol phase; only installation/version is currently claimed.
-
-Recovery:
-
-```text
-NOT ACTIVE
-```
-
-Critical dates remain protected:
-
-```text
-Project v1.0: 2026-12-14
-Roadmap close: 2027-01-12
-```
-
----
-
-# 5. Hardware / Toolchain Readiness
-
-Required Sprint 0 operational paths:
-
-| Area | Status |
-|---|---|
-| Repository/control plane | PASS |
-| STM32 build/flash/debug | PASS |
-| ESP32 build/flash/monitor | PASS |
-| Host C smoke test | PASS |
-| ARM GCC | PASS |
-| CMake | PASS |
-| UART | PASS |
-| Logic analyzer | PASS |
-| Hardware inventory/fallback | PASS |
-| Tool/application version baseline | PASS |
-
-Detailed versions and limitations remain in:
-- `roadmap-control/tool-versions.md`
-- `roadmap-control/inventory.md`
-
----
-
-# 6. Current Command / Result
-
-Last verified W01D01 repository evidence before provenance correction:
-
-```text
-Host tests
-→ 46/46 PASS
-
-git log -2 --oneline
-→ ab4a578 docs(log): close W01D01
-→ aff3d4d feat(w01d01): complete pointer array const exercises
-```
-
-The provenance correction changes evidence classification only; it does not change the tested source behavior or 46/46 artifact result.
-
----
-
-# 7. Decision
-
-```text
-CP-00: CONTINUE
-SPRINT-0: CLOSED
-W01D01 LEARNING/PRACTICE: PASS
-W01D01 HIGHEST AI LEVEL: AI-4
-W01-C-FOUND: COMPETENCY_UNVERIFIED
-P0 BLOCKERS: NONE
-RECOVERY: NOT ACTIVE
-```
-
-W01D01 PASS is a learning/practice and artifact result only. It does not mean Embedded C competency PASS.
-
----
-
-# 8. Exact Next Action
-
-Proceed to:
-
-```text
-BOOT
-```
-
-`BOOT` must read the live state and start/resume W01D02 under `roadmap-control/operating-rules.md` and the V3 AI-integrity rules. The user does not need to enter a Week/Day command manually. Keep `W01-C-FOUND` unverified until the fresh Week 1 AI-0 competency gate passes.
+- **Next gate:** `Week 1 fresh independent AI-0 C gate`
+- **Hard deadline:** `2026-12-14 — project v1.0`
+- **Scope cuts:** `NONE active`. If schedule lag occurs later, apply roadmap-defined cut order: cut P2 first, reduce P1 polish, preserve P0.
+- **Exact Next Action:** `BOOT`
+- **Files/links to inspect first:**
+  - `roadmap-control/current-state.md`
+  - `roadmap-control/operating-rules.md`
+  - `docs/system/ROADMAP_REVIEW_LOG.md`
+  - `roadmap-control/competency-ledger.md`
+  - `roadmap-control/ai-usage-log.md`
+  - `roadmap-control/daily-log.md`
+  - `evidence/week-01/day-01/test_c_exercises_01.log`
+  - Week 1 Day 2 roadmap card and W01D02 files when created

@@ -1,7 +1,7 @@
 # ROADMAP REVIEW LOG — EMBEDDED/FIRMWARE ROADMAP V3.1
 
 **Document ID:** `ROADMAP_REVIEW_LOG`
-**Version:** `1.0.2`
+**Version:** `1.0.3`
 **Status:** `ACTIVE REVIEW LOG — NON-AUTHORITATIVE`
 **Created:** `2026-08-09`
 **Timezone:** `Asia/Ho_Chi_Minh`
@@ -785,11 +785,12 @@ quality near end of day
 If repeated hard-limit pressure → confirm load/scope review.
 
 ## RR-002 — Evidence/bookkeeping overhead
-Status: `DEFECT_CONFIRMED`
+Status: `CLOSED`
 Severity: `R1`
 First review: `CP-01`
 
 Confirmed: `2026-08-11` from W01D01 operational evidence.
+Closed: `2026-08-11`
 
 Evidence:
 ```text
@@ -812,6 +813,34 @@ Default to at most two commits/day and one pre-commit audit.
 Keep evidence/competency requirements intact.
 Keep the current daily-log schema unchanged.
 DEFER per-day log files to CP-01 if friction repeats.
+```
+
+Fix:
+```text
+roadmap-control/operating-rules.md
+```
+
+Relevant commits:
+```text
+f0a1f15998830ef5b19ed68cf20f5b8fd1b6a980
+docs(workflow): simplify daily close and commit flow
+
+f973b9ae5b0d0f0b4004b77767ca6ce0019e46f7
+docs(system): make BOOT discover active operating rules
+```
+
+Verification summary:
+```text
+- operating-rules.md ACTIVE
+- Master Prompt 3.0.3 discovers active operational layer during BOOT
+- Current State uses Exact Next Action = BOOT
+- repository synchronized after previous push
+- workflow now defers bookkeeping to END DAY atomic closure
+```
+
+Residual:
+```text
+Per-day daily-log split remains DEFERRED to CP-01 only if operational friction repeats.
 ```
 
 Collect:
@@ -1051,7 +1080,7 @@ Other evidence: `roadmap-control/preflight.md`, `roadmap-control/inventory.md`, 
 
 ### Active review items
 RR-009: `CLOSED` — required hardware/toolchain paths verified or explicitly bounded/deferred.
-RR-002: remains `OBSERVING` — Sprint 0 closure produced noticeable bookkeeping friction; one bootstrap day is not enough to confirm a system defect. Recheck at CP-01 and favor consolidated AI-assisted bookkeeping.
+RR-002: `OBSERVING` at this historical CP-00 snapshot — Sprint 0 closure produced noticeable bookkeeping friction; one bootstrap day was not enough to confirm a system defect. Superseded by RR-002 `CLOSED` on `2026-08-11` after W01D01 evidence and workflow verification.
 RR-008: remains `WATCH` — no new evidence requiring schedule/recovery change.
 
 ### Findings
@@ -1351,6 +1380,16 @@ Synchronize execution authority with MASTER_PROMPT_V3 3.0.3 active operational l
 
 Behavior impact:
 NONE to review checkpoints, severity, change-control or roadmap semantics.
+```
+
+# 23.3 VERSION NOTE — 1.0.3
+
+```text
+Change:
+Close RR-002 after the approved operating-rules workflow fix and BOOT discovery verification.
+
+Behavior impact:
+NONE to roadmap curriculum, gates, competency, PASS, AI-integrity or evidence semantics.
 ```
 
 ---
