@@ -105,22 +105,24 @@ What I personally implemented, reasoned about, measured, or explained:
 
 ### 5. AI Usage
 
-Highest AI level used: AI-3
+Highest AI level used: AI-4
 
 What AI helped with:
 - Giảng lý thuyết ngắn về pointer, array, const, pointer arithmetic và pointer-to-pointer.
 - Làm rõ misunderstanding sau khi learner trả lời.
 - Đưa hint theo từng mức.
 - Review/debug sau khi learner đã có meaningful attempt.
+- Trong E06 `retarget_pointer`, AI đã làm lộ exact implementation line `*slot = target;` sau meaningful learner attempt; provenance bảo thủ vì vậy được phân loại AI-4.
 - Hướng dẫn cách lưu execution evidence và Git workflow.
 
 Files/functions materially assisted:
 - `learning/week-01/day-01/TODO_W01_D01.md`
 - Review các function E01–E07 sau learner attempt.
+- E06 `retarget_pointer`: bounded implementation exposure.
 - `evidence/week-01/day-01/test_c_exercises_01.log` về cấu trúc evidence/logging.
 
 Competencies contaminated:
-- Không claim independent competency từ W01D01 vì phiên học có AI hỗ trợ.
+- W01D01 không được dùng làm independent competency evidence do có AI-4 exposure ở E06.
 - Artifact/practice result không được dùng làm W01-C-FOUND competency PASS.
 
 Independent retest required:
@@ -166,6 +168,7 @@ Video/demo:
 
 Other:
 - `learning/week-01/day-01/TODO_W01_D01.md` contains exercise specification and completion record.
+- Provenance corrected after audit: highest AI level = AI-4 due bounded E06 implementation exposure.
 
 ### 8. Measurements
 
@@ -225,9 +228,10 @@ Task:
 Closure criteria:
 - W01D01 artifact/evidence committed.
 - Daily log updated.
-- Repository pushed/synchronized.
+- Provenance correction recorded.
+- Repository synchronized.
 - Sau đó bắt đầu W01D02, không cần recovery W01D01.
 
 ### 12. Next Action
 
-Push commit `aff3d4d` và daily-log update lên `origin/main`.
+Start `WEEK 1 DAY 2` under V3 AI-integrity rules; keep W01-C-FOUND unverified until the fresh AI-0 gate.

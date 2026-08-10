@@ -1,6 +1,8 @@
-﻿Date: 2026-08-10
+Date: 2026-08-10
 Week/Day: Week 01 / Day 01
 What: Host test for c_exercises_01 pointer/array exercises
+Artifact commit: aff3d4d
+Hardware: N/A — host-only
 Toolchain: Host GCC 14.2.0
 
 Expected:
@@ -9,11 +11,11 @@ Expected:
 - Tests failed: 0
 - Result: PASS
 
-AI level: AI-3
-AI usage: Theory, hints, and review/debug after learner attempts; no full core solution accepted.
+AI level: AI-4
+AI usage: Theory/hints/review-debug plus bounded E06 implementation exposure after a meaningful learner attempt; exact line `*slot = target;` was exposed. No full W01D01 solution was provided.
 Evidence class: E2 - execution evidence
 Competency claim: NONE - practice evidence only; Week 1 competency requires fresh AI-0 gate.
-Known limitations: Host practice only; this log does not prove independent competency.
+Known limitations: Host practice only; this log does not prove independent competency. E06 provenance is AI-4 and cannot be used as independent competency evidence.
 
 === BUILD ===
 Command:

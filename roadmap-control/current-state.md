@@ -1,9 +1,9 @@
 # CURRENT STATE V3 — EMBEDDED/FIRMWARE ROADMAP
 
 **Document ID:** `CURRENT_STATE_V3`
-**Version:** `3.0.6`
+**Version:** `3.0.7`
 **State type:** Operational snapshot — mô tả thực tế hiện tại, không tự tạo luật mới
-**Generated at:** `2026-08-10 22:12 +07:00`
+**Generated at:** `2026-08-10 23:38 +07:00`
 **Timezone:** `Asia/Ho_Chi_Minh`
 
 **Status:** `WEEK 1 ACTIVE — W01D01 CLOSED`
@@ -16,7 +16,7 @@
 SYSTEM_SPEC_V3.md                3.0.0  FROZEN BASELINE
 EMBEDDED_ROADMAP_V3.1.docx       3.1.0  FROZEN ROADMAP BASELINE
 MASTER_PROMPT_V3.md               3.0.2  FROZEN BASELINE
-roadmap-control/current-state.md  3.0.6  ACTIVE OPERATIONAL STATE
+roadmap-control/current-state.md  3.0.7  ACTIVE OPERATIONAL STATE
 Canonical repo: https://github.com/MinhSit/embedded-firmware-journey-v3
 ```
 
@@ -50,6 +50,7 @@ W01D01 host-practice artifact: PASS
 Host tests: 46/46 PASS
 Artifact commit: aff3d4d
 Daily-log commit: ab4a578
+W01D01 provenance correction: AI-4 due bounded E06 implementation exposure
 ```
 
 Primary evidence:
@@ -59,7 +60,9 @@ Primary evidence:
 - `evidence/sprint-00/captures/`
 - `roadmap-control/tool-versions.md`
 - `learning/week-01/day-01/`
+- `evidence/week-01/day-01/test_c_exercises_01.log`
 - `roadmap-control/daily-log.md`
+- `roadmap-control/ai-usage-log.md`
 
 ## Competency Position
 
@@ -70,7 +73,7 @@ W01D01 learning/practice: PASS
 Fresh Week 1 AI-0 competency gate: REQUIRED
 ```
 
-No Sprint 0 artifact or setup result is competency evidence.
+No Sprint 0 artifact or W01D01 practice result is competency evidence by itself.
 
 ---
 
@@ -113,10 +116,12 @@ Sprint 0:
 - competency impact from Sprint 0 assistance: `NONE`.
 
 W01D01:
-- highest material assistance level: `AI-3` for theory, hints, post-attempt review/debug and evidence workflow;
-- full core implementation provided by AI: `NO`;
+- highest material assistance level: `AI-4`;
+- reason: after a meaningful learner attempt on E06 `retarget_pointer`, AI exposed the exact implementation line `*slot = target;`;
+- scope of AI-4: bounded to E06 implementation exposure, not a full exercise-set solution;
+- full core solution provided by AI: `NO`;
 - learning/practice and artifact evidence: `PASS`;
-- competency impact: `W01-C-FOUND` remains `COMPETENCY_UNVERIFIED` pending a fresh AI-0 Week 1 gate.
+- competency impact: W01D01 practice must not be promoted to independent competency evidence; `W01-C-FOUND` remains `COMPETENCY_UNVERIFIED` pending a fresh AI-0 Week 1 gate.
 
 Pre-V3 Week 1:
 
@@ -199,7 +204,7 @@ Detailed versions and limitations remain in:
 
 # 6. Current Command / Result
 
-Last verified W01D01 repository evidence before this state synchronization:
+Last verified W01D01 repository evidence before provenance correction:
 
 ```text
 Host tests
@@ -210,6 +215,8 @@ git log -2 --oneline
 → aff3d4d feat(w01d01): complete pointer array const exercises
 ```
 
+The provenance correction changes evidence classification only; it does not change the tested source behavior or 46/46 artifact result.
+
 ---
 
 # 7. Decision
@@ -218,6 +225,7 @@ git log -2 --oneline
 CP-00: CONTINUE
 SPRINT-0: CLOSED
 W01D01 LEARNING/PRACTICE: PASS
+W01D01 HIGHEST AI LEVEL: AI-4
 W01-C-FOUND: COMPETENCY_UNVERIFIED
 P0 BLOCKERS: NONE
 RECOVERY: NOT ACTIVE

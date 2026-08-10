@@ -80,32 +80,34 @@ AI assistance is deliberately retained in provenance instead of being hidden. Se
 ## 2026-08-10 — W01D01 Embedded C learning/practice and evidence workflow
 
 Highest AI level:
-AI-3 for theory, hints, post-attempt review/debug and evidence workflow.
+AI-4 — bounded implementation exposure on E06 after a meaningful learner attempt. Other assistance was AI-1/AI-2/AI-3 theory, hints, review/debug and evidence workflow.
 
 What AI contributed:
 - theory and clarification for pointer, array, pointer arithmetic and `const` placement;
 - bounded hints during the learner's implementation attempts;
 - review and debugging after meaningful learner attempts;
+- exact implementation line `*slot = target;` was exposed for E06 `retarget_pointer` after the learner had already attempted the function;
 - test/evidence workflow guidance and post-result interpretation.
 
 Files/functions materially assisted:
-- W01D01 learning/practice artifact under `learning/week-01/day-01/`;
+- `learning/week-01/day-01/TODO_W01_D01.md`;
+- E06 `retarget_pointer` implementation provenance;
 - W01D01 test/evidence and `roadmap-control/daily-log.md` bookkeeping.
 
 Implementation code provided:
-NO — AI did not provide the full core implementation.
+YES — bounded to the exact E06 line `*slot = target;`; no full W01D01 exercise-set solution was provided.
 
 Gate answer revealed:
 NO — W01D01 was learning/practice, not the fresh independent Week 1 competency gate.
 
 Competency affected:
-No competency PASS is claimed. `W01-C-FOUND` remains `COMPETENCY_UNVERIFIED`.
+No competency PASS is claimed. Because W01D01 had AI-4 implementation exposure, the affected practice cannot serve as independent competency evidence. `W01-C-FOUND` remains `COMPETENCY_UNVERIFIED`.
 
 Fresh independent retest required:
 YES — a fresh AI-0 Week 1 competency gate is required before any `W01-C-FOUND` PASS claim.
 
 Notes:
-W01D01 learning/practice PASS and host tests 46/46 PASS are artifact evidence only. Artifact commit: `aff3d4d`. Daily-log commit: `ab4a578`. Recovery: `NOT ACTIVE`. Next execution: `W01D02`.
+W01D01 learning/practice PASS and host tests 46/46 PASS remain valid artifact evidence. Artifact commit: `aff3d4d`. Daily-log commit: `ab4a578`. Recovery: `NOT ACTIVE`. Next execution: `W01D02`.
 
 ---
 

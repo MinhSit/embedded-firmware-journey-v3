@@ -1,8 +1,10 @@
-﻿# W01D01 — Pointer / Array / Const
+# W01D01 — Pointer / Array / Const
 
 ## AI Mode
 
 AI-1 / AI-2 for learning; AI-3 review/debug after learner attempts.
+
+Provenance note: actual highest AI level reached `AI-4` because E06 exposed the exact implementation line `*slot = target;` after a meaningful learner attempt. This does not invalidate the learning/practice artifact, but W01D01 must not be used as independent competency evidence.
 
 Core implementation phải tự viết.
 
@@ -77,6 +79,11 @@ TODO:
 Question:
 - Tại sao phải dùng `int **` thay vì `int *`?
 
+Provenance:
+- Learner had a meaningful attempt before review.
+- AI later exposed the exact implementation line `*slot = target;`.
+- Classification: bounded `AI-4` implementation exposure for E06.
+
 ---
 
 ## E07 — transform_ints
@@ -149,7 +156,7 @@ Date: 2026-08-10
 - E09 one-past-end: PASS
 - Host tests: 46 / 46 PASS
 - Self-explain: PASS
-- Highest AI level used: AI-3
+- Highest AI level used: AI-4 — bounded E06 implementation exposure after meaningful learner attempt.
 - Competency claim: NONE — practice/learning evidence only; Week 1 competency requires fresh AI-0 gate.
 
 ---
@@ -158,6 +165,6 @@ Date: 2026-08-10
 
 Day 1 learning/practice completed successfully.
 
-This file records the exercise specification and completion status only.
+This file records the exercise specification, completion status and corrected provenance.
 
 Independent competency is not claimed from this artifact.
