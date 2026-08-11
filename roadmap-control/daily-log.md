@@ -253,8 +253,8 @@ GREEN
 
 ### 3. Focused Time
 
-Planned: Không được ghi nhận rõ trong session.
-Actual: Không được đo; không suy diễn focused time từ wall-clock span.
+Planned: 7h
+Actual: ~7h — learner estimate
 
 ### 4. Independent Work
 
@@ -362,7 +362,7 @@ Observed:
 
 Relevant values/registers/timing/errors:
 - No hardware/register/timing measurement was required for this host exercise.
-- Focused time was not measured.
+- Focused time: planned 7h; actual ~7h by learner estimate.
 
 ### 9. Understanding Check
 
