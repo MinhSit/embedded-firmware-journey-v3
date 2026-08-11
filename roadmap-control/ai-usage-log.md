@@ -111,6 +111,55 @@ W01D01 learning/practice PASS and host tests 46/46 PASS remain valid artifact ev
 
 ---
 
+## 2026-08-11 — W01D02 storage/linkage/memory-map learning and evidence
+
+Highest AI level:
+AI-5 — AI provided the complete host experiment source scaffold and substantial
+ready-to-paste evidence prose. Theory/hints/review portions also used
+AI-1/AI-2/AI-3.
+
+What AI contributed:
+- detailed teaching and correction for scope, linkage, storage duration,
+  `static`, `extern`, memory placement, build/link stages, and `volatile`;
+- complete source scaffold for the multi-translation-unit host experiment;
+- build/map/`nm` command guidance and interpretation after learner execution;
+- fault-injection procedure and root-cause review after learner prediction;
+- substantial Markdown sections/templates for the evidence note;
+- END DAY provenance audit and routine bookkeeping.
+
+Files/functions materially assisted:
+- `learning/week-01/day-02/storage_demo.h`;
+- `learning/week-01/day-02/storage_demo.c`;
+- `learning/week-01/day-02/storage_peer.c`;
+- `learning/week-01/day-02/memory-map-note.md`;
+- W01D02 daily log, AI usage log, and current-state bookkeeping.
+
+Implementation code provided:
+YES — complete source scaffold for the W01D02 host experiment, plus substantial
+evidence prose. This was an assisted learning/practice artifact, not a
+competency-gate solution.
+
+Gate answer revealed:
+NO — W01D02 was not the fresh Week 1 competency gate. AI corrected closed-book
+practice answers after learner attempts; those corrected answers are not
+independent gate evidence.
+
+Competency affected:
+No competency PASS is claimed. W01D02 remains valid learning/practice,
+artifact, and reproducibility evidence, but cannot independently verify
+`W01-C-FOUND`. Status remains `COMPETENCY_UNVERIFIED`.
+
+Fresh independent retest required:
+YES — a fresh AI-0 Week 1 competency gate is required before any
+`W01-C-FOUND` PASS claim.
+
+Notes:
+Final baseline build/runtime passed with output `11 20 0 6 W01D02`. The
+generated `storage_demo.map` remains ignored by `*.map` policy and was not
+force-added. Recovery: `NOT ACTIVE`. Next execution: `W01D03`.
+
+---
+
 ## Pre-V3 Migration Note
 
 Known affected scope:

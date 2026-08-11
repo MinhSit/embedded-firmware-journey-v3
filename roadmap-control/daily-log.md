@@ -236,3 +236,179 @@ Closure criteria:
 ### 12. Next Action
 
 BOOT
+
+---
+
+## 2026-08-11 — Week 01 / Day 02
+
+### 1. Planned Outcome
+
+Giải thích được `static` / `extern` / `volatile`, phân biệt scope / linkage /
+storage duration, đọc map/symbol output của một chương trình C nhỏ, và ghi lại
+prediction → observation → explanation trong `memory-map-note.md`.
+
+### 2. Actual Status
+
+GREEN
+
+### 3. Focused Time
+
+Planned: Không được ghi nhận rõ trong session.
+Actual: Không được đo; không suy diễn focused time từ wall-clock span.
+
+### 4. Independent Work
+
+What I personally implemented, reasoned about, measured, or explained:
+
+- Tự dự đoán scope, linkage, storage duration và location cho sáu object trước
+  khi build; các lỗi ban đầu về scope/linkage và automatic location đã được sửa.
+- Tự chạy strict-warning build, executable, linker-map inspection và `nm`.
+- Tự dự đoán fault injection: đổi `shared_value` sang file-scope `static` làm
+  compilation đi qua nhưng final link thất bại vì external reference không được
+  thỏa mãn; measurement xác nhận `undefined reference to 'shared_value'`.
+- Restore baseline source và xác nhận lại build/runtime `11 20 0 6 W01D02`.
+- Hoàn thành closed-book recall về scope/storage duration, file-scope `static`,
+  memory-section prediction và `volatile`/atomicity; Q1 và Q4 PASS sau correction.
+
+### 5. AI Usage
+
+Highest AI level used: AI-5
+
+What AI helped with:
+- Giảng lý thuyết và sửa misunderstanding về scope, linkage, storage duration,
+  memory placement, `extern`, build vs link, và `volatile`.
+- Cung cấp complete source scaffold cho host experiment.
+- Cung cấp command guidance, review/interpretation sau learner measurements,
+  fault-injection workflow và closed-book correction.
+- Cung cấp substantial ready-to-paste prose/template cho
+  `memory-map-note.md`, rồi hỗ trợ END DAY bookkeeping.
+
+Files/functions materially assisted:
+- `learning/week-01/day-02/storage_demo.h`
+- `learning/week-01/day-02/storage_demo.c`
+- `learning/week-01/day-02/storage_peer.c`
+- `learning/week-01/day-02/memory-map-note.md`
+- W01D02 evidence/provenance and control-file bookkeeping.
+
+Competencies contaminated:
+- W01D02 không được dùng làm independent competency evidence vì full experiment
+  scaffold và substantial evidence prose đã được AI cung cấp.
+- Không có competency PASS nào được tạo; `W01-C-FOUND` vẫn
+  `COMPETENCY_UNVERIFIED`.
+
+Independent retest required:
+- YES — fresh AI-0 Week 1 competency gate trước mọi claim
+  `W01-C-FOUND — COMPETENCY_PASS`.
+
+### 6. Artifact Result
+
+Files changed:
+- `learning/week-01/day-02/storage_demo.h`
+- `learning/week-01/day-02/storage_demo.c`
+- `learning/week-01/day-02/storage_peer.c`
+- `learning/week-01/day-02/memory-map-note.md`
+
+Build command:
+`gcc -std=c17 -O0 -g -Wall -Wextra -Wpedantic -Werror learning/week-01/day-02/storage_demo.c learning/week-01/day-02/storage_peer.c "-Wl,-Map=evidence/week-01/day-02/storage_demo.map" -o tests/host/storage_demo.exe`
+
+Build result:
+PASS — exit code 0, no warning/error under configured flags.
+
+Test command:
+`.\tests\host\storage_demo.exe`
+
+Test result:
+PASS — exit code 0; output `11 20 0 6 W01D02`.
+
+### 7. Evidence
+
+Commit:
+- This atomic W01D02 closure commit; resolve the exact hash from repository
+  `HEAD` after commit.
+
+Logs:
+- None committed; final commands/results are recorded in
+  `learning/week-01/day-02/memory-map-note.md`.
+
+Captures:
+- None
+
+Reports:
+- `learning/week-01/day-02/memory-map-note.md`
+
+Video/demo:
+- None
+
+Other:
+- `evidence/week-01/day-02/storage_demo.map` was regenerated from the restored
+  baseline and intentionally remains ignored by repository policy (`*.map`).
+- GNU `nm` confirmed `D shared_value`, `d file_value`, `B zero_value`,
+  `b id.0`, `r label`, and `t next_id`.
+
+### 8. Measurements
+
+Expected:
+- Strict-warning baseline build succeeds.
+- Runtime output is `11 20 0 6 W01D02`.
+- Static-storage objects match predicted `.data`, `.bss`, and read-only data.
+- File-scope `static shared_value` fault injection causes final link failure.
+
+Observed:
+- Baseline build exit code: 0.
+- Runtime exit code: 0; output matched exactly.
+- Map and `nm` observations matched the section/linkage predictions.
+- Fault-injection link failed with `undefined reference to 'shared_value'`.
+- Baseline was restored and reverified.
+
+Relevant values/registers/timing/errors:
+- No hardware/register/timing measurement was required for this host exercise.
+- Focused time was not measured.
+
+### 9. Understanding Check
+
+What I can explain without AI:
+- Scope answers where an identifier is visible; storage duration answers how
+  long the object exists; linkage answers whether declarations can denote the
+  same entity across translation units.
+- File-scope `static` gives internal linkage; block-scope `static` retains block
+  scope but has static storage duration.
+- Writable non-zero static-storage data is typically `.data`; zero-initialized
+  static-storage data is typically `.bss`; read-only static data is commonly
+  `.rdata/.rodata`, subject to toolchain behavior.
+- `volatile` affects compiler treatment of accesses but does not provide
+  atomicity, locking, synchronization, or thread safety.
+
+What I still cannot explain:
+- Scope and linkage still need repetition to remain completely separate under
+  interview pressure.
+- The exact `volatile` wording and implementation-specific section placement
+  need further practice.
+- These concepts have not passed a fresh AI-0 independent gate.
+
+### 10. Defects / Failed Tests
+
+Defect/Test IDs:
+- None unresolved in the final W01D02 artifact.
+
+Root cause known?:
+YES — the injected link failure was intentional and its linkage root cause was
+confirmed; the baseline was restored.
+
+Current hypothesis:
+- No unresolved artifact defect.
+- Independent competency remains unverified until the fresh AI-0 gate.
+
+### 11. Carry-over
+
+Task:
+- NONE from W01D02 artifact. W01D03 is the next scheduled execution, not
+  recovery carry-over.
+
+Closure criteria:
+- W01D02 source/note and control bookkeeping committed atomically.
+- Repository synchronized if push succeeds.
+- Fresh Week 1 AI-0 gate remains mandatory before competency PASS.
+
+### 12. Next Action
+
+BOOT
