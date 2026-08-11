@@ -240,8 +240,9 @@ endian.
 ## 10. Evidence Metadata and Provenance
 
 - Date: `2026-08-11` (`Asia/Ho_Chi_Minh`).
-- Commit: the atomic W01D02 closure commit containing this file; resolve the
-  exact hash from repository `HEAD` after commit.
+- Artifact closure commit:
+  `68c43bd89dec8264f9b34b9877f97f6b3b83fe3e`
+  (`feat(w01d02): close storage linkage memory map`).
 - Toolchain: Windows host, GCC/MinGW `14.2.0`, GNU `ld` map output, GNU `nm`.
 - Hardware: none; this was a host-side C experiment.
 - Expected behavior: clean strict-warning build, runtime output

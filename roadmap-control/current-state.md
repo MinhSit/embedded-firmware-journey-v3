@@ -1,9 +1,9 @@
 # CURRENT STATE V3 — EMBEDDED/FIRMWARE ROADMAP
 
 **Document ID:** `CURRENT_STATE_V3`
-**Version:** `3.0.12`
+**Version:** `3.0.13`
 **State type:** Operational snapshot — describes reality and creates no new policy
-**Generated at:** `2026-08-11 21:27 +07:00`
+**Generated at:** `2026-08-11 21:46 +07:00`
 **Timezone:** `Asia/Ho_Chi_Minh`
 **Status:** `WEEK 1 ACTIVE — W01D02 CLOSED — W01D03 NEXT`
 
@@ -14,7 +14,7 @@
 - **System Spec version:** `SYSTEM_SPEC_V3 3.0.0`
 - **Roadmap version:** `EMBEDDED_ROADMAP_V3.1 3.1.0`
 - **Master Prompt version:** `MASTER_PROMPT_V3 3.0.3`
-- **Current State version:** `3.0.12`
+- **Current State version:** `3.0.13`
 - **Active operational layer:** `roadmap-control/operating-rules.md`
 
 If this file conflicts with a higher-authority source, the higher-authority source wins.
@@ -25,7 +25,7 @@ If this file conflicts with a higher-authority source, the higher-authority sour
 - **Execution position:** `W01D03 — NOT STARTED / NEXT EXECUTION (2026-08-12)`
 - **Artifact position:** `W01D02 storage/linkage/memory-map experiment — ARTIFACT_PASS; strict-warning build PASS; runtime PASS`
 - **Competency position:** `W01-C-FOUND — COMPETENCY_UNVERIFIED`
-- **Last artifact PASS:** `W01D02 storage/linkage/memory-map experiment` (this atomic closure commit), evidence at `learning/week-01/day-02/memory-map-note.md`
+- **Last artifact PASS:** `W01D02 storage/linkage/memory-map experiment` at artifact closure commit `68c43bd89dec8264f9b34b9877f97f6b3b83fe3e`, evidence at `learning/week-01/day-02/memory-map-note.md`
 - **Last competency PASS:** `NONE UNDER V3`
 
 ## Competency and AI Integrity
@@ -47,7 +47,9 @@ If this file conflicts with a higher-authority source, the higher-authority sour
 
 - **Repo URL:** `https://github.com/MinhSit/embedded-firmware-journey-v3`
 - **Branch:** `main`
-- **Commit:** State base before closure `28fa9510b47c92d2352eadb78dc6f13d83d749e4`; after commit, the commit containing this snapshot is the authoritative W01D02 closure HEAD and must be resolved from the repository at BOOT.
+- **Artifact closure:** `68c43bd89dec8264f9b34b9877f97f6b3b83fe3e` (`feat(w01d02): close storage linkage memory map`)
+- **Focused-time bookkeeping correction:** `c86993217c40bb7c95ad3dd99af3fe78638bba32` (`docs(control): correct W01D02 focused time`)
+- **Current operational HEAD:** Resolve from the Git repository at `BOOT`.
 - **Release:** `NONE — no Git tag present at state generation`
 
 ## Latest Build and Test

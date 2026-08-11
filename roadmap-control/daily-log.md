@@ -323,8 +323,12 @@ PASS — exit code 0; output `11 20 0 6 W01D02`.
 ### 7. Evidence
 
 Commit:
-- This atomic W01D02 closure commit; resolve the exact hash from repository
-  `HEAD` after commit.
+- Artifact closure commit:
+  `68c43bd89dec8264f9b34b9877f97f6b3b83fe3e`
+  (`feat(w01d02): close storage linkage memory map`).
+- Corrective bookkeeping commit:
+  `c86993217c40bb7c95ad3dd99af3fe78638bba32`
+  (`docs(control): correct W01D02 focused time`).
 
 Logs:
 - None committed; final commands/results are recorded in

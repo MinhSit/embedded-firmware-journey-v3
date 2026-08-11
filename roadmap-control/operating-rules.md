@@ -67,11 +67,11 @@ If no checkpoint is needed, combine technical work and bookkeeping into one END 
 - Do not split the log into per-day files now.
 - Reconsider per-day logs at `CP-01` only if bookkeeping friction repeats.
 
-## 9. Stable State Semantics for W01D02
+## 9. Stable State Semantics
 
-- W01D01 remains closed.
-- Next execution position is W01D02.
+- Closed days remain closed unless explicitly reopened by recovery or review.
+- Current execution position must be read from `roadmap-control/current-state.md`; this file must not hard-code a stale Week/Day execution position.
 - `W01-C-FOUND` remains `COMPETENCY_UNVERIFIED`.
 - A fresh AI-0 gate remains required.
-- Recovery remains `NOT ACTIVE`.
-- Current-state `Exact Next Action` is `BOOT`.
+- Recovery status must be read from `roadmap-control/current-state.md`.
+- `Exact Next Action` must be read from `roadmap-control/current-state.md`.
