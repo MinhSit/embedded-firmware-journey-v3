@@ -12,12 +12,89 @@ This file simplifies daily execution without overriding `SYSTEM_SPEC_V3`, `EMBED
 - `BOOT` performs the authoritative state read and then runs the day according to `BOOT = STATUS + START DAY`.
 - `START DAY` is an internal/subcommand path when context is already clear. The user does not need to type `START WEEK ...` or remember the next Week/Day identifier.
 
+## 1.1 Unclosed Session Recovery at BOOT
+
+Before starting a new roadmap execution day, `BOOT` must determine whether the
+prior execution is cleanly `CLOSED` or whether credible evidence indicates that
+a prior learning session may still be unclosed.
+
+1. Use available context first: Current State, daily log, repository history,
+   current conversation/session context, available local worktree/tool state,
+   and learner disclosure when the environment cannot observe relevant local
+   state.
+2. Do not silently advance to a new execution day when an unclosed prior session
+   is known or reasonably indicated. Classify the prior execution as exactly one
+   of:
+   - `A. PRIOR SESSION IN PROGRESS`;
+   - `B. PRIOR SESSION END DAY READY BUT NOT CLOSED`;
+   - `C. PRIOR SESSION STOPPED BEFORE READINESS`;
+   - `D. AMBIGUOUS — HUMAN INPUT REQUIRED`.
+3. For `A`, resume the prior execution.
+4. For `B`, declare that the previous session is `END DAY READY` and ask the
+   learner to confirm `END DAY` before advancing.
+5. For `C`, resume the prior execution, or let the learner request `END DAY` and
+   classify the actual result honestly under the normal closure transaction.
+6. For `D`, ask only the minimum human-only question needed to resolve the
+   ambiguity. Use the Project Chat <-> Cowork/local execution handoff only when
+   repository inspection is actually required; Cowork is not required on every
+   `BOOT`.
+7. If the execution environment cannot inspect the learner's local worktree,
+   remote-`main` cleanliness is not proof that no unclosed local work exists.
+8. Do not ask repetitive "did you forget END DAY?" questions when trusted
+   context already proves the prior execution was properly `CLOSED`.
+9. Never infer completion or clean closure from elapsed calendar date, chat
+   inactivity, timestamps, or remote clean state alone.
+10. Once the prior execution is confirmed `CLOSED`, `BOOT` may advance normally.
+
 ## 2. Focus Phase: LEARN / IMPLEMENT / TEST
 
 - Do not update `current-state.md`, `daily-log.md`, or `ai-usage-log.md` during the focus phase.
 - Do not create bookkeeping commits during the focus phase.
 - AI keeps temporary session notes in chat. The learner focuses on learning, implementation, tests, and measurements.
 - The learner supplies only execution results or evidence that the active execution environment cannot independently read from the repository or tools.
+
+## 2.1 Proactive END DAY Readiness
+
+During the Focus Phase, the mentor/execution system owns tracking the
+authoritative daily completion and stop conditions. Readiness must be derived
+from `SYSTEM_SPEC_V3`, the approved Roadmap/day card, and any explicit gate
+contract. Generated THEORY/TODO/SUBMIT packs may organize work, but cannot
+create a new `END DAY` threshold.
+
+1. When all required learning-day criteria are satisfied, the mentor must
+   proactively declare `END DAY READY`.
+2. At `END DAY READY`, the mentor must summarize why readiness was reached,
+   identify any remaining `OPTIONAL`/`BONUS` work separately, stop assigning
+   additional normal required work for that day, and ask the learner to confirm
+   `END DAY`.
+3. The learner is not required to remember or infer the closure threshold.
+4. `END DAY READY` is not `CLOSED`. Do not update final closure bookkeeping,
+   commit, or push solely because readiness was detected.
+5. Final closure begins only after learner confirmation, normally the explicit
+   command `END DAY`; the Human-Input Gate and normal atomic END DAY transaction
+   then remain mandatory.
+6. The learner may request `END DAY` before readiness. Audit the actual
+   authoritative result and classify `GREEN`/`YELLOW`/`RED`, carry-over and
+   blockers honestly; do not force continued study.
+7. Optional or bonus work must not delay `END DAY READY` unless a
+   higher-authority source explicitly makes it required.
+8. END DAY readiness concerns daily execution closure only and must not imply
+   `COMPETENCY_PASS`.
+
+Workflow transitions:
+
+```text
+ACTIVE
+  -> authoritative required criteria satisfied -> END_DAY_READY
+  -> learner confirms END DAY -> CLOSURE_IN_PROGRESS
+  -> Human-Input Gate + evidence/log/state + linter + human audit -> CLOSED
+
+ACTIVE
+  -> learner requests END DAY early -> CLOSURE_IN_PROGRESS
+  -> classify actual outcome honestly -> CLOSED / carry-over as applicable
+```
+
+These labels describe workflow only; they do not add competency states.
 
 ## 3. END DAY Is One Atomic Close Transaction
 

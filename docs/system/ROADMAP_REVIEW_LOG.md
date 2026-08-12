@@ -1,7 +1,7 @@
 # ROADMAP REVIEW LOG — EMBEDDED/FIRMWARE ROADMAP V3.1
 
 **Document ID:** `ROADMAP_REVIEW_LOG`
-**Version:** `1.0.4`
+**Version:** `1.0.5`
 **Status:** `ACTIVE REVIEW LOG — NON-AUTHORITATIVE`
 **Created:** `2026-08-09`
 **Timezone:** `Asia/Ho_Chi_Minh`
@@ -1292,6 +1292,141 @@ Execution impact:   NONE — W01D04 remains NEXT
 Next action impact: NONE — Exact Next Action remains BOOT
 ```
 
+## RR-014 — No proactive END DAY readiness / unclosed-session recovery contract
+Status: `CLOSED`
+Severity: `R1`
+Opened: `2026-08-12`
+Closed: `2026-08-12`
+Target: `EARLY OPERATIONAL REVIEW — COMPLETED`
+
+### Concern
+
+The learner had to remember to trigger `END DAY` even after all authoritative
+day criteria were satisfied. If a learning session ended without `END DAY`,
+`BOOT` had no explicit recovery contract preventing silent advancement.
+
+### Evidence and authority validation
+
+- `SYSTEM_SPEC_V3` requires every day to have a stop condition and defines daily
+  status, but does not assign the learner responsibility for detecting the
+  threshold.
+- Approved Roadmap V3.1 day cards define authoritative `Điểm dừng` criteria.
+- `MASTER_PROMPT_V3` defines `END DAY` as an explicit command and specifies the
+  audit performed after that command. It does not forbid a proactive readiness
+  notification and it does not make readiness automatic closure.
+- The active operating rules defined `BOOT`, the Focus Phase, the atomic END DAY
+  transaction, Human-Input Gate, Closure Linter, commit/push, diagnostic/generated
+  pack authority, and Project Chat <-> Cowork handoff. They did not assign
+  readiness detection to the mentor/execution system or define an interrupted
+  prior-session transition at `BOOT`.
+
+### Expected
+
+- The mentor/execution system owns proactive readiness detection from
+  higher-authority daily criteria.
+- The learner owns explicit `END DAY` confirmation.
+- Only then does the normal END DAY closure transaction run.
+- Before advancing, `BOOT` resolves credible evidence of any unclosed prior
+  execution using available context first and minimum human input only when
+  genuinely ambiguous.
+
+### Root cause
+
+The workflow specified END DAY execution but not readiness ownership or
+interrupted-session transition semantics.
+
+### Impact
+
+- the learner had to manually decide the closure threshold;
+- completed work could remain unclosed;
+- the next `BOOT` could become ambiguous;
+- closure/bookkeeping could be delayed;
+- execution position could become unclear.
+
+There is no automatic technical artifact or competency impact.
+
+### Decision and operational changes
+
+`APPROVED / CLOSED` — confirmed workflow defect; Level A operational adjustment,
+severity `R1`. This does not require or authorize a frozen-source change.
+
+- Added proactive `END DAY READY`: the mentor tracks the System Spec, approved
+  Roadmap/day card and explicit gate contract, announces readiness, separates
+  optional/bonus work, stops adding normal required work, and requests learner
+  confirmation.
+- Preserved explicit `END DAY`: readiness alone does not update closure
+  bookkeeping, commit or push; learner confirmation starts the existing atomic
+  transaction and Human-Input Gate.
+- Preserved early learner-requested `END DAY`: the actual outcome is audited and
+  classified honestly without forcing continued study.
+- Added BOOT recovery classifications for prior-session in-progress, ready but
+  unclosed, stopped before readiness, and genuinely ambiguous states.
+- Required available context/tools first, one minimum human-only question only
+  when needed, and local execution/Cowork only when repository inspection is
+  actually necessary. Remote-`main` cleanliness alone is not proof of clean
+  local closure.
+- Did not change the Closure Linter because readiness is semantic and day-card
+  dependent; a regex check would not be a robust structural invariant.
+
+### Workflow state machine
+
+```text
+ACTIVE
+  -> authoritative required criteria satisfied -> END_DAY_READY
+  -> learner confirms END DAY -> CLOSURE_IN_PROGRESS
+  -> Human-Input Gate + evidence/log/state + linter + human audit -> CLOSED
+
+ACTIVE
+  -> learner requests END DAY early -> CLOSURE_IN_PROGRESS
+  -> classify actual outcome honestly -> CLOSED / carry-over as applicable
+```
+
+These are workflow concepts only and create no competency state.
+
+### Retroactive impact sweep
+
+Defect class: `Daily workflow lacks proactive END DAY readiness ownership and
+explicit unclosed-session BOOT recovery.`
+
+Scope: `W01D01-W01D03` — every Week 1 day currently `CLOSED`.
+
+- `W01D01 — PASS — NO RECOVERABLE CONTROL INCONSISTENCY FOUND.` The daily log
+  records `GREEN`, completed closure fields, explicit progression to W01D02 and
+  `Next Action: BOOT`; repository history contains closure bookkeeping. The
+  repository cannot prove whether the learner had to ask when the day was done,
+  so no conversation chronology is invented.
+- `W01D02 — PASS — NO RECOVERABLE CONTROL INCONSISTENCY FOUND.` The daily log
+  records `GREEN`, completed closure fields, no artifact carry-over, explicit
+  progression to W01D03 and `Next Action: BOOT`; later focused-time correction
+  belongs to RR-012, not this defect class. No unclosed-session advancement is
+  evidenced.
+- `W01D03 — PASS — NO RECOVERABLE CONTROL INCONSISTENCY FOUND.` The corrected
+  authoritative result is `GREEN`, closure fields are complete, W01D04 is
+  explicitly `NEXT`, and `Next Action: BOOT`; the diagnostic correction belongs
+  to RR-011, not this defect class. No unclosed-session advancement is evidenced.
+- Current same-class inconsistency found/fixed: `NONE`. Correctly closed days
+  remain closed; no historical chronology, status, artifact, AI provenance,
+  competency, schedule, recovery or execution position was rewritten.
+
+### Verification and preserved semantics
+
+- Real repository linter before change: `0 FAIL`, `0 WARN`, `20 PASS`; exit code
+  `0`. The linter is unchanged and remains part of the existing closure flow.
+- Human audit found no technical/competency issue and no historical fact that
+  could be safely reconstructed beyond repository evidence.
+
+```text
+Daily impact:       NONE — W01D03 remains GREEN
+Artifact impact:    NONE — W01D03 remains ARTIFACT_PASS; 25/25 PASS
+AI impact:          NONE — W01D03 remains AI-4
+Competency impact:  NONE — W01-C-FOUND remains COMPETENCY_UNVERIFIED
+Gate impact:        NONE — fresh Week 1 AI-0 gate remains required
+Schedule impact:    NONE — variance remains 0
+Recovery impact:    NONE — NOT ACTIVE
+Execution impact:   NONE — W01D04 remains NEXT
+Next action impact: NONE — Exact Next Action remains BOOT
+```
+
 ---
 # 17. BASELINE REVIEW — PRE-EXECUTION
 
@@ -1696,6 +1831,19 @@ verification.
 Behavior impact:
 Operational review/closure hardening only. NONE to curriculum, gates,
 competency, PASS, AI-integrity or evidence semantics.
+```
+
+# 23.5 VERSION NOTE — 1.0.5
+
+```text
+Change:
+Close RR-014 after adding mentor-owned proactive END DAY readiness, learner-owned
+END DAY confirmation, unclosed-session BOOT recovery, and the bounded
+W01D01-W01D03 retrospective impact sweep.
+
+Behavior impact:
+Operational workflow correction only. NONE to curriculum, gates, competency,
+PASS, AI-integrity, evidence, schedule or recovery semantics.
 ```
 
 ---
