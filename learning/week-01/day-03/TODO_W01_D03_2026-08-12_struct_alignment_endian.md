@@ -24,10 +24,6 @@ Source: Week 1 Day 3 roadmap card; System Spec AI/evidence rules
 
 ### MUST
 
-- [ ] Trả lời pre-check trước khi code.
-  - NOT MET (historical / non-recoverable).
-  - Flow was changed to theory-first because prerequisite understanding was insufficient.
-  - Do not count as independent pre-check evidence.
 - [x] Predict layout A/B trước khi chạy measurement.
 - [x] `inspect_layout_a()` và `inspect_layout_b()` trả đúng `sizeof/_Alignof/offsetof`.
 - [x] `byte_swap_u16()` PASS known-pattern + boundary + involution tests.
@@ -42,6 +38,18 @@ Source: Week 1 Day 3 roadmap card; System Spec AI/evidence rules
   - Fresh independent retest completed without hints: PASS.
   - Fresh retest correctly identified both ABI/layout-padding risk and endian mismatch risk.
   - This remains practice-level evidence and is not an AI-0 competency PASS.
+
+### Historical Diagnostic Record — NON-SCORING
+
+- The generated pack originally promoted "Trả lời pre-check trước khi code" to
+  learner-scored `MUST`, but the authoritative W01D03 card did not define it as
+  an independent daily PASS criterion.
+- The original pre-check flow was not completed before coding after the learner
+  disclosed no prerequisite knowledge and the mentor switched to theory-first
+  teaching. Do not retroactively mark it complete.
+- Classification: `MENTOR/SYSTEM WORKFLOW VARIANCE — NON-SCORING FOR DAILY STATUS`.
+- This chronology is not independent competency evidence. The later closed-book
+  practice and unhinted practice retest remain recorded above.
 
 ### SHOULD
 
@@ -82,9 +90,12 @@ Initial expectation: compile PASS, some tests FAIL because core functions are TO
 
 ## 5. Learner TODO
 
-### Phase A — Closed-book pre-check
+### Phase A — Baseline diagnostic record (historical / non-scoring)
 
-Answer the six questions in THEORY without AI. Do not chase perfect wording; record misconceptions.
+The original six-question pre-check was interrupted and was not completed in
+its original before-coding sequence. Preserve that fact; do not recreate or
+mark it complete retroactively. This generated diagnostic had no authority to
+add a learner-scored W01D03 daily requirement.
 
 ### Phase B — Prediction before measurement
 

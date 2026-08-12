@@ -196,11 +196,15 @@ YES — a fresh AI-0 Week 1 competency gate is required before any
 `W01-C-FOUND — COMPETENCY_PASS` claim.
 
 Notes:
-Strict build and 25/25 host tests passed. The original pre-check was not
-completed before coding and remains `NOT MET` as a historical, non-recoverable
-process variance. Initial closed-book practice was 6 PASS / 1 PARTIAL; a fresh
-unhinted practice retest later identified both ABI/layout-padding and endian
-risks. Recovery: `NOT ACTIVE`. Next execution: `W01D04`.
+Strict build and 25/25 host tests passed. The original generated pre-check flow
+was interrupted when the learner disclosed missing prerequisite knowledge and
+the mentor switched to theory-first teaching. It remains historical
+`MENTOR/SYSTEM WORKFLOW VARIANCE — NON-SCORING`, not learner non-compliance or
+competency evidence. Initial closed-book practice was 6 PASS / 1 PARTIAL; a
+fresh unhinted practice retest later identified both ABI/layout-padding and
+endian risks. AI-4 remains unchanged, and competency remains unverified because
+the fresh Week 1 AI-0 gate is outstanding. Recovery: `NOT ACTIVE`. Next
+execution: `W01D04`.
 
 ---
 

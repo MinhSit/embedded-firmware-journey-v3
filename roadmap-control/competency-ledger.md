@@ -82,5 +82,7 @@ Complete Week 1 V3 and pass a fresh AI-0 gate.
 
 Notes:
 Do not promote pre-V3 or W01D01–W01D03 artifact/test results to competency
-PASS. W01D03's original pre-check-before-coding criterion was NOT MET and
-remains a historical process variance.
+PASS. W01D03's interrupted generated pre-check remains a historical
+`MENTOR/SYSTEM WORKFLOW VARIANCE — NON-SCORING`; it is not why competency is
+unverified. `W01-C-FOUND` remains unverified because the fresh independent
+Week 1 AI-0 gate is outstanding and assisted practice cannot substitute for it.

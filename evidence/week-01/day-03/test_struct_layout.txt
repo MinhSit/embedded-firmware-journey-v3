@@ -14,7 +14,7 @@ AI level: AI-4
 AI usage: AI-1 theory, AI-2 hints, AI-3 review/debug, and bounded AI-4 code/syntax assistance after learner attempts. Section 7 of alignment-note.md received AI-assisted wording.
 Evidence class: E2 execution evidence plus E3 host measurement evidence
 Competency claim: NONE — practice/artifact evidence only; W01-C-FOUND remains COMPETENCY_UNVERIFIED.
-Known limitations: Host/ABI-specific layout and byte-order observations; this record is not independent AI-0 competency evidence. The original pre-check-before-coding criterion was NOT MET.
+Known limitations: Host/ABI-specific layout and byte-order observations; this record is not independent AI-0 competency evidence. The original generated diagnostic flow was interrupted and remains documented as MENTOR/SYSTEM WORKFLOW VARIANCE — NON-SCORING for W01D03 daily status. This has no effect on ARTIFACT_PASS or COMPETENCY_UNVERIFIED.
 
 === BUILD ===
 Command:

@@ -999,6 +999,88 @@ interview gaps
 
 Chỉ đổi timing bằng pipeline evidence.
 
+## RR-011 — Pre-check diagnostic misclassified as daily PASS criterion
+Status: `CLOSED`
+Severity: `R2`
+Opened: `2026-08-12`
+Closed: `2026-08-12`
+Target: `EARLY REVIEW — COMPLETED`
+
+### Concern
+
+A generated W01D03 TODO promoted a pre-learning baseline diagnostic into a
+learner-scored `MUST`, and END DAY later used its incomplete checkbox to assign
+`YELLOW`.
+
+### Observed
+
+- The learner disclosed no prior struct alignment/padding/endian knowledge.
+- The mentor switched from the generated pre-check flow to theory-first teaching.
+- The originally generated pre-check was not completed in its original sequence.
+- W01D03 later completed the authoritative implementation, measurement,
+  strict-build, host-test, evidence, expected/actual and end-of-day
+  self-explanation criteria.
+- END DAY nevertheless treated the generated diagnostic checkbox as a remaining
+  learner-required item and assigned `YELLOW`.
+
+### Expected
+
+- A pre-check on new material is baseline data; `UNKNOWN`, "I don't know", an
+  uncertainty, or a labeled prediction is valid unless a higher-authority
+  source explicitly defines a scored diagnostic.
+- Daily status follows `SYSTEM_SPEC_V3` plus the roadmap/day card, not a new PASS
+  definition introduced by a generated checklist.
+- Mentor/system diagnostic-flow failure is attributed to the workflow, not the
+  learner.
+
+### Root cause
+
+- The generated day-pack requirement exceeded its authority.
+- The mentor/system mishandled diagnostic sequencing after discovering the
+  missing prerequisite baseline.
+- END DAY trusted generated `MUST` state without tracing it to higher-authority
+  criteria.
+
+### Impact
+
+- Inaccurate learner-performance signal and misleading W01D03 `YELLOW`.
+- Recurrence risk across future day packs and cross-chat/BOOT sessions.
+- No technical artifact, competency, schedule, or recovery impact.
+
+### Decision and minimum correction
+
+`APPROVED / CLOSED` — Level A operational clarification and historical status
+correction; no frozen-source amendment and no curriculum/gate change.
+
+- Add active baseline-diagnostic semantics and generated-pack authority guard.
+- Add the Project chat <-> Cowork manual handoff workflow.
+- Correct stale W01D03 records while preserving the interrupted chronology as
+  `MENTOR/SYSTEM WORKFLOW VARIANCE — NON-SCORING`.
+- Correct W01D03 daily status from `YELLOW` to `GREEN` because every
+  authoritative daily criterion was complete.
+
+### Preserved semantics
+
+```text
+Artifact impact:   NONE — W01D03 remains ARTIFACT_PASS
+Competency impact: NONE — W01-C-FOUND remains COMPETENCY_UNVERIFIED
+AI impact:         NONE — highest level remains AI-4
+Gate impact:       NONE — fresh Week 1 AI-0 gate remains required
+Schedule impact:   NONE — variance remains 0
+Recovery impact:   NONE — NOT ACTIVE
+Execution impact:  NONE — W01D04 remains NEXT
+```
+
+### Verification after change
+
+- `roadmap-control/operating-rules.md` is already declared as the active
+  operational layer in Current State and is mandatory BOOT input under Master
+  Prompt 3.0.3.
+- Future BOOT therefore inherits the diagnostic and Cowork rules.
+- Repository-wide search and staged-diff audit must show no active claim that
+  W01D03 is `YELLOW` because the learner failed unknown pre-learning material.
+- W01D03 strict build, 25/25 host tests and measurement helper must still pass.
+
 ---
 # 17. BASELINE REVIEW — PRE-EXECUTION
 

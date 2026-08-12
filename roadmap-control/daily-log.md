@@ -429,8 +429,15 @@ lưu strict host-test evidence và `alignment-note.md`.
 
 ### 2. Actual Status
 
-YELLOW — artifact/evidence PASS, nhưng pre-check bắt buộc đã không được hoàn
-thành trước khi code. Đây là historical process variance không thể sửa hồi tố.
+GREEN — authoritative W01D03 artifact, evidence and end-of-day understanding
+criteria were completed.
+
+Correction note (2026-08-12): the previous `YELLOW` classification was based
+solely on a generated pre-check `MUST`. Authority audit found that item was a
+non-scoring baseline diagnostic, not an independent W01D03 roadmap completion
+criterion. The interrupted chronology remains documented as
+`MENTOR/SYSTEM WORKFLOW VARIANCE — NON-SCORING`. `ARTIFACT_PASS`, AI-4,
+`W01-C-FOUND — COMPETENCY_UNVERIFIED`, schedule and recovery remain unchanged.
 
 ### 3. Focused Time
 
@@ -452,7 +459,10 @@ What I personally implemented, reasoned about, measured, or explained:
   ban đầu nêu ABI/layout-padding risk nhưng bỏ sót endian risk.
 - Fresh unhinted practice retest sau đó nêu đúng cả ABI/layout-padding và endian
   mismatch risk. Kết quả này không phải AI-0 competency gate.
-- Original pre-check-before-coding không được thực hiện và vẫn `NOT MET`.
+- Original generated pre-check flow was not completed before coding after the
+  learner disclosed missing prerequisite knowledge and the mentor switched to
+  theory-first teaching. This is `MENTOR/SYSTEM WORKFLOW VARIANCE — NON-SCORING`
+  and is not independent competency evidence.
 
 ### 5. AI Usage
 
@@ -562,7 +572,9 @@ What I still cannot explain:
 
 Defect/Test IDs:
 - No unresolved source/test defect; final visible host suite is 25/25 PASS.
-- Process variance: original pre-check-before-coding criterion `NOT MET`.
+- Historical diagnostic-flow variance: the original generated pre-check was
+  interrupted. Classification: `MENTOR/SYSTEM WORKFLOW VARIANCE — NON-SCORING`
+  for W01D03 daily status.
 
 Root cause known?:
 YES — the learning flow changed to theory-first because prerequisite
@@ -576,8 +588,9 @@ Current hypothesis:
 ### 11. Carry-over
 
 Task:
-- NONE from the W01D03 artifact. The historical pre-check variance is retained,
-  not converted into a fake carry-over or PASS.
+- NONE from the W01D03 artifact. The historical diagnostic interruption is
+  retained as a non-scoring mentor/system workflow variance, not converted into
+  a fake diagnostic PASS or learner carry-over.
 - W01D04 is the next scheduled execution. The Week 1 fresh AI-0 gate remains a
   required future gate, not a W01D03 artifact carry-over.
 

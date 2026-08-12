@@ -1,9 +1,9 @@
 # CURRENT STATE V3 — EMBEDDED/FIRMWARE ROADMAP
 
 **Document ID:** `CURRENT_STATE_V3`
-**Version:** `3.0.14`
+**Version:** `3.0.15`
 **State type:** Operational snapshot — describes reality and creates no new policy
-**Generated at:** `2026-08-12 16:59 +07:00`
+**Generated at:** `2026-08-12 17:54 +07:00`
 **Timezone:** `Asia/Ho_Chi_Minh`
 **Status:** `WEEK 1 ACTIVE — W01D03 CLOSED — W01D04 NEXT`
 
@@ -14,7 +14,7 @@
 - **System Spec version:** `SYSTEM_SPEC_V3 3.0.0`
 - **Roadmap version:** `EMBEDDED_ROADMAP_V3.1 3.1.0`
 - **Master Prompt version:** `MASTER_PROMPT_V3 3.0.3`
-- **Current State version:** `3.0.14`
+- **Current State version:** `3.0.15`
 - **Active operational layer:** `roadmap-control/operating-rules.md`
 
 If this file conflicts with a higher-authority source, the higher-authority source wins.
@@ -38,7 +38,8 @@ If this file conflicts with a higher-authority source, the higher-authority sour
 
 ## Outcome and Gates
 
-- **Current outcome:** `W01D03 CLOSED — daily status YELLOW because the original pre-check-before-coding criterion was NOT MET; artifact ARTIFACT_PASS; W01D04 NOT STARTED`
+- **Current outcome:** `W01D03 CLOSED — daily GREEN; artifact ARTIFACT_PASS; W01D04 NOT STARTED`
+- **Status correction:** The previous W01D03 `YELLOW` was based solely on an incomplete generated pre-check flow. Authority audit found that flow was a baseline diagnostic, not a roadmap-required daily completion criterion. Its interruption remains recorded as `MENTOR/SYSTEM WORKFLOW VARIANCE — NON-SCORING`; artifact, AI, competency, schedule and recovery semantics are unchanged.
 - **Current gate:** `Week 1 Embedded C independent gate — AI-0 — REQUIRED / NOT YET ATTEMPTED`
 - **Gate completed:** `CP-00 Sprint 0 operational/bootstrap gate — CONTINUE (2026-08-09); competency gates completed: NONE UNDER V3`
 - **Gate missing:** `Fresh Week 1 AI-0 gate for W01-C-FOUND`
@@ -69,7 +70,7 @@ If this file conflicts with a higher-authority source, the higher-authority sour
 - **Open blockers:** `NONE`; P0 blocker: `NONE`.
 - **Known bugs:** `NONE unresolved in the W01D03 artifact`; strict build, host tests and measurement helper passed.
 - **Technical debt:** Verify MPU6050 at the sensor/I2C phase; resolve ESP32 4 MB detected flash versus historical 2 MB project header when creating the clean ESP32 baseline; verify optional physical CAN hardware before any physical-bus claim; validate Wireshark capture workflow in the network/protocol phase.
-- **Carry-over:** `NONE from W01D03 artifact`; W01D04 is the next scheduled execution. The missed pre-check remains a historical process variance and is not rewritten as PASS. The fresh Week 1 AI-0 gate remains required.
+- **Carry-over:** `NONE from W01D03 artifact`; W01D04 is the next scheduled execution. The interrupted baseline diagnostic remains a historical `MENTOR/SYSTEM WORKFLOW VARIANCE — NON-SCORING`, not a retroactive diagnostic PASS. The fresh Week 1 AI-0 gate remains required.
 
 ## Schedule, Load, and Risk
 
