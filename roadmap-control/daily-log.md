@@ -416,3 +416,176 @@ Closure criteria:
 ### 12. Next Action
 
 BOOT
+
+---
+
+## 2026-08-12 — Week 01 / Day 03
+
+### 1. Planned Outcome
+
+Đo và giải thích layout của hai `struct` bằng `sizeof`, `_Alignof` và
+`offsetof`; quan sát union/endian; implement byte-swap và host-endian detection;
+lưu strict host-test evidence và `alignment-note.md`.
+
+### 2. Actual Status
+
+YELLOW — artifact/evidence PASS, nhưng pre-check bắt buộc đã không được hoàn
+thành trước khi code. Đây là historical process variance không thể sửa hồi tố.
+
+### 3. Focused Time
+
+Planned: ~6–7 focused hours nếu là normal roadmap day, theo TODO.
+Actual: Không được ghi nhận; không suy diễn từ wall-clock hoặc file timestamps.
+
+### 4. Independent Work
+
+What I personally implemented, reasoned about, measured, or explained:
+
+- Dự đoán size/alignment/member offsets của `layout_a_t` và `layout_b_t` trước
+  measurement; các dự đoán số học khớp kết quả host.
+- Hoàn thành layout inspection, byte-swap và endian-detection practice; bounded
+  AI-4 code/syntax assistance đã được dùng sau learner attempts.
+- Chạy strict build, 25 host tests và measurement helper.
+- Quan sát `layout_a_t` có size 12, `layout_b_t` có size 8, union size/alignment
+  là 4, và bytes của `0x01020304` là `04 03 02 01` trên host hiện tại.
+- Initial mini closed-book practice đạt 6 PASS / 1 PARTIAL; câu trả lời raw-struct
+  ban đầu nêu ABI/layout-padding risk nhưng bỏ sót endian risk.
+- Fresh unhinted practice retest sau đó nêu đúng cả ABI/layout-padding và endian
+  mismatch risk. Kết quả này không phải AI-0 competency gate.
+- Original pre-check-before-coding không được thực hiện và vẫn `NOT MET`.
+
+### 5. AI Usage
+
+Highest AI level used: AI-4
+
+What AI helped with:
+- AI-1 theory/clarification về struct padding/alignment, union/enum và endian.
+- AI-2 hints và AI-3 review/debug sau meaningful attempts.
+- Bounded AI-4 code/syntax assistance trong implementation sau learner attempts.
+- AI-assisted wording cho Section 7 của `alignment-note.md`.
+- END DAY audit, evidence metadata và routine bookkeeping.
+
+Files/functions materially assisted:
+- `learning/week-01/day-03/struct_layout.c`
+- `learning/week-01/day-03/alignment-note.md`, đặc biệt wording Section 7
+- W01D03 TODO/SUBMIT, evidence metadata và control-file bookkeeping
+
+Competencies contaminated:
+- W01D03 không được dùng làm independent competency evidence do AI-4 bounded
+  code/syntax assistance và AI-assisted evidence wording.
+- `W01-C-FOUND` vẫn `COMPETENCY_UNVERIFIED`.
+
+Independent retest required:
+- YES — fresh AI-0 Week 1 competency gate trước mọi claim
+  `W01-C-FOUND — COMPETENCY_PASS`.
+
+### 6. Artifact Result
+
+Files changed:
+- `learning/week-01/day-03/struct_layout.c`
+- `learning/week-01/day-03/alignment-note.md`
+- `learning/week-01/day-03/measure_w01d03.c`
+- `learning/week-01/day-03/TODO_W01_D03_2026-08-12_struct_alignment_endian.md`
+- `learning/week-01/day-03/SUBMIT_W01_D03_2026-08-12.md`
+- `evidence/week-01/day-03/test_struct_layout.txt`
+
+Build command:
+`gcc -std=c17 -Wall -Wextra -Wpedantic -Werror learning/week-01/day-03/struct_layout.c tests/host/test_struct_layout.c -Ilearning/week-01/day-03 -o tests/host/test_struct_layout.exe`
+
+Build result:
+PASS — exit code 0, no warning/error under configured flags.
+
+Test command:
+`.\tests\host\test_struct_layout.exe`
+
+Test result:
+PASS — exit code 0; `SUMMARY: 25 tests, 0 failed`.
+
+### 7. Evidence
+
+Commit:
+- Closure commit; see repository history.
+
+Logs:
+- `evidence/week-01/day-03/test_struct_layout.txt` — intentionally tracked UTF-8
+  verification record with build/test/measurement metadata and provenance.
+
+Captures:
+- None
+
+Reports:
+- `learning/week-01/day-03/alignment-note.md`
+- `learning/week-01/day-03/SUBMIT_W01_D03_2026-08-12.md`
+
+Video/demo:
+- None
+
+Other:
+- `learning/week-01/day-03/measure_w01d03.c` is retained as a clean,
+  reproducible host measurement helper.
+
+### 8. Measurements
+
+Expected:
+- Strict build succeeds and all 25 visible host tests pass.
+- `layout_a_t` and `layout_b_t` results match `sizeof/_Alignof/offsetof`.
+- Object bytes identify the host byte order without union-punning.
+
+Observed:
+- `layout_a_t`: size 12, alignment 4, offsets `tag=0`, `value=4`, `code=8`.
+- `layout_b_t`: size 8, alignment 4, offsets `tag=6`, `value=0`, `code=4`.
+- `u32_view_t`: size 4, alignment 4.
+- `0x01020304` bytes at increasing addresses: `04 03 02 01`.
+- Detected host endian: little-endian (`ENDIAN_LITTLE`, enum value 1).
+- Host tests: 25 run, 0 failed.
+
+Relevant values/registers/timing/errors:
+- No hardware/register/timing measurement was required for this host exercise.
+- Exact layout/alignment/endian observations are implementation/ABI specific.
+
+### 9. Understanding Check
+
+What I can explain without AI:
+- Alignment constrains where an object/member begins; padding is storage inserted
+  to satisfy alignment.
+- Tail padding lets consecutive struct array elements meet struct alignment.
+- Member order can change padding and `sizeof(struct)`.
+- Endian is byte order, not bit order.
+- Raw struct serialization is unsafe across ABI/layout and endian boundaries.
+
+What I still cannot explain:
+- No unresolved concept blocker is recorded for this practice artifact.
+- Independent ownership of Week 1 C concepts remains unverified until a fresh
+  AI-0 gate.
+
+### 10. Defects / Failed Tests
+
+Defect/Test IDs:
+- No unresolved source/test defect; final visible host suite is 25/25 PASS.
+- Process variance: original pre-check-before-coding criterion `NOT MET`.
+
+Root cause known?:
+YES — the learning flow changed to theory-first because prerequisite
+understanding was insufficient; the missed pre-check cannot be recreated as a
+genuine before-coding check.
+
+Current hypothesis:
+- Artifact behavior is correct under the verified host test contract.
+- Passing tests do not establish competency.
+
+### 11. Carry-over
+
+Task:
+- NONE from the W01D03 artifact. The historical pre-check variance is retained,
+  not converted into a fake carry-over or PASS.
+- W01D04 is the next scheduled execution. The Week 1 fresh AI-0 gate remains a
+  required future gate, not a W01D03 artifact carry-over.
+
+Closure criteria:
+- W01D03 artifact/evidence and control bookkeeping committed atomically.
+- Repository synchronized if push succeeds.
+- `W01-C-FOUND` remains `COMPETENCY_UNVERIFIED` until the fresh AI-0 gate.
+
+### 12. Next Action
+
+BOOT

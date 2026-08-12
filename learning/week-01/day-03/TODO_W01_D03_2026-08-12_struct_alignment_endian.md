@@ -13,7 +13,7 @@ Artifact Position at start: W01D02 ARTIFACT_PASS
 Competency Position: W01-C-FOUND — COMPETENCY_UNVERIFIED
 Available Time: TBD; use ~6–7 focused hours if today is a normal roadmap day
 Toolchain: Host GCC 14.2.0 / C17
-AI Mode: AI-1 theory + AI-2 hints; AI-3 only after meaningful attempt
+AI Mode Used: AI-1 theory, AI-2 hints, AI-3 review/debug, AI-4 bounded code/syntax assistance after own attempts
 Source: Week 1 Day 3 roadmap card; System Spec AI/evidence rules
 
 ## 1. Outcome
@@ -25,20 +25,28 @@ Source: Week 1 Day 3 roadmap card; System Spec AI/evidence rules
 ### MUST
 
 - [ ] Trả lời pre-check trước khi code.
-- [ ] Predict layout A/B trước khi chạy measurement.
-- [ ] `inspect_layout_a()` và `inspect_layout_b()` trả đúng `sizeof/_Alignof/offsetof`.
-- [ ] `byte_swap_u16()` PASS known-pattern + boundary + involution tests.
-- [ ] `byte_swap_u32()` PASS known-pattern + boundary + involution tests.
-- [ ] `detect_host_endian()` khớp independent byte-observation trong test harness.
-- [ ] Host build sạch với `-Wall -Wextra -Wpedantic -Werror`.
-- [ ] Final host tests PASS.
-- [ ] `alignment-note.md` có prediction -> observed -> explanation.
-- [ ] Closed-book: giải thích padding vs alignment, tail padding, endian, và vì sao raw struct serialization không portable.
+  - NOT MET (historical / non-recoverable).
+  - Flow was changed to theory-first because prerequisite understanding was insufficient.
+  - Do not count as independent pre-check evidence.
+- [x] Predict layout A/B trước khi chạy measurement.
+- [x] `inspect_layout_a()` và `inspect_layout_b()` trả đúng `sizeof/_Alignof/offsetof`.
+- [x] `byte_swap_u16()` PASS known-pattern + boundary + involution tests.
+- [x] `byte_swap_u32()` PASS known-pattern + boundary + involution tests.
+- [x] `detect_host_endian()` khớp independent byte-observation trong test harness.
+- [x] Host build sạch với `-Wall -Wextra -Wpedantic -Werror`.
+- [x] Final host tests PASS.
+- [x] `alignment-note.md` có prediction -> observed -> explanation.
+- [x] Closed-book: giải thích padding vs alignment, tail padding, endian, và vì sao raw struct serialization không portable.
+  - Initial mini closed-book check after implementation: 6 PASS, 1 PARTIAL.
+  - Initial raw-struct answer identified layout/padding risk but omitted endian risk.
+  - Fresh independent retest completed without hints: PASS.
+  - Fresh retest correctly identified both ABI/layout-padding risk and endian mismatch risk.
+  - This remains practice-level evidence and is not an AI-0 competency PASS.
 
 ### SHOULD
 
-- [ ] Ghi một observation về việc đổi member order ảnh hưởng `sizeof` trên host hiện tại.
-- [ ] Nêu phần nào là C concept, phần nào là implementation/ABI-specific observation.
+- [x] Ghi một observation về việc đổi member order ảnh hưởng `sizeof` trên host hiện tại.
+- [x] Nêu phần nào là C concept, phần nào là implementation/ABI-specific observation.
 
 ### BONUS
 
@@ -145,15 +153,18 @@ No artificial crash is required today. Use these reasoning negatives:
 Required:
 
 - `learning/week-01/day-03/alignment-note.md`
-- final test output/log, preferably `evidence/week-01/day-03/test_struct_layout.log`
+- final sanitized verification record at `evidence/week-01/day-03/test_struct_layout.txt`
 - final source + tests
 
-Recommended final evidence command:
+Reproduction commands:
 
 ```powershell
-New-Item -ItemType Directory -Force evidence/week-01/day-03 | Out-Null
-.\tests\host\test_struct_layout.exe | Tee-Object evidence/week-01/day-03/test_struct_layout.log
+gcc -std=c17 -Wall -Wextra -Wpedantic -Werror learning/week-01/day-03/struct_layout.c tests/host/test_struct_layout.c -Ilearning/week-01/day-03 -o tests/host/test_struct_layout.exe
+.\tests\host\test_struct_layout.exe
 ```
+
+The tracked `.txt` record contains the command/result metadata and sanitized
+test output. Raw `*.log` files remain ignored by repository policy.
 
 ## 9. Self-Explanation
 
@@ -199,4 +210,4 @@ Stop when final strict build + tests PASS, `alignment-note.md` contains predicti
 
 ## 16. Next Physical Action
 
-Open THEORY and answer Pre-check Q1 only, without AI.
+Run `BOOT` to start W01D04 — safe bit-manipulation APIs.

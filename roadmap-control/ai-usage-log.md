@@ -160,6 +160,50 @@ force-added. Recovery: `NOT ACTIVE`. Next execution: `W01D03`.
 
 ---
 
+## 2026-08-12 — W01D03 struct/alignment/union/endian learning and evidence
+
+Highest AI level:
+AI-4 — bounded code/syntax assistance after learner attempts. Theory, hints and
+review/debug also used AI-1/AI-2/AI-3.
+
+What AI contributed:
+- theory and clarification for struct padding/alignment, union/enum and endian;
+- hints and review/debug after learner attempts;
+- bounded code/syntax assistance in the W01D03 implementation;
+- AI-assisted wording for Section 7 of `alignment-note.md`;
+- closure audit, evidence metadata and routine bookkeeping.
+
+Files/functions materially assisted:
+- `learning/week-01/day-03/struct_layout.c`;
+- `learning/week-01/day-03/alignment-note.md`, especially Section 7 wording;
+- W01D03 TODO/SUBMIT, evidence metadata and control-file bookkeeping.
+
+Implementation code provided:
+YES — bounded code/syntax assistance after learner attempts. The repository does
+not preserve a finer-grained transcript, so provenance is conservatively AI-4.
+
+Gate answer revealed:
+NO — W01D03 was learning/practice, not the fresh Week 1 competency gate. The
+later closed-book retest is recorded as practice-level evidence only.
+
+Competency affected:
+No competency PASS is claimed. W01D03 remains valid artifact/practice evidence,
+but it cannot independently verify `W01-C-FOUND`; status remains
+`COMPETENCY_UNVERIFIED`.
+
+Fresh independent retest required:
+YES — a fresh AI-0 Week 1 competency gate is required before any
+`W01-C-FOUND — COMPETENCY_PASS` claim.
+
+Notes:
+Strict build and 25/25 host tests passed. The original pre-check was not
+completed before coding and remains `NOT MET` as a historical, non-recoverable
+process variance. Initial closed-book practice was 6 PASS / 1 PARTIAL; a fresh
+unhinted practice retest later identified both ABI/layout-padding and endian
+risks. Recovery: `NOT ACTIVE`. Next execution: `W01D04`.
+
+---
+
 ## Pre-V3 Migration Note
 
 Known affected scope:

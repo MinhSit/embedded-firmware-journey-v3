@@ -55,7 +55,15 @@ Required level:
 Independent reasoning about pointer/array/lifetime, qualifiers, memory, UB, bit operations and bounded ring-buffer behavior.
 
 Artifact evidence:
-Pre-V3 artifacts may exist but are historical/reference only.
+- Pre-V3 artifacts may exist but are historical/reference only.
+- W01D01 pointer/array/const practice: strict host build and 46/46 tests PASS;
+  bounded AI-4 implementation exposure in E06.
+- W01D02 storage/linkage/memory-map practice: strict host build/runtime PASS;
+  AI-5 scaffold and substantial evidence assistance.
+- W01D03 struct/alignment/endian practice: strict host build and 25/25 tests
+  PASS; host layout/endian measurements recorded; bounded AI-4 code/syntax
+  assistance and AI-assisted wording recorded.
+- These are artifact/practice evidence only. None is fresh AI-0 E5 evidence.
 
 Independent gate:
 Fresh Week 1 V3 AI-0 gate required.
@@ -73,4 +81,6 @@ Retest condition:
 Complete Week 1 V3 and pass a fresh AI-0 gate.
 
 Notes:
-Do not promote pre-V3 test counts or commits to competency PASS.
+Do not promote pre-V3 or W01D01–W01D03 artifact/test results to competency
+PASS. W01D03's original pre-check-before-coding criterion was NOT MET and
+remains a historical process variance.

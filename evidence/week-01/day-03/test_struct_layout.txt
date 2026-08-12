@@ -1,0 +1,69 @@
+Date: 2026-08-12
+Week/Day: Week 01 / Day 03
+What: Closure verification for struct layout, union storage, byte-swap and host-endian practice
+Artifact commit: closure commit; see repository history
+Hardware: N/A — host-only
+Toolchain: Host GCC 14.2.0 / C17
+
+Expected:
+- Strict build succeeds with -Wall -Wextra -Wpedantic -Werror.
+- Host test result is 25 tests, 0 failed.
+- Measurement helper reports u32_view_t size/alignment and object bytes for 0x01020304.
+
+AI level: AI-4
+AI usage: AI-1 theory, AI-2 hints, AI-3 review/debug, and bounded AI-4 code/syntax assistance after learner attempts. Section 7 of alignment-note.md received AI-assisted wording.
+Evidence class: E2 execution evidence plus E3 host measurement evidence
+Competency claim: NONE — practice/artifact evidence only; W01-C-FOUND remains COMPETENCY_UNVERIFIED.
+Known limitations: Host/ABI-specific layout and byte-order observations; this record is not independent AI-0 competency evidence. The original pre-check-before-coding criterion was NOT MET.
+
+=== BUILD ===
+Command:
+gcc -std=c17 -Wall -Wextra -Wpedantic -Werror learning/week-01/day-03/struct_layout.c tests/host/test_struct_layout.c -Ilearning/week-01/day-03 -o tests/host/test_struct_layout.exe
+
+Build exit code: 0
+
+=== TEST ===
+Command: .\tests\host\test_struct_layout.exe
+
+PASS: D03-T01 A size
+PASS: D03-T01 A alignment
+PASS: D03-T01 A tag offset
+PASS: D03-T01 A value offset
+PASS: D03-T01 A code offset
+PASS: D03-T03 A value aligned
+PASS: D03-T03 A code aligned
+PASS: D03-T02 B size
+PASS: D03-T02 B alignment
+PASS: D03-T02 B tag offset
+PASS: D03-T02 B value offset
+PASS: D03-T02 B code offset
+PASS: D03-T03 B value aligned
+PASS: D03-T03 B code aligned
+PASS: D03-T04 union contains uint32_t
+PASS: D03-T04 union members share start address
+PASS: D03-T05 swap16 known
+PASS: D03-T06 swap16 zero
+PASS: D03-T06 swap16 ones
+PASS: D03-T07 swap16 involution
+PASS: D03-T08 swap32 known
+PASS: D03-T09 swap32 zero
+PASS: D03-T09 swap32 ones
+PASS: D03-T10 swap32 involution
+PASS: D03-T11 host endian
+SUMMARY: 25 tests, 0 failed
+
+Test exit code: 0
+
+=== MEASUREMENT HELPER ===
+Build command:
+gcc -std=c17 -Wall -Wextra -Wpedantic -Werror learning/week-01/day-03/struct_layout.c learning/week-01/day-03/measure_w01d03.c -Ilearning/week-01/day-03 -o tests/host/measure_w01d03.exe
+
+Build exit code: 0
+Run command: .\tests\host\measure_w01d03.exe
+
+sizeof(u32_view_t): 4
+_Alignof(u32_view_t): 4
+bytes: 04 03 02 01
+detected endian enum: 1
+
+Measurement exit code: 0
