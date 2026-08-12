@@ -1081,6 +1081,89 @@ Execution impact:  NONE — W01D04 remains NEXT
   W01D03 is `YELLOW` because the learner failed unknown pre-learning material.
 - W01D03 strict build, 25/25 host tests and measurement helper must still pass.
 
+## RR-012 — END DAY closure misses mandatory human-only fields
+Status: `CLOSED`
+Severity: `R1`
+Opened: `2026-08-12`
+Closed: `2026-08-12`
+Target: `EARLY OPERATIONAL REVIEW — COMPLETED`
+
+### Concern
+
+END DAY could reach committed closure while a required daily-log field remained
+unknown because repository tooling could not derive the value.
+
+### Evidence
+
+- W01D02 closed without an actual focused-time value and required the later
+  corrective bookkeeping commit `c869932` (`docs(control): correct W01D02
+  focused time`).
+- W01D03 again closed with `Actual: Không được ghi nhận` even though the fixed
+  daily-log schema requires an `Actual` field and the learner could later supply
+  an explicitly labeled estimate.
+- This is repeated execution evidence across two consecutive days, not two
+  unrelated wording errors.
+
+### Expected
+
+Before END DAY bookkeeping and commit, the active execution environment must
+identify every mandatory field that cannot be reliably derived from repository
+or tool state. If a required human-only value is missing, ask the learner only
+for that missing information before closure.
+
+### Root cause
+
+END DAY had repository consistency checks but no mandatory human-input
+preflight. The workflow said the learner supplies information the execution
+environment cannot read, but did not require the environment to enumerate and
+resolve missing human-only fields before commit.
+
+### Impact
+
+- repeated corrective commits;
+- incomplete daily execution and workload data;
+- weaker CP-01 planned-versus-actual and health/load analysis;
+- avoidable bookkeeping churn;
+- risk of silently recording an unknown value when learner input could resolve it.
+
+There is no technical artifact, competency, AI-integrity, schedule, or recovery
+impact.
+
+### Decision and minimum correction
+
+`APPROVED / CLOSED` — confirmed workflow defect; Level A operational adjustment,
+severity `R1`. This is not an `R4` System Spec defect because PASS semantics, AI
+integrity, evidence authority, gates, and state semantics remain consistent.
+
+- Add a lightweight END DAY Human-Input Gate to the active operating rules.
+- Integrate the gate before evidence/log/state edits and before the closure commit.
+- Repair W01D03 Actual Focused Time with the learner-supplied estimate
+  `~6h — learner estimate`.
+- Do not modify frozen System Spec, Roadmap, or Master Prompt.
+
+### Preserved semantics
+
+```text
+Daily impact:       NONE — W01D03 remains GREEN
+Artifact impact:    NONE — W01D03 remains ARTIFACT_PASS
+Competency impact:  NONE — W01-C-FOUND remains COMPETENCY_UNVERIFIED
+AI impact:          NONE — highest level remains AI-4
+Gate impact:        NONE — fresh Week 1 AI-0 gate remains required
+Schedule impact:    NONE — variance remains 0
+Recovery impact:    NONE — NOT ACTIVE
+Execution impact:   NONE — W01D04 remains NEXT
+```
+
+### Verification after change
+
+- `roadmap-control/operating-rules.md` requires the human-input preflight before
+  the final END DAY commit and preserves the atomic closure, verification,
+  diagnostic, and Cowork handoff rules.
+- `roadmap-control/daily-log.md` and `roadmap-control/current-state.md` record
+  W01D03 focused time as `~6h — learner estimate` without inferred precision.
+- No technical source, test, artifact result, AI provenance, competency, gate,
+  schedule, or recovery record is changed.
+
 ---
 # 17. BASELINE REVIEW — PRE-EXECUTION
 

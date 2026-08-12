@@ -24,15 +24,34 @@ This file simplifies daily execution without overriding `SYSTEM_SPEC_V3`, `EMBED
 The active repository execution environment handles `END DAY` in this order:
 
 1. Determine the artifact result and AI provenance first.
-2. Update required evidence metadata.
-3. Update the daily log.
-4. Update the AI usage log.
-5. Update current state.
-6. Run one consistency audit across result, provenance, evidence, logs, and state.
-7. Commit the closure.
-8. Push only after one verification, when push is authorized.
+2. Run the human-input preflight and identify any missing mandatory human-only fields.
+3. Ask the learner only for those genuinely missing fields and resolve them.
+4. Update required evidence metadata.
+5. Update the daily log.
+6. Update the AI usage log.
+7. Update current state.
+8. Run one consistency audit across result, provenance, human-only fields, evidence, logs, and state.
+9. Commit the closure.
+10. Push only after one verification, when push is authorized.
 
 Provenance must be settled before the closure commit so a late provenance audit does not create avoidable repair commits. This workflow does not change artifact, evidence, AI-contamination, or competency semantics.
+
+## 3.1 END DAY Human-Input Gate
+
+Before any END DAY closure edit or commit, the active execution environment must perform a lightweight human-input preflight.
+
+1. Identify every mandatory field in the active daily/closure schema that cannot be reliably derived from repository state, tools, tests, measurements, or already recorded evidence.
+2. Typical human-only fields may include actual focused time; a relevant required health/load issue; a learner-observed blocker not captured in repository evidence; material AI assistance not visible in repository/tool history; uncaptured physical/hardware observations; and other subjective or experiential information explicitly required by the active schema.
+3. Reuse trusted current-session context or repository evidence when the value is already available. Do not ask repetitive questions.
+4. Ask only for genuinely missing required human-only information.
+5. If any required human-only field is missing, END DAY closure is `NOT READY`; do not commit the closure yet.
+6. Never infer focused time from chat duration, conversation timestamps, file modification timestamps, commit timestamps, shell history, IDE-open duration, or wall-clock time between `BOOT` and `END DAY`.
+7. A learner estimate is valid only when explicitly labeled as an estimate, for example: `Actual: ~6h — learner estimate`.
+8. Do not add fake precision. If the learner says `~6h`, do not record `6h00m`.
+9. If the learner genuinely cannot recover a required value, record `UNKNOWN` / `NOT RECORDED` honestly only when the governing schema allows it, record why, and determine whether it is a process variance. Do not silently pretend the field was resolved.
+10. The normal atomic END DAY transaction may continue only after every mandatory human-only field is supplied, already available, or explicitly and validly classified as unrecoverable.
+11. The pre-commit consistency audit must verify that no required human-only field was silently omitted; no `TBD`, `UNKNOWN`, `NOT RECORDED`, or equivalent placeholder remains unless intentionally allowed and explained; and no inferred human-only value is presented as fact.
+12. This gate occurs before the final END DAY commit and must remain lightweight. Its purpose is to prevent repair commits, not create additional bureaucracy.
 
 ## 4. Bookkeeping Ownership
 

@@ -1,9 +1,9 @@
 # CURRENT STATE V3 — EMBEDDED/FIRMWARE ROADMAP
 
 **Document ID:** `CURRENT_STATE_V3`
-**Version:** `3.0.15`
+**Version:** `3.0.16`
 **State type:** Operational snapshot — describes reality and creates no new policy
-**Generated at:** `2026-08-12 17:54 +07:00`
+**Generated at:** `2026-08-12 18:30 +07:00`
 **Timezone:** `Asia/Ho_Chi_Minh`
 **Status:** `WEEK 1 ACTIVE — W01D03 CLOSED — W01D04 NEXT`
 
@@ -14,7 +14,7 @@
 - **System Spec version:** `SYSTEM_SPEC_V3 3.0.0`
 - **Roadmap version:** `EMBEDDED_ROADMAP_V3.1 3.1.0`
 - **Master Prompt version:** `MASTER_PROMPT_V3 3.0.3`
-- **Current State version:** `3.0.15`
+- **Current State version:** `3.0.16`
 - **Active operational layer:** `roadmap-control/operating-rules.md`
 
 If this file conflicts with a higher-authority source, the higher-authority source wins.
@@ -79,7 +79,7 @@ If this file conflicts with a higher-authority source, the higher-authority sour
 - **Critical path risk:** `NONE currently identified`; no P0 blocker and the protected deadline is unchanged.
 - **Weekly scorecard:** `NOT YET DUE — Week 1 closes 2026-08-16`
 - **Career pipeline:** `N/A — no career task scheduled for W01D04 in the roadmap`
-- **Health/load:** W01D03 actual focused time was not recorded; no health issue is recorded.
+- **Health/load:** W01D03 focused time: ~6h — learner estimate. No health issue is recorded. No sustainability conclusion is drawn from this single value.
 
 ## Forward Control
 

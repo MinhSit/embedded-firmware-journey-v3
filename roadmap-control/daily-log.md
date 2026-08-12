@@ -442,7 +442,7 @@ criterion. The interrupted chronology remains documented as
 ### 3. Focused Time
 
 Planned: ~6–7 focused hours nếu là normal roadmap day, theo TODO.
-Actual: Không được ghi nhận; không suy diễn từ wall-clock hoặc file timestamps.
+Actual: ~6h — learner estimate
 
 ### 4. Independent Work
 
