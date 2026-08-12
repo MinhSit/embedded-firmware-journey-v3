@@ -1,7 +1,7 @@
 # ROADMAP REVIEW LOG — EMBEDDED/FIRMWARE ROADMAP V3.1
 
 **Document ID:** `ROADMAP_REVIEW_LOG`
-**Version:** `1.0.3`
+**Version:** `1.0.4`
 **Status:** `ACTIVE REVIEW LOG — NON-AUTHORITATIVE`
 **Created:** `2026-08-09`
 **Timezone:** `Asia/Ho_Chi_Minh`
@@ -261,6 +261,11 @@ AI:
 
 Bookkeeping:
 - logs/evidence hữu ích hay bureaucracy?
+
+Week Consistency Sweep:
+- follow `roadmap-control/operating-rules.md` Section 13
+- cover every Week 1 CLOSED day with closure-linter output + human semantic audit
+- record PASS/WARN/FAIL/N/A without re-grading technical competency
 ```
 
 Decision:
@@ -1164,6 +1169,129 @@ Execution impact:   NONE — W01D04 remains NEXT
 - No technical source, test, artifact result, AI provenance, competency, gate,
   schedule, or recovery record is changed.
 
+## RR-013 — Defect fixes lack mandatory retrospective scope verification
+Status: `CLOSED`
+Severity: `R1`
+Opened: `2026-08-12`
+Closed: `2026-08-12`
+Target: `EARLY OPERATIONAL REVIEW — COMPLETED`
+
+### Concern
+
+The active workflow corrected a confirmed defect at the point where it was
+noticed but did not explicitly require a bounded audit of prior `CLOSED` records
+that could have been affected by the same defect class. This is a system-design
+risk; it is not a claim that an undiscovered historical defect definitely exists.
+
+### Evidence
+
+- RR-011 corrected generated baseline-diagnostic semantics after W01D03 was
+  misclassified.
+- RR-012 confirmed that missing END DAY human-only focused-time data had occurred
+  on both W01D02 and W01D03.
+- These events demonstrate that a workflow defect class can span days. A fix that
+  checks only the discovered occurrence can leave same-class historical records
+  stale.
+
+### Expected
+
+Every confirmed workflow/system/control defect must define the defect class,
+identify the reasonable historical scope that could have been affected, classify
+every item in that scope, safely fix recoverable hits, preserve and explain
+unrecoverable history, and record the results before the review item is closed.
+
+### Root cause / system gap
+
+The review flow required impact analysis and verification, but the active
+operational layer did not make retrospective scope selection, per-item
+classification, and completion-before-closure explicit. CP-01 also lacked a
+bounded cross-day control-consistency sweep, and END DAY had no machine helper
+for simple structural contradictions.
+
+### Impact
+
+- stale same-class historical inconsistencies could survive indefinitely;
+- checkpoint inputs could contain hidden control defects;
+- learner/reviewer could mistake a latest-day repair for repository-wide
+  consistency.
+
+There is no technical artifact or competency impact by itself.
+
+### Decision and operational changes
+
+`APPROVED / CLOSED` — confirmed operational/system hardening gap, severity `R1`.
+This is a Level A operational adjustment, not an `R4` System Spec defect.
+
+- Added `Confirmed Defect -> Retroactive Impact Sweep` to the active operating
+  rules, including precise defect class, bounded scope, per-item classification,
+  safe correction, unrecoverable-history handling, and closure gating.
+- Added the bounded `CP-01 Week Consistency Sweep` for all Week 1 `CLOSED` days.
+- Added read-only standard-library linter `tools/roadmap/closure_lint.py` and
+  integrated it before the final END DAY commit without replacing human review.
+- Did not modify the frozen System Spec, Roadmap, Master Prompt, daily-log schema,
+  technical implementation, tests, AI provenance, or competency rules.
+
+### Initial retrospective scope and results
+
+Scope: `W01D01-W01D03` — every Week 1 day currently `CLOSED`.
+
+Checked dimensions: daily status / planned and actual focused time / artifact /
+required evidence / AI provenance / competency boundary / carry-over / next
+action and closed-state progression / mandatory placeholders / Current State
+alignment / RR-011 and RR-012 correction alignment.
+
+| Invariant | W01D01 | W01D02 | W01D03 |
+|---|---|---|---|
+| Daily status | PASS | PASS | PASS |
+| Planned focused time | PASS | PASS | PASS |
+| Actual focused time | PASS | PASS | PASS |
+| Artifact result | PASS | PASS | PASS |
+| Required evidence present | PASS | PASS | PASS |
+| AI provenance present/consistent | PASS | PASS | PASS |
+| Competency claim within evidence | PASS | PASS | PASS |
+| Carry-over explicit | PASS | PASS | PASS |
+| Next action / closed-state progression | PASS | PASS | PASS |
+| No unexplained mandatory placeholder | PASS | PASS | PASS |
+| Current State alignment | PASS | PASS | PASS |
+| RR-011 / RR-012 correction alignment | PASS | PASS | PASS |
+
+Defect-specific historical results:
+
+- RR-011 class — generated diagnostic misclassified as scored `MUST`:
+  `W01D01 NOT APPLICABLE`; `W01D02 NOT APPLICABLE`; `W01D03 AFFECTED — FIXED`
+  by the prior RR-011 correction.
+- RR-012 class — `CLOSED` day missing Actual Focused Time:
+  `W01D01 PASS`; `W01D02 AFFECTED — FIXED` by commit `c869932`;
+  `W01D03 AFFECTED — FIXED` by commit `986f15a`.
+- Additional same-scope recoverable inconsistencies found: `NONE`.
+
+This bounded result means only that W01D01-W01D03 passed the defined closure
+invariant matrix. It does not prove that no other unknown defect exists.
+
+### Verification
+
+- Real repository linter: `0 FAIL`, `0 WARN`, `20 PASS`; exit code `0`.
+- Negative temporary fixture with blank W01D03 `Actual` focused time:
+  `1 FAIL`, `0 WARN`, `19 PASS`; exit code `1`.
+- False-positive review: legitimate hardware `NOT_TESTED/UNKNOWN` and historical
+  review prose are outside the mandatory parsed fields and were not flagged.
+- Human audit found no technical/competency issue requiring a separate review and
+  no historical value requiring invention.
+
+### Preserved semantics
+
+```text
+Daily impact:       NONE — W01D03 remains GREEN
+Artifact impact:    NONE — W01D03 remains ARTIFACT_PASS
+AI impact:          NONE — W01D03 remains AI-4
+Competency impact:  NONE — W01-C-FOUND remains COMPETENCY_UNVERIFIED
+Gate impact:        NONE — fresh Week 1 AI-0 gate remains required
+Schedule impact:    NONE — variance remains 0
+Recovery impact:    NONE — NOT ACTIVE
+Execution impact:   NONE — W01D04 remains NEXT
+Next action impact: NONE — Exact Next Action remains BOOT
+```
+
 ---
 # 17. BASELINE REVIEW — PRE-EXECUTION
 
@@ -1555,6 +1683,19 @@ Close RR-002 after the approved operating-rules workflow fix and BOOT discovery 
 
 Behavior impact:
 NONE to roadmap curriculum, gates, competency, PASS, AI-integrity or evidence semantics.
+```
+
+# 23.4 VERSION NOTE — 1.0.4
+
+```text
+Change:
+Close RR-013 after adding the confirmed-defect retrospective sweep, bounded
+CP-01 Week Consistency Sweep, read-only closure linter, and initial W01D01-W01D03
+verification.
+
+Behavior impact:
+Operational review/closure hardening only. NONE to curriculum, gates,
+competency, PASS, AI-integrity or evidence semantics.
 ```
 
 ---

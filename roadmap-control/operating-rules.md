@@ -30,9 +30,10 @@ The active repository execution environment handles `END DAY` in this order:
 5. Update the daily log.
 6. Update the AI usage log.
 7. Update current state.
-8. Run one consistency audit across result, provenance, human-only fields, evidence, logs, and state.
-9. Commit the closure.
-10. Push only after one verification, when push is authorized.
+8. If the repository closure linter exists, run it against the updated control state.
+9. Run one human consistency audit across result, provenance, human-only fields, evidence, logs, and state.
+10. Commit the closure.
+11. Push only after one verification, when push is authorized.
 
 Provenance must be settled before the closure commit so a late provenance audit does not create avoidable repair commits. This workflow does not change artifact, evidence, AI-contamination, or competency semantics.
 
@@ -52,6 +53,15 @@ Before any END DAY closure edit or commit, the active execution environment must
 10. The normal atomic END DAY transaction may continue only after every mandatory human-only field is supplied, already available, or explicitly and validly classified as unrecoverable.
 11. The pre-commit consistency audit must verify that no required human-only field was silently omitted; no `TBD`, `UNKNOWN`, `NOT RECORDED`, or equivalent placeholder remains unless intentionally allowed and explained; and no inferred human-only value is presented as fact.
 12. This gate occurs before the final END DAY commit and must remain lightweight. Its purpose is to prevent repair commits, not create additional bureaucracy.
+
+## 3.2 Closure Linter in END DAY
+
+- The repository closure linter is `tools/roadmap/closure_lint.py`. Run `python tools/roadmap/closure_lint.py` after evidence/log/state updates and before the final commit.
+- `FAIL` means `END DAY NOT READY`; correct the objective control-contract failure before closure.
+- `WARN` requires human review. A warning does not automatically block closure unless that review confirms a required contract failure.
+- `PASS` permits the normal human consistency audit to continue; it does not by itself make END DAY ready.
+- The linter is a read-only operational helper, not policy authority. It must not edit files, judge conceptual answers, decide technical correctness, or award competency PASS.
+- The human audit remains mandatory because evidence meaning, AI provenance, competency claims, carry-over, and historical explanations cannot be safely decided by a structural parser alone.
 
 ## 4. Bookkeeping Ownership
 
@@ -118,3 +128,45 @@ If no checkpoint is needed, combine technical work and bookkeeping into one END 
 - Cowork must not replace learner-owned competency work: no AI-0 gate answers, assessed closed-book answers, learner core implementation under independence evaluation, or scored project-defense responses.
 - If Cowork materially changes technical implementation, log the actual AI assistance under AI Integrity rules. Pure administrative help does not itself change competency, but provenance remains honest where recording is required.
 - This handoff minimizes learner bookkeeping while preserving learner ownership of technical competency.
+
+## 12. Confirmed Defect -> Retroactive Impact Sweep
+
+Whenever a workflow, system, or control defect is `CONFIRMED`:
+
+1. Do not fix only the day or file where the defect was discovered.
+2. Define the defect class precisely. Use a testable class such as "CLOSED days can retain missing Actual Focused Time", not a vague statement such as "something was wrong with D04".
+3. Determine the reasonable retrospective scope: every prior `CLOSED` day, artifact, or control record that could have been affected by the same defect class. Do not scan unrelated areas automatically.
+4. Audit every item in that scope and classify it `PASS`, `AFFECTED — FIXABLE`, `AFFECTED — HISTORICAL / UNRECOVERABLE`, or `NOT APPLICABLE`.
+5. Safely correct recoverable same-class inconsistencies where the evidence is authoritative and sufficient.
+6. For unrecoverable historical cases, preserve truthful history, do not invent missing data, and record the limitation or process variance.
+7. Record the exact retrospective scope and per-item results in the review item. Example: `Scope: W01D01-W01D03; W01D01 PASS; W01D02 AFFECTED — FIXED; W01D03 AFFECTED — FIXED`.
+8. A confirmed review item must not be marked `CLOSED` until its required retrospective impact sweep is complete and recorded.
+9. If the defect could affect technical artifacts or competency claims, do not auto-fix; escalate under the authoritative gate and evidence rules.
+10. Keep the sweep defect-specific. Do not turn it into unlimited repository archaeology or unrelated cleanup.
+11. If the defect is first discovered at a checkpoint, complete the same retrospective sweep before closing the checkpoint finding.
+12. Prefer one coherent correction transaction where practical instead of multiple repair commits.
+
+## 13. CP-01 Week Consistency Sweep
+
+At `CP-01 — End of Week 1`, run one bounded consistency sweep across every Week 1 day that is `CLOSED` (`W01D01` through the last closed day, expected eventually through `W01D07`). This is control/review verification, not a curriculum change or a new competency gate.
+
+Use `PASS`, `WARN`, `FAIL`, or `N/A` for this compact matrix:
+
+- daily status;
+- planned focused time;
+- actual focused time;
+- artifact result;
+- required evidence present;
+- AI provenance present;
+- competency claim consistent with admissible evidence and the ledger;
+- carry-over resolved or explicit;
+- next action / closed-state progression consistent;
+- no unexplained placeholder in a mandatory field;
+- Current State consistent with the latest execution, artifact, and competency positions.
+
+Combine:
+
+1. the machine-checkable output of `python tools/roadmap/closure_lint.py`; and
+2. a human semantic audit of evidence meaning, provenance, competency boundaries, carry-over, progression, and any warning.
+
+Do not re-grade technical competency from this matrix and do not rerun every historical technical test by default. A technical rerun is required only when source/tests changed, evidence is stale or contradictory, an objective artifact concern exists, or a review/gate contract requires it. Record the exact scope, findings, and any bounded follow-up concisely enough to remain within the existing CP-01 review timebox.
