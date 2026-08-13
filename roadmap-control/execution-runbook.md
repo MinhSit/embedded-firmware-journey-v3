@@ -5,7 +5,7 @@
 **Status:** `ACTIVE IMPLEMENTATION RUNBOOK — NON-AUTHORITATIVE`
 **Owner approval:** `2026-08-13 — APPROVE MIGRATION D`
 
-Purpose: mechanical repository HOW implementing `MASTER_PROMPT_V3 3.1.0`.
+Purpose: mechanical repository HOW implementing `MASTER_PROMPT_V3 3.1.1`.
 
 This file does not define PASS, AI levels, assessment rules, lifecycle states,
 command legality, actor roles, HANDOFF semantics, competency requirements or
@@ -41,12 +41,16 @@ Canonical repo
 Local repo path
 Expected branch
 Expected base SHA
+Read-first files
+Known state
+Facts to preserve
 Allowed file scope
 Forbidden scope
 Required validation
 Commit authorization
 Push authorization
-Return-report requirements
+STOP/REPORT conditions
+Return-report schema
 ```
 
 Before mutation, verify repo path, origin, branch, local/remote base SHA,
@@ -146,7 +150,7 @@ Before any END DAY closure edit or commit, the active execution environment must
 
 ## 4. Bookkeeping Ownership
 
-- Routine control-file bookkeeping and long control-file edits belong to the active repository execution environment; the Master Prompt defines how Project Chat prepares this work for Cowork.
+- Routine control-file bookkeeping and long control-file edits belong to the active repository execution environment; the Master Prompt defines how Project Chat prepares this work for an external executor.
 - The learner is not required to manually edit control files.
 - The learner remains responsible for honest disclosure and for providing results/evidence that cannot be independently read from repository/tool output.
 

@@ -1,13 +1,13 @@
 # ROADMAP REVIEW LOG — EMBEDDED/FIRMWARE ROADMAP V3.1
 
 **Document ID:** `ROADMAP_REVIEW_LOG`
-**Version:** `1.1.1`
+**Version:** `1.2.0`
 **Status:** `ACTIVE REVIEW LOG — NON-AUTHORITATIVE`
 **Created:** `2026-08-09`
 **Timezone:** `Asia/Ho_Chi_Minh`
 **Reviewed roadmap:** `EMBEDDED_ROADMAP_V3.1.docx`
 **System authority:** `SYSTEM_SPEC_V3.md 3.0.0`
-**Execution authority:** `MASTER_PROMPT_V3.md 3.1.0 — FROZEN BASELINE`
+**Execution authority:** `MASTER_PROMPT_V3.md 3.1.1 — FROZEN BASELINE with Amendment 3.1.1`
 **Intended repo path:** `docs/system/ROADMAP_REVIEW_LOG.md`
 **Canonical live repo:** `https://github.com/MinhSit/embedded-firmware-journey-v3`
 
@@ -2252,4 +2252,4 @@ Default giữa các checkpoint:
 **Last completed formal review:** `RV-001 — CP-00 Sprint 0 Exit — 09/08/2026`
 **Next formal review:** `CP-01 — End of Week 1 — 16/08/2026`
 **Early exception:** `R3/R4 structural/system defect`
-**Latest system review:** `RR-016 — CLOSED — MASTER_PROMPT_V3 3.1.0 ACTIVATED / FINALIZED / CANONICAL`
+**Latest system review:** `RR-017 — CLOSED — MASTER_PROMPT_V3 3.1.1 ACTIVATED / FINALIZED / CANONICAL`
