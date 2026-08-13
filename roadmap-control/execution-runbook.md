@@ -1,50 +1,61 @@
-# OPERATING RULES — MINIMUM DAILY WORKFLOW
+# EXECUTION RUNBOOK
 
-**Status:** `ACTIVE OPERATIONAL LAYER`
-**Effective from:** `W01D02`
-**Owner approval:** `2026-08-11 — APPROVED`
+**Document ID:** `EXECUTION_RUNBOOK`
+**Version:** `1.0.0`
+**Status:** `ACTIVE IMPLEMENTATION RUNBOOK — NON-AUTHORITATIVE`
+**Owner approval:** `2026-08-13 — APPROVE MIGRATION D`
 
-This file simplifies daily execution without overriding `SYSTEM_SPEC_V3`, `EMBEDDED_ROADMAP_V3.1`, or `MASTER_PROMPT_V3`. If a conflict exists, the higher-authority source wins.
+Purpose: mechanical repository HOW implementing `MASTER_PROMPT_V3 3.1.0`.
 
-## 1. Start / Resume Command
+This file does not define PASS, AI levels, assessment rules, lifecycle states,
+command legality, actor roles, HANDOFF semantics, competency requirements or
+week-transition policy. Those semantics belong to the Master Prompt or higher
+authority. If a conflict exists, the higher-authority source wins.
 
-- `BOOT` is the only default user command to start or resume a new learning day.
-- `BOOT` performs the authoritative state read and then runs the day according to `BOOT = STATUS + START DAY`.
-- `START DAY` is an internal/subcommand path when context is already clear. The user does not need to type `START WEEK ...` or remember the next Week/Day identifier.
+## A. Source and Context Preflight
 
-## 1.1 Unclosed Session Recovery at BOOT
+Before a stateful operation, load the canonical System Spec, Roadmap, Master
+Prompt, Current State, this runbook and the relevant review/log/evidence files.
+Validate governing source/version when required by the Master Prompt.
 
-Before starting a new roadmap execution day, `BOOT` must determine whether the
-prior execution is cleanly `CLOSED` or whether credible evidence indicates that
-a prior learning session may still be unclosed.
+For `ENSURE_CONTEXT_READY`:
 
-1. Use available context first: Current State, daily log, repository history,
-   current conversation/session context, available local worktree/tool state,
-   and learner disclosure when the environment cannot observe relevant local
-   state.
-2. Do not silently advance to a new execution day when an unclosed prior session
-   is known or reasonably indicated. Classify the prior execution as exactly one
-   of:
-   - `A. PRIOR SESSION IN PROGRESS`;
-   - `B. PRIOR SESSION END DAY READY BUT NOT CLOSED`;
-   - `C. PRIOR SESSION STOPPED BEFORE READINESS`;
-   - `D. AMBIGUOUS — HUMAN INPUT REQUIRED`.
-3. For `A`, resume the prior execution.
-4. For `B`, declare that the previous session is `END DAY READY` and ask the
-   learner to confirm `END DAY` before advancing.
-5. For `C`, resume the prior execution, or let the learner request `END DAY` and
-   classify the actual result honestly under the normal closure transaction.
-6. For `D`, ask only the minimum human-only question needed to resolve the
-   ambiguity. Use the Project Chat <-> Cowork/local execution handoff only when
-   repository inspection is actually required; Cowork is not required on every
-   `BOOT`.
-7. If the execution environment cannot inspect the learner's local worktree,
-   remote-`main` cleanliness is not proof that no unclosed local work exists.
-8. Do not ask repetitive "did you forget END DAY?" questions when trusted
-   context already proves the prior execution was properly `CLOSED`.
-9. Never infer completion or clean closure from elapsed calendar date, chat
-   inactivity, timestamps, or remote clean state alone.
-10. Once the prior execution is confirmed `CLOSED`, `BOOT` may advance normally.
+1. read available persistent and transient facts;
+2. reconcile prior/session state using the Master Prompt classifications;
+3. mark unobservable facts `UNRESOLVED`;
+4. ask only the minimum human-only question required;
+5. continue to legality/dependency checks only when context is sufficient.
+
+`BOOT` is the normal learner-facing start/resume command, but this preflight is
+also invoked implicitly for other stateful commands.
+
+## B. Managed Repository Transaction Preflight
+
+The `EXECUTOR DISPATCH` contract must state:
+
+```text
+Purpose
+Canonical repo
+Local repo path
+Expected branch
+Expected base SHA
+Allowed file scope
+Forbidden scope
+Required validation
+Commit authorization
+Push authorization
+Return-report requirements
+```
+
+Before mutation, verify repo path, origin, branch, local/remote base SHA,
+staged/unstaged/untracked paths, candidate ref state and allowlist. Only one
+managed mutation transaction may own a worktree at a time. Unexpected state is:
+
+```text
+STOP / REPORT
+```
+
+Do not silently rebase, reset, force, overwrite, merge or discard work.
 
 ## 1.2 Start-Day Focused-Time Plan
 
@@ -68,55 +79,16 @@ known.
    time plan never overrides proactive `END DAY READY` or the authoritative
    daily stop condition.
 
+Record the complete Day Contract in temporary session notes, including Roadmap
+Standard Load, Available Focused Time, Planned Focused Time and the authority
+trace for every generated status-affecting `MUST`.
+
 ## 2. Focus Phase: LEARN / IMPLEMENT / TEST
 
 - Do not update `current-state.md`, `daily-log.md`, or `ai-usage-log.md` during the focus phase.
 - Do not create bookkeeping commits during the focus phase.
 - AI keeps temporary session notes in chat. The learner focuses on learning, implementation, tests, and measurements.
 - The learner supplies only execution results or evidence that the active execution environment cannot independently read from the repository or tools.
-
-## 2.1 Proactive END DAY Readiness
-
-During the Focus Phase, the mentor/execution system owns tracking the
-authoritative daily completion and stop conditions. Readiness must be derived
-from `SYSTEM_SPEC_V3`, the approved Roadmap/day card, and any explicit gate
-contract. Generated THEORY/TODO/SUBMIT packs may organize work, but cannot
-create a new `END DAY` threshold.
-
-1. When all required learning-day criteria are satisfied, the mentor must
-   proactively declare `END DAY READY`.
-2. At `END DAY READY`, the mentor must summarize why readiness was reached,
-   identify any remaining `OPTIONAL`/`BONUS` work separately, stop assigning
-   additional normal required work for that day, and ask the learner to confirm
-   `END DAY`.
-3. The learner is not required to remember or infer the closure threshold.
-4. `END DAY READY` is not `CLOSED`. Do not update final closure bookkeeping,
-   commit, or push solely because readiness was detected.
-5. Final closure begins only after learner confirmation, normally the explicit
-   command `END DAY`; the Human-Input Gate and normal atomic END DAY transaction
-   then remain mandatory.
-6. The learner may request `END DAY` before readiness. Audit the actual
-   authoritative result and classify `GREEN`/`YELLOW`/`RED`, carry-over and
-   blockers honestly; do not force continued study.
-7. Optional or bonus work must not delay `END DAY READY` unless a
-   higher-authority source explicitly makes it required.
-8. END DAY readiness concerns daily execution closure only and must not imply
-   `COMPETENCY_PASS`.
-
-Workflow transitions:
-
-```text
-ACTIVE
-  -> authoritative required criteria satisfied -> END_DAY_READY
-  -> learner confirms END DAY -> CLOSURE_IN_PROGRESS
-  -> Human-Input Gate + evidence/log/state + linter + human audit -> CLOSED
-
-ACTIVE
-  -> learner requests END DAY early -> CLOSURE_IN_PROGRESS
-  -> classify actual outcome honestly -> CLOSED / carry-over as applicable
-```
-
-These labels describe workflow only; they do not add competency states.
 
 ## 3. END DAY Is One Atomic Close Transaction
 
@@ -164,7 +136,7 @@ Before any END DAY closure edit or commit, the active execution environment must
 
 ## 4. Bookkeeping Ownership
 
-- Routine control-file bookkeeping and long control-file edits belong to the active repository execution environment; Section 11 defines how Project chat may prepare this work for Cowork.
+- Routine control-file bookkeeping and long control-file edits belong to the active repository execution environment; the Master Prompt defines how Project Chat prepares this work for Cowork.
 - The learner is not required to manually edit control files.
 - The learner remains responsible for honest disclosure and for providing results/evidence that cannot be independently read from repository/tool output.
 
@@ -176,6 +148,10 @@ Default maximum: **two commits per learning day**.
 - **B — END DAY closure:** contains the final technical result plus required bookkeeping, or only closure changes if checkpoint A was necessary.
 
 If no checkpoint is needed, combine technical work and bookkeeping into one END DAY commit. Do not split artifact, daily log, AI log, and state into three or four default commits.
+
+A narrow review-confirmed system/control/evidence-integrity correction may use a
+bounded extra correction commit when authorized by the Master Prompt. It does
+not consume the next learning day's normal allowance and is not for polish.
 
 ## 6. Verification Policy
 
@@ -195,65 +171,43 @@ If no checkpoint is needed, combine technical work and bookkeeping into one END 
 - Do not split the log into per-day files now.
 - Reconsider per-day logs at `CP-01` only if bookkeeping friction repeats.
 
-## 9. Stable State Semantics
+## C. Current State and Commit Self-Reference
 
-- Closed days remain closed unless explicitly reopened by recovery or review.
+Mutate Current State with read-modify-validate semantics:
+
 - Current execution position must be read from `roadmap-control/current-state.md`; this file must not hard-code a stale Week/Day execution position.
-- `W01-C-FOUND` remains `COMPETENCY_UNVERIFIED`.
-- A fresh AI-0 gate remains required.
 - Recovery status must be read from `roadmap-control/current-state.md`.
 - `Exact Next Action` must be read from `roadmap-control/current-state.md`.
 
-## 10. Pre-check / Baseline Diagnostic and Generated-Pack Authority
+```text
+READ complete state
+-> calculate minimum semantic delta
+-> preserve required schema and unrelated fields
+-> apply
+-> validate required fields
+-> cross-check related control claims
+```
 
-- Before a new topic, a pre-check is `DIAGNOSTIC / NON-SCORING` unless `SYSTEM_SPEC_V3`, the approved roadmap/day card, or an explicit gate contract makes it scored.
-- Correct answers are not required to complete a baseline. Honest answers such as "I don't know", "I haven't learned this", "I am unsure", or a clearly labeled prediction/guess are valid baseline data.
-- Record each starting point as `KNOWN`, `PARTIAL`, `INCORRECT`, or `UNKNOWN`, then proceed to theory. A baseline measures the starting point; it must not penalize missing knowledge that the current lesson is intended to teach.
-- End-of-day understanding checks and competency gates remain strict. "I still cannot explain it" after required learning may affect status when the authoritative contract says so; this clarification does not weaken competency verification.
-- If the mentor/system interrupts or mishandles the diagnostic, record `MENTOR/SYSTEM WORKFLOW VARIANCE`, not automatic learner non-compliance. Preserve the chronology; do not retroactively mark an uncompleted diagnostic complete.
-- `GENERATED PACK != SOURCE OF NEW POLICY`. A generated THEORY/TODO/SUBMIT pack may add exercises, examples, measurements, checklist structure, or optional diagnostics, but may not add a competency, gate, PASS definition, or learner-scored daily requirement.
-- Every generated `MUST` that can downgrade daily status must trace to `SYSTEM_SPEC_V3`, the approved roadmap/day card, an explicit gate contract, or an operational requirement strictly necessary to satisfy one of those sources.
-- If a generated pack exceeds its authority, the higher-authority criteria win and the discrepancy must be recorded and corrected.
-- Daily `GREEN/YELLOW/RED` is decided from authoritative daily criteria, not generated checkbox state. This rule does not excuse an omitted scored diagnostic or pre-work artifact when a higher-authority source explicitly requires it.
+For a record inside the same not-yet-created commit, write:
 
-## 11. Project Chat <-> Cowork Handoff
+```text
+Commit:
+SELF — containing commit
+```
 
-Anti-confusion contract:
+Resolve `SELF = <actual SHA>` in the report; do not create a backfill-only commit.
 
-1. `PLATFORM WORK MODE IS NOT COWORK`. A product/platform Work-mode handoff does
-   not satisfy this section, and rejection of Work mode must never be interpreted
-   as rejection of the roadmap's Cowork workflow.
-2. When Cowork is the chosen executor, the contract is the manual prompt: Project
-   Chat finishes reasoning/decision first, then outputs one complete
-   self-contained copy-paste Cowork prompt in the current Project chat. The
-   learner opens an independent Cowork chat and pastes it; Cowork executes; the
-   learner returns its report; Project Chat audits independently.
-3. If platform Work mode is offered or rejected while Cowork remains the correct
-   roadmap executor, immediately fall back to the manual Cowork prompt. Do not
-   silently continue as if Cowork was rejected or make the learner request the
-   prompt again.
-4. Cowork is not required for every `BOOT`. After BOOT/day analysis, however, if
-   Cowork is chosen to create or modify local starter files, TODOs, test
-   harnesses, multi-file repo setup, or other local artifact preparation,
-   Project Chat must proactively output the manual Cowork prompt.
-5. After the learner confirms `END DAY` and all missing Human-Input Gate fields
-   are resolved, if Cowork is required for local evidence/control edits, the
-   linter, commit/push, or repo-wide closure work, Project Chat must proactively
-   output the END DAY Cowork prompt. It must not ask the learner to edit routine
-   bookkeeping or run Git commands merely because Work mode was rejected, and
-   must not wait for the learner to request the prompt.
-6. If Cowork reports a blocker, the learner returns that report and Project Chat
-   decides the next step. Never assume Cowork succeeded.
+## D. Interrupted Transaction and Context-Handoff Mechanics
 
-- The roadmap Project chat is the reasoning, teaching, and decision environment. Cowork is an external execution environment opened by the learner in a separate independent chat.
-- The Project mentor finishes the analysis and decision before proposing Cowork. It must not invoke Cowork from the Project chat, leave the response unfinished, tell the learner to wait for Cowork, assume shared hidden context, or make the learner reconstruct a large request.
-- When Cowork is useful, the Project mentor produces one complete self-contained Cowork prompt. As relevant, it includes the local repo path, canonical remote, objective, read-first sources, known state, facts to preserve, likely files, safety constraints, validation commands, commit/push rules, and final-report requirements.
-- The learner manually opens an independent Cowork chat, points it to the repository, and pastes that prompt. Cowork performs the repository operations; the learner then returns its final report, commit SHA, build/test result, and relevant file list to the Project chat.
-- The Project mentor independently audits the returned work. A Cowork `PASS` report is not automatically authoritative.
-- Prefer Cowork for multi-file bookkeeping, repo-wide consistency audits, routine control-file/evidence metadata edits, END DAY closure, commit/push, and other repetitive operational work.
-- Cowork must not replace learner-owned competency work: no AI-0 gate answers, assessed closed-book answers, learner core implementation under independence evaluation, or scored project-defense responses.
-- If Cowork materially changes technical implementation, log the actual AI assistance under AI Integrity rules. Pure administrative help does not itself change competency, but provenance remains honest where recording is required.
-- This handoff minimizes learner bookkeeping while preserving learner ownership of technical competency.
+On interruption, inspect branch, HEAD, status, staged/unstaged/untracked paths,
+remote refs and last verified checkpoint. Preserve partial work. Resume only if
+transaction ownership and exact safe base are proven; otherwise stop/report.
+
+For an active context HANDOFF, collect workflow phase, current task, known repo
+state, latest build/test/failures, measurements, attempts, hypotheses, hints,
+highest AI level, exact implementation exposure, assessment integrity, blockers,
+resume point and transfer strategy. Do not auto-commit. Unknown provenance is
+`UNRESOLVED`; do not guess a lower AI level.
 
 ## 12. Confirmed Defect -> Retroactive Impact Sweep
 
@@ -296,3 +250,19 @@ Combine:
 2. a human semantic audit of evidence meaning, provenance, competency boundaries, carry-over, progression, and any warning.
 
 Do not re-grade technical competency from this matrix and do not rerun every historical technical test by default. A technical rerun is required only when source/tests changed, evidence is stale or contradictory, an objective artifact concern exists, or a review/gate contract requires it. Record the exact scope, findings, and any bounded follow-up concisely enough to remain within the existing CP-01 review timebox.
+
+## E. Cowork Return Report
+
+Return result, expected/actual base SHAs, branch, commit, push, explicit main
+protection, exact files/rename, versions, architecture summary, preserved state,
+validation, unexpected findings, out-of-scope dependencies, final worktree and
+remote SHAs. Project Chat independently verifies the report.
+
+- When Cowork is useful, the Project mentor produces one complete self-contained Cowork prompt. As relevant, it includes the local repo path, canonical remote, objective, read-first sources, known state, facts to preserve, likely files, safety constraints, validation commands, commit/push rules, and final-report requirements.
+- The learner manually opens an independent Cowork chat, points it to the repository, and pastes that prompt. Cowork performs the repository operations; the learner then returns its final report, commit SHA, build/test result, and relevant file list to the Project chat.
+- The Project mentor independently audits the returned work. A Cowork `PASS` report is not automatically authoritative.
+- Prefer Cowork for multi-file bookkeeping, repo-wide consistency audits, routine control-file/evidence metadata edits, END DAY closure, commit/push, and other repetitive operational work.
+- Cowork must not replace learner-owned competency work: no AI-0 gate answers, assessed closed-book answers, learner core implementation under independence evaluation, or scored project-defense responses.
+- If Cowork materially changes technical implementation, log the actual AI assistance under AI Integrity rules. Pure administrative help does not itself change competency, but provenance remains honest where recording is required.
+
+This runbook is mechanical HOW only and must not become a second execution engine.

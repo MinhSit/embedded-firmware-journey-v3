@@ -1,13 +1,13 @@
 # ROADMAP REVIEW LOG — EMBEDDED/FIRMWARE ROADMAP V3.1
 
 **Document ID:** `ROADMAP_REVIEW_LOG`
-**Version:** `1.0.6`
+**Version:** `1.1.0`
 **Status:** `ACTIVE REVIEW LOG — NON-AUTHORITATIVE`
 **Created:** `2026-08-09`
 **Timezone:** `Asia/Ho_Chi_Minh`
 **Reviewed roadmap:** `EMBEDDED_ROADMAP_V3.1.docx`
 **System authority:** `SYSTEM_SPEC_V3.md 3.0.0`
-**Execution authority:** `MASTER_PROMPT_V3.md 3.0.3`
+**Execution authority:** `MASTER_PROMPT_V3.md 3.1.0 — CANDIDATE / ACTIVATION PENDING`
 **Intended repo path:** `docs/system/ROADMAP_REVIEW_LOG.md`
 **Canonical live repo:** `https://github.com/MinhSit/embedded-firmware-journey-v3`
 
@@ -263,7 +263,8 @@ Bookkeeping:
 - logs/evidence hữu ích hay bureaucracy?
 
 Week Consistency Sweep:
-- follow `roadmap-control/operating-rules.md` Section 13
+- follow `MASTER_PROMPT_V3.md` Section `3A.13` and the mechanical checklist in
+  `roadmap-control/execution-runbook.md`
 - cover every Week 1 CLOSED day with closure-linter output + human semantic audit
 - record PASS/WARN/FAIL/N/A without re-grading technical competency
 ```
@@ -500,6 +501,22 @@ Các tín hiệu đó chỉ được mở `HYPOTHESIS`.
 ---
 # 11. CHANGE LEVELS VÀ REACTION CHAIN
 
+Trước khi chọn Level, bắt buộc review bốn impact dimensions độc lập:
+
+```text
+Higher policy / curriculum?
+Execution-engine behavior?
+Learner-facing workflow?
+Persistent schema / evidence?
+```
+
+Rules:
+
+- execution-engine behavior đổi => `MASTER_PROMPT_V3.md` impact phải được đánh giá;
+- learner-facing workflow đổi => `HOW_TO_USE_ROADMAP_WITH_AI.docx` impact phải được đánh giá;
+- `không đổi curriculum` không được dùng để kết luận `Master Prompt: no`;
+- không invent Level E/F; bốn dimensions bổ sung cho Level A-D, không thay chúng.
+
 ## Level A — Operational Adjustment
 Ví dụ:
 ```text
@@ -619,6 +636,12 @@ Health/load:
 
 ## Proposed minimum change
 
+## Impact Surface
+Higher policy / curriculum?:
+Execution-engine behavior?:
+Learner-facing workflow?:
+Persistent schema / evidence?:
+
 ## Files affected
 [ ] SYSTEM_SPEC_V3.md
 [ ] EMBEDDED_ROADMAP_V3.1.docx
@@ -699,6 +722,11 @@ C — roadmap revision
 ## Benefit
 ## Critical-path impact
 ## Competency impact
+## Impact Surface
+Higher policy / curriculum?:
+Execution-engine behavior?:
+Learner-facing workflow?:
+Persistent schema / evidence?:
 ## Files affected
 ## Decision
 ## Verification after change
@@ -1540,6 +1568,99 @@ Execution impact:   NONE — W01D05 remains NEXT and is not started here
 Next action impact: NONE — Exact Next Action remains BOOT
 ```
 
+## RR-016 — Execution-engine architecture drift and lifecycle consolidation
+
+Status: `APPROVED — CANDIDATE IMPLEMENTED / ACTIVATION PENDING`
+Severity: `R3`
+Opened: `2026-08-13`
+Target: `OWNER ACTIVATION REVIEW AFTER INDEPENDENT PROJECT CHAT AUDIT`
+Owner approval: `2026-08-13 — APPROVE MIGRATION D`
+
+### Concern and confirmed root problem
+
+`SYSTEM_SPEC_V3` defines `MASTER_PROMPT_V3` as the roadmap execution engine.
+During early Week 1 operation, repeated execution-critical behavior accumulated
+in the lower `roadmap-control/operating-rules.md` extension instead of being
+consolidated in that engine.
+
+Confirmed contributing defects:
+
+- change classification under-recognized execution-engine impact because
+  "no curriculum change" was often treated as "no Master Prompt impact";
+- W01D04 exposed product Work-mode versus roadmap Cowork routing failure even
+  though the lower extension contained relevant rules;
+- command context hydration could depend on learner remembering `BOOT`;
+- day lifecycle, Day Contract entry, HANDOFF, assessment firewall, managed
+  transaction, MASTER CHECK and week-transition order were underspecified;
+- learner-facing handbook workflow retained obsolete END DAY and executor
+  routing guidance.
+
+No confirmed false `COMPETENCY_PASS` or contradiction with `SYSTEM_SPEC_V3` was
+found. W01D01-W01D04 technical artifacts are not reopened.
+
+### Approved Candidate D solution
+
+- Consolidate canonical orchestration in `MASTER_PROMPT_V3 3.1.0`: universal
+  stateful-command guard; five-state day lifecycle; Day Contract; five operation
+  classes; AI-0 firewall; generated-pack authority; actor/executor model;
+  context-only HANDOFF; managed repository transaction; END DAY/commit/state
+  invariants; MASTER CHECK; week-close/recovery ordering; audit/review/correction
+  separation; governing-source handshake; impact surface; workflow acceptance
+  tests.
+- Rename `roadmap-control/operating-rules.md` to
+  `roadmap-control/execution-runbook.md` with Git history preservation.
+- Make the runbook `NON-AUTHORITATIVE` mechanical HOW and remove the concept
+  `ACTIVE OPERATIONAL LAYER`; no compatibility stub remains at the old path.
+- Update Current State only for candidate future-state version/runbook metadata.
+- Update the learner handbook to the 3.1 workflow without turning it into a
+  large state-machine lecture.
+
+### Impact Surface
+
+```text
+Higher policy / curriculum?: NO — System Spec and Roadmap remain unchanged.
+Execution-engine behavior?: YES — Master Prompt consolidation is the core change.
+Learner-facing workflow?: YES — Handbook update required.
+Persistent schema / evidence?: METADATA ONLY — no log/ledger/evidence schema change.
+```
+
+### Files affected
+
+```text
+docs/system/MASTER_PROMPT_V3.md
+docs/system/ROADMAP_REVIEW_LOG.md
+docs/system/HOW_TO_USE_ROADMAP_WITH_AI.docx
+roadmap-control/current-state.md
+roadmap-control/operating-rules.md -> roadmap-control/execution-runbook.md
+```
+
+No other file is authorized by this candidate transaction.
+
+### Preserved state and semantics
+
+```text
+W01D04:             CLOSED / GREEN
+Artifact:           ARTIFACT_PASS; strict build PASS; 34/34 host tests PASS
+W01D05:             NOT STARTED / NEXT
+Competency:         W01-C-FOUND = COMPETENCY_UNVERIFIED
+Last competency:    NONE UNDER V3
+Week 1 AI-0 gate:   REQUIRED / NOT YET ATTEMPTED
+Schedule variance:  0 days / ON SCHEDULE
+Recovery:           NOT ACTIVE
+Technical history:  W01D01-W01D04 not reopened or rewritten
+AI provenance:      unchanged
+Curriculum/gates:   unchanged
+```
+
+### Candidate verification and activation boundary
+
+Candidate implementation requires full mechanical validation, independent
+Project Chat audit and separate owner activation approval before canonical
+activation. Candidate branch creation, commit or push is not activation.
+
+RR-016 is deliberately not `CLOSED`. Post-activation verification and any
+required defect-specific impact disposition remain pending.
+
 ---
 # 17. BASELINE REVIEW — PRE-EXECUTION
 
@@ -1973,6 +2094,22 @@ Operational workflow correction only. NONE to curriculum, gates, competency,
 PASS, AI-integrity, evidence, schedule or recovery semantics.
 ```
 
+# 23.7 VERSION NOTE — 1.1.0
+
+```text
+Change:
+Open RR-016 and record owner-approved Candidate D implementation: consolidate
+execution-engine architecture in MASTER_PROMPT_V3 3.1.0, retire the active
+operational-layer concept, rename the lower file to a non-authoritative execution
+runbook, update the learner handbook, and harden change Impact Surface review.
+
+Behavior impact:
+Execution orchestration and learner workflow are clarified/consolidated. NONE to
+System Spec, roadmap curriculum, mandatory competencies, gates, deadlines,
+testing ladder, evidence admissibility, AI-level definitions or PASS semantics.
+Candidate implementation is not canonical activation.
+```
+
 ---
 
 # 24. FINAL RULE
@@ -1993,3 +2130,4 @@ Default giữa các checkpoint:
 **Last completed formal review:** `RV-001 — CP-00 Sprint 0 Exit — 09/08/2026`
 **Next formal review:** `CP-01 — End of Week 1 — 16/08/2026`
 **Early exception:** `R3/R4 structural/system defect`
+**Active system review:** `RR-016 — APPROVED — CANDIDATE IMPLEMENTED / ACTIVATION PENDING`

@@ -1,7 +1,7 @@
 # CURRENT STATE V3 — EMBEDDED/FIRMWARE ROADMAP
 
 **Document ID:** `CURRENT_STATE_V3`
-**Version:** `3.0.17`
+**Version:** `3.0.18`
 **State type:** Operational snapshot — describes reality and creates no new policy
 **Generated at:** `2026-08-13 16:16 +07:00`
 **Timezone:** `Asia/Ho_Chi_Minh`
@@ -13,9 +13,9 @@
 
 - **System Spec version:** `SYSTEM_SPEC_V3 3.0.0`
 - **Roadmap version:** `EMBEDDED_ROADMAP_V3.1 3.1.0`
-- **Master Prompt version:** `MASTER_PROMPT_V3 3.0.3`
-- **Current State version:** `3.0.17`
-- **Active operational layer:** `roadmap-control/operating-rules.md`
+- **Master Prompt version:** `MASTER_PROMPT_V3 3.1.0`
+- **Current State version:** `3.0.18`
+- **Implementation runbook:** `roadmap-control/execution-runbook.md` — `NON-AUTHORITATIVE`
 
 If this file conflicts with a higher-authority source, the higher-authority source wins.
 
@@ -89,7 +89,7 @@ If this file conflicts with a higher-authority source, the higher-authority sour
 - **Exact Next Action:** `BOOT`
 - **Files/links to inspect first:**
   - `roadmap-control/current-state.md`
-  - `roadmap-control/operating-rules.md`
+  - `roadmap-control/execution-runbook.md`
   - `docs/system/ROADMAP_REVIEW_LOG.md`
   - `roadmap-control/competency-ledger.md`
   - `roadmap-control/ai-usage-log.md`
