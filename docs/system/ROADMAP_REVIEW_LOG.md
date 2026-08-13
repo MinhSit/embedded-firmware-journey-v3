@@ -1692,6 +1692,70 @@ remains `NOT STARTED / NEXT`, `W01-C-FOUND` remains
 
 RR-016 is `CLOSED` after canonical promotion and post-promotion verification.
 
+## RR-017 — Executor consent UX and portable executor fallback
+
+Status: `CLOSED`
+Severity: `R1`
+Opened: `2026-08-14`
+Closed: `2026-08-14`
+Target: `COMPLETED — CANONICAL ACTIVATION`
+Owner approval: `2026-08-14 — owner explicitly approved fixing these workflow defects`
+
+### Concern and confirmed root problem
+
+Platform Work-mode popup rejection could be misinterpreted as rejection of roadmap
+executor. Learner-facing consent semantics for executor routing were incomplete.
+The system was too product-specific (Cowork-only), without acknowledging
+Antigravity as fallback. MASTER CHECK external-inspection boundary lacked
+clarification when an external executor assists. E30–E34 acceptance tests were
+missing.
+
+Confirmed defects:
+- Missing explicit opt-in UX sequence (5-step consent)
+- Missing portable Antigravity fallback
+- Missing REPOSITORY EXECUTOR concept
+- Underspecified MASTER CHECK read-only inspection boundaries
+
+### Approved Candidate solution
+
+- Master Prompt: Add explicit opt-in UX sequence, REPOSITORY EXECUTOR abstraction,
+  Antigravity fallback, external READ-ONLY inspection for MASTER CHECK, and
+  E30-E34 acceptance tests.
+- Execution runbook: Add explicit opt-in sequence, fallback, and portability rules.
+- Handbook (DOCX): Update Section 13 to clarify explicit opt-in, Antigravity,
+  and popup rejection boundaries.
+- No curriculum, gate, AI-level, PASS semantics, or evidence schema changed.
+
+### Impact Surface
+
+```text
+Higher policy / curriculum?: NO — System Spec and Roadmap remain unchanged.
+Execution-engine behavior?: YES — Master Prompt behavior hardened.
+Learner-facing workflow?: YES — Handbook updated for explicit consent.
+Persistent schema / evidence?: NO.
+```
+
+### Files affected
+
+```text
+docs/system/MASTER_PROMPT_V3.md
+docs/system/ROADMAP_REVIEW_LOG.md
+docs/system/HOW_TO_USE_ROADMAP_WITH_AI.docx
+roadmap-control/execution-runbook.md
+```
+
+### Retrospective sweep results
+
+Defect affected routing UX, not technical evidence.
+W01D01–W01D04 technical artifacts/competency claims are unchanged.
+CLOSED-day historical statuses require no rewriting.
+No false COMPETENCY_PASS.
+
+### Canonical activation closure
+
+Commit: `SELF — containing commit`
+System Spec and Roadmap remain unchanged. W01D01-W01D04 remains CLOSED/GREEN.
+
 ---
 # 17. BASELINE REVIEW — PRE-EXECUTION
 
@@ -2153,6 +2217,19 @@ Behavior impact:
 Activation/finalization metadata only. NONE to System Spec, Roadmap, learner
 technical artifacts/history, competency, gates, AI provenance, recovery,
 schedule or PASS semantics.
+```
+
+# 23.9 VERSION NOTE — 1.2.0
+
+```text
+Change:
+Record RR-017 closed for executor consent UX and portable executor fallback. Add
+REPOSITORY EXECUTOR concept, Antigravity fallback, explicit opt-in consent
+sequence, and READ-ONLY MASTER CHECK inspection rules across documents.
+
+Behavior impact:
+Operational workflow hardened. NONE to System Spec, roadmap curriculum, gates,
+competency, AI integrity, evidence admissibility, or PASS semantics.
 ```
 
 ---

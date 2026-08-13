@@ -1,7 +1,7 @@
 # EXECUTION RUNBOOK
 
 **Document ID:** `EXECUTION_RUNBOOK`
-**Version:** `1.0.0`
+**Version:** `1.1.0`
 **Status:** `ACTIVE IMPLEMENTATION RUNBOOK — NON-AUTHORITATIVE`
 **Owner approval:** `2026-08-13 — APPROVE MIGRATION D`
 
@@ -58,6 +58,12 @@ STOP / REPORT
 ```
 
 Do not silently rebase, reset, force, overwrite, merge or discard work.
+
+Executor prompts must be self-contained and product-agnostic enough to paste
+unchanged into either Cowork or Antigravity, following `MASTER_PROMPT_V3`
+Section 3A.7.2 portability requirements. If Cowork is unavailable or
+quota-exhausted, do not cancel the roadmap operation automatically; offer
+Antigravity as a learner-selected fallback and reuse the same executor contract.
 
 ## 1.2 Start-Day Focused-Time Plan
 
@@ -255,18 +261,70 @@ Combine:
 
 Do not re-grade technical competency from this matrix and do not rerun every historical technical test by default. A technical rerun is required only when source/tests changed, evidence is stale or contradictory, an objective artifact concern exists, or a review/gate contract requires it. Record the exact scope, findings, and any bounded follow-up concisely enough to remain within the existing CP-01 review timebox.
 
-## E. Cowork Return Report
+## E. Repository Executor Mechanics
+
+The `REPOSITORY EXECUTOR` concept (Master Prompt Section 3A.7) defines an
+external bounded repository-operation actor operating from a self-contained
+executor prompt. Cowork is the preferred/default implementation; Antigravity is
+the approved learner-selected fallback.
+
+### E.1 Explicit Opt-In Sequence
+
+1. Project Chat finishes its substantive reply first.
+2. Project Chat identifies that an external repository executor is useful.
+3. Project Chat explains purpose, scope and why executor is appropriate.
+4. Project Chat asks one explicit consent question.
+5. Only after explicit learner approval, Project Chat emits the self-contained
+   executor prompt.
+6. Learner manually opens an independent Cowork/Antigravity context and pastes
+   the prompt.
+7. Executor performs the bounded operation.
+8. Learner returns the executor report.
+9. Project Chat independently verifies the result.
+
+Platform Work-mode popup rejection does NOT count as executor rejection.
+
+### E.2 Return Report
 
 Return result, expected/actual base SHAs, branch, commit, push, explicit main
 protection, exact files/rename, versions, architecture summary, preserved state,
 validation, unexpected findings, out-of-scope dependencies, final worktree and
 remote SHAs. Project Chat independently verifies the report.
 
-- When Cowork is useful, the Project mentor produces one complete self-contained Cowork prompt. As relevant, it includes the local repo path, canonical remote, objective, read-first sources, known state, facts to preserve, likely files, safety constraints, validation commands, commit/push rules, and final-report requirements.
-- The learner manually opens an independent Cowork chat, points it to the repository, and pastes that prompt. Cowork performs the repository operations; the learner then returns its final report, commit SHA, build/test result, and relevant file list to the Project chat.
-- The Project mentor independently audits the returned work. A Cowork `PASS` report is not automatically authoritative.
-- Prefer Cowork for multi-file bookkeeping, repo-wide consistency audits, routine control-file/evidence metadata edits, END DAY closure, commit/push, and other repetitive operational work.
-- Cowork must not replace learner-owned competency work: no AI-0 gate answers, assessed closed-book answers, learner core implementation under independence evaluation, or scored project-defense responses.
-- If Cowork materially changes technical implementation, log the actual AI assistance under AI Integrity rules. Pure administrative help does not itself change competency, but provenance remains honest where recording is required.
+- When executor is useful, the Project mentor produces one complete self-contained
+  executor prompt. As relevant, it includes the local repo path, canonical remote,
+  objective, read-first sources, known state, facts to preserve, likely files,
+  safety constraints, validation commands, commit/push rules, STOP/REPORT
+  conditions, and final-report requirements.
+- The learner manually opens an independent Cowork/Antigravity context, points it
+  to the repository, and pastes that prompt. The executor performs the repository
+  operations; the learner then returns its final report, commit SHA, build/test
+  result, and relevant file list to the Project chat.
+- The Project mentor independently audits the returned work. An executor `PASS`
+  report is not automatically authoritative.
+- Prefer executor for multi-file bookkeeping, repo-wide consistency audits,
+  routine control-file/evidence metadata edits, END DAY closure, commit/push,
+  and other repetitive operational work.
+- Executor must not replace learner-owned competency work: no AI-0 gate answers,
+  assessed closed-book answers, learner core implementation under independence
+  evaluation, or scored project-defense responses.
+- If executor materially changes technical implementation, log the actual AI
+  assistance under AI Integrity rules. Pure administrative help does not itself
+  change competency, but provenance remains honest where recording is required.
+
+### E.3 Executor Failure
+
+Executor failure, quota exhaustion, unexpected state, or partial execution:
+never assume success; preserve partial work; return exact report; Project Chat
+decides next action. If Cowork fails and learner selects Antigravity, reuse the
+same executor contract.
+
+### E.4 MASTER CHECK External Inspection
+
+When MASTER CHECK needs local-repository inspection unavailable to Project Chat,
+the executor prompt must be `READ_ONLY_AUDIT`. The executor must not edit files,
+stage, commit, push, repair findings, or award competency. Observations return
+to Project Chat for independent evaluation. Correction requires a separate
+transaction with fresh executor consent.
 
 This runbook is mechanical HOW only and must not become a second execution engine.
