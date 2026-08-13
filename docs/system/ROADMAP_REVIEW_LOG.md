@@ -529,7 +529,8 @@ small same-week reorder
 Impact:
 ```text
 Roadmap:      usually no change
-MasterPrompt: no
+MasterPrompt: usually no; MUST review if Impact Surface Execution-engine behavior = YES
+Handbook:     usually no; MUST review if Impact Surface Learner-facing workflow = YES
 CurrentState: only if execution changes
 ReviewLog:    optional note
 Risk:         LOW
@@ -1657,6 +1658,20 @@ Curriculum/gates:   unchanged
 Candidate implementation requires full mechanical validation, independent
 Project Chat audit and separate owner activation approval before canonical
 activation. Candidate branch creation, commit or push is not activation.
+
+### Candidate audit correction — F01–F04
+
+Independent Project Chat audit found four bounded pre-activation gaps. Candidate
+correction makes Day Contract availability mandatory before normal Focus,
+conditions Level A Master Prompt/Handbook review on the Impact Surface, hydrates
+fresh-account `STATUS` from live state without mutation, and adds valid entry
+preconditions for `RETEST` and `RECOVERY`.
+
+Commit: `SELF — containing commit`
+
+This correction does not activate Candidate D, close RR-016, alter learner
+state, or change curriculum, gates, evidence, AI integrity, competency or PASS
+semantics.
 
 RR-016 is deliberately not `CLOSED`. Post-activation verification and any
 required defect-specific impact disposition remain pending.

@@ -206,6 +206,14 @@ STATEFUL COMMAND
   -> EXECUTE / BLOCK / REDIRECT
 ```
 
+Mọi command/operation phụ thuộc state — kể cả read-only `STATUS` — phải chạy
+`ENSURE_CONTEXT_READY` với mức live-source hydration đủ cho câu trả lời trước khi
+answer/execute/block/redirect. Trong fresh account/chat, `STATUS` phải hydrate
+governing sources và Current State canonical đang live; không yêu cầu learner kể
+lại repo state đã có thể đọc. Hydration này read-only, không được mutate state.
+`BOOT STATUS ONLY` vẫn read-only. Câu hỏi thông thường không phụ thuộc roadmap
+state không phải load toàn bộ source stack.
+
 Các command stateful gồm ít nhất `START DAY`, `END DAY`, `GATE`, `RETEST`,
 `RECOVERY`, `WEEKLY REVIEW`, `HANDOFF`, `MASTER CHECK` và mọi command có thể đổi
 execution, assessment, recovery, review hoặc repository state.
@@ -2116,6 +2124,23 @@ NEXT ACTION:
 
 # 39. RETEST RULE
 
+`RETEST` chỉ applicable khi entry context xác định được:
+
+1. prior assessment/gate identity;
+2. prior result cần retest: `FAIL`, `INVALID / RETEST REQUIRED`, hoặc một
+   authoritative retest requirement;
+3. targeted competencies;
+4. freshness/new-variant contract.
+
+Nếu không có prior context hợp lệ, trả:
+
+```text
+RETEST NOT APPLICABLE — no valid prior failed/invalid/retest-required assessment found
+```
+
+Sau đó redirect tới actual next action. Không tạo assessment giả, không mutate
+competency status và không award/downgrade competency.
+
 Retest:
 
 - fresh input;
@@ -2544,6 +2569,21 @@ Lệnh:
 ```text
 RECOVERY
 ```
+
+Typing `RECOVERY` không tự activate Recovery Mode. Trước tiên evaluate các
+authoritative trigger của System Spec: weekly gate fail, two consecutive RED
+days, material schedule variance, P0 blocker overrun, invalidated competency,
+hoặc health/load reduction.
+
+Nếu không có trigger hợp lệ, trả:
+
+```text
+RECOVERY NOT TRIGGERED — no authoritative Recovery trigger is currently satisfied
+```
+
+và giữ state không đổi. Nếu có trigger, tạo targeted Recovery plan theo failed
+competency/blocker/variance thực tế. Entry guard này không làm yếu automatic
+targeted Recovery sau mandatory gate `FAIL`.
 
 Trigger khi:
 
@@ -3590,6 +3630,11 @@ Nếu topic thuộc current day:
 
 # 89. COMMAND: STATUS
 
+`STATUS` là state-dependent read-only command. Kể cả trong fresh account/chat và
+không có prior `BOOT`, trước khi trả lời phải chạy `ENSURE_CONTEXT_READY`, đọc
+live governing/current sources đủ để xuất canonical state, không yêu cầu learner
+tự reconstruct repo state và không mutate repository/session state.
+
 Output tối đa concise:
 
 ```text
@@ -4099,6 +4144,24 @@ approved activation transaction mới đổi canonical main; audit phải nói
 Expected: technical artifact/day/gate result được chấm đúng contract; ordinary
 FAIL đi targeted recovery khi trigger phù hợp, không tự mở system migration,
 không rewrite curriculum và không biến MASTER CHECK thành correction.
+
+### E27 — Fresh chat STATUS
+
+Expected: `STATUS` tự chạy `ENSURE_CONTEXT_READY`, hydrate live governing/current
+sources và trả canonical state; read-only, không mutation, không yêu cầu prior
+`BOOT`, không bắt learner reconstruct repo state.
+
+### E28 — RETEST without valid prior context
+
+Expected: không có prior failed/invalid/retest-required assessment hợp lệ =>
+`RETEST NOT APPLICABLE — no valid prior failed/invalid/retest-required assessment found`;
+redirect actual next action và không ảnh hưởng competency.
+
+### E29 — RECOVERY command without trigger
+
+Expected: không có authoritative trigger => `RECOVERY NOT TRIGGERED — no
+authoritative Recovery trigger is currently satisfied`; giữ state không đổi.
+Mandatory AI-0 gate FAIL vẫn tự activate targeted Recovery.
 
 ---
 

@@ -14,9 +14,10 @@ authority. If a conflict exists, the higher-authority source wins.
 
 ## A. Source and Context Preflight
 
-Before a stateful operation, load the canonical System Spec, Roadmap, Master
-Prompt, Current State, this runbook and the relevant review/log/evidence files.
-Validate governing source/version when required by the Master Prompt.
+Before a stateful operation or state-dependent response, load the canonical
+System Spec, Roadmap, Master Prompt, Current State, this runbook and the relevant
+review/log/evidence files. Validate governing source/version when required by
+the Master Prompt.
 
 For `ENSURE_CONTEXT_READY`:
 
@@ -27,7 +28,8 @@ For `ENSURE_CONTEXT_READY`:
 5. continue to legality/dependency checks only when context is sufficient.
 
 `BOOT` is the normal learner-facing start/resume command, but this preflight is
-also invoked implicitly for other stateful commands.
+also invoked implicitly for other stateful commands and state-dependent
+read-only commands such as `STATUS`.
 
 ## B. Managed Repository Transaction Preflight
 
@@ -59,25 +61,27 @@ Do not silently rebase, reset, force, overwrite, merge or discard work.
 
 ## 1.2 Start-Day Focused-Time Plan
 
-Before the Focus Phase begins, Project Chat must establish and state the day's
-`Planned Focused Time`; it must also establish the learner's `Available Focused
-Time` when that value is required to choose a realistic plan and is not already
-known.
+Before normal `FOCUS_ACTIVE`, Project Chat must establish and state all three
+focused-time fields in the Day Contract:
 
-1. Use an explicit numeric daily plan from the approved Roadmap/day card when it
-   exists.
-2. If the Roadmap provides only a standard daily load or range, Project Chat may
-   use it as the initial planning baseline, but must label it `ROADMAP-DERIVED`,
-   not learner-provided availability.
-3. If learner availability is necessary to choose the final plan and is still
-   unknown, ask exactly one human-only availability question before focus work.
-4. State the final `Planned Focused Time` explicitly in chat before normal focus
-   work. Do not wait until `END DAY` to discover it is missing, infer learner
-   availability from timestamps/chat duration, or create fake precision.
-5. Planned hours are workload planning, not a quota. Finishing earlier does not
-   downgrade `GREEN` when authoritative stop conditions are satisfied, and a
-   time plan never overrides proactive `END DAY READY` or the authoritative
-   daily stop condition.
+1. `Roadmap Standard Load` — the source-derived standard load or day-card load.
+2. `Available Focused Time` — the learner-specific human input for this day.
+3. `Planned Focused Time` — the actual plan chosen after comparing the Day
+   Contract with learner availability.
+
+Use an explicit numeric daily load from the approved Roadmap/day card when it
+exists. If the Roadmap provides only a standard daily load or range, record it
+as `ROADMAP-DERIVED`. Never substitute that load for learner availability.
+
+If trusted current context does not already contain learner availability for
+this day, ask exactly one minimum human-only availability question and obtain
+the value before normal Focus. Do not wait until `END DAY`, infer availability
+from timestamps/chat duration/history, or create fake precision.
+
+State the final `Planned Focused Time` explicitly before normal Focus. Planned
+hours are workload planning, not a quota. Finishing earlier does not downgrade
+`GREEN` when authoritative stop conditions are satisfied, and a time plan never
+overrides proactive `END DAY READY` or the authoritative daily stop condition.
 
 Record the complete Day Contract in temporary session notes, including Roadmap
 Standard Load, Available Focused Time, Planned Focused Time and the authority
