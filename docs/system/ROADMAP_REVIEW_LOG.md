@@ -1,13 +1,13 @@
 # ROADMAP REVIEW LOG — EMBEDDED/FIRMWARE ROADMAP V3.1
 
 **Document ID:** `ROADMAP_REVIEW_LOG`
-**Version:** `1.1.0`
+**Version:** `1.1.1`
 **Status:** `ACTIVE REVIEW LOG — NON-AUTHORITATIVE`
 **Created:** `2026-08-09`
 **Timezone:** `Asia/Ho_Chi_Minh`
 **Reviewed roadmap:** `EMBEDDED_ROADMAP_V3.1.docx`
 **System authority:** `SYSTEM_SPEC_V3.md 3.0.0`
-**Execution authority:** `MASTER_PROMPT_V3.md 3.1.0 — CANDIDATE / ACTIVATION PENDING`
+**Execution authority:** `MASTER_PROMPT_V3.md 3.1.0 — FROZEN BASELINE`
 **Intended repo path:** `docs/system/ROADMAP_REVIEW_LOG.md`
 **Canonical live repo:** `https://github.com/MinhSit/embedded-firmware-journey-v3`
 
@@ -1571,11 +1571,13 @@ Next action impact: NONE — Exact Next Action remains BOOT
 
 ## RR-016 — Execution-engine architecture drift and lifecycle consolidation
 
-Status: `APPROVED — CANDIDATE IMPLEMENTED / ACTIVATION PENDING`
+Status: `CLOSED`
 Severity: `R3`
 Opened: `2026-08-13`
-Target: `OWNER ACTIVATION REVIEW AFTER INDEPENDENT PROJECT CHAT AUDIT`
+Closed: `2026-08-13`
+Target: `COMPLETED — CANONICAL ACTIVATION`
 Owner approval: `2026-08-13 — APPROVE MIGRATION D`
+Activation approval: `2026-08-13 — owner explicitly approved activation after independent corrected-candidate audit`
 
 ### Concern and confirmed root problem
 
@@ -1655,9 +1657,10 @@ Curriculum/gates:   unchanged
 
 ### Candidate verification and activation boundary
 
-Candidate implementation requires full mechanical validation, independent
+Candidate implementation received full mechanical validation, independent
 Project Chat audit and separate owner activation approval before canonical
-activation. Candidate branch creation, commit or push is not activation.
+activation. Candidate branch creation and push alone were not treated as
+activation.
 
 ### Candidate audit correction — F01–F04
 
@@ -1669,12 +1672,25 @@ preconditions for `RETEST` and `RECOVERY`.
 
 Commit: `SELF — containing commit`
 
-This correction does not activate Candidate D, close RR-016, alter learner
-state, or change curriculum, gates, evidence, AI integrity, competency or PASS
-semantics.
+This correction did not itself activate Candidate D, alter learner state, or
+change curriculum, gates, evidence, AI integrity, competency or PASS semantics.
 
-RR-016 is deliberately not `CLOSED`. Post-activation verification and any
-required defect-specific impact disposition remain pending.
+### Canonical activation closure
+
+```text
+Canonical promotion SHA: 92e7373de666beb5b20a242a26fd0e2b9e823b2b
+Promotion method:         true fast-forward; no merge commit
+Post-promotion verification: PASS — 18/18 migrated invariants; closure linter 25 PASS / 0 WARN / 0 FAIL
+Finalization commit:      SELF — containing activation-finalization commit
+```
+
+System Spec and Roadmap remain unchanged. W01D01–W01D04 technical artifacts and
+historical evidence remain unchanged. W01D04 remains `CLOSED / GREEN`, W01D05
+remains `NOT STARTED / NEXT`, `W01-C-FOUND` remains
+`COMPETENCY_UNVERIFIED`, the Week 1 AI-0 gate remains required, Recovery remains
+`NOT ACTIVE`, and schedule variance remains `0`.
+
+RR-016 is `CLOSED` after canonical promotion and post-promotion verification.
 
 ---
 # 17. BASELINE REVIEW — PRE-EXECUTION
@@ -2125,6 +2141,20 @@ testing ladder, evidence admissibility, AI-level definitions or PASS semantics.
 Candidate implementation is not canonical activation.
 ```
 
+# 23.8 VERSION NOTE — 1.1.1
+
+```text
+Change:
+Close RR-016 after owner-approved fast-forward promotion of corrected Candidate
+D, successful post-promotion rehydration and 18-invariant smoke verification,
+then finalize MASTER_PROMPT_V3 3.1.0 as the canonical frozen baseline.
+
+Behavior impact:
+Activation/finalization metadata only. NONE to System Spec, Roadmap, learner
+technical artifacts/history, competency, gates, AI provenance, recovery,
+schedule or PASS semantics.
+```
+
 ---
 
 # 24. FINAL RULE
@@ -2145,4 +2175,4 @@ Default giữa các checkpoint:
 **Last completed formal review:** `RV-001 — CP-00 Sprint 0 Exit — 09/08/2026`
 **Next formal review:** `CP-01 — End of Week 1 — 16/08/2026`
 **Early exception:** `R3/R4 structural/system defect`
-**Active system review:** `RR-016 — APPROVED — CANDIDATE IMPLEMENTED / ACTIVATION PENDING`
+**Latest system review:** `RR-016 — CLOSED — MASTER_PROMPT_V3 3.1.0 ACTIVATED / FINALIZED / CANONICAL`

@@ -2,7 +2,7 @@
 
 **Document ID:** `MASTER_PROMPT_V3`
 **Version:** `3.1.0`
-**Status:** `CANDIDATE — ACTIVATION PENDING`
+**Status:** `FROZEN BASELINE`
 **Applies from:** `2026-08-09`
 **Timezone:** `Asia/Ho_Chi_Minh`
 **System authority:** `SYSTEM_SPEC_V3.md` version `3.0.0`
@@ -4198,10 +4198,10 @@ Trước operational response, tự kiểm:
 
 # 102. FREEZE DECLARATION
 
-Trong candidate branch này:
+Trên canonical `main`:
 
 ```text
-MASTER_PROMPT_V3 3.1.0 = CANDIDATE — ACTIVATION PENDING
+MASTER_PROMPT_V3 3.1.0 = FROZEN BASELINE
 ```
 
 Không rewrite Master Prompt vì:
@@ -4336,4 +4336,4 @@ Mục tiêu cuối cùng:
 
 ---
 
-**Candidate status:** `MASTER_PROMPT_V3 3.1.0 — CANDIDATE IMPLEMENTED / ACTIVATION PENDING`
+**Canonical status:** `MASTER_PROMPT_V3 3.1.0 — FROZEN BASELINE`
