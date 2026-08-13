@@ -1,0 +1,76 @@
+Date: 2026-08-13
+Week/Day: Week 01 / Day 04
+What: Closure verification for safe uint32_t bit set, clear, extract and update operations
+Relevant files: learning/week-01/day-04/bit_ops.c; learning/week-01/day-04/bit_ops.h; tests/host/test_bit_ops.c
+Artifact commit: closure commit; see repository history
+Hardware: N/A — host-only
+Toolchain: Host GCC 14.2.0 / C17
+
+Expected:
+- Strict build succeeds with -Wall -Wextra -Wpedantic -Werror.
+- Host test result is 34 tests, 0 failed.
+- Invalid operations return false and preserve caller-owned destinations.
+- Valid extract/update operations handle width 32 without an invalid shift and preserve non-target bits.
+
+Actual:
+- Strict build exited 0 with no warning or error.
+- All D04-T01 through D04-T34 passed; SUMMARY: 34 tests, 0 failed.
+- No unresolved technical failure was observed in the verified visible host suite.
+
+Assertion decision:
+- Runtime validation is used for all caller-controlled invalid inputs and remains active in release builds.
+- No assert was added because this small public API has no additional useful internal invariant after contract validation; a cosmetic assert would not improve the runtime contract.
+
+AI level: AI-3
+AI usage: Theory/clarification, hint-level guidance, pointer-versus-bit correction, a generic bit-mask syntax example, review/debug after meaningful learner attempts, UB/correctness reasoning, self-explanation feedback, and extra AND/OR practice. AI did not provide a complete bit_ops solution or conduct an AI-0 gate.
+Implementation code provided: NO complete or exact bit_ops solution; learner wrote the core implementations.
+Evidence class: E2 execution evidence plus E4 reproducibility metadata
+Competency claim: NONE — practice/artifact evidence only; W01-C-FOUND remains COMPETENCY_UNVERIFIED.
+Known limitations: This verifies the committed visible host-test contract, not every possible input combination or production portability. It is not fresh AI-0 E5 competency evidence.
+
+=== BUILD ===
+Command:
+gcc -std=c17 -Wall -Wextra -Wpedantic -Werror learning/week-01/day-04/bit_ops.c tests/host/test_bit_ops.c -Ilearning/week-01/day-04 -o tests/host/test_bit_ops.exe
+
+Build exit code: 0
+
+=== TEST ===
+Command: .\tests\host\test_bit_ops.exe
+
+PASS: D04-T01 set bit 0
+PASS: D04-T02 set bit 31
+PASS: D04-T03 set already-set bit
+PASS: D04-T04 reject set bit 32 and preserve value
+PASS: D04-T05 reject set NULL
+PASS: D04-T06 clear bit 0
+PASS: D04-T07 clear bit 31
+PASS: D04-T08 clear already-clear bit
+PASS: D04-T09 reject clear bit 32 and preserve value
+PASS: D04-T10 reject clear NULL
+PASS: D04-T11 extract single bit
+PASS: D04-T12 extract middle field
+PASS: D04-T13 extract field ending at bit 31
+PASS: D04-T14 extract width 32
+PASS: D04-T15 reject extract width 0 and preserve output
+PASS: D04-T16 reject extract lsb 32 and preserve output
+PASS: D04-T17 reject extract range crossing bit 31
+PASS: D04-T18 reject extract NULL output
+PASS: D04-T19 reject extract width 33 and preserve output
+PASS: D04-T20 extract bit 31
+PASS: D04-T21 reject extract width 32 with nonzero lsb
+PASS: D04-T22 update middle field
+PASS: D04-T23 update field at bit 0
+PASS: D04-T24 update field ending at bit 31
+PASS: D04-T25 update width 32
+PASS: D04-T26 update maximum fitting field value
+PASS: D04-T27 reject oversized field value and preserve word
+PASS: D04-T28 reject update width 0 and preserve word
+PASS: D04-T29 reject update range crossing bit 31
+PASS: D04-T30 reject update NULL
+PASS: D04-T31 update preserves non-target bits
+PASS: D04-T32 reject update lsb 32 and preserve word
+PASS: D04-T33 update bit 31
+PASS: D04-T34 reject update width 32 with nonzero lsb
+SUMMARY: 34 tests, 0 failed
+
+Test exit code: 0

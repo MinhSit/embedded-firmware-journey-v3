@@ -63,6 +63,9 @@ Artifact evidence:
 - W01D03 struct/alignment/endian practice: strict host build and 25/25 tests
   PASS; host layout/endian measurements recorded; bounded AI-4 code/syntax
   assistance and AI-assisted wording recorded.
+- W01D04 safe bit-operations practice: strict host build and 34/34 tests PASS;
+  invalid-input, unchanged-on-failure, full-width and field-isolation behavior
+  recorded; AI-3 review/debug after meaningful learner attempts.
 - These are artifact/practice evidence only. None is fresh AI-0 E5 evidence.
 
 Independent gate:
@@ -81,7 +84,7 @@ Retest condition:
 Complete Week 1 V3 and pass a fresh AI-0 gate.
 
 Notes:
-Do not promote pre-V3 or W01D01–W01D03 artifact/test results to competency
+Do not promote pre-V3 or W01D01–W01D04 artifact/test results to competency
 PASS. W01D03's interrupted generated pre-check remains a historical
 `MENTOR/SYSTEM WORKFLOW VARIANCE — NON-SCORING`; it is not why competency is
 unverified. `W01-C-FOUND` remains unverified because the fresh independent

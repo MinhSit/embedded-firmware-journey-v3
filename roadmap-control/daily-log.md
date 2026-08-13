@@ -602,3 +602,178 @@ Closure criteria:
 ### 12. Next Action
 
 BOOT
+
+---
+
+## 2026-08-13 — Week 01 / Day 04
+
+### 1. Planned Outcome
+
+Implement and explain a defensive `uint32_t` bit-operation API for set, clear,
+extract and update; avoid undefined shifts, preserve destinations on rejection,
+and save reproducible strict-build and host-test evidence.
+
+### 2. Actual Status
+
+GREEN — the authoritative W01D04 artifact, required execution evidence and
+practice-level closed-book explanation criteria were completed.
+
+### 3. Focused Time
+
+Planned: Not separately specified in the W01D04 roadmap card/day pack.
+Actual: ~5h — learner estimate
+
+### 4. Independent Work
+
+What I personally implemented, reasoned about, measured, or explained:
+
+- Learner independently wrote the core implementations for `bit_set_u32`,
+  `bit_clear_u32`, `bit_extract_u32` and `bit_update_u32`.
+- Learner removed the earlier explicit width-32 assignment branch from
+  `bit_update_u32`, rebuilt, and reran the complete visible host suite.
+- Learner practiced and explained shift-width UB, validation-before-mask use,
+  runtime validation versus `assert`, unsigned fixed-width operations,
+  unchanged-on-rejection behavior, non-target-bit preservation and the
+  `width == 32` boundary.
+- Initial partial explanations were corrected during tutoring. The final
+  explanation is practice evidence only, not independent E5 evidence.
+- Assertion decision: keep caller-controlled failures under runtime validation;
+  no useful additional internal invariant justified adding a cosmetic assert.
+
+### 5. AI Usage
+
+Highest AI level used: AI-3
+
+What AI helped with:
+- Short theory/clarification and hint-level guidance.
+- Explanation of a pointer-versus-bit mistake and a generic mask-syntax example.
+- Review/debug after meaningful learner attempts, including correctness and UB
+  reasoning.
+- Feedback on closed-book explanations and additional AND/OR mask practice.
+- END DAY audit, evidence metadata and routine bookkeeping.
+
+Files/functions materially assisted:
+- Review of learner-written `learning/week-01/day-04/bit_ops.c` after attempts.
+- W01D04 self-explanation feedback, evidence metadata and control bookkeeping.
+
+Competencies contaminated:
+- No complete bit-operations solution or AI-0 gate answer was provided.
+- W01D04 remains assisted learning/practice and is not independent competency
+  evidence; `W01-C-FOUND` remains `COMPETENCY_UNVERIFIED`.
+
+Independent retest required:
+- YES — fresh AI-0 Week 1 competency gate before any
+  `W01-C-FOUND — COMPETENCY_PASS` claim.
+
+### 6. Artifact Result
+
+Files changed:
+- `learning/week-01/day-04/TODO_W01_D04.md`
+- `learning/week-01/day-04/bit_ops.c`
+- `learning/week-01/day-04/bit_ops.h`
+- `tests/host/test_bit_ops.c`
+- `evidence/week-01/day-04/test_bit_ops.txt`
+
+Build command:
+`gcc -std=c17 -Wall -Wextra -Wpedantic -Werror learning/week-01/day-04/bit_ops.c tests/host/test_bit_ops.c -Ilearning/week-01/day-04 -o tests/host/test_bit_ops.exe`
+
+Build result:
+PASS — exit code 0, no warning/error under configured flags.
+
+Test command:
+`.\tests\host\test_bit_ops.exe`
+
+Test result:
+PASS — exit code 0; `SUMMARY: 34 tests, 0 failed`.
+
+### 7. Evidence
+
+Commit:
+- Closure commit; see repository history.
+
+Logs:
+- `evidence/week-01/day-04/test_bit_ops.txt` — tracked UTF-8 verification record
+  containing commands, expected/actual results, all 34 final test lines,
+  assertion decision, provenance and limitations.
+
+Captures:
+- None
+
+Reports:
+- None
+
+Video/demo:
+- None
+
+Other:
+- `tests/host/test_bit_ops.exe` is generated, ignored by `*.exe` policy and not
+  committed.
+
+### 8. Measurements
+
+Expected:
+- Strict C17 build succeeds with all configured warnings treated as errors.
+- All 34 visible host tests pass with zero failures.
+- Rejected calls preserve destinations; full-width and boundary operations
+  avoid invalid shifts; update preserves non-target bits.
+
+Observed:
+- Build exit code: 0.
+- Test exit code: 0.
+- Tests run: 34.
+- Tests failed: 0.
+- Result: PASS.
+
+Relevant values/registers/timing/errors:
+- No hardware/register/timing measurement was required for this host exercise.
+- Actual focused time: ~5h — learner estimate.
+- No unresolved final test ID.
+
+### 9. Understanding Check
+
+What I can explain without AI:
+- Shift counts equal to or greater than the promoted type width are undefined in
+  C, so ranges must be validated before a mask or shift is evaluated.
+- Runtime validation handles caller-controlled invalid inputs; `assert` is for
+  programmer/internal invariants and may be compiled out.
+- Unsigned fixed-width integers make width and bitwise behavior explicit.
+- Rejected operations preserve caller state by completing every failure check
+  before writing the destination.
+- A field mask clears/replaces only target bits, while the inverse mask keeps
+  non-target bits; AND uses 1 to keep and 0 to clear, OR uses 0 to keep and 1
+  to set.
+- `width == 32` requires deliberate control flow so no shift by 32 is evaluated.
+
+What I still cannot explain:
+- No unresolved concept blocker is recorded for this practice artifact.
+- Independent ownership of Week 1 C concepts remains unverified until a fresh
+  AI-0 gate.
+
+### 10. Defects / Failed Tests
+
+Defect/Test IDs:
+- None unresolved; final D04-T01 through D04-T34 all passed.
+
+Root cause known?:
+N/A — no final defect remains in the verified visible host-test contract.
+
+Current hypothesis:
+- Artifact behavior is correct under the verified host test contract.
+- Passing tests and corrected practice explanations do not establish competency.
+
+### 11. Carry-over
+
+Task:
+- NONE from the W01D04 artifact. W01D05 fixed-size ring buffer is the next
+  scheduled execution, not recovery carry-over.
+- The fresh Week 1 AI-0 gate remains a future requirement.
+
+Closure criteria:
+- W01D04 source/header/tests, reproducible evidence and control bookkeeping are
+  included in one atomic closure commit.
+- Repository is synchronized after the authorized push.
+- `W01-C-FOUND` remains `COMPETENCY_UNVERIFIED`.
+
+### 12. Next Action
+
+BOOT — open W01D05 fixed-size ring buffer execution and declare its AI mode.

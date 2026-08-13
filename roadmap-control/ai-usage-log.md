@@ -208,6 +208,50 @@ execution: `W01D04`.
 
 ---
 
+## 2026-08-13 — W01D04 safe bit-operations learning and evidence
+
+Highest AI level:
+AI-3 — review/debug after meaningful learner attempts. Theory, clarification and
+hints also used AI-1/AI-2.
+
+What AI contributed:
+- short theory and clarification about safe shifts, validation and masks;
+- hint-level guidance and explanation of a pointer-versus-bit mistake;
+- a generic bit-mask syntax example, not a complete exact solution;
+- review/debug of learner-written validation and implementation after meaningful
+  attempts, including correctness and UB reasoning;
+- feedback on closed-book explanations and additional AND/OR mask practice;
+- closure audit, evidence metadata and routine bookkeeping.
+
+Files/functions materially assisted:
+- review of learner-written `learning/week-01/day-04/bit_ops.c` after attempts;
+- W01D04 self-explanation feedback, evidence metadata and control bookkeeping.
+
+Implementation code provided:
+NO — AI did not provide a complete or exact `bit_ops` solution. The learner
+wrote the core implementations.
+
+Gate answer revealed:
+NO — W01D04 was learning/practice, not the fresh Week 1 AI-0 competency gate.
+Corrected practice explanations are not independent E5 evidence.
+
+Competency affected:
+No competency PASS is claimed. W01D04 remains valid artifact/practice evidence,
+but it cannot independently verify `W01-C-FOUND`; status remains
+`COMPETENCY_UNVERIFIED`.
+
+Fresh independent retest required:
+YES — a fresh AI-0 Week 1 competency gate is required before any
+`W01-C-FOUND — COMPETENCY_PASS` claim.
+
+Notes:
+Strict build and 34/34 visible host tests passed. Runtime validation handles
+caller-controlled invalid inputs; no cosmetic assert was added because no
+additional useful internal invariant was identified. Recovery: `NOT ACTIVE`.
+Next execution: `W01D05`.
+
+---
+
 ## Pre-V3 Migration Note
 
 Known affected scope:
