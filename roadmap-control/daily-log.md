@@ -620,7 +620,8 @@ practice-level closed-book explanation criteria were completed.
 
 ### 3. Focused Time
 
-Planned: Not separately specified in the W01D04 roadmap card/day pack.
+Planned: 6–8h — roadmap standard daily load for a normal Week 1 technical day;
+no separate learner-specific numeric plan was captured at START DAY.
 Actual: ~5h — learner estimate
 
 ### 4. Independent Work

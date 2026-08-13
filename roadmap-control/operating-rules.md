@@ -46,6 +46,28 @@ a prior learning session may still be unclosed.
    inactivity, timestamps, or remote clean state alone.
 10. Once the prior execution is confirmed `CLOSED`, `BOOT` may advance normally.
 
+## 1.2 Start-Day Focused-Time Plan
+
+Before the Focus Phase begins, Project Chat must establish and state the day's
+`Planned Focused Time`; it must also establish the learner's `Available Focused
+Time` when that value is required to choose a realistic plan and is not already
+known.
+
+1. Use an explicit numeric daily plan from the approved Roadmap/day card when it
+   exists.
+2. If the Roadmap provides only a standard daily load or range, Project Chat may
+   use it as the initial planning baseline, but must label it `ROADMAP-DERIVED`,
+   not learner-provided availability.
+3. If learner availability is necessary to choose the final plan and is still
+   unknown, ask exactly one human-only availability question before focus work.
+4. State the final `Planned Focused Time` explicitly in chat before normal focus
+   work. Do not wait until `END DAY` to discover it is missing, infer learner
+   availability from timestamps/chat duration, or create fake precision.
+5. Planned hours are workload planning, not a quota. Finishing earlier does not
+   downgrade `GREEN` when authoritative stop conditions are satisfied, and a
+   time plan never overrides proactive `END DAY READY` or the authoritative
+   daily stop condition.
+
 ## 2. Focus Phase: LEARN / IMPLEMENT / TEST
 
 - Do not update `current-state.md`, `daily-log.md`, or `ai-usage-log.md` during the focus phase.
@@ -195,6 +217,33 @@ If no checkpoint is needed, combine technical work and bookkeeping into one END 
 - Daily `GREEN/YELLOW/RED` is decided from authoritative daily criteria, not generated checkbox state. This rule does not excuse an omitted scored diagnostic or pre-work artifact when a higher-authority source explicitly requires it.
 
 ## 11. Project Chat <-> Cowork Handoff
+
+Anti-confusion contract:
+
+1. `PLATFORM WORK MODE IS NOT COWORK`. A product/platform Work-mode handoff does
+   not satisfy this section, and rejection of Work mode must never be interpreted
+   as rejection of the roadmap's Cowork workflow.
+2. When Cowork is the chosen executor, the contract is the manual prompt: Project
+   Chat finishes reasoning/decision first, then outputs one complete
+   self-contained copy-paste Cowork prompt in the current Project chat. The
+   learner opens an independent Cowork chat and pastes it; Cowork executes; the
+   learner returns its report; Project Chat audits independently.
+3. If platform Work mode is offered or rejected while Cowork remains the correct
+   roadmap executor, immediately fall back to the manual Cowork prompt. Do not
+   silently continue as if Cowork was rejected or make the learner request the
+   prompt again.
+4. Cowork is not required for every `BOOT`. After BOOT/day analysis, however, if
+   Cowork is chosen to create or modify local starter files, TODOs, test
+   harnesses, multi-file repo setup, or other local artifact preparation,
+   Project Chat must proactively output the manual Cowork prompt.
+5. After the learner confirms `END DAY` and all missing Human-Input Gate fields
+   are resolved, if Cowork is required for local evidence/control edits, the
+   linter, commit/push, or repo-wide closure work, Project Chat must proactively
+   output the END DAY Cowork prompt. It must not ask the learner to edit routine
+   bookkeeping or run Git commands merely because Work mode was rejected, and
+   must not wait for the learner to request the prompt.
+6. If Cowork reports a blocker, the learner returns that report and Project Chat
+   decides the next step. Never assume Cowork succeeded.
 
 - The roadmap Project chat is the reasoning, teaching, and decision environment. Cowork is an external execution environment opened by the learner in a separate independent chat.
 - The Project mentor finishes the analysis and decision before proposing Cowork. It must not invoke Cowork from the Project chat, leave the response unfinished, tell the learner to wait for Cowork, assume shared hidden context, or make the learner reconstruct a large request.

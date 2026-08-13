@@ -1,7 +1,7 @@
 # ROADMAP REVIEW LOG — EMBEDDED/FIRMWARE ROADMAP V3.1
 
 **Document ID:** `ROADMAP_REVIEW_LOG`
-**Version:** `1.0.5`
+**Version:** `1.0.6`
 **Status:** `ACTIVE REVIEW LOG — NON-AUTHORITATIVE`
 **Created:** `2026-08-09`
 **Timezone:** `Asia/Ho_Chi_Minh`
@@ -1427,6 +1427,119 @@ Execution impact:   NONE — W01D04 remains NEXT
 Next action impact: NONE — Exact Next Action remains BOOT
 ```
 
+## RR-015 — Cowork routing confusion and missing START DAY focused-time plan
+Status: `CLOSED`
+Severity: `R1`
+Opened: `2026-08-13`
+Closed: `2026-08-13`
+Target: `EARLY OPERATIONAL REVIEW — COMPLETED`
+
+### Concern and confirmed defects
+
+Two related daily-workflow defects were confirmed on W01D04:
+
+1. Project Chat conflated a product/platform Work-mode handoff with the roadmap's
+   manual Project Chat <-> Cowork workflow. Rejection of Work mode was treated as
+   if Cowork had been rejected, so the learner had to request the Cowork prompt
+   during both day-pack preparation and END DAY closure.
+2. START DAY did not establish a numeric `Planned Focused Time`; the omission was
+   discovered only at closure.
+
+### Evidence and authority validation
+
+- The owner report for 2026-08-13 records the two W01D04 routing manifestations:
+  day-pack/starter preparation and post-END DAY closure. Repository evidence does
+  not preserve the platform chat transcript, so no additional chronology is
+  invented.
+- `SYSTEM_SPEC_V3` start-of-day data includes `Available focused hours`, and its
+  fixed daily log requires `Planned` and `Actual` focused time.
+- Roadmap V3.1 defines a standard load of `6–8` focused hours/day and Week 1 load
+  of `46–48` focused hours, while the W01D04 day card has no separate numeric
+  daily plan.
+- The pre-correction W01D04 daily log therefore truthfully reported that no
+  separate plan was specified, but exposed the missing START DAY capture.
+
+### Severity and impact analysis
+
+`R1 — Operational friction`. The defects shifted workflow memory and routine
+repository execution back to the learner and left one ambiguous planning field.
+No technical artifact corruption, status drift, gate change, competency change,
+AI-integrity change, or evidence-semantic change was identified.
+
+### Decision and approved minimum correction
+
+`APPROVED / CLOSED` — owner approval is provided by the 2026-08-13 correction
+request. This is a Level A operational correction only.
+
+- Added an explicit rule that platform Work mode is not Cowork, rejection of Work
+  mode is not rejection of Cowork, and the manual self-contained Cowork prompt is
+  the Section 11 contract.
+- Added immediate manual-prompt fallback plus proactive BOOT/day-pack and END DAY
+  Cowork triggers, while preserving that Cowork is not required for every BOOT
+  and that blockers must return to Project Chat for decision.
+- Added START DAY planning semantics: establish and explicitly state numeric
+  `Planned Focused Time`, distinguish roadmap-derived load from learner
+  availability, ask one human-only question only when availability is necessary,
+  and keep hours subordinate to authoritative stop conditions.
+- Corrected only the W01D04 `Planned` line to the roadmap-derived `6–8h` standard
+  while explicitly preserving that no learner-specific numeric plan was captured.
+- Did not modify Current State, AI usage, competency ledger, technical source,
+  tests, evidence, frozen sources, roadmap curriculum, gates, PASS semantics, AI
+  integrity, or competency semantics.
+
+### Retrospective Sweep A — Cowork routing defect
+
+Defect class: `Platform Work-mode handoff or rejection can be misread as
+satisfying or rejecting the roadmap's manual Cowork route.`
+
+Scope: `W01D02-W01D04`, because the active operating rules apply from W01D02.
+
+- `W01D02 — NOT APPLICABLE` — no preserved repository/review evidence of a
+  same-class platform-routing manifestation; absence of chat history is not
+  recorded as PASS.
+- `W01D03 — NOT APPLICABLE` — no preserved repository/review evidence of a
+  same-class platform-routing manifestation; absence of chat history is not
+  recorded as PASS.
+- `W01D04 — AFFECTED — FIXED` — the owner-confirmed day-pack and END DAY routing
+  failures are addressed by the Section 11 anti-confusion/fallback contract.
+
+### Retrospective Sweep B — planned-time capture defect
+
+Defect class: `A CLOSED day can reach focus work without a numeric Planned
+Focused Time established at START DAY.`
+
+Scope: `W01D01-W01D04`, every currently CLOSED Week 1 day.
+
+- `W01D01 — PASS` — `Planned: ~5–6 hours`.
+- `W01D02 — PASS` — `Planned: 7h`.
+- `W01D03 — PASS` — `Planned: ~6–7 focused hours` for a normal roadmap day.
+- `W01D04 — AFFECTED — FIXED` — historical log now records `6–8h` as a
+  roadmap-derived standard and explicitly states that no learner-specific numeric
+  plan was captured at START DAY.
+
+The W01D04 correction does not claim that the learner promised `6–8h`, does not
+classify `~5h` as insufficient, and creates no schedule debt or carry-over.
+
+### Verification and preserved semantics
+
+- `git diff --check`: PASS.
+- Closure linter: `0 FAIL`, `0 WARN`, `25 PASS`; exit code `0`.
+- Human semantic audit: PASS; retrospective classifications match preserved
+  evidence and no unrelated file is changed.
+
+```text
+Daily impact:       W01D04 remains CLOSED / GREEN
+Artifact impact:    NONE — W01D04 remains ARTIFACT_PASS; 34/34 PASS
+Time impact:        Actual remains ~5h — learner estimate; no schedule debt
+AI impact:          NONE — W01D04 remains AI-3
+Competency impact:  NONE — W01-C-FOUND remains COMPETENCY_UNVERIFIED
+Gate impact:        NONE — fresh Week 1 AI-0 gate remains required
+Schedule impact:    NONE — variance remains 0
+Recovery impact:    NONE — NOT ACTIVE
+Execution impact:   NONE — W01D05 remains NEXT and is not started here
+Next action impact: NONE — Exact Next Action remains BOOT
+```
+
 ---
 # 17. BASELINE REVIEW — PRE-EXECUTION
 
@@ -1840,6 +1953,20 @@ Change:
 Close RR-014 after adding mentor-owned proactive END DAY readiness, learner-owned
 END DAY confirmation, unclosed-session BOOT recovery, and the bounded
 W01D01-W01D03 retrospective impact sweep.
+
+Behavior impact:
+Operational workflow correction only. NONE to curriculum, gates, competency,
+PASS, AI-integrity, evidence, schedule or recovery semantics.
+```
+
+# 23.6 VERSION NOTE — 1.0.6
+
+```text
+Change:
+Close RR-015 after distinguishing platform Work mode from the manual Cowork
+contract, adding proactive Cowork prompt fallback/triggers, establishing START
+DAY focused-time planning, and completing the bounded W01D02-W01D04 / W01D01-
+W01D04 retrospective sweeps.
 
 Behavior impact:
 Operational workflow correction only. NONE to curriculum, gates, competency,
