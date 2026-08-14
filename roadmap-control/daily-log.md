@@ -778,3 +778,185 @@ Closure criteria:
 ### 12. Next Action
 
 BOOT — open W01D05 fixed-size ring buffer execution and declare its AI mode.
+
+## 2026-08-14 — Week 01 / Day 05
+
+### 1. Planned Outcome
+
+Design, implement and explain a fixed-size `uint8_t` FIFO ring buffer; pass a
+strict C17 build and repeatable host tests for normal, empty, full, wrap and
+invalid-input behavior.
+
+### 2. Actual Status
+
+GREEN — the authoritative W01D05 artifact, required execution evidence and
+practice-level closed-book state-reasoning criteria were completed.
+
+### 3. Focused Time
+
+Planned: ~7h
+Actual: ~1.5h — learner estimate
+
+The artifact and required reasoning stop conditions were satisfied
+substantially earlier than planned. Planned hours are workload planning, not a
+completion quota.
+
+### 4. Independent Work
+
+What I personally implemented, reasoned about, measured, or explained:
+
+- Learner designed and implemented the final fixed-size ring-buffer core using
+  compile-time storage plus `head`, `tail` and `count` state.
+- Learner derived the push/pop state transitions and personally implemented
+  rejection-before-mutation, wrap, count updates and FIFO behavior.
+- Learner completed closed-book reasoning for the `head`/`tail`/`count`
+  invariants, EMPTY/FULL distinction, logical FIFO order, wrap and failed-call
+  state preservation.
+- The closed-book explanation satisfies the W01D05 practice stop condition; it
+  is not independent E5 competency evidence.
+
+### 5. AI Usage
+
+Highest AI level used: AI-3
+
+What AI helped with:
+- AI-1 theory and clarification.
+- AI-2 graded hints, design questions and API discussion before implementation.
+- AI-3 post-attempt code review after the learner completed the implementation.
+- END DAY audit, evidence metadata and routine bookkeeping.
+
+Files/functions materially assisted:
+- The `ring_buffer` API/core was learner implemented; AI reviewed the completed
+  implementation and reasoning after the learner's attempt.
+- W01D05 evidence metadata and control bookkeeping.
+
+Competencies contaminated:
+- No AI-4/AI-5 replacement implementation was supplied, but this AI-assisted
+  practice artifact does not independently verify `W01-C-FOUND`.
+- `W01-C-FOUND` remains `COMPETENCY_UNVERIFIED`.
+
+Independent retest required:
+- YES — a fresh Week 1 AI-0 competency gate remains required before any
+  `W01-C-FOUND — COMPETENCY_PASS` claim.
+
+### 6. Artifact Result
+
+Files changed:
+- `learning/week-01/day-05/ring_buffer.h`
+- `learning/week-01/day-05/ring_buffer.c`
+- `learning/week-01/day-05/TODO_W01_D05.md`
+- `tests/host/test_ring_buffer.c`
+- `evidence/week-01/day-05/test_ring_buffer.txt`
+- `roadmap-control/daily-log.md`
+- `roadmap-control/ai-usage-log.md`
+- `roadmap-control/current-state.md`
+
+Build command:
+`gcc -std=c17 -Wall -Wextra -Wpedantic -Werror learning/week-01/day-05/ring_buffer.c tests/host/test_ring_buffer.c -Ilearning/week-01/day-05 -o tests/host/test_ring_buffer.exe`
+
+Build result:
+PASS — exit code 0, no warning/error under configured flags.
+
+Test command:
+`.\tests\host\test_ring_buffer.exe`
+
+Test result:
+PASS — two consecutive runs each exited 0 with
+`SUMMARY: 36 tests, 0 failed`.
+
+### 7. Evidence
+
+Commit:
+SELF — containing commit
+
+Logs:
+- `evidence/week-01/day-05/test_ring_buffer.txt` — tracked UTF-8 verification
+  record containing commands, expected/actual results, two final run summaries,
+  historical baseline, provenance and limitations.
+
+Captures:
+- None
+
+Reports:
+- None
+
+Video/demo:
+- None
+
+Other:
+- `tests/host/test_ring_buffer.exe` is generated, ignored by `*.exe` policy and
+  not committed.
+
+### 8. Measurements
+
+Expected:
+- Strict C17 build succeeds with all configured warnings treated as errors.
+- Required NORMAL, EMPTY, FULL, WRAP, repeated-wrap and INVALID INPUT tests pass.
+- Failed push/pop operations preserve observable state; an empty pop preserves
+  the caller's output value.
+
+Observed:
+- Build exit code: 0.
+- Test run #1: 36 tests run, 0 failed, exit code 0.
+- Test run #2: 36 tests run, 0 failed, exit code 0.
+- All required W01D05 categories passed.
+
+Relevant values/registers/timing/errors:
+- Host GCC 14.2.0; C17; fixed capacity `RB_CAPACITY == 4`.
+- Historical starter baseline from the prior session: 36 tests, 26 failed,
+  exit code 1. It was not reconstructed during closure.
+- No hardware/register/timing measurement was required for this host exercise.
+- Actual focused time: ~1.5h — learner estimate.
+
+### 9. Understanding Check
+
+What I can explain without AI:
+- `0 <= count <= capacity`, and `head`/`tail` stay in the valid index range.
+- EMPTY is exactly `count == 0`; FULL is exactly `count == capacity`.
+- A successful push writes at the old `head`, advances `head` with wrap and
+  increments `count` without changing `tail`.
+- A successful pop reads at the old `tail`, advances `tail` with wrap and
+  decrements `count`.
+- `tail` names the next logical FIFO element even when physical storage order
+  differs from logical FIFO order.
+- Rejected push/pop operations validate before mutation and preserve observable
+  state; modulo implements wrap for this fixed capacity.
+
+What I still cannot explain:
+- None observed in the required W01D05 scope.
+- Independent ownership of Week 1 C competency remains unverified until a fresh
+  AI-0 gate.
+
+### 10. Defects / Failed Tests
+
+Defect/Test IDs:
+- Final: none unresolved; D05-T01 through D05-T36 passed twice consecutively.
+- Historical baseline: 36 tests, 26 failed before learner implementation.
+
+Root cause known?:
+- Final: N/A — no final defect remains in the verified visible host-test
+  contract.
+- Historical baseline failures belonged to the untouched TODO-stub behavior;
+  no per-test root-cause detail was reconstructed during closure.
+
+Current hypothesis:
+- Artifact behavior is correct under the verified public host-test contract.
+- Passing tests and practice reasoning do not establish competency.
+
+### 11. Carry-over
+
+Task:
+- NONE from the W01D05 artifact. W01D06 independent coding gate is the next
+  scheduled execution, not recovery carry-over.
+- The fresh Week 1 AI-0 gate remains required.
+
+Closure criteria:
+- W01D05 source/header/TODO/tests, reproducible evidence and control bookkeeping
+  are included in one atomic closure commit.
+- Repository is synchronized after the authorized push.
+- `W01-C-FOUND` remains `COMPETENCY_UNVERIFIED`.
+
+### 12. Next Action
+
+BOOT — open the W01D06 independent coding-gate contract and prepare the clean
+45-minute AI-0 attempt; do not begin the gate before its contract is declared.

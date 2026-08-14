@@ -252,6 +252,50 @@ Next execution: `W01D05`.
 
 ---
 
+## 2026-08-14 — W01D05 fixed-size ring-buffer learning and evidence
+
+Highest AI level:
+AI-3 — post-attempt review after the learner completed the implementation.
+Theory and design work also used AI-1/AI-2.
+
+What AI contributed:
+- AI-1 theory and clarification about ring-buffer concepts and invariants;
+- AI-2 graded hints, design questioning and API discussion before implementation;
+- mirrored confirmation of push/pop state transitions only after the learner
+  had stated that logic;
+- AI-3 review of the learner-completed implementation and closed-book reasoning;
+- closure audit, evidence metadata and routine bookkeeping.
+
+Files/functions materially assisted:
+- post-attempt review of the learner-written
+  `learning/week-01/day-05/ring_buffer.c` and public API contract;
+- W01D05 reasoning feedback, evidence metadata and control bookkeeping.
+
+Implementation code provided:
+NO AI-4/AI-5 substitute implementation — the learner derived and implemented
+the final ring-buffer core. Later code-like mirroring confirmed learner-stated
+state transitions and did not replace learner ownership.
+
+Gate answer revealed:
+NO — W01D05 was learning/practice, not the fresh Week 1 AI-0 competency gate.
+The closed-book practice explanation satisfies only the W01D05 stop condition.
+
+Competency affected:
+No competency PASS is claimed. W01D05 remains valid artifact/practice evidence,
+but it cannot independently verify `W01-C-FOUND`; status remains
+`COMPETENCY_UNVERIFIED`.
+
+Fresh independent retest required:
+YES — a fresh AI-0 Week 1 competency gate is required before any
+`W01-C-FOUND — COMPETENCY_PASS` claim.
+
+Notes:
+Strict build passed and two consecutive visible-suite runs each reported 36/36
+tests PASS. Required NORMAL, EMPTY, FULL, WRAP, repeated-wrap and INVALID INPUT
+categories passed. Recovery: `NOT ACTIVE`. Next execution: `W01D06`.
+
+---
+
 ## Pre-V3 Migration Note
 
 Known affected scope:
