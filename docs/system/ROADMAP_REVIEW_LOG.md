@@ -1,13 +1,13 @@
 # ROADMAP REVIEW LOG — EMBEDDED/FIRMWARE ROADMAP V3.1
 
 **Document ID:** `ROADMAP_REVIEW_LOG`
-**Version:** `1.2.0`
+**Version:** `1.3.0`
 **Status:** `ACTIVE REVIEW LOG — NON-AUTHORITATIVE`
 **Created:** `2026-08-09`
 **Timezone:** `Asia/Ho_Chi_Minh`
 **Reviewed roadmap:** `EMBEDDED_ROADMAP_V3.1.docx`
 **System authority:** `SYSTEM_SPEC_V3.md 3.0.0`
-**Execution authority:** `MASTER_PROMPT_V3.md 3.1.1 — FROZEN BASELINE with Amendment 3.1.1`
+**Execution authority:** `MASTER_PROMPT_V3.md 3.1.2 — FROZEN BASELINE with Amendment 3.1.2`
 **Intended repo path:** `docs/system/ROADMAP_REVIEW_LOG.md`
 **Canonical live repo:** `https://github.com/MinhSit/embedded-firmware-journey-v3`
 
@@ -1756,6 +1756,119 @@ No false COMPETENCY_PASS.
 Commit: `SELF — containing commit`
 System Spec and Roadmap remain unchanged. W01D01-W01D04 remains CLOSED/GREEN.
 
+## RR-018 — Pipelined start-day prep and one-shot executor hygiene
+
+Status: `CLOSED`
+Severity: `R1`
+Opened: `2026-08-14`
+Closed: `2026-08-14`
+Target: `COMPLETED — CANONICAL WORKFLOW CORRECTION`
+Owner approval: `2026-08-14 — owner explicitly approved the W01D05 workflow correction`
+
+### Concern and confirmed defects
+
+Two workflow defects were confirmed during W01D05:
+
+1. Project Chat lacked a deterministic pre-`NEXT ACTION` actor-ownership guard.
+   It initially told the learner to create `ring_buffer.h` manually although
+   multi-file starter/test/TODO preparation was appropriate for a repository
+   executor; the learner had to challenge the routing.
+2. Managed closure required final `git diff --check` but had no bounded
+   non-semantic hygiene authority. Trailing whitespace in
+   `learning/week-01/day-05/ring_buffer.c` therefore correctly stopped the old
+   transaction and required explicit mechanical authorization plus a second
+   executor continuation.
+
+### Impact Surface
+
+```text
+Higher policy / curriculum?: NO — System Spec and Roadmap remain unchanged.
+Execution-engine behavior?: YES — Master Prompt 3.1.2 correction.
+Learner-facing workflow?: YES — canonical handbook updated.
+Persistent schema / evidence?: NO — no daily-log/evidence schema change.
+```
+
+No curriculum, dates, PASS/FAIL, AI levels, competency requirements, gate
+content, evidence semantics or learner technical result changes are authorized.
+No persistent lifecycle state is added.
+
+### Approved minimum correction
+
+- Add transient pipelined BOOT preparation: State Snapshot and scoped Theory Pack
+  may arrive before starter prep, compact availability + executor-consent input,
+  executor verification before interactive Pre-check, then complete Day Contract
+  before `FOCUS_ACTIVE`.
+- Preserve scored AI-0 integrity: only neutral logistics and non-answer-revealing
+  scaffold prep; no targeted theory/hints/examples/tutoring Pre-check.
+- Add the pre-`NEXT ACTION` actor-ownership guard so administrative multi-file
+  starter setup is proposed to the executor while learner core work remains
+  learner-owned.
+- Add early and final `git diff --check` plus a narrow trailing-whitespace/final-
+  newline exception inside already approved files. Semantic learner code remains
+  protected; non-mechanical changes still `STOP / REPORT`.
+- Keep no-repeat audit semantics when no objective failure or new evidence exists.
+
+### Retrospective sweep — defect A: start-day actor routing
+
+Defect class: `Project Chat can assign useful administrative starter/repository
+preparation to the learner without first resolving NEXT-ACTION actor ownership.`
+
+Scope: `W01D01-W01D05` workflow/control history only.
+
+- `W01D01 — NOT APPLICABLE` — no preserved repository/review evidence of the
+  same-class starter-routing manifestation; missing chat history is not PASS.
+- `W01D02 — NOT APPLICABLE` — no preserved repository/review evidence of the
+  same-class starter-routing manifestation; missing chat history is not PASS.
+- `W01D03 — NOT APPLICABLE` — a seven-file starter pack exists in separate commit
+  `6108e0d`, but preserved evidence does not identify a learner-assignment
+  failure; absence of chat history is not PASS.
+- `W01D04 — AFFECTED — FIXABLE` — owner-confirmed day-pack/starter executor
+  routing friction was recovered and corrected under RR-015; this sweep does not
+  rewrite that history.
+- `W01D05 — AFFECTED — FIXABLE` — owner-confirmed manual `ring_buffer.h` routing
+  was challenged and recovered in the same session; Master 3.1.2 adds the
+  deterministic ownership guard.
+
+### Retrospective sweep — defect B: closure mechanical hygiene
+
+Defect class: `An approved managed closure can require a second consent round
+trip for trailing whitespace or a missing final newline inside allowed scope.`
+
+Scope: `W01D01-W01D05` workflow/control history only.
+
+- `W01D01 — NOT APPLICABLE` — closure commit `aff3d4d` is clean under historical
+  `git show --check`; no preserved same-class round-trip evidence.
+- `W01D02 — NOT APPLICABLE` — closure commit `68c43bd` is clean under historical
+  `git show --check`; no preserved same-class round-trip evidence.
+- `W01D03 — NOT APPLICABLE` — starter/closure commits `6108e0d` and `4368c4a`
+  are clean under historical `git show --check`; no preserved same-class
+  round-trip evidence.
+- `W01D04 — NOT APPLICABLE` — closure commit `5158b52` is clean under historical
+  `git show --check`; no preserved same-class round-trip evidence.
+- `W01D05 — AFFECTED — FIXABLE` — owner-confirmed trailing whitespace was
+  mechanically corrected after a second authorization and before closure.
+
+W01D05 persistent artifact/control integrity is `PASS` after closure. All six
+historical commits named above are clean under `git show --check`; this does not
+invent missing transient chat chronology.
+
+### Preserved state and closure
+
+```text
+W01D05:             CLOSED / GREEN / ARTIFACT_PASS
+W01D06:             NOT STARTED / NEXT
+Competency:         W01-C-FOUND = COMPETENCY_UNVERIFIED
+Week 1 AI-0 gate:   REQUIRED / NOT YET ATTEMPTED
+Schedule variance:  0 days / ON SCHEDULE
+Recovery:           NOT ACTIVE
+```
+
+Handbook impact: `YES`; canonical handbook in repo: `AVAILABLE / UPDATED`;
+required external sync: `NO`.
+
+Commit: `SELF — containing commit`
+System Spec and Roadmap remain unchanged.
+
 ---
 # 17. BASELINE REVIEW — PRE-EXECUTION
 
@@ -2232,6 +2345,20 @@ Operational workflow hardened. NONE to System Spec, roadmap curriculum, gates,
 competency, AI integrity, evidence admissibility, or PASS semantics.
 ```
 
+# 23.10 VERSION NOTE — 1.3.0
+
+```text
+Change:
+Close RR-018 after adding pipelined normal-learning BOOT prep, the strict AI-0
+exception, NEXT-ACTION ownership guard, early/final hygiene checks, bounded
+mechanical whitespace authorization and learner-handbook sync.
+
+Behavior impact:
+Backward-compatible execution/workflow correction only. NONE to System Spec,
+Roadmap, lifecycle states, curriculum, dates, daily-log schema, gates,
+competency, PASS/FAIL, AI levels or evidence semantics.
+```
+
 ---
 
 # 24. FINAL RULE
@@ -2252,4 +2379,4 @@ Default giữa các checkpoint:
 **Last completed formal review:** `RV-001 — CP-00 Sprint 0 Exit — 09/08/2026`
 **Next formal review:** `CP-01 — End of Week 1 — 16/08/2026`
 **Early exception:** `R3/R4 structural/system defect`
-**Latest system review:** `RR-017 — CLOSED — MASTER_PROMPT_V3 3.1.1 ACTIVATED / FINALIZED / CANONICAL`
+**Latest system review:** `RR-018 — CLOSED — MASTER_PROMPT_V3 3.1.2 WORKFLOW CORRECTION / CANONICAL`

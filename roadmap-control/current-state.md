@@ -1,9 +1,9 @@
 # CURRENT STATE V3 — EMBEDDED/FIRMWARE ROADMAP
 
 **Document ID:** `CURRENT_STATE_V3`
-**Version:** `3.0.20`
+**Version:** `3.0.21`
 **State type:** Operational snapshot — describes reality and creates no new policy
-**Generated at:** `2026-08-14 13:05 +07:00`
+**Generated at:** `2026-08-14 13:49 +07:00`
 **Timezone:** `Asia/Ho_Chi_Minh`
 **Status:** `WEEK 1 ACTIVE — W01D05 CLOSED — W01D06 NEXT`
 
@@ -13,8 +13,8 @@
 
 - **System Spec version:** `SYSTEM_SPEC_V3 3.0.0`
 - **Roadmap version:** `EMBEDDED_ROADMAP_V3.1 3.1.0`
-- **Master Prompt version:** `MASTER_PROMPT_V3 3.1.1`
-- **Current State version:** `3.0.20`
+- **Master Prompt version:** `MASTER_PROMPT_V3 3.1.2`
+- **Current State version:** `3.0.21`
 - **Implementation runbook:** `roadmap-control/execution-runbook.md` — `NON-AUTHORITATIVE`
 
 If this file conflicts with a higher-authority source, the higher-authority source wins.

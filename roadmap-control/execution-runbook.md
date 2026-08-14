@@ -1,11 +1,11 @@
 # EXECUTION RUNBOOK
 
 **Document ID:** `EXECUTION_RUNBOOK`
-**Version:** `1.1.0`
+**Version:** `1.2.0`
 **Status:** `ACTIVE IMPLEMENTATION RUNBOOK — NON-AUTHORITATIVE`
-**Owner approval:** `2026-08-13 — APPROVE MIGRATION D`
+**Owner approval:** `2026-08-14 — APPROVE W01D05 WORKFLOW CORRECTION`
 
-Purpose: mechanical repository HOW implementing `MASTER_PROMPT_V3 3.1.1`.
+Purpose: mechanical repository HOW implementing `MASTER_PROMPT_V3 3.1.2`.
 
 This file does not define PASS, AI levels, assessment rules, lifecycle states,
 command legality, actor roles, HANDOFF semantics, competency requirements or
@@ -30,6 +30,41 @@ For `ENSURE_CONTEXT_READY`:
 `BOOT` is the normal learner-facing start/resume command, but this preflight is
 also invoked implicitly for other stateful commands and state-dependent
 read-only commands such as `STATUS`.
+
+## A.1 Pipelined Start-Day Preparation
+
+For a normal `LEARNING` day where starter/repository prep is useful and no
+safety, prerequisite, review or assessment-integrity blocker exists:
+
+1. run `ENSURE_CONTEXT_READY` and resolve source-derived Day Contract facts;
+2. return `STATE SNAPSHOT -> THEORY PACK -> DAY OUTCOME / AI BOUNDARY`;
+3. do not claim `FOCUS_ACTIVE` or activate learner implementation;
+4. ask one compact `BOOT PREP INPUT` containing:
+   - `Available Focused Time` if still missing;
+   - explicit repository-executor consent when executor is useful;
+5. after approval, emit the self-contained executor prompt;
+6. learner may read the delivered Theory Pack while the independent executor
+   prepares bounded starter/TODO/tests;
+7. when the report returns, Project Chat independently verifies prep;
+8. only then activate interactive Pre-check, preferably one question at a time;
+9. resolve remaining Day Contract items and `Planned Focused Time`;
+10. only after the Day Contract is complete, enter `FOCUS_ACTIVE` and issue the
+    exact first learner-owned implementation/test action.
+
+This is transient orchestration only. Do not persist `DAY_PREPARING`, mutate
+bookkeeping because theory was displayed, or change the canonical five-state
+lifecycle.
+
+For scored AI-0 `DIAGNOSTIC` / `GATE` / `RETEST`, do not deliver targeted theory,
+hints, examples or tutoring Pre-check before/during the attempt. Neutral
+logistics, contract/timing, allowed references and non-answer-revealing scaffold
+prep may proceed; assessment integrity overrides pipeline optimization.
+
+Before any operational `NEXT ACTION`, mechanically check lifecycle state,
+operation class, proposed owner, whether repo prep/admin/mutation is involved,
+executor usefulness, transaction-specific explicit consent, AI-level boundary
+and learner-work ownership. Administrative multi-file starter setup defaults to
+an executor proposal when useful, never to learner boilerplate creation.
 
 ## B. Managed Repository Transaction Preflight
 
@@ -62,6 +97,36 @@ STOP / REPORT
 ```
 
 Do not silently rebase, reset, force, overwrite, merge or discard work.
+
+After preflight, inspect candidate technical files and run an early
+`git diff --check` before long build/bookkeeping work. Within files already in
+the approved mutation scope, the executor may remove trailing whitespace or add
+a missing final newline only when the delta is purely mechanical/whitespace and
+contains no semantic token, code-logic or behavior change. Report exact affected
+files and rerun relevant build/tests/checks.
+
+Do not use this exception to refactor, rename, reformat a whole file, normalize
+line endings, remove learner comments/TODOs, change unrelated style or learner
+logic, or suppress tests/warnings. Any required non-mechanical change is
+`STOP / REPORT`.
+
+Managed transaction order:
+
+```text
+preflight
+-> inspect candidate technical files
+-> early git diff --check
+-> allowed mechanical hygiene if needed
+-> main build/tests/validation
+-> evidence/log/state mutation
+-> closure linter / semantic audit
+-> final git diff --check
+-> commit
+-> authorized push
+-> independent verification
+```
+
+The final `git diff --check` remains mandatory.
 
 Executor prompts must be self-contained and product-agnostic enough to paste
 unchanged into either Cowork or Antigravity, following `MASTER_PROMPT_V3`
@@ -111,14 +176,17 @@ The active repository execution environment handles `END DAY` in this order:
 1. Determine the artifact result and AI provenance first.
 2. Run the human-input preflight and identify any missing mandatory human-only fields.
 3. Ask the learner only for those genuinely missing fields and resolve them.
-4. Update required evidence metadata.
-5. Update the daily log.
-6. Update the AI usage log.
-7. Update current state.
-8. If the repository closure linter exists, run it against the updated control state.
-9. Run one human consistency audit across result, provenance, human-only fields, evidence, logs, and state.
-10. Commit the closure.
-11. Push only after one verification, when push is authorized.
+4. Inspect candidate technical files and run the early hygiene check; apply only
+   the bounded mechanical exception above when needed, then rerun affected validation.
+5. Update required evidence metadata.
+6. Update the daily log.
+7. Update the AI usage log.
+8. Update current state.
+9. If the repository closure linter exists, run it against the updated control state.
+10. Run one human consistency audit across result, provenance, human-only fields, evidence, logs, and state.
+11. Run the mandatory final `git diff --check`.
+12. Commit the closure.
+13. Push only after one verification, when push is authorized.
 
 Provenance must be settled before the closure commit so a late provenance audit does not create avoidable repair commits. This workflow does not change artifact, evidence, AI-contamination, or competency semantics.
 
@@ -169,9 +237,13 @@ not consume the next learning day's normal allowance and is not for polish.
 
 ## 6. Verification Policy
 
-- Run one pre-commit audit covering applicable build/tests, provenance, required fields, consistency, and `git diff --check`.
+- Run the early hygiene check described in Section B, then one final pre-commit
+  audit covering applicable build/tests, provenance, required fields,
+  consistency, and the mandatory final `git diff --check`.
 - After an authorized push, run one post-push sync check.
-- Do not repeat audits without an objective failure, conflict, or new evidence.
+- Do not repeat an audit/check when there is no objective failure, conflict or
+  new evidence. Rerun only affected validation after allowed mechanical hygiene;
+  the mandatory final hygiene check is not a repeated audit.
 
 ## 7. Minimum-Sufficient Evidence and Logging
 
@@ -287,6 +359,12 @@ the approved learner-selected fallback.
 9. Project Chat independently verifies the result.
 
 Platform Work-mode popup rejection does NOT count as executor rejection.
+
+For pipelined BOOT prep, steps 2-4 may be represented by the single compact
+`BOOT PREP INPUT` after the already-delivered State Snapshot/Theory Pack/day
+boundary. Availability and executor consent may be collected together to avoid
+sequential round trips. Consent remains explicit and transaction-specific; the
+executor prompt still follows approval, and Pre-check waits for prep verification.
 
 ### E.2 Return Report
 
