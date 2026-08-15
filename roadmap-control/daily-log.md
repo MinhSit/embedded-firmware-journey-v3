@@ -1172,3 +1172,212 @@ Closure criteria:
 BOOT — open W01D07 as the separate Week 1 close/review and independent
 competency-gate day. Do not reuse the W01D06 98/100 daily coding-gate PASS as
 `W01-C-FOUND — COMPETENCY_PASS`.
+
+## 2026-08-15 — Week 01 / Day 07
+
+### 1. Planned Outcome
+
+Complete the separate Week 1 C Foundations competency gate under AI-0, preserve
+the recovered raw chat evidence, and record the post-gate volatile/UB
+explanation without prematurely closing Week 1.
+
+W01D07 was executed one day before its roadmap calendar date. The normal Day
+Contract availability/planned-time precheck was skipped; this is recorded as
+`MENTOR/SYSTEM WORKFLOW VARIANCE — NON-SCORING`.
+
+### 2. Actual Status
+
+GREEN — W01D07 technical/assessment work is `COMPLETED / PERSISTED`. Tasks 1-4,
+the mandatory bounds/lifetime condition and AI-0 integrity passed. The gate
+decision is categorical PASS, and `W01-C-FOUND` transitions to
+`COMPETENCY_PASS`.
+
+Week 1 final closure remains pending. MASTER CHECK was not executed and is next;
+CP-01 / WEEKLY REVIEW was not executed and remains pending.
+
+### 3. Focused Time
+
+Roadmap Standard Load: Week 1 roadmap load remains separate from learner time
+estimates.
+
+Available: `NOT SUPPLIED`
+
+Planned: `NOT SUPPLIED`
+
+Actual: `~2h — learner estimate`
+
+No underwork, schedule debt or Recovery state is inferred from Actual Focused
+Time.
+
+### 4. Independent Work
+
+What I personally implemented, reasoned about, measured, or explained:
+
+- Learner completed the fresh Week 1 C Foundations competency gate under AI-0
+  and explicitly sent `CLOSE GATE` before the 60-minute hard stop.
+- Learner answered pointer/array/qualifier questions, implemented a fresh safe
+  bit-field extraction function, diagnosed bounds/lifetime defects and proposed
+  a safe API redesign, and reasoned through unseen ring-buffer state.
+- Learner supplied the post-gate volatile/UB explanation preserved separately
+  from executor review caveats.
+- No learner-created Day07 `.c` files or folder existed during the scored
+  attempt; the direct chat answers are the raw competency evidence.
+
+### 5. AI Usage
+
+Scored phase: `AI-0`
+
+External help during scored phase: `NO — learner human confirmation`
+
+AI-0 integrity: `PASS`
+
+Post-close phase: `AI-3 — assessment/review and administrative persistence`
+
+Highest AI level used: AI-3 after `CLOSE GATE`; the scored phase remained AI-0.
+
+What AI helped with:
+- No hints, correctness feedback, solution assistance or gate answers during
+  the scored phase.
+- After closure, executor preserved the recovered raw text verbatim, authored
+  the assessment/review files and prepared bounded control bookkeeping.
+
+Files/functions materially assisted:
+- No learner-created Day07 `.c` file existed.
+- Assessment result, post-gate review and control bookkeeping were
+  executor-authored after closure.
+- Raw Markdown evidence is an executor transcription of learner chat, not an
+  executor solution.
+
+Competencies contaminated:
+- None in the scored W01D07 phase; AI-0 integrity is PASS.
+
+Independent retest required:
+- `NO — NONE REQUIRED` for `W01-C-FOUND` from this passed gate.
+
+### 6. Artifact Result
+
+Assessment result:
+- Task 1: PASS
+- Task 2: PASS
+- Task 3: PASS
+- Task 4: PASS
+- Mandatory bounds/lifetime condition: PASS
+- Decision: `CATEGORICAL PASS`
+- Competency: `W01-C-FOUND — COMPETENCY_PASS`
+
+Files changed:
+- `learning/week-01/day-07/RAW_COMPETENCY_SUBMISSION_W01D07.md`
+- `learning/week-01/day-07/RAW_POST_GATE_EXPLANATION_W01D07.md`
+- `learning/week-01/day-07/ASSESSMENT_RESULT_W01D07.md`
+- `learning/week-01/day-07/POST_GATE_REVIEW_W01D07.md`
+- `roadmap-control/daily-log.md`
+- `roadmap-control/ai-usage-log.md`
+- `roadmap-control/current-state.md`
+- `roadmap-control/competency-ledger.md`
+
+Build:
+`NOT RUN — optional executor C transcription/validation was not required for
+the recovered persistence transaction.`
+
+Tests:
+`NOT RUN — no learner Day07 source files existed; technical scoring rests on
+the closed raw submission and recorded assessment decision.`
+
+### 7. Evidence
+
+Commit:
+`SELF — containing commit`
+
+Logs:
+- None; no optional C transcription/validation run was performed.
+
+Captures:
+- None
+
+Reports:
+- `learning/week-01/day-07/ASSESSMENT_RESULT_W01D07.md`
+- `learning/week-01/day-07/POST_GATE_REVIEW_W01D07.md`
+
+Other:
+- `learning/week-01/day-07/RAW_COMPETENCY_SUBMISSION_W01D07.md` preserves Raw
+  Tasks 1-4 verbatim.
+- `learning/week-01/day-07/RAW_POST_GATE_EXPLANATION_W01D07.md` preserves the
+  volatile/UB explanation verbatim.
+
+### 8. Measurements
+
+Expected:
+- Raw Tasks 1-4 and the post-gate volatile/UB block match the recovered learner
+  transcript verbatim.
+- The categorical PASS is not converted to a numeric score.
+- Only `W01-C-FOUND` transitions from `COMPETENCY_UNVERIFIED` to
+  `COMPETENCY_PASS`.
+- Week 1 remains pending MASTER CHECK and CP-01 / WEEKLY REVIEW.
+
+Observed:
+- Raw block comparison: PASS for Tasks 1-4 and volatile/UB explanation.
+- Gate: PASS; AI-0 integrity: PASS; external help: NO by learner human
+  confirmation.
+- Post-gate volatile/UB explanation: `PASS WITH PRECISION CAVEATS`.
+
+Relevant values/registers/timing/errors:
+- Date executed: `2026-08-15`; roadmap calendar Day 7: `2026-08-16`.
+- Time limit: `60 minutes maximum`; learner completed before the hard stop.
+- Actual Focused Time: `~2h — learner estimate`.
+- Available Focused Time: `NOT SUPPLIED`.
+- Planned Focused Time: `NOT SUPPLIED`.
+- No hardware/register measurement was required.
+
+### 9. Understanding Check
+
+What I can explain without AI, as preserved in raw evidence:
+- Pointer/array distinctions, array-parameter adjustment, qualifier effects and
+  one-past-end restrictions.
+- Safe bit-field extraction with validation-before-output-mutation and valid
+  shift counts.
+- Bounds overflow, expired-local lifetime and caller-owned storage redesign.
+- Ring-buffer FIFO state using `head`, `tail` and `count`.
+- `volatile` does not supply atomicity, locking, synchronization or memory
+  barriers; several common C undefined-behavior classes.
+
+What required post-gate precision caveats:
+- Pointer validity is more constrained than "can point anywhere".
+- `volatile` is stated in terms of required observable volatile accesses, not
+  arbitrary physical-memory guarantees.
+- Declaring an uninitialized local is not itself undefined behavior; the actual
+  issue is a language-invalid use of an indeterminate value.
+
+### 10. Defects / Failed Tests
+
+Defect/Test IDs:
+- None severe in the assessed mandatory bounds/lifetime scope.
+- No numeric deductions exist because the declared result is categorical.
+
+Root cause known?:
+- N/A — the gate passed its mandatory criteria.
+
+Current hypothesis:
+- No fresh retest is required for `W01-C-FOUND` from this gate.
+- Review caveats improve precision without altering raw evidence or the closed
+  categorical decision.
+
+### 11. Carry-over
+
+Task:
+- MASTER CHECK — next, read-only, not yet executed.
+- CP-01 / WEEKLY REVIEW — pending after MASTER CHECK and finding disposition.
+
+Closure criteria:
+- W01D07 evidence/control persistence is included in one bounded commit and
+  synchronized to `origin/main`.
+- Week 1 is not marked fully CLOSED until MASTER CHECK and CP-01 / WEEKLY REVIEW
+  are actually completed.
+
+Recovery:
+- `NOT ACTIVE`
+
+### 12. Next Action
+
+MASTER CHECK — run the required read-only Week 1 audit on the persisted W01D07
+snapshot; do not mutate the repository or award another competency during that
+audit.

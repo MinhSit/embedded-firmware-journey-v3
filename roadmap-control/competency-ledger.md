@@ -72,29 +72,37 @@ Artifact evidence:
   `W01D06-C-CODING-01`: 98/100 PASS; mandatory items PASS; scored phase AI-0
   integrity PASS; original source and written answers preserved. This is daily
   coding-gate evidence and does not replace the separate W01D07 competency gate.
+- W01D07 separate Week 1 C Foundations competency gate: categorical PASS;
+  Tasks 1-4 PASS; mandatory bounds/lifetime condition PASS; scored phase AI-0
+  integrity PASS; external help NO by learner human confirmation; raw chat
+  submission preserved verbatim in `RAW_COMPETENCY_SUBMISSION_W01D07.md`.
 - W01D01 through W01D05 records remain artifact/practice evidence. W01D06 is
-  valid independent assessment evidence, but it is not the complete defined
-  gate for `W01-C-FOUND`.
+  valid independent daily assessment evidence. The W01D07 gate independently
+  verifies `W01-C-FOUND`.
 
 Independent gate:
-W01D07 separate Week 1 V3 60-minute AI-0 competency gate required.
+W01D07 separate Week 1 V3 60-minute AI-0 competency gate — PASS on 2026-08-15.
 
 AI mode:
 AI-0 for gate.
 
 Status:
-COMPETENCY_UNVERIFIED
+COMPETENCY_PASS
 
 Last verified:
-NONE UNDER V3
+2026-08-15
 
 Retest condition:
-Complete W01D07 and pass its separate Week 1 AI-0 competency gate.
+NONE REQUIRED from the passed W01D07 gate. Retest only if later evidence
+invalidates this independent result or a higher-authority gate requires it.
 
 Notes:
-Do not promote pre-V3 or W01D01–W01D05 artifact/test results to competency
-PASS. W01D03's interrupted generated pre-check remains a historical
-`MENTOR/SYSTEM WORKFLOW VARIANCE — NON-SCORING`; it is not why competency is
-unverified. `W01-C-FOUND` remains unverified because the fresh independent
-Week 1 AI-0 competency gate in W01D07 is outstanding. The W01D06 98/100 daily
-coding-gate PASS is retained without being relabeled as Week 1 competency PASS.
+The competency transition is based only on the fresh W01D07 AI-0 gate, not on
+pre-V3 evidence, W01D01-W01D05 artifact/test results or the W01D06 daily coding
+gate. W01D03's interrupted generated pre-check remains historical
+`MENTOR/SYSTEM WORKFLOW VARIANCE — NON-SCORING`. The W01D06 98/100 daily
+coding-gate PASS remains separately labeled. W01D07 was executed one day early
+with a skipped availability/planned-time precheck; this is recorded as
+`MENTOR/SYSTEM WORKFLOW VARIANCE — NON-SCORING` and did not invalidate the
+established assessment scope, time or AI firewall. Week 1 final closure remains
+pending MASTER CHECK and CP-01 / WEEKLY REVIEW.

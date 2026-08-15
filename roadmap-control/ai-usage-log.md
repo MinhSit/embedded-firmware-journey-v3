@@ -355,6 +355,71 @@ harness reported 14 tests, 0 failed. Recovery: `NOT ACTIVE`. Next execution:
 
 ---
 
+## 2026-08-15 — W01D07 Week 1 C Foundations competency gate and post-gate review
+
+Assessment:
+`Week 1 C Foundations competency gate`
+
+Competency ID:
+`W01-C-FOUND`
+
+Scored phase AI level:
+AI-0 — independent / closed book.
+
+External help during scored phase:
+NO — learner human confirmation.
+
+Scored-phase integrity:
+PASS — the assessment scope, 60-minute maximum and AI firewall were established
+before the attempt. The learner completed before the hard stop and explicitly
+sent `CLOSE GATE`; no prohibited assistance was provided during the scored
+phase.
+
+Post-close AI level:
+AI-3 — assessment/review and administrative persistence after the gate closed.
+
+What AI contributed after close:
+- preserved the recovered learner chat submission and volatile/UB explanation
+  as separate verbatim raw evidence;
+- authored the assessment result and post-gate review, keeping precision
+  caveats separate from raw evidence;
+- prepared the bounded control-file bookkeeping and repository transaction.
+
+Files/functions materially assisted:
+- No learner-created Day07 `.c` file existed during the scored attempt.
+- `ASSESSMENT_RESULT_W01D07.md`, `POST_GATE_REVIEW_W01D07.md` and control
+  bookkeeping were executor-authored after `CLOSE GATE`.
+- `RAW_COMPETENCY_SUBMISSION_W01D07.md` and
+  `RAW_POST_GATE_EXPLANATION_W01D07.md` are executor transcriptions of recovered
+  learner text and are not rewritten solutions.
+
+Implementation code provided during scored phase:
+NO.
+
+Gate answer revealed during scored phase:
+NO.
+
+Raw result:
+`CATEGORICAL PASS` — Tasks 1-4 PASS; mandatory bounds/lifetime condition PASS;
+no numeric score was declared or inferred.
+
+Competency affected:
+`W01-C-FOUND — COMPETENCY_PASS` based on the fresh W01D07 AI-0 gate.
+
+Fresh independent retest required:
+NO — none required from this passed gate.
+
+Notes:
+W01D07 was executed one day early on 2026-08-15 and the normal availability /
+planned-time precheck was skipped. This is
+`MENTOR/SYSTEM WORKFLOW VARIANCE — NON-SCORING`; it does not invalidate the
+established scope/time/AI firewall. Actual Focused Time is
+`~2h — learner estimate`; Available Focused Time and Planned Focused Time are
+`NOT SUPPLIED`. Recovery is `NOT ACTIVE`. Week 1 remains pending MASTER CHECK
+and CP-01 / WEEKLY REVIEW.
+
+---
+
 ## Pre-V3 Migration Note
 
 Known affected scope:
@@ -366,4 +431,6 @@ CONTAMINATED FOR INDEPENDENT COMPETENCY EVIDENCE.
 Treatment:
 Artifacts may remain historical references.
 No V3 competency PASS is imported.
-Fresh AI-0 verification is required.
+Fresh AI-0 verification is required before a V3 competency PASS. W01D07 now
+provides new independent evidence for `W01-C-FOUND`; it does not import or
+reclassify the pre-V3 evidence.
