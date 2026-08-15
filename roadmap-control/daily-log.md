@@ -984,13 +984,13 @@ estimates.
 
 Available: ~7h — learner estimate
 
-Planned: not separately supplied; Available Focused Time is not reclassified as
-Planned Focused Time.
+Planned: ~4h core + up to ~3h reserve
 
 Actual: ~2h — learner estimate
 
-The difference between available and actual time is not underwork or schedule
-debt. Hours are planning/accounting information, not a completion quota.
+The difference between planned/available and actual time is not underwork or
+schedule debt. Hours are planning/accounting information, not a completion
+quota. W01D06 stopped after its valid assessment/evidence conditions were met.
 
 ### 4. Independent Work
 

@@ -1,9 +1,9 @@
 # CURRENT STATE V3 — EMBEDDED/FIRMWARE ROADMAP
 
 **Document ID:** `CURRENT_STATE_V3`
-**Version:** `3.0.22`
+**Version:** `3.0.23`
 **State type:** Operational snapshot — describes reality and creates no new policy
-**Generated at:** `2026-08-15 11:17 +07:00`
+**Generated at:** `2026-08-15 11:47 +07:00`
 **Timezone:** `Asia/Ho_Chi_Minh`
 **Status:** `WEEK 1 ACTIVE — W01D06 CLOSED — W01D07 NEXT`
 
@@ -14,7 +14,7 @@
 - **System Spec version:** `SYSTEM_SPEC_V3 3.0.0`
 - **Roadmap version:** `EMBEDDED_ROADMAP_V3.1 3.1.0`
 - **Master Prompt version:** `MASTER_PROMPT_V3 3.1.2`
-- **Current State version:** `3.0.22`
+- **Current State version:** `3.0.23`
 - **Implementation runbook:** `roadmap-control/execution-runbook.md` — `NON-AUTHORITATIVE`
 
 If this file conflicts with a higher-authority source, the higher-authority source wins.
@@ -81,7 +81,7 @@ If this file conflicts with a higher-authority source, the higher-authority sour
 - **Critical path risk:** `NONE currently identified`; no P0 blocker and the protected deadline is unchanged.
 - **Weekly scorecard:** `NOT YET DUE — Week 1 closes 2026-08-16`
 - **Career pipeline:** `N/A — no separate career task recorded for W01D07 beyond roadmap review/English explanation work`
-- **Health/load:** W01D06 Available Focused Time: ~7h — learner estimate; Actual Focused Time: ~2h — learner estimate. Planned Focused Time was not separately supplied and is not inferred from availability. The day closed after the valid assessment/evidence conditions were satisfied; no underwork, schedule debt or recovery condition is inferred. No health issue is recorded.
+- **Health/load:** W01D06 Available Focused Time: ~7h — learner estimate; Planned Focused Time: ~4h core + up to ~3h reserve; Actual Focused Time: ~2h — learner estimate. Reserve time was optional capacity, not a completion quota. The day closed after the valid assessment/evidence stop conditions were satisfied; no underwork, schedule debt or recovery condition is inferred. No health issue is recorded.
 
 ## Forward Control
 
