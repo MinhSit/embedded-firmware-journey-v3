@@ -960,3 +960,215 @@ Closure criteria:
 
 BOOT — open the W01D06 independent coding-gate contract and prepare the clean
 45-minute AI-0 attempt; do not begin the gate before its contract is declared.
+
+## 2026-08-15 — Week 01 / Day 06
+
+### 1. Planned Outcome
+
+Complete the roadmap's 45-minute independent C coding gate under AI-0, preserve
+the original attempt before review, record the scored result and keep it
+separate from the W01D07 Week 1 competency gate.
+
+### 2. Actual Status
+
+GREEN — `W01D06-C-CODING-01` closed with `98/100 PASS`; all mandatory items
+passed, AI-0 integrity passed and the raw attempt was preserved unchanged.
+
+This daily coding-gate PASS is not `W01-C-FOUND — COMPETENCY_PASS` and does not
+mark Week 1 PASS.
+
+### 3. Focused Time
+
+Roadmap Standard Load: Week 1 roadmap load remains separate from learner time
+estimates.
+
+Available: ~7h — learner estimate
+
+Planned: not separately supplied; Available Focused Time is not reclassified as
+Planned Focused Time.
+
+Actual: ~2h — learner estimate
+
+The difference between available and actual time is not underwork or schedule
+debt. Hours are planning/accounting information, not a completion quota.
+
+### 4. Independent Work
+
+What I personally implemented, reasoned about, measured, or explained:
+
+- Learner completed the scored attempt under AI-0 and supplied the original
+  `safe_bit.c`, `copy_token.c` and `lifetime.c` files.
+- Learner completed the Task 2 and Task 3 analysis plus the Task 4 struct-layout
+  answer recorded in `RAW_WRITTEN_ANSWERS_W01D06.md`.
+- Learner's Task 1 runner reported seven PASS results covering normal, full-width,
+  MSB, NULL, zero-width, boundary-overflow and oversized-field cases.
+- Learner closed the attempt before the 45-minute hard stop.
+
+### 5. AI Usage
+
+Scored phase: AI-0
+
+External help during scored attempt: NO
+
+Post-close phase: AI-3
+
+Highest AI level used: AI-3 — post-close only; scored phase remained AI-0
+
+What AI helped with:
+- No hints, review, correctness feedback or solution assistance during
+  `START GATE` through `CLOSE ATTEMPT`.
+- After `CLOSE ATTEMPT`, AI reviewed/scored the submission, clarified the Task 2
+  out-of-source-object undefined behavior and supported closure bookkeeping.
+- Executor-created boundary tests were run only after closure of the attempt and
+  are not attributed to the learner.
+
+Files/functions materially assisted:
+- Raw `.c` files: none; preserved byte-for-byte.
+- Post-gate review record, reproducibility evidence, test harness and control
+  bookkeeping: executor-assisted after `CLOSE ATTEMPT`.
+
+Competencies contaminated:
+- None in the valid W01D06 scored phase; AI-0 integrity is PASS.
+- W01D06 is not the defined W01-C-FOUND competency gate. The later AI-3 review
+  does not promote or retroactively invalidate the closed raw score.
+- `W01-C-FOUND` remains `COMPETENCY_UNVERIFIED`.
+
+Independent retest required:
+- No retest is required for `W01D06-C-CODING-01`.
+- W01D07 remains the separate required Week 1 independent competency gate; it is
+  not a retest of the 98/100 daily coding-gate score.
+
+### 6. Artifact Result
+
+Assessment result:
+- `W01D06-C-CODING-01 = 98/100 PASS`
+- Task 1: 35/35
+- Task 2: 28/30
+- Task 3: 20/20
+- Task 4: 15/15
+- Mandatory items: PASS
+
+Files changed:
+- `.gitattributes` — exact-path `-text -eol` entries preserve raw scored bytes.
+- `learning/week-01/day-06/safe_bit.c`
+- `learning/week-01/day-06/copy_token.c`
+- `learning/week-01/day-06/lifetime.c`
+- `learning/week-01/day-06/RAW_WRITTEN_ANSWERS_W01D06.md`
+- `learning/week-01/day-06/ASSESSMENT_RESULT_W01D06.md`
+- `learning/week-01/day-06/POST_GATE_REVIEW_W01D06.md`
+- `tests/host/test_w01d06_gate.c`
+- `evidence/week-01/day-06/validation.txt`
+- `roadmap-control/daily-log.md`
+- `roadmap-control/ai-usage-log.md`
+- `roadmap-control/current-state.md`
+- `roadmap-control/competency-ledger.md`
+
+Build commands:
+- `gcc -std=c17 -Wall -Wextra -Wpedantic -Werror learning/week-01/day-06/safe_bit.c -o <temp>/safe_bit_learner.exe`
+- Strict object builds for all three raw files, with Task 1 `main` renamed only
+  by compiler macro in the executor harness object.
+- `gcc -std=c17 -Wall -Wextra -Wpedantic -Werror tests/host/test_w01d06_gate.c <temp>/safe_bit.o <temp>/copy_token.o <temp>/lifetime.o -o <temp>/test_w01d06_gate.exe`
+
+Build result:
+PASS — every strict C17 build exited 0 with no warning/error.
+
+Test result:
+- Learner-authored Task 1 runner: seven reported tests PASS; exit code 0.
+- Executor-created post-close harness: 14 tests, 0 failed; exit code 0.
+
+### 7. Evidence
+
+Commit:
+SELF — containing commit
+
+Logs:
+- `evidence/week-01/day-06/validation.txt` — tracked UTF-8 validation record with
+  commands, results, hashes, provenance and limitations.
+
+Captures:
+- None
+
+Reports:
+- `learning/week-01/day-06/ASSESSMENT_RESULT_W01D06.md`
+- `learning/week-01/day-06/POST_GATE_REVIEW_W01D06.md`
+
+Other:
+- `learning/week-01/day-06/RAW_WRITTEN_ANSWERS_W01D06.md` preserves the raw
+  non-file answers.
+- `learning/week-01/day-06/safe_bit.exe` is learner-produced, ignored and not
+  committed.
+
+### 8. Measurements
+
+Expected:
+- Raw source hashes remain unchanged through closure.
+- Strict-warning builds succeed.
+- Learner Task 1 runner passes its seven reported cases.
+- Executor post-close boundary harness passes without severe bounds/lifetime
+  defects in the established corrected implementations.
+
+Observed:
+- All three raw SHA-256 values matched the learner-authorized baseline before
+  closure edits.
+- Strict builds exited 0 with no warning/error.
+- Learner Task 1 runner: seven PASS results; exit code 0.
+- Executor harness: `SUMMARY: 14 tests, 0 failed`; exit code 0.
+
+Relevant values/registers/timing/errors:
+- Attempt began approximately 10:18 and closed approximately 10:53
+  Asia/Ho_Chi_Minh; no extra attempt time is invented.
+- Actual focused time: ~2h — learner estimate.
+- Host GCC 14.2.0; C17; no hardware/register measurement required.
+
+### 9. Understanding Check
+
+What I can explain without AI, as preserved in the raw answers:
+- `sizeof(src)` on a function parameter gives pointer size, not string length.
+- A terminator write at index `dst_cap` is out of bounds.
+- NULL input requires explicit defensive handling.
+- Returning the address of a local object creates a dangling pointer and
+  undefined behavior.
+- A status-return plus output-parameter API can preserve the output on failure.
+- The original struct layout uses 12 bytes with four total padding bytes; the
+  reordered layout uses 8 bytes with no padding under the stated ABI layout.
+
+What required post-gate correction:
+- The raw Task 2 explanation did not explicitly state that requesting
+  `sizeof(src)` bytes may read beyond the source object itself; that access is
+  undefined behavior, not guaranteed "garbage bytes".
+
+### 10. Defects / Failed Tests
+
+Defect/Test IDs:
+- Task 2 analysis omission: two-point deduction, producing 28/30.
+- Final technical validation: no failed learner-runner case and no failed
+  executor-harness case.
+
+Root cause known?:
+- YES — the raw analysis identified pointer-size misuse but omitted the explicit
+  source-object overread consequence.
+
+Current hypothesis:
+- The corrected implementation has no severe bounds defect under the verified
+  contract. The post-gate explanation correction is recorded separately and
+  does not alter the raw score.
+
+### 11. Carry-over
+
+Task:
+- W01D07 — separate Week 1 review, English explanation and 60-minute independent
+  competency gate.
+- This is scheduled next work, not recovery carry-over from a failed W01D06.
+
+Closure criteria:
+- Raw attempt, written answers, score, post-gate correction, validation evidence
+  and control bookkeeping are included in one atomic closure commit.
+- AI-0 and post-close AI-3 phases remain distinct.
+- `W01-C-FOUND` remains `COMPETENCY_UNVERIFIED`.
+- Repository is synchronized after the authorized push.
+
+### 12. Next Action
+
+BOOT — open W01D07 as the separate Week 1 close/review and independent
+competency-gate day. Do not reuse the W01D06 98/100 daily coding-gate PASS as
+`W01-C-FOUND — COMPETENCY_PASS`.

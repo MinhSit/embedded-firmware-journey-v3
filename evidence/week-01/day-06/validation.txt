@@ -1,0 +1,100 @@
+Date: 2026-08-15
+Timezone: Asia/Ho_Chi_Minh
+Week/Day: Week 01 / Day 06
+Execution: W01D06-C-CODING-01
+What: Post-close reproducibility validation of preserved raw scored files
+Commit: SELF — containing commit
+Hardware: N/A — host-only
+Toolchain: Host GCC 14.2.0 / C17
+
+Assessment result established after CLOSE ATTEMPT:
+- Task 1: 35/35
+- Task 2: 28/30
+- Task 3: 20/20
+- Task 4: 15/15
+- Total: 98/100 PASS
+- Mandatory items: PASS
+
+AI provenance:
+- Scored phase: AI-0; external help NO.
+- Post-close phase: AI-3 review/correction.
+- Executor validation below occurred after CLOSE ATTEMPT and is not learner test
+  authorship or scored-attempt evidence.
+
+Raw baseline fingerprints:
+- safe_bit.c: 16ba35db6b8ed4579bfdd78d18487b5ae92d4023f1d80ab4b0d2aa8df7b40c9e
+- copy_token.c: 85ecea161a1a3a03f012c8fcad5805acb488c41b18e86ee164a5c5981ce6f5ad
+- lifetime.c: 6d00707f441b898635e8c52a8ff70682fdb0c733c5979497e5f9c81f383ea825
+
+Known preserved raw formatting:
+- safe_bit.c: trailing whitespace at lines 2, 32 and 75; no final newline.
+- copy_token.c: trailing whitespace at line 19; no final newline.
+- lifetime.c: no trailing whitespace; no final newline.
+- These are authorized raw-evidence properties and were not normalized.
+- Exact-path `-text -eol` entries in `.gitattributes` prevent Git from
+  normalizing these three raw evidence blobs during staging/checkout.
+
+Whitespace validation domains:
+- Raw byte/content scan: exactly four trailing-space findings — safe_bit.c
+  lines 2, 32 and 75; copy_token.c line 19 — plus the preserved missing final
+  newline in all three files.
+- Generic `git diff --cached --check` is scoped to exclude the three raw paths
+  because their exact preserved CRLF bytes make Git report each added CRLF line
+  as whitespace.
+- Executor-authored/control-file scoped diff check: PASS, zero findings.
+
+=== LEARNER-AUTHORED TASK 1 RUNNER ===
+
+Build command:
+gcc -std=c17 -Wall -Wextra -Wpedantic -Werror learning/week-01/day-06/safe_bit.c -o <temp>/safe_bit_learner.exe
+
+Build result: PASS — exit code 0; no warning/error.
+
+Test command:
+<temp>/safe_bit_learner.exe
+
+Observed learner-reported tests:
+- PASS — Ghi 4 bit (0xA) vao vi tri bit 4
+- PASS — Ghi toan bo 32 bit
+- PASS — Ghi 1 bit vao MSB (bit 31)
+- PASS — Truyen con tro NULL
+- PASS — Width bang 0
+- PASS — Tran bien (lsb+width > 32)
+- PASS — Gia tri field lon hon width
+
+Test result: PASS — exit code 0.
+
+=== STRICT OBJECT BUILDS ===
+
+Commands:
+gcc -std=c17 -Wall -Wextra -Wpedantic -Werror -Dmain=learner_main -c learning/week-01/day-06/safe_bit.c -o <temp>/safe_bit.o
+gcc -std=c17 -Wall -Wextra -Wpedantic -Werror -c learning/week-01/day-06/copy_token.c -o <temp>/copy_token.o
+gcc -std=c17 -Wall -Wextra -Wpedantic -Werror -c learning/week-01/day-06/lifetime.c -o <temp>/lifetime.o
+
+Results: PASS — all exit code 0; no warning/error.
+
+=== EXECUTOR-CREATED POST-CLOSE BOUNDARY HARNESS ===
+
+Build command:
+gcc -std=c17 -Wall -Wextra -Wpedantic -Werror tests/host/test_w01d06_gate.c <temp>/safe_bit.o <temp>/copy_token.o <temp>/lifetime.o -o <temp>/test_w01d06_gate.exe
+
+Build result: PASS — exit code 0; no warning/error.
+
+Coverage:
+- safe bit: NULL, zero width, lsb+width overflow, oversized field,
+  unchanged-on-failure and full-width write.
+- copy token: NULL destination, zero capacity, NULL source, truncation,
+  termination and complete copy.
+- maximum API: NULL values, zero count, NULL output, unchanged-on-failure and
+  all-negative input.
+
+Test result: PASS — SUMMARY: 14 tests, 0 failed; exit code 0.
+
+Known limitations:
+- The boundary harness was created and run by the executor after CLOSE ATTEMPT;
+  it is not attributed to the learner.
+- No sanitizer result is claimed.
+- safe_bit.exe in the day-06 directory is a learner-produced ignored build
+  artifact. It was not rewritten, staged or committed by this transaction.
+- W01D06 PASS is a daily coding-gate result, not the separate W01D07 Week 1
+  competency-gate result. W01-C-FOUND remains COMPETENCY_UNVERIFIED.

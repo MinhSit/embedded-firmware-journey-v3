@@ -66,10 +66,18 @@ Artifact evidence:
 - W01D04 safe bit-operations practice: strict host build and 34/34 tests PASS;
   invalid-input, unchanged-on-failure, full-width and field-isolation behavior
   recorded; AI-3 review/debug after meaningful learner attempts.
-- These are artifact/practice evidence only. None is fresh AI-0 E5 evidence.
+- W01D05 fixed-size ring-buffer practice: strict host build and two consecutive
+  36/36 test runs PASS; AI-3 post-attempt review after learner implementation.
+- W01D06 independent 45-minute C coding assessment
+  `W01D06-C-CODING-01`: 98/100 PASS; mandatory items PASS; scored phase AI-0
+  integrity PASS; original source and written answers preserved. This is daily
+  coding-gate evidence and does not replace the separate W01D07 competency gate.
+- W01D01 through W01D05 records remain artifact/practice evidence. W01D06 is
+  valid independent assessment evidence, but it is not the complete defined
+  gate for `W01-C-FOUND`.
 
 Independent gate:
-Fresh Week 1 V3 AI-0 gate required.
+W01D07 separate Week 1 V3 60-minute AI-0 competency gate required.
 
 AI mode:
 AI-0 for gate.
@@ -81,11 +89,12 @@ Last verified:
 NONE UNDER V3
 
 Retest condition:
-Complete Week 1 V3 and pass a fresh AI-0 gate.
+Complete W01D07 and pass its separate Week 1 AI-0 competency gate.
 
 Notes:
-Do not promote pre-V3 or W01D01–W01D04 artifact/test results to competency
+Do not promote pre-V3 or W01D01–W01D05 artifact/test results to competency
 PASS. W01D03's interrupted generated pre-check remains a historical
 `MENTOR/SYSTEM WORKFLOW VARIANCE — NON-SCORING`; it is not why competency is
 unverified. `W01-C-FOUND` remains unverified because the fresh independent
-Week 1 AI-0 gate is outstanding and assisted practice cannot substitute for it.
+Week 1 AI-0 competency gate in W01D07 is outstanding. The W01D06 98/100 daily
+coding-gate PASS is retained without being relabeled as Week 1 competency PASS.

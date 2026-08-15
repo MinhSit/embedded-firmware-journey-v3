@@ -54,3 +54,8 @@
 *.sr   -text
 *.pcap -text
 *.pcapng -text
+
+# Preserve the original byte sequence of scored W01D06 raw evidence.
+learning/week-01/day-06/safe_bit.c -text -eol
+learning/week-01/day-06/copy_token.c -text -eol
+learning/week-01/day-06/lifetime.c -text -eol

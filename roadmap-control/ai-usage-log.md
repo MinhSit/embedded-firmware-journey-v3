@@ -296,6 +296,65 @@ categories passed. Recovery: `NOT ACTIVE`. Next execution: `W01D06`.
 
 ---
 
+## 2026-08-15 — W01D06 independent C coding assessment and post-close review
+
+Assessment ID:
+`W01D06-C-CODING-01`
+
+Scored phase AI level:
+AI-0 — independent / closed book.
+
+External help during scored phase:
+NO.
+
+Scored-phase integrity:
+PASS — no external AI, search, notes, old code or solution assistance was used
+during `START GATE` through `CLOSE ATTEMPT`. The learner sent work to ChatGPT
+before closure, but ChatGPT withheld review, hints and correctness feedback until
+after `CLOSE ATTEMPT`.
+
+Post-close AI level:
+AI-3 — review, assessment and correction discussion after the attempt closed.
+
+What AI contributed after close:
+- reviewed and scored the preserved submission;
+- clarified that `memcpy(dst, src, sizeof(src))` may read beyond the source
+  object and therefore has undefined behavior, not guaranteed "garbage";
+- created and ran post-close executor boundary tests;
+- prepared evidence metadata and routine END DAY bookkeeping.
+
+Files/functions materially assisted:
+- No raw `.c` file was assisted or modified.
+- `POST_GATE_REVIEW_W01D06.md`, `ASSESSMENT_RESULT_W01D06.md`, executor-created
+  test/evidence and control bookkeeping were prepared after close.
+
+Implementation code provided during scored phase:
+NO.
+
+Gate answer revealed during scored phase:
+NO.
+
+Raw result:
+`98/100 PASS` — Task 1 35/35; Task 2 28/30; Task 3 20/20; Task 4 15/15;
+mandatory items PASS.
+
+Competency affected:
+The W01D06 daily coding-gate result is valid AI-0 assessment evidence, but it is
+not the roadmap's separate W01D07 Week 1 competency gate. No competency PASS is
+claimed; `W01-C-FOUND` remains `COMPETENCY_UNVERIFIED`.
+
+Fresh independent retest required:
+NO for the passed W01D06 daily coding gate. W01D07 remains the separate required
+60-minute Week 1 AI-0 competency gate, not a retest of W01D06.
+
+Notes:
+Raw source hashes were preserved. Strict C17 builds passed; the learner-authored
+Task 1 runner reported seven PASS results; the executor-created post-close
+harness reported 14 tests, 0 failed. Recovery: `NOT ACTIVE`. Next execution:
+`W01D07`.
+
+---
+
 ## Pre-V3 Migration Note
 
 Known affected scope:
