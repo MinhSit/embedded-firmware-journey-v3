@@ -1187,13 +1187,17 @@ Contract availability/planned-time precheck was skipped; this is recorded as
 
 ### 2. Actual Status
 
-GREEN — W01D07 technical/assessment work is `COMPLETED / PERSISTED`. Tasks 1-4,
+GREEN — FINAL. W01D07 technical/assessment work, the remaining English oral
+activity and all required Day-7/week-close evidence are complete. Tasks 1-4,
 the mandatory bounds/lifetime condition and AI-0 integrity passed. The gate
-decision is categorical PASS, and `W01-C-FOUND` transitions to
+decision remains categorical PASS, and `W01-C-FOUND` remains
 `COMPETENCY_PASS`.
 
-Week 1 final closure remains pending. MASTER CHECK was not executed and is next;
-CP-01 / WEEKLY REVIEW was not executed and remains pending.
+Historical note: W01D07 was previously marked GREEN for its technical/assessment
+work before the remaining Day-7/week-close evidence was complete. MASTER CHECK
+classified that premature whole-day GREEN as a MEDIUM finding. It did not affect
+the competency PASS or AI-0 integrity and is `RESOLVED BY WEEK-1 FINAL CLOSURE`
+through the persisted English oral note, Week-1 scorecard and RV-002 CP-01 review.
 
 ### 3. Focused Time
 
@@ -1220,6 +1224,10 @@ What I personally implemented, reasoned about, measured, or explained:
   a safe API redesign, and reasoned through unseen ring-buffer state.
 - Learner supplied the post-gate volatile/UB explanation preserved separately
   from executor review caveats.
+- Learner completed the scheduled English oral explanation about why `volatile`
+  does not make code thread-safe. The delivery is recorded as non-competency
+  communication evidence; no standalone audio exists and exact duration was not
+  independently measured.
 - No learner-created Day07 `.c` files or folder existed during the scored
   attempt; the direct chat answers are the raw competency evidence.
 
@@ -1240,6 +1248,8 @@ What AI helped with:
   the scored phase.
 - After closure, executor preserved the recovered raw text verbatim, authored
   the assessment/review files and prepared bounded control bookkeeping.
+- AI also helped structure/edit the English wording before the learner spoke.
+  This was allowed communication support outside the scored AI-0 gate.
 
 Files/functions materially assisted:
 - No learner-created Day07 `.c` file existed.
@@ -1265,15 +1275,18 @@ Assessment result:
 - Decision: `CATEGORICAL PASS`
 - Competency: `W01-C-FOUND — COMPETENCY_PASS`
 
-Files changed:
+Files changed by the earlier W01D07 gate-persistence transaction:
 - `learning/week-01/day-07/RAW_COMPETENCY_SUBMISSION_W01D07.md`
 - `learning/week-01/day-07/RAW_POST_GATE_EXPLANATION_W01D07.md`
 - `learning/week-01/day-07/ASSESSMENT_RESULT_W01D07.md`
 - `learning/week-01/day-07/POST_GATE_REVIEW_W01D07.md`
+
+Files changed by the Week-1 final-closure transaction:
+- `learning/week-01/day-07/ENGLISH_ORAL_EXPLANATION_W01D07.md`
+- `roadmap-control/weekly-scorecards/week-01.md`
 - `roadmap-control/daily-log.md`
-- `roadmap-control/ai-usage-log.md`
 - `roadmap-control/current-state.md`
-- `roadmap-control/competency-ledger.md`
+- `docs/system/ROADMAP_REVIEW_LOG.md`
 
 Build:
 `NOT RUN — optional executor C transcription/validation was not required for
@@ -1282,6 +1295,16 @@ the recovered persistence transaction.`
 Tests:
 `NOT RUN — no learner Day07 source files existed; technical scoring rests on
 the closed raw submission and recorded assessment decision.`
+
+Week-1 final-closure validation:
+- Canonical W01D01-W01D06 strict host builds/tests were rerun using temporary
+  output paths; all builds and tests passed.
+- W01D01: 46 tests, 0 failed.
+- W01D02: runtime output `11 20 0 6 W01D02`.
+- W01D03: 25 tests, 0 failed.
+- W01D04: 34 tests, 0 failed.
+- W01D05: two consecutive runs, each 36 tests and 0 failed.
+- W01D06: learner runner seven PASS results; executor harness 14 tests, 0 failed.
 
 ### 7. Evidence
 
@@ -1297,6 +1320,9 @@ Captures:
 Reports:
 - `learning/week-01/day-07/ASSESSMENT_RESULT_W01D07.md`
 - `learning/week-01/day-07/POST_GATE_REVIEW_W01D07.md`
+- `learning/week-01/day-07/ENGLISH_ORAL_EXPLANATION_W01D07.md`
+- `roadmap-control/weekly-scorecards/week-01.md`
+- `docs/system/ROADMAP_REVIEW_LOG.md` — `RV-002 — CP-01 End of Week 1`
 
 Other:
 - `learning/week-01/day-07/RAW_COMPETENCY_SUBMISSION_W01D07.md` preserves Raw
@@ -1312,13 +1338,17 @@ Expected:
 - The categorical PASS is not converted to a numeric score.
 - Only `W01-C-FOUND` transitions from `COMPETENCY_UNVERIFIED` to
   `COMPETENCY_PASS`.
-- Week 1 remains pending MASTER CHECK and CP-01 / WEEKLY REVIEW.
+- The earlier gate-persistence snapshot correctly kept Week 1 pending MASTER
+  CHECK and CP-01 / WEEKLY REVIEW. This final transaction completes those steps
+  and closes Week 1 as PASS.
 
 Observed:
 - Raw block comparison: PASS for Tasks 1-4 and volatile/UB explanation.
 - Gate: PASS; AI-0 integrity: PASS; external help: NO by learner human
   confirmation.
 - Post-gate volatile/UB explanation: `PASS WITH PRECISION CAVEATS`.
+- MASTER CHECK: `PASS WITH FINDINGS`; MEDIUM resolved, LOW accepted/no action.
+- CP-01: `RV-002 PERSISTED`; Week-1 Weekly Decision: `PASS`.
 
 Relevant values/registers/timing/errors:
 - Date executed: `2026-08-15`; roadmap calendar Day 7: `2026-08-16`.
@@ -1326,6 +1356,8 @@ Relevant values/registers/timing/errors:
 - Actual Focused Time: `~2h — learner estimate`.
 - Available Focused Time: `NOT SUPPLIED`.
 - Planned Focused Time: `NOT SUPPLIED`.
+- English oral-practice exact duration: `NOT INDEPENDENTLY MEASURED`.
+- Standalone audio retained: `NO`.
 - No hardware/register measurement was required.
 
 ### 9. Understanding Check
@@ -1352,6 +1384,10 @@ What required post-gate precision caveats:
 Defect/Test IDs:
 - None severe in the assessed mandatory bounds/lifetime scope.
 - No numeric deductions exist because the declared result is categorical.
+- MASTER CHECK MEDIUM: premature whole-day GREEN — `RESOLVED BY WEEK-1 FINAL
+  CLOSURE`; no competency or retest impact.
+- MASTER CHECK LOW: Task-2 `1u << i` theoretical C-portability caveat —
+  `ACCEPT / NO ACTION REQUIRED`; no learner raw-code change.
 
 Root cause known?:
 - N/A — the gate passed its mandatory criteria.
@@ -1364,20 +1400,18 @@ Current hypothesis:
 ### 11. Carry-over
 
 Task:
-- MASTER CHECK — next, read-only, not yet executed.
-- CP-01 / WEEKLY REVIEW — pending after MASTER CHECK and finding disposition.
+- `NONE`
 
 Closure criteria:
-- W01D07 evidence/control persistence is included in one bounded commit and
-  synchronized to `origin/main`.
-- Week 1 is not marked fully CLOSED until MASTER CHECK and CP-01 / WEEKLY REVIEW
-  are actually completed.
+- English oral note, Week-1 scorecard, MASTER CHECK disposition, RV-002 CP-01
+  review and final control state are included in one bounded containing commit.
+- Week 1 Weekly Decision: `PASS`; Week 2 prerequisite: `SATISFIED`.
 
 Recovery:
 - `NOT ACTIVE`
 
 ### 12. Next Action
 
-MASTER CHECK — run the required read-only Week 1 audit on the persisted W01D07
-snapshot; do not mutate the repository or award another competency during that
-audit.
+Project Chat reviews the recorded CP-01 workflow observations before making any
+workflow/gate-system change; W02D01 remains eligible but `NOT STARTED` until its
+normal start workflow begins.

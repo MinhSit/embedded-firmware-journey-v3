@@ -1992,6 +1992,217 @@ No Sprint 0 recovery and no roadmap/system revision are justified.
 On `2026-08-10`, start `WEEK 1 DAY 1 — Embedded C Foundation` with fresh independent C validation under the V3 AI-integrity rules.
 
 ---
+
+## RV-002 — CP-01 End of Week 1
+
+Date performed: `2026-08-15`
+
+Checkpoint calendar date: `2026-08-16`
+
+Calendar Position: `2026-08-15 — Week 1 / Day 6 by roadmap calendar`
+
+Execution Position: `WEEK 1 — CLOSED EARLY`
+
+Roadmap version: `EMBEDDED_ROADMAP_V3.1`
+
+Relevant commit: `SELF — containing commit`
+
+Execution note: Performed one day early because the scheduled Week-1 work and
+required competency assessment were completed early.
+
+### Inputs
+
+Current State: Week-1 required artifacts/evidence complete; W01D01-W01D07 GREEN;
+`W01-C-FOUND — COMPETENCY_PASS`; Recovery not active.
+
+Weekly scorecard: `roadmap-control/weekly-scorecards/week-01.md` — Weekly
+Decision `PASS`; carry-over `NONE`; Week 2 prerequisite `SATISFIED`.
+
+Gate: fresh W01D07 `W01-C-FOUND` AI-0 competency gate — categorical PASS;
+external help `NO — learner human confirmation`; retest `NONE REQUIRED`.
+
+AI usage: early Week-1 practice used relatively high AI assistance; independence
+improved through W01D04-W01D05 and fresh AI-0 evidence exists from W01D06 and
+W01D07. The English speaking-script assistance was allowed non-gate
+communication support and does not alter the W01D07 scored-phase provenance.
+
+Schedule variance: Week 1 execution finished one calendar day early. Actual
+focused time is materially below the roadmap 46–48h standard; no underwork,
+schedule debt or roadmap-load change is inferred from one week of evidence.
+
+Health/load: learner human input `A — sustainable`; sleep/rest acceptable; no
+all-nighter and no day above nine focused hours reported. Health score `2/2`.
+
+Career data: `N/A`.
+
+Other evidence: W01D01-W01D06 canonical strict host builds/tests rerun PASS;
+Day-7 raw competency evidence retained; English oral note retained without a
+standalone-audio or measured-duration claim; MASTER CHECK result below.
+
+### CP-01 Week Consistency Sweep
+
+Machine check: `python tools/roadmap/closure_lint.py` — `PASS`; `0 FAIL / 0 WARN /
+40 PASS`.
+
+Human semantic audit did not re-grade technical competency:
+
+- W01D01: `PASS` — status, planned/actual time, artifact/evidence, AI provenance,
+  competency boundary, carry-over and progression are consistent.
+- W01D02: `PASS` — same fields consistent; AI-5 practice remains distinct from
+  independent competency.
+- W01D03: `PASS` — historical generated-precheck variance remains truthful and
+  non-scoring; status correction is supported.
+- W01D04: `PASS` — artifact/test evidence and AI-3 practice provenance are
+  consistent.
+- W01D05: `PASS` — repeated test evidence and learner-owned implementation
+  provenance are consistent.
+- W01D06: `PASS` — 98/100 daily coding-gate result remains separate from
+  `W01-C-FOUND`; raw evidence remains protected.
+- W01D07: `WARN — RESOLVED FOR CLOSURE` — availability/planned time were not
+  supplied and the whole day was marked GREEN before its remaining close
+  evidence existed. The missing planning fields remain truthful historical
+  workflow variance; the premature-GREEN finding is resolved by the English
+  note, scorecard and this review. Competency PASS and AI-0 integrity are
+  unaffected.
+- Current State: `PASS` — Calendar, Execution, Artifact and Competency positions
+  remain distinct; carry-over `NONE`; Recovery `NOT ACTIVE`; W02D01 not started.
+
+### MASTER CHECK
+
+Audit base SHA: `2f27dcba45afd9e0cf672933fe0dd558f0cd7874`
+
+Overall: `PASS WITH FINDINGS`
+
+| Severity | Count |
+| --- | ---: |
+| BLOCKER | 0 |
+| HIGH | 0 |
+| MEDIUM | 1 |
+| LOW | 1 |
+| COSMETIC | 0 |
+
+MEDIUM — W01D07 was marked GREEN for the whole day before the remaining Day-7
+and week-close evidence was complete.
+
+Disposition: `RESOLVED BY WEEK-1 FINAL CLOSURE` because the learner completed
+the remaining English oral activity and this containing transaction persists
+its note, the Week-1 scorecard and CP-01. This finding did not affect
+`W01-C-FOUND — COMPETENCY_PASS`, AI-0 integrity or retest status.
+
+LOW — Task-2 `1u << i` has a theoretical C-portability caveat on implementations
+where `unsigned int` is narrower than the intended `uint32_t` use.
+
+Disposition: `ACCEPT / NO ACTION REQUIRED`. This is not a severe correctness
+error for the actual Week-1 toolchain, does not change the gate result and does
+not require a retest. Learner raw code remains unchanged.
+
+MASTER CHECK did not award competency and made no repository mutation at its
+audited snapshot.
+
+### Active review items
+
+- RR-001: `OBSERVING / WATCH` — Week-1 actual time is materially below standard
+  load, while required output and independent competency passed; retain the
+  roadmap load and collect more data.
+- RR-003: `OBSERVING / WATCH` — early days used higher AI assistance, with clear
+  improvement toward AI-0 independence.
+- RR-008: `WATCH` — no recovery/buffer trigger is active and no critical-path
+  risk is currently identified.
+
+### CP-01 learner workflow observations — record only
+
+**Observation A — practice difficulty / feedback loop**
+
+Classification: `R2 LEARNING-DESIGN WATCH`.
+
+The learner reports that normal Week-1 coding exercises felt too easy; performance
+is strong with a tight code → test → feedback → fix loop; difficult practice is
+welcome when deep tests and iterative correction exist; without feedback,
+manual correctness reasoning slows progress. Future practice should be reviewed
+for materially higher difficulty while preserving deep test coverage. No change
+is approved here.
+
+**Observation B — competency-gate feedback model**
+
+Classification: `R2 LEARNING-DESIGN WATCH / PROPOSAL TO REVIEW`.
+
+The learner does not request hidden tests or solutions, but proposes bounded
+multiple submissions, approximately two to five attempts, with only minimal
+aggregate feedback such as correct/incorrect or pass percentage. This may alter
+gate semantics or assessment integrity. It requires separate impact analysis
+and owner approval; it is not applied by this transaction.
+
+**Observation C — end-of-week workflow**
+
+Classification: `R1 OPERATIONAL FRICTION`.
+
+The learner reports that END DAY works well, while Week Close required too many
+manual prompts/steps and should become a more coherent workflow. Record for
+later review; do not redesign it in this closure.
+
+**Observation D — HANDOFF**
+
+Disposition: `POSITIVE SIGNAL / KEEP CURRENT HANDOFF APPROACH`.
+
+The learner reports that HANDOFF worked effectively after account/context
+failure. No change is required now.
+
+These observations do not block the Week-1 PASS.
+
+### Findings
+
+Curriculum Coverage:      OK
+Sequencing/Prerequisite:  OK
+Workload:                 WATCH
+Learning Depth:           OK
+AI Workflow:              WATCH
+Evidence Overhead:        WATCH
+Industry Relevance:       UNKNOWN
+Project Value:            UNKNOWN
+Career Fit:               UNKNOWN
+Health/Sustainability:    OK
+
+Early R3/R4 trigger: `NONE`.
+
+### Defects confirmed
+
+NONE. The premature-GREEN audit finding is resolved by completing the missing
+closure evidence; no curriculum or system defect is confirmed here.
+
+### Operational adjustments
+
+NONE applied. The workflow observations remain open review input.
+
+### Change requests opened
+
+NONE approved. Observation B requires separate assessment-integrity impact
+analysis before any proposal can be approved.
+
+### Decision
+
+`CONTINUE EMBEDDED_ROADMAP_V3.1`
+
+No curriculum/system amendment, roadmap-load change, workflow redesign or
+gate-contract change is approved in this transaction.
+
+### Files affected
+
+- `docs/system/ROADMAP_REVIEW_LOG.md`
+- `learning/week-01/day-07/ENGLISH_ORAL_EXPLANATION_W01D07.md`
+- `roadmap-control/weekly-scorecards/week-01.md`
+- `roadmap-control/daily-log.md`
+- `roadmap-control/current-state.md`
+
+### Next formal review
+
+`CP-02 — Foundation MCU Gate — 06/09/2026`
+
+### Exact next action
+
+Project Chat reviews the recorded CP-01 workflow observations before making any
+workflow/gate-system change; W02D01 remains eligible but `NOT STARTED`.
+
+---
 # 18. REVIEW ENTRY TEMPLATE
 
 ```text
@@ -2376,7 +2587,7 @@ Default giữa các checkpoint:
 > **Execute V3.1. Collect evidence. Change only the minimum necessary when a real defect is demonstrated.**
 
 **Current decision:** `CONTINUE EMBEDDED_ROADMAP_V3.1`
-**Last completed formal review:** `RV-001 — CP-00 Sprint 0 Exit — 09/08/2026`
-**Next formal review:** `CP-01 — End of Week 1 — 16/08/2026`
+**Last completed formal review:** `RV-002 — CP-01 End of Week 1 — 15/08/2026`
+**Next formal review:** `CP-02 — Foundation MCU Gate — 06/09/2026`
 **Early exception:** `R3/R4 structural/system defect`
 **Latest system review:** `RR-018 — CLOSED — MASTER_PROMPT_V3 3.1.2 WORKFLOW CORRECTION / CANONICAL`
