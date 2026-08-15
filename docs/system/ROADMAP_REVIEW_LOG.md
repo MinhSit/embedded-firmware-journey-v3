@@ -1,13 +1,13 @@
 # ROADMAP REVIEW LOG — EMBEDDED/FIRMWARE ROADMAP V3.1
 
 **Document ID:** `ROADMAP_REVIEW_LOG`
-**Version:** `1.3.0`
+**Version:** `1.4.0`
 **Status:** `ACTIVE REVIEW LOG — NON-AUTHORITATIVE`
 **Created:** `2026-08-09`
 **Timezone:** `Asia/Ho_Chi_Minh`
 **Reviewed roadmap:** `EMBEDDED_ROADMAP_V3.1.docx`
 **System authority:** `SYSTEM_SPEC_V3.md 3.0.0`
-**Execution authority:** `MASTER_PROMPT_V3.md 3.1.2 — FROZEN BASELINE with Amendment 3.1.2`
+**Execution authority:** `MASTER_PROMPT_V3.md 3.1.3 — FROZEN BASELINE with Amendment 3.1.3`
 **Intended repo path:** `docs/system/ROADMAP_REVIEW_LOG.md`
 **Canonical live repo:** `https://github.com/MinhSit/embedded-firmware-journey-v3`
 
@@ -1870,6 +1870,127 @@ Commit: `SELF — containing commit`
 System Spec and Roadmap remain unchanged.
 
 ---
+## RR-019 — CP-01 WORKFLOW / LEARNING-FEEDBACK AMENDMENT
+
+Status: `CLOSED`
+Severity: `R1 / R2`
+Opened: `2026-08-15`
+Closed: `2026-08-15`
+Target: `COMPLETED — CANONICAL WORKFLOW AMENDMENT`
+Owner approval: `APPROVED — 2026-08-15`
+
+### Approved items
+
+```text
+MC-01 END WEEK                         APPROVED / APPLIED
+MC-02 harder normal practice           APPROVED / APPLIED
+MC-03 bounded coding-gate feedback     APPROVED / APPLIED
+HANDOFF                                KEEP / CLOSED / NO CHANGE
+```
+
+### Four-dimensional impact
+
+**MC-01 — END WEEK**
+
+```text
+Higher policy / curriculum?:     NO
+Execution-engine behavior?:      YES
+Learner-facing workflow?:        YES
+Persistent schema / evidence?:   NO
+```
+
+**MC-02 — harder normal practice**
+
+```text
+Higher policy / curriculum?:     NO
+Execution-engine/teaching?:      YES
+Learner-facing workflow?:        minor YES
+Persistent schema / evidence?:   NO
+```
+
+**MC-03 — bounded coding-gate feedback**
+
+```text
+Higher policy / curriculum?:     NO change to mandatory competency, PASS
+                                 definition, AI integrity, deadlines or roadmap content
+Execution-engine behavior?:      YES
+Learner-facing workflow?:        YES
+Persistent schema / evidence?:   gate-local metadata only; NO global schema redesign
+```
+
+**HANDOFF**
+
+```text
+No behavioral change.
+```
+
+### Applied minimum amendment
+
+- Add learner-facing `END WEEK` as a stateful orchestrator: context/version and
+  assessment dependencies first; unresolved AI-0 assessment before deep audit;
+  read-only `MASTER CHECK`; findings disposition; separate bounded correction
+  and independent verify when required; one batched human-only preflight;
+  weekly review/CP; weekly decision; carry-over/recovery/eligibility; one coherent
+  closure transaction; linter/semantic audit/diff check/commit/authorized push/
+  remote verification; exactly one next action.
+- Calibrate normal learning, especially from Week 2 onward after prerequisites,
+  toward materially harder implementation with visible/deep iterative feedback,
+  richer boundary/failure/state/idempotency/wrap/regression cases and meaningful
+  randomized/property/stress work after deterministic baseline.
+- Keep generated extra/deep tests `NON-SCORING` unless traceable to System Spec,
+  roadmap/day card, valid gate contract or necessary operational invariant.
+- Add an optional prospective protocol for future scored AI-0 coding subparts:
+  maximum two total scored submissions, `PASS / NOT PASS` only, one original
+  timer, raw-attempt retention and no hidden-case/diff/hint/review/score leak.
+  Both submissions are one gate attempt; the retry is not a retest.
+- Keep conceptual, verbal, design-defense, project-defense, unseen-diagnosis and
+  interview-style portions strictly single-response/no-feedback while scored.
+- Record Week-1 HANDOFF as positive evidence and retain the current
+  context-transfer-only architecture.
+
+### Explicitly preserved
+
+```text
+SYSTEM_SPEC_V3.md:                    UNCHANGED
+EMBEDDED_ROADMAP_V3.1.docx:           UNCHANGED
+PASS semantics:                       UNCHANGED
+AI-0 independence requirement:        UNCHANGED
+Week-1 competency evidence:           UNCHANGED
+W01D06/W01D07 raw attempts/results:   UNCHANGED / NOT REINTERPRETED
+No retrospective competency impact:   CONFIRMED
+W01-C-FOUND:                           COMPETENCY_PASS
+Week 1:                               PASS / CLOSED EARLY
+W01D01-W01D07:                         GREEN — FINAL
+MASTER CHECK:                          COMPLETED
+CP-01:                                 RV-002 COMPLETED
+Carry-over:                            NONE
+Recovery:                              NOT ACTIVE
+Week 2 eligibility:                    YES
+W02D01:                                NOT STARTED
+HANDOFF:                               CONTEXT TRANSFER ONLY / UNCHANGED
+```
+
+### Verification
+
+- Authority/version cross-check: `PASS`.
+- Audit -> review -> separate correction -> verify boundary: `PRESERVED`.
+- Assessment firewall before deep audit where leakage is possible: `PRESERVED`.
+- Bounded coding feedback: exactly two maximum submissions, binary-only signal,
+  one original timer, raw retention and explicit prospective opt-in: `PASS`.
+- Normal-practice deep tests cannot silently become scoring requirements: `PASS`.
+- Learner handbook synchronized and rendered for page-image visual QA: `PASS`.
+- System Spec, Roadmap, Week-1 learner/evidence paths and competency ledger
+  semantics: `UNCHANGED`.
+- Closure linter, final `git diff --check`, semantic diff review and remote
+  verification: required by the containing correction transaction.
+
+Commit: `SELF — containing commit`
+
+### Decision
+
+`CONTINUE EMBEDDED_ROADMAP_V3.1`
+
+---
 # 17. BASELINE REVIEW — PRE-EXECUTION
 
 **Review ID:** `RV-000`
@@ -2570,6 +2691,20 @@ Roadmap, lifecycle states, curriculum, dates, daily-log schema, gates,
 competency, PASS/FAIL, AI levels or evidence semantics.
 ```
 
+# 23.11 VERSION NOTE — 1.4.0
+
+```text
+Change:
+Close RR-019 after applying owner-approved END WEEK orchestration, harder
+iterative normal practice, optional bounded binary feedback for future AI-0
+coding subparts and learner-handbook synchronization. HANDOFF remains unchanged.
+
+Behavior impact:
+Backward-compatible execution/teaching workflow amendment. NONE to System Spec,
+Roadmap, curriculum, mandatory competency, PASS definition, AI-0 independence,
+deadlines or global evidence schema. W01D06/W01D07 are not reinterpreted.
+```
+
 ---
 
 # 24. FINAL RULE
@@ -2590,4 +2725,4 @@ Default giữa các checkpoint:
 **Last completed formal review:** `RV-002 — CP-01 End of Week 1 — 15/08/2026`
 **Next formal review:** `CP-02 — Foundation MCU Gate — 06/09/2026`
 **Early exception:** `R3/R4 structural/system defect`
-**Latest system review:** `RR-018 — CLOSED — MASTER_PROMPT_V3 3.1.2 WORKFLOW CORRECTION / CANONICAL`
+**Latest system review:** `RR-019 — CLOSED — MASTER_PROMPT_V3 3.1.3 CP-01 WORKFLOW AMENDMENT / CANONICAL`

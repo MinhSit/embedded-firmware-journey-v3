@@ -1,9 +1,9 @@
 # CURRENT STATE V3 — EMBEDDED/FIRMWARE ROADMAP
 
 **Document ID:** `CURRENT_STATE_V3`
-**Version:** `3.0.25`
+**Version:** `3.0.26`
 **State type:** Operational snapshot — describes reality and creates no new policy
-**Generated at:** `2026-08-15 20:09 +07:00`
+**Generated at:** `2026-08-15 21:01 +07:00`
 **Timezone:** `Asia/Ho_Chi_Minh`
 **Status:** `WEEK 1 PASS / CLOSED EARLY — WEEK 2 ELIGIBLE — W02D01 NOT STARTED`
 
@@ -13,8 +13,8 @@
 
 - **System Spec version:** `SYSTEM_SPEC_V3 3.0.0`
 - **Roadmap version:** `EMBEDDED_ROADMAP_V3.1 3.1.0`
-- **Master Prompt version:** `MASTER_PROMPT_V3 3.1.2`
-- **Current State version:** `3.0.25`
+- **Master Prompt version:** `MASTER_PROMPT_V3 3.1.3`
+- **Current State version:** `3.0.26`
 - **Implementation runbook:** `roadmap-control/execution-runbook.md` — `NON-AUTHORITATIVE`
 
 If this file conflicts with a higher-authority source, the higher-authority source wins.
@@ -33,7 +33,7 @@ If this file conflicts with a higher-authority source, the higher-authority sour
 
 - **Competencies verified:** `W01-C-FOUND — Embedded C foundation (W01D07 AI-0 gate PASS, 2026-08-15)`
 - **Competencies unverified:** `NONE currently recorded for Week 1 C foundation after the W01D07 gate`
-- **Competencies invalidated/retest required:** `NONE from the W01D07 gate`; pre-V3 Week 1 evidence remains historical/reference only and prior AI-assisted practice retains its recorded provenance.
+- **Competencies invalidated/retest required:** `NONE from the W01D07 gate or RR-019 workflow amendment`; pre-V3 Week 1 evidence remains historical/reference only and prior AI-assisted practice retains its recorded provenance.
 - **Current AI mode:** `NONE — Week 1 is closed; W02D01 is not started`
 - **AI-contaminated evidence:** W01D01 E06 exposed exact implementation line `*slot = target;`; W01D02 received a complete experiment scaffold and substantial evidence prose; W01D03 received bounded code/syntax assistance after attempts and AI-assisted wording in `alignment-note.md` Section 7. W01D04 used AI-3 review/debug and corrected practice explanations after meaningful learner attempts. W01D05 used AI-1 theory, AI-2 graded hints/design questioning and AI-3 post-attempt review; the learner owned the final core implementation. W01D06 and W01D07 raw scored evidence are not contaminated: each scored phase was AI-0 with external help NO, and review/administrative assistance began only after the learner's explicit closure signal.
 
@@ -46,6 +46,7 @@ If this file conflicts with a higher-authority source, the higher-authority sour
 - **Week 1:** `PASS / CLOSED`
 - **MASTER CHECK:** `COMPLETED — PASS WITH FINDINGS; MEDIUM finding RESOLVED; LOW finding ACCEPTED / NO ACTION`
 - **CP-01:** `COMPLETED — RV-002`
+- **RR-019:** `APPLIED — CP-01 workflow/learning-feedback amendment; END WEEK added; harder iterative normal practice calibrated; bounded coding-gate feedback is prospective explicit opt-in only; HANDOFF unchanged`
 - **Week 2 eligibility:** `YES`
 - **W02D01:** `NOT STARTED`
 - **Current gate:** `NONE ACTIVE — Week 1 gate and close reviews completed; W02D01 NOT STARTED`
@@ -95,7 +96,7 @@ If this file conflicts with a higher-authority source, the higher-authority sour
 - **Roadmap calendar start for Week 2:** `2026-08-17`
 - **Hard deadline:** `2026-12-14 — project v1.0`
 - **Scope cuts:** `NONE active`. If schedule lag occurs later, apply roadmap-defined cut order: cut P2 first, reduce P1 polish, preserve P0.
-- **Exact Next Action:** `Project Chat reviews the recorded CP-01 workflow observations before making any workflow/gate-system change; W02D01 remains eligible but not started.`
+- **Exact Next Action:** `On/after 2026-08-17, run BOOT for W02D01; use the calibrated harder normal practice loop. Bounded gate feedback applies only when a future gate contract explicitly enables it.`
 - **Files/links to inspect first:**
   - `roadmap-control/current-state.md`
   - `roadmap-control/execution-runbook.md`

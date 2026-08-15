@@ -1,11 +1,11 @@
 # EXECUTION RUNBOOK
 
 **Document ID:** `EXECUTION_RUNBOOK`
-**Version:** `1.2.0`
+**Version:** `1.3.0`
 **Status:** `ACTIVE IMPLEMENTATION RUNBOOK — NON-AUTHORITATIVE`
-**Owner approval:** `2026-08-14 — APPROVE W01D05 WORKFLOW CORRECTION`
+**Owner approval:** `2026-08-15 — APPROVE CP-01 WORKFLOW AMENDMENT`
 
-Purpose: mechanical repository HOW implementing `MASTER_PROMPT_V3 3.1.2`.
+Purpose: mechanical repository HOW implementing `MASTER_PROMPT_V3 3.1.3`.
 
 This file does not define PASS, AI levels, assessment rules, lifecycle states,
 command legality, actor roles, HANDOFF semantics, competency requirements or
@@ -169,6 +169,28 @@ trace for every generated status-affecting `MUST`.
 - AI keeps temporary session notes in chat. The learner focuses on learning, implementation, tests, and measurements.
 - The learner supplies only execution results or evidence that the active execution environment cannot independently read from the repository or tools.
 
+## 2.1 Calibrated Normal-Learning Practice
+
+For normal `LEARNING` coding work, especially from Week 2 onward after
+prerequisites are satisfied, prepare materially harder implementation and tests
+inside the authoritative day outcome. Preserve the learner's loop:
+
+```text
+code -> visible/deep tests -> observe failure -> reason about delta
+-> modify -> rerun
+```
+
+Use deterministic normal/boundary/invalid/failure/state/repeated-call/wrap and
+regression cases as the baseline. Add randomized/property/stress cases only when
+technically meaningful and after deterministic behavior is established. Tests
+may expose actual/expected differences during normal learning.
+
+Do not pre-fill core implementation. Generated extra/deep tests without trace to
+System Spec, roadmap/day card, valid gate contract or necessary operational
+invariant are `NON-SCORING learning feedback`, never a silent acceptance `MUST`.
+Add a short code-to-diagram/state-flow-to-reasoning/verbal transfer exercise when
+useful without replacing implementation.
+
 ## 3. END DAY Is One Atomic Close Transaction
 
 The active repository execution environment handles `END DAY` in this order:
@@ -216,6 +238,72 @@ Before any END DAY closure edit or commit, the active execution environment must
 - The linter is a read-only operational helper, not policy authority. It must not edit files, judge conceptual answers, decide technical correctness, or award competency PASS.
 - The human audit remains mandatory because evidence meaning, AI provenance, competency claims, carry-over, and historical explanations cannot be safely decided by a structural parser alone.
 
+## 3.3 END WEEK Canonical Orchestration
+
+`END WEEK` is a stateful public orchestrator. Run `ENSURE_CONTEXT_READY`, validate
+governing versions and check assessment/gate dependencies before deep audit.
+
+Mechanical sequence:
+
+```text
+context/state + version ready
+-> unresolved required AI-0 gate/retest resolved under assessment firewall
+-> MASTER CHECK read-only AUDIT
+-> findings disposition
+-> if required: finish AUDIT, REVIEW/disposition, separate bounded CORRECTION, VERIFY
+-> one batched human-only-input preflight
+-> WEEKLY REVIEW / formal CP when due
+-> PASS / CONDITIONAL PASS / FAIL
+-> carry-over / Recovery / next-week eligibility
+-> one coherent week-closure repository transaction
+-> closure linter + semantic consistency audit
+-> final git diff --check
+-> commit + authorized push
+-> independent remote verification
+-> final status + exactly one NEXT ACTION
+```
+
+`MASTER CHECK` never mutates. One explicit executor consent covers one
+already-defined bounded transaction; do not re-ask at internal steps. Unexpected
+new correction scope requires a new transaction boundary. `END WEEK` does not
+alter PASS, competency or AI-integrity semantics.
+
+## 3.4 Optional Bounded Coding-Gate Feedback Mechanics
+
+Apply only when a future scored AI-0 coding-subpart contract explicitly opts in.
+Default/existing gate behavior otherwise remains unchanged.
+
+Contract metadata:
+
+```text
+Submission Policy:
+Max Scored Submissions: 2 total
+Hidden Feedback Mode: PASS / NOT PASS only
+Timer Across Submissions: one original timer; no reset/extension/retry clock
+Raw Attempt Retention: Attempt 1 and Attempt 2 if used
+```
+
+Evaluator mechanics:
+
+1. store raw Attempt 1 plus timestamp/result before returning binary status;
+2. if `PASS`, close the coding subpart subject to all mandatory gate criteria;
+3. if `NOT PASS`, permit at most one learner-chosen revision/submission while the
+   original timer continues;
+4. store raw Attempt 2 plus timestamp/result if used;
+5. record submissions allowed/used, feedback mode, original limit, attempt
+   evidence and final scored submission without overwriting Attempt 1.
+
+Do not reveal hidden test identity/count/category, expected or actual hidden
+value/diff, failing input, bug location, hint, explanation, review, score,
+aggregate pass count or solution. Only ordinary learner-program compiler/runtime
+output explicitly allowed by the contract may be used.
+
+Both submissions are one gate attempt; the retry is not `RETEST`. Exhaustion
+without mandatory criteria is `FAIL`; a later reassessment is a fresh retest.
+AI contamination remains `INVALID / RETEST REQUIRED`. Conceptual/verbal/design-
+defense/project-defense/unseen-diagnosis/interview portions remain single-response
+and no-feedback. Do not reinterpret W01D06 or W01D07.
+
 ## 4. Bookkeeping Ownership
 
 - Routine control-file bookkeeping and long control-file edits belong to the active repository execution environment; the Master Prompt defines how Project Chat prepares this work for an external executor.
@@ -240,6 +328,12 @@ not consume the next learning day's normal allowance and is not for polish.
 - Run the early hygiene check described in Section B, then one final pre-commit
   audit covering applicable build/tests, provenance, required fields,
   consistency, and the mandatory final `git diff --check`.
+- For `END WEEK`, verify audit/review/correction/verify separation, AI-0 firewall
+  ordering, one batched human-input preflight, weekly decision/carry-over/Recovery/
+  eligibility consistency and the authorized remote result.
+- For an opted-in bounded coding subpart, verify exactly two maximum scored
+  submissions, binary-only hidden feedback, one original timer, raw-attempt
+  retention and prospective/non-retroactive application.
 - After an authorized push, run one post-push sync check.
 - Do not repeat an audit/check when there is no objective failure, conflict or
   new evidence. Rerun only affected validation after allowed mechanical hygiene;
@@ -294,6 +388,9 @@ state, latest build/test/failures, measurements, attempts, hypotheses, hints,
 highest AI level, exact implementation exposure, assessment integrity, blockers,
 resume point and transfer strategy. Do not auto-commit. Unknown provenance is
 `UNRESOLVED`; do not guess a lower AI level.
+
+CP-01 retained HANDOFF as context-transfer-only; this amendment makes no
+behavioral change to that architecture.
 
 ## 12. Confirmed Defect -> Retroactive Impact Sweep
 
