@@ -1415,3 +1415,160 @@ Recovery:
 Project Chat reviews the recorded CP-01 workflow observations before making any
 workflow/gate-system change; W02D01 remains eligible but `NOT STARTED` until its
 normal start workflow begins.
+
+---
+
+## 2026-08-17 — Week 02 / Day 01
+
+### 1. Planned Outcome
+
+Build a practical Cortex-M mental model covering Thread/Handler mode, MSP/PSP
+and exception entry/return, then preserve the required learner-created diagram
+and closed-book reconstruction.
+
+### 2. Actual Status
+
+GREEN
+
+### 3. Focused Time
+
+Planned: ~7h
+
+Actual: ~2h56m — learner-derived estimate
+
+### 4. Independent Work
+
+What I personally implemented, reasoned about, measured, or explained:
+
+- Read and reasoned from learner-provided excerpts/screenshots of the ARM guide.
+- Produced self-explanations and a closed-book reconstruction.
+- Reasoned about MSP/PSP selection and exception-frame placement.
+- Distinguished nested/preemption, late-arriving and tail-chaining.
+- Created the Thread/Handler + exception-flow diagram.
+
+### 5. AI Usage
+
+Highest AI level used: AI-3
+
+What AI helped with:
+- AI-1 theory/clarification from learner-provided ARM Cortex-M4 documentation.
+- AI-2 comprehension questions and bounded hints.
+- AI-3 review/correction of learner reasoning and the learner-created diagram
+  after meaningful learner attempts.
+
+Files/functions materially assisted:
+- Review of W02D01 worksheet/diagram concepts.
+- Routine closure bookkeeping.
+
+Competencies contaminated:
+NONE — normal learning day; no new competency PASS is claimed.
+
+Independent retest required:
+NO
+
+External technical help outside Project Chat:
+NO
+
+### 6. Artifact Result
+
+Files changed:
+- `learning/week-02/day-01/TODO_W02_D01.md`
+- `learning/week-02/day-01/CORTEX_M_EXCEPTION_FLOW_W02D01.md`
+- `learning/week-02/day-01/cortex_m_exception_flow.png`
+- `learning/week-02/day-01/SUBMIT_W02_D01.md`
+- `roadmap-control/daily-log.md`
+- `roadmap-control/ai-usage-log.md`
+- `roadmap-control/current-state.md`
+
+Build command:
+N/A — theory/diagram day
+
+Build result:
+N/A
+
+Test command:
+N/A — no code test required by W02D01
+
+Test result:
+N/A
+
+### 7. Evidence
+
+Commit:
+SELF — containing commit
+
+Logs:
+N/A
+
+Captures:
+- `learning/week-02/day-01/cortex_m_exception_flow.png`
+
+Reports:
+- `learning/week-02/day-01/CORTEX_M_EXCEPTION_FLOW_W02D01.md`
+- `learning/week-02/day-01/SUBMIT_W02_D01.md`
+
+Video/demo:
+N/A
+
+Other:
+- `learning/week-02/day-01/TODO_W02_D01.md`
+
+### 8. Measurements
+
+Expected:
+Practical Cortex-M Thread/Handler + exception-flow mental model.
+
+Observed:
+Learner reconstructed the required flow and produced diagram evidence.
+
+Relevant values/registers/timing/errors:
+No debugger/register measurement performed. Previous STM32 baseline source was
+deleted; no hardware/debug observation was fabricated.
+
+### 9. Understanding Check
+
+What I can explain without AI:
+- Thread mode runs normal application execution and may use MSP or PSP.
+- Reset defaults Thread mode to MSP because `CONTROL.SPSEL` resets to 0.
+- Handler mode is always privileged and always uses MSP.
+- Exception entry stacks context on the current stack; if Thread uses PSP, the
+  exception frame is stacked on PSP while Handler runs on MSP.
+- EXC_RETURN carries return-mode, restoration-stack and floating-point-state
+  information.
+- Late-arriving, nested/preemption and tail-chaining are distinct flows.
+
+What I still cannot explain:
+- Detailed roles of xPSR and R0-R3/R12 in the exception stack frame.
+- Deeper EXC_RETURN mechanics.
+
+### 10. Defects / Failed Tests
+
+Defect/Test IDs:
+No code tests.
+
+Learning misconceptions corrected during the session:
+- reset stack default;
+- exception-frame stack selection;
+- EXC_RETURN vs tail-chaining responsibility;
+- timing distinction among late-arriving / nested / tail-chaining.
+
+Root cause known?:
+YES — these were learning misconceptions resolved through source review and
+post-attempt feedback.
+
+Current hypothesis:
+No unresolved blocker exists for the W02D01 practical mental-model outcome.
+
+### 11. Carry-over
+
+Task:
+NONE
+
+Closure criteria:
+N/A — required W02D01 artifact/evidence is complete. The absence of debugger
+observation is not a mandatory W02D01 carry-over.
+
+### 12. Next Action
+
+BOOT W02D02; inspect the Week 2 Day 2 startup-sequence contract and locate the
+vector table / `Reset_Handler` path.

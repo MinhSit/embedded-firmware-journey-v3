@@ -420,6 +420,40 @@ and CP-01 / WEEKLY REVIEW.
 
 ---
 
+## 2026-08-17 — W02D01 Cortex-M mental model / exception flow
+
+Highest AI level:
+AI-3
+
+What AI contributed:
+- theory/clarification from learner-provided ARM documentation;
+- bounded hints and comprehension checks;
+- post-attempt review of learner reasoning and the learner-created diagram;
+- routine closure bookkeeping.
+
+Files/functions materially assisted:
+- review of W02D01 worksheet/diagram concepts;
+- routine closure bookkeeping.
+
+Implementation code provided:
+NO
+
+Gate answer revealed:
+NO — W02D01 is normal learning, not an AI-0 gate.
+
+Competency affected:
+NONE — normal learning day; no new competency PASS is claimed.
+
+Fresh independent retest required:
+NO
+
+Notes:
+The required diagram and learning evidence may support `ARTIFACT_PASS`, but do
+not independently prove a new Cortex-M competency. `W01-C-FOUND` remains the
+latest competency PASS.
+
+---
+
 ## Pre-V3 Migration Note
 
 Known affected scope:
