@@ -454,11 +454,11 @@ latest competency PASS.
 
 ---
 
-## 2026-08-18 — W02D02 STM32F446RE startup sequence / power-on to `main()`
+## 2026-08-18 — W02D02 startup sequence / power-on to `main()`
 
 Highest AI level:
-AI-5 — executor-prepared lab/reference/infrastructure; the learner's final
-conceptual reconstruction remained learner-authored.
+AI-5 overall — executor-prepared lab/reference/infrastructure for both the
+STM32F446RE source/map lab and the supplemental PC-hosted startup simulator.
 
 What AI contributed:
 - theory and clarification of the vector table, `_estack`, MSP,
@@ -468,6 +468,11 @@ What AI contributed:
 - administrative worksheet/submission support and closure bookkeeping;
 - a complete bounded STM32F446RE lab/reference package used to build and inspect
   startup behavior.
+- the supplemental simulator's full scaffold, harness, tests, fault
+  infrastructure, documentation scaffold and build plumbing;
+- direct guided implementation structure/syntax for the learner's `.data` copy,
+  `.bss` zero and trace instrumentation, plus debugging, fault-diagnosis tutoring
+  and simulator-to-STM32 mapping review.
 
 Files/functions materially assisted:
 - `firmware/stm32/w02d02-startup-lab/**` — executor-prepared
@@ -476,26 +481,42 @@ Files/functions materially assisted:
   control records;
 - the learner's final reconstruction in `POWER_ON_TO_MAIN_W02D02.md` was not
   authored or rewritten by AI.
+- `learning/week-02/startup-simulator/**` — executor-generated infrastructure
+  and reference material; Project Chat materially assisted the learner-owned
+  `src/startup.c` core with substantial exact structure/syntax.
+
+Learner contribution:
+- entered and iterated the final `src/startup.c` startup logic;
+- ran tests and baseline/fault demos;
+- corrected the BSS trace-index instrumentation;
+- performed the fault diagnosis and conceptual reconstruction.
 
 Implementation code provided:
-YES — bounded executor-prepared infrastructure/reference code only; not learner
-competency implementation.
+YES — executor-generated infrastructure/reference code plus substantial exact
+implementation structure/syntax exposed during tutoring for the supplemental
+startup core.
 
 Gate answer revealed:
-NO — W02D02 was not an AI-0 competency gate.
+NO ACTIVE GATE — W02D02 and its supplemental simulator were learning practice,
+not an AI-0 competency gate.
 
 Competency affected:
 No existing competency was invalidated and no new competency PASS is claimed.
 The W02D02 artifact is learning evidence only; Week 2 Cortex-M/startup
 competency remains pending the scheduled fresh AI-0 gate.
+The supplemental simulator does not independently prove competency and does not
+create a second W02D02 PASS decision.
 
 Fresh independent retest required:
 NO special retest solely because of this learning-day assistance; the normal
 scheduled fresh Week 2 AI-0 competency gate remains required.
 
 Notes:
-External help: YES. AI-5 applies only to executor-prepared
-lab/reference/infrastructure, not to the learner's conceptual reconstruction.
+The supplemental transaction preserves additional artifact reinforcement only;
+W02D02 remains the original `GREEN / CLOSED / ARTIFACT_PASS` day.
+External help: YES. AI-5 covers executor-prepared infrastructure and the direct
+guided implementation support disclosed above; none of this is independent
+competency evidence.
 Debugger/hardware observation was `NOT PERFORMED`.
 
 ---

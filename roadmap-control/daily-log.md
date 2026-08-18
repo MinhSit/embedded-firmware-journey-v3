@@ -1592,7 +1592,10 @@ Planned: UNRECOVERABLE PROCESS VARIANCE — the W02D02 Day Contract did not
 preserve a trusted numeric value; no value is inferred from the transient `6h`
 availability or from timestamps.
 
-Actual: ~2h56m — learner estimate
+Actual: ~3h56m — learner estimate
+
+This total includes ~1h — learner estimate of supplemental PC-hosted startup-
+simulator reinforcement completed after the initial W02D02 closure.
 
 ### 4. Independent Work
 
@@ -1603,11 +1606,21 @@ What I personally implemented, reasoned about, measured, or explained:
 - Traced `.data` copy and `.bss` zeroing.
 - Identified linker symbols from source and fresh map evidence.
 - Reconstructed the power-on-to-`main()` sequence in the learner's own words.
+- Implemented the learner-owned `startup.c` core: manual `.data` copy, manual
+  `.bss` zero, and runtime-before-application sequencing without `memcpy` or
+  `memset`.
+- Corrected the BSS trace-index instrumentation so the final trace records
+  indices `0,1,2,3`.
+- Ran and diagnosed all five simulator fault scenarios, then mapped the
+  simulator concepts back to the STM32 startup model.
 
 ### 5. AI Usage
 
-Highest AI level used: AI-5 — executor-prepared lab/reference/infrastructure;
-learner conceptual reconstruction remained learner-authored.
+Highest AI level used: AI-5 — executor-prepared lab/reference/infrastructure,
+including the supplemental simulator scaffold, harness, tests, fault system,
+documentation scaffold and build plumbing. Project Chat also exposed direct
+implementation structure/syntax and debugging guidance for the learner-owned
+startup core.
 
 What AI helped with:
 - Theory/clarification of the vector table, startup flow, Flash/RAM sections,
@@ -1615,16 +1628,24 @@ What AI helped with:
 - Review/correction after meaningful learner attempts.
 - Administrative worksheet/submission support and closure bookkeeping.
 - Complete bounded STM32F446RE lab/reference infrastructure.
+- Direct guided structure/syntax for the supplemental `.data`/`.bss` loops and
+  trace instrumentation, plus fault-diagnosis tutoring and mapping review.
 
 Files/functions materially assisted:
 - `firmware/stm32/w02d02-startup-lab/**` — executor-prepared
   lab/reference/infrastructure, including bounded `main.c` and `build.ps1`.
 - Administrative assistance around W02D02 worksheet/submission and control
   records; the final learner reconstruction was not AI-authored.
+- `learning/week-02/startup-simulator/**` — executor-generated simulator
+  infrastructure/reference material. The learner entered and iterated the
+  final `src/startup.c` core and performed the fault diagnosis, but substantial
+  exact implementation structure/syntax was exposed during tutoring.
 
 Competencies contaminated:
 NONE invalidated — no new competency PASS is claimed. The artifact remains
 learning evidence; the scheduled fresh Week 2 AI-0 gate is still required.
+The supplemental simulator is valid learning/artifact evidence, not independent
+competency evidence.
 
 Independent retest required:
 NO special retest solely for this learning-day assistance; normal Week 2 AI-0
@@ -1640,6 +1661,7 @@ Files changed:
 - `learning/week-02/day-02/POWER_ON_TO_MAIN_W02D02.md`
 - `learning/week-02/day-02/SUBMIT_W02_D02.md`
 - `firmware/stm32/w02d02-startup-lab/**` excluding ignored `build/` products
+- `learning/week-02/startup-simulator/**` excluding ignored `build/` products
 - `roadmap-control/daily-log.md`
 - `roadmap-control/ai-usage-log.md`
 - `roadmap-control/current-state.md`
@@ -1657,6 +1679,17 @@ N/A — required validation was clean build plus source/map/list inspection.
 Test result:
 N/A
 
+Supplemental simulator validation:
+- Command: `.\run_tests.ps1` from `learning/week-02/startup-simulator`
+- Result: PASS — `100% tests passed, 0 tests failed out of 4`; `30/30`
+  individual cases PASS (`9` memory-layout, `6` CPU-reset, `10` learner-startup,
+  `5` fault-campaign cases).
+- Build: C11 with GCC 14.2 and `-Wall -Wextra -Wpedantic -Werror`; no compiler
+  warning or error was reported in the successful run.
+- Demo commands: `.\build\startup_demo.exe none`, `data-short`, `skip-bss`,
+  `bad-stack`, `main-before-runtime`, and `wrong-reset-handler`; all returned
+  exit `0` with the expected controlled observations.
+
 ### 7. Evidence
 
 Commit:
@@ -1664,6 +1697,8 @@ SELF — containing commit
 
 Logs:
 - Fresh map inspection of `build/w02d02-startup-lab.map`
+- Fresh supplemental simulator test and six-mode demo output observed directly
+  during this closure transaction.
 
 Captures:
 N/A
@@ -1700,6 +1735,17 @@ Relevant values/registers/timing/errors:
 - These are build/map observations, not hardware measurements.
 - Debugger/hardware observation: `NOT PERFORMED`.
 
+Supplemental simulator observations:
+- Baseline changed `.data` from `0xDEADBEEF x4` to
+  `0x11111111,0x22222222,0x33333333,0x44444444`; `.bss` changed from
+  `0xA5A5A5A5 x4` to zero; runtime init preceded `app_main`; MSP was
+  `0x20000040`; guards remained intact.
+- `data-short` left only the last `.data` word poisoned; `skip-bss` left all
+  `.bss` words poisoned despite reaching the app; `bad-stack` stopped before
+  `Reset_Handler`; `main-before-runtime` exposed the wrong trace order; and
+  `wrong-reset-handler` dispatched to `Fault_Handler` with startup memory still
+  poisoned. These are simulator fault-injection lessons, not hardware findings.
+
 ### 9. Understanding Check
 
 What I can explain without AI, as preserved in the learner artifact:
@@ -1707,6 +1753,11 @@ What I can explain without AI, as preserved in the learner artifact:
 - `Reset_Handler` reloads SP, calls `SystemInit()`, copies `.data`, zeroes
   `.bss`, calls `__libc_init_array()` and then calls `main()`.
 - The linker symbols connect the Flash load address and RAM runtime ranges.
+- Vector entry 0 supplies the initial MSP while entry 1 targets the reset
+  handler; `_sidata` is the Flash initialization-image start;
+  `_sdata`/`_edata` and `_sbss`/`_ebss` are half-open RAM ranges.
+- Correct final memory state does not prove correct runtime/application order,
+  and reaching the app does not prove startup memory initialization succeeded.
 
 What I still cannot explain:
 - No unresolved mandatory W02D02 question was recorded.
@@ -1714,7 +1765,8 @@ What I still cannot explain:
 ### 10. Defects / Failed Tests
 
 Defect/Test IDs:
-NONE for the required W02D02 artifact/build/map contract.
+NONE remaining for the required W02D02 artifact/build/map contract or the
+supplemental simulator validation.
 
 Root cause known?:
 N/A
@@ -1722,6 +1774,8 @@ N/A
 Current hypothesis:
 The non-blocking `nosys` syscall warnings do not affect this bounded startup
 trace; no source or build-logic change is required for W02D02 closure.
+The earlier all-zero BSS trace indices were an instrumentation/measurement
+defect, not a startup memory-state defect; the final trace records `0,1,2,3`.
 
 ### 11. Carry-over
 
