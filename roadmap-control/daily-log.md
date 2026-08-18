@@ -1572,3 +1572,170 @@ observation is not a mandatory W02D01 carry-over.
 
 BOOT W02D02; inspect the Week 2 Day 2 startup-sequence contract and locate the
 vector table / `Reset_Handler` path.
+
+---
+
+## 2026-08-18 — Week 02 / Day 02
+
+### 1. Planned Outcome
+
+Trace vector table -> `Reset_Handler` -> `.data`/`.bss` -> `SystemInit` ->
+`main`, and produce the power-on-to-main artifact.
+
+### 2. Actual Status
+
+GREEN
+
+### 3. Focused Time
+
+Planned: UNRECOVERABLE PROCESS VARIANCE — the W02D02 Day Contract did not
+preserve a trusted numeric value; no value is inferred from the transient `6h`
+availability or from timestamps.
+
+Actual: ~2h56m — learner estimate
+
+### 4. Independent Work
+
+What I personally implemented, reasoned about, measured, or explained:
+
+- Traced the real vector table and startup source.
+- Reasoned about `_estack`, initial MSP and `Reset_Handler`.
+- Traced `.data` copy and `.bss` zeroing.
+- Identified linker symbols from source and fresh map evidence.
+- Reconstructed the power-on-to-`main()` sequence in the learner's own words.
+
+### 5. AI Usage
+
+Highest AI level used: AI-5 — executor-prepared lab/reference/infrastructure;
+learner conceptual reconstruction remained learner-authored.
+
+What AI helped with:
+- Theory/clarification of the vector table, startup flow, Flash/RAM sections,
+  linker symbols, `SystemInit()` and `__libc_init_array()`.
+- Review/correction after meaningful learner attempts.
+- Administrative worksheet/submission support and closure bookkeeping.
+- Complete bounded STM32F446RE lab/reference infrastructure.
+
+Files/functions materially assisted:
+- `firmware/stm32/w02d02-startup-lab/**` — executor-prepared
+  lab/reference/infrastructure, including bounded `main.c` and `build.ps1`.
+- Administrative assistance around W02D02 worksheet/submission and control
+  records; the final learner reconstruction was not AI-authored.
+
+Competencies contaminated:
+NONE invalidated — no new competency PASS is claimed. The artifact remains
+learning evidence; the scheduled fresh Week 2 AI-0 gate is still required.
+
+Independent retest required:
+NO special retest solely for this learning-day assistance; normal Week 2 AI-0
+gate remains required.
+
+External technical help outside Project Chat:
+YES — executor-prepared lab/reference/infrastructure.
+
+### 6. Artifact Result
+
+Files changed:
+- `learning/week-02/day-02/TODO_W02_D02.md`
+- `learning/week-02/day-02/POWER_ON_TO_MAIN_W02D02.md`
+- `learning/week-02/day-02/SUBMIT_W02_D02.md`
+- `firmware/stm32/w02d02-startup-lab/**` excluding ignored `build/` products
+- `roadmap-control/daily-log.md`
+- `roadmap-control/ai-usage-log.md`
+- `roadmap-control/current-state.md`
+
+Build command:
+`powershell -ExecutionPolicy Bypass -File .\build.ps1 -Clean`
+
+Build result:
+PASS / exit 0. Linker reported non-blocking `nosys` warnings for `_close`,
+`_lseek`, `_read` and `_write`; no startup-trace artifact was missing.
+
+Test command:
+N/A — required validation was clean build plus source/map/list inspection.
+
+Test result:
+N/A
+
+### 7. Evidence
+
+Commit:
+SELF — containing commit
+
+Logs:
+- Fresh map inspection of `build/w02d02-startup-lab.map`
+
+Captures:
+N/A
+
+Reports:
+- `learning/week-02/day-02/POWER_ON_TO_MAIN_W02D02.md`
+- `learning/week-02/day-02/SUBMIT_W02_D02.md`
+
+Video/demo:
+N/A
+
+Other:
+- `firmware/stm32/w02d02-startup-lab/PROVENANCE.md`
+- Generated ELF/map/list under ignored `build/`
+
+### 8. Measurements
+
+Expected:
+- Startup source and fresh map reproduce the vector/startup path and linker
+  ranges recorded by the learner.
+
+Observed:
+- `Reset_Handler = 0x08000204`
+- `SystemInit = 0x08000258`
+- `main = 0x0800027c`
+- `__libc_init_array = 0x08000294`
+- `_sidata = 0x080002fc`
+- `_sdata = 0x20000000`, `_edata = 0x20000004`
+- `_sbss = 0x20000004`, `_ebss = 0x20000024`
+
+Relevant values/registers/timing/errors:
+- `.data` size: `4 bytes`
+- `.bss` size: `0x20 = 32 bytes`
+- These are build/map observations, not hardware measurements.
+- Debugger/hardware observation: `NOT PERFORMED`.
+
+### 9. Understanding Check
+
+What I can explain without AI, as preserved in the learner artifact:
+- The first two vector entries provide initial MSP and reset-entry information.
+- `Reset_Handler` reloads SP, calls `SystemInit()`, copies `.data`, zeroes
+  `.bss`, calls `__libc_init_array()` and then calls `main()`.
+- The linker symbols connect the Flash load address and RAM runtime ranges.
+
+What I still cannot explain:
+- No unresolved mandatory W02D02 question was recorded.
+
+### 10. Defects / Failed Tests
+
+Defect/Test IDs:
+NONE for the required W02D02 artifact/build/map contract.
+
+Root cause known?:
+N/A
+
+Current hypothesis:
+The non-blocking `nosys` syscall warnings do not affect this bounded startup
+trace; no source or build-logic change is required for W02D02 closure.
+
+### 11. Carry-over
+
+Task:
+NONE
+
+Closure criteria:
+N/A — the required W02D02 artifact and reproducible build/map evidence are
+complete.
+
+Recovery:
+NOT ACTIVE
+
+### 12. Next Action
+
+BOOT W02D03 and open the authoritative RCC/GPIO sources before writing the
+register-level GPIO output code.

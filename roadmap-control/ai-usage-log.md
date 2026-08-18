@@ -454,6 +454,52 @@ latest competency PASS.
 
 ---
 
+## 2026-08-18 — W02D02 STM32F446RE startup sequence / power-on to `main()`
+
+Highest AI level:
+AI-5 — executor-prepared lab/reference/infrastructure; the learner's final
+conceptual reconstruction remained learner-authored.
+
+What AI contributed:
+- theory and clarification of the vector table, `_estack`, MSP,
+  `Reset_Handler`, `.data`, `.bss`, linker symbols, `SystemInit()` and
+  `__libc_init_array()`;
+- review/correction after meaningful learner attempts;
+- administrative worksheet/submission support and closure bookkeeping;
+- a complete bounded STM32F446RE lab/reference package used to build and inspect
+  startup behavior.
+
+Files/functions materially assisted:
+- `firmware/stm32/w02d02-startup-lab/**` — executor-prepared
+  lab/reference/infrastructure, including bounded `main.c` and `build.ps1`;
+- administrative assistance around `learning/week-02/day-02/**` and closure
+  control records;
+- the learner's final reconstruction in `POWER_ON_TO_MAIN_W02D02.md` was not
+  authored or rewritten by AI.
+
+Implementation code provided:
+YES — bounded executor-prepared infrastructure/reference code only; not learner
+competency implementation.
+
+Gate answer revealed:
+NO — W02D02 was not an AI-0 competency gate.
+
+Competency affected:
+No existing competency was invalidated and no new competency PASS is claimed.
+The W02D02 artifact is learning evidence only; Week 2 Cortex-M/startup
+competency remains pending the scheduled fresh AI-0 gate.
+
+Fresh independent retest required:
+NO special retest solely because of this learning-day assistance; the normal
+scheduled fresh Week 2 AI-0 competency gate remains required.
+
+Notes:
+External help: YES. AI-5 applies only to executor-prepared
+lab/reference/infrastructure, not to the learner's conceptual reconstruction.
+Debugger/hardware observation was `NOT PERFORMED`.
+
+---
+
 ## Pre-V3 Migration Note
 
 Known affected scope:
