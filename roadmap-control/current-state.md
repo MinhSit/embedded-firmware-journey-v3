@@ -1,11 +1,11 @@
 # CURRENT STATE V3 — EMBEDDED/FIRMWARE ROADMAP
 
 **Document ID:** `CURRENT_STATE_V3`
-**Version:** `3.0.29`
+**Version:** `3.0.30`
 **State type:** Operational snapshot — describes reality and creates no new policy
-**Generated at:** `2026-08-18`
+**Generated at:** `2026-08-19`
 **Timezone:** `Asia/Ho_Chi_Minh`
-**Status:** `W02D02 GREEN / CLOSED — W02D03 NOT STARTED`
+**Status:** `W02D03 GREEN / CLOSED — W02D04 NOT STARTED`
 
 ---
 
@@ -14,18 +14,18 @@
 - **System Spec version:** `SYSTEM_SPEC_V3 3.0.0`
 - **Roadmap version:** `EMBEDDED_ROADMAP_V3.1 3.1.0`
 - **Master Prompt version:** `MASTER_PROMPT_V3 3.1.3`
-- **Current State version:** `3.0.29`
+- **Current State version:** `3.0.30`
 - **Implementation runbook:** `roadmap-control/execution-runbook.md` — `NON-AUTHORITATIVE`
 
 If this file conflicts with a higher-authority source, the higher-authority source wins.
 
 ## Positions
 
-- **Calendar position:** `2026-08-18 — Week 2 / Day 2`
-- **Execution position:** `W02D02 — CLOSED`
-- **Artifact position:** `W02D02 power-on-to-main artifact plus supplemental host startup-simulator reinforcement — ARTIFACT_PASS`
+- **Calendar position:** `2026-08-19 — Week 2 / Day 3`
+- **Execution position:** `W02D03 — CLOSED`
+- **Artifact position:** `W02D03 RCC + register-level GPIO output / LED demo + register checklist — ARTIFACT_PASS`
 - **Competency position:** `W01-C-FOUND — COMPETENCY_PASS`
-- **Last artifact PASS:** `W02D02 power-on-to-main artifact plus supplemental host startup-simulator reinforcement`, evidence at `learning/week-02/day-02/POWER_ON_TO_MAIN_W02D02.md`, `learning/week-02/day-02/SUBMIT_W02_D02.md` and `learning/week-02/startup-simulator/`
+- **Last artifact PASS:** `W02D03 RCC + register-level GPIO output`, evidence at `learning/week-02/day-03/REGISTER_CHECKLIST_W02D03.md`, `learning/week-02/day-03/SUBMIT_W02_D03.md` and `firmware/stm32/w02d03-gpio-lab/main.c`
 - **Last daily assessment PASS:** `W01D07 Week 1 C Foundations competency gate — CATEGORICAL PASS`, evidence at `learning/week-01/day-07/ASSESSMENT_RESULT_W01D07.md`
 - **Last competency PASS:** `W01-C-FOUND — COMPETENCY_PASS (2026-08-15)`
 
@@ -34,12 +34,12 @@ If this file conflicts with a higher-authority source, the higher-authority sour
 - **Competencies verified:** `W01-C-FOUND — Embedded C foundation (W01D07 AI-0 gate PASS, 2026-08-15)`
 - **Competencies unverified:** `NONE currently recorded for Week 1 C foundation after the W01D07 gate`
 - **Competencies invalidated/retest required:** `NONE from the W01D07 gate or RR-019 workflow amendment`; pre-V3 Week 1 evidence remains historical/reference only and prior AI-assisted practice retains its recorded provenance.
-- **Current AI mode:** `NONE — W02D02 closed; W02D03 not started`
-- **AI-contaminated evidence:** W01D01 E06 exposed exact implementation line `*slot = target;`; W01D02 received a complete experiment scaffold and substantial evidence prose; W01D03 received bounded code/syntax assistance after attempts and AI-assisted wording in `alignment-note.md` Section 7. W01D04 used AI-3 review/debug and corrected practice explanations after meaningful learner attempts. W01D05 used AI-1 theory, AI-2 graded hints/design questioning and AI-3 post-attempt review; the learner owned the final core implementation. W01D06 and W01D07 raw scored evidence are not contaminated: each scored phase was AI-0 with external help NO, and review/administrative assistance began only after the learner's explicit closure signal. W02D01 used AI-3 post-attempt learning review. W02D02 used AI-5 executor-prepared lab/reference/infrastructure plus post-attempt review; its supplemental simulator also used AI-5 infrastructure and direct guided support for the learner-owned startup core. Both Week 2 records are valid learning/artifact evidence only and do not independently prove a new Cortex-M/startup competency; the normal fresh Week 2 AI-0 gate remains required.
+- **Current AI mode:** `NONE — W02D03 closed; W02D04 not started`
+- **AI-contaminated evidence:** W01D01 E06 exposed exact implementation line `*slot = target;`; W01D02 received a complete experiment scaffold and substantial evidence prose; W01D03 received bounded code/syntax assistance after attempts and AI-assisted wording in `alignment-note.md` Section 7. W01D04 used AI-3 review/debug and corrected practice explanations after meaningful learner attempts. W01D05 used AI-1 theory, AI-2 graded hints/design questioning and AI-3 post-attempt review; the learner owned the final core implementation. W01D06 and W01D07 raw scored evidence are not contaminated: each scored phase was AI-0 with external help NO, and review/administrative assistance began only after the learner's explicit closure signal. W02D01 used AI-3 post-attempt learning review. W02D02 used AI-5 executor-prepared lab/reference/infrastructure plus post-attempt review; its supplemental simulator also used AI-5 infrastructure and direct guided support for the learner-owned startup core. W02D03 used AI-5 executor infrastructure and AI-assisted evidence prose plus AI-3 post-attempt review; the core RCC/GPIO implementation and hardware observations remained learner-owned. These Week 2 records are valid learning/artifact evidence only and do not independently prove a new competency; no new competency PASS is created and the normal fresh Week 2 AI-0 gate remains required.
 
 ## Outcome and Gates
 
-- **Current outcome:** `W02D02 GREEN / CLOSED; startup-sequence artifact plus supplemental host-simulator reinforcement complete; W02D03 NOT STARTED`
+- **Current outcome:** `W02D03 GREEN / CLOSED / ARTIFACT_PASS; W02D04 NOT STARTED`
 - **Status correction:** The previous W01D03 `YELLOW` was based solely on an incomplete generated pre-check flow. Authority audit found that flow was a baseline diagnostic, not a roadmap-required daily completion criterion. Its interruption remains recorded as `MENTOR/SYSTEM WORKFLOW VARIANCE — NON-SCORING`; artifact, AI, competency, schedule and recovery semantics are unchanged.
 - **W01D06/W01D07 correction:** `W01D06 is the roadmap's 45-minute independent daily coding gate. W01D07 contains the separate approximately 60-minute Week 1 competency gate required for W01-C-FOUND COMPETENCY_PASS and Week 1 PASS.`
 - **Week 1 daily status:** `W01D01 GREEN; W01D02 GREEN; W01D03 GREEN; W01D04 GREEN; W01D05 GREEN; W01D06 GREEN; W01D07 GREEN — FINAL`
@@ -50,25 +50,28 @@ If this file conflicts with a higher-authority source, the higher-authority sour
 - **Week 2 eligibility:** `YES — ACTIVE`
 - **W02D01:** `GREEN / CLOSED / ARTIFACT_PASS`
 - **W02D02:** `GREEN / CLOSED / ARTIFACT_PASS`
+- **W02D03:** `GREEN / CLOSED / ARTIFACT_PASS`
+- **W02D04:** `NOT STARTED`
 - **Current gate:** `NONE ACTIVE`
 - **Gate completed:** `CP-00 Sprint 0 operational/bootstrap gate — CONTINUE (2026-08-09); W01D06-C-CODING-01 daily coding gate — 98/100 PASS (2026-08-15); W01D07 Week 1 C Foundations competency gate — CATEGORICAL PASS / AI-0 integrity PASS (2026-08-15); MASTER CHECK — PASS WITH FINDINGS / MEDIUM RESOLVED / LOW ACCEPTED; CP-01 — RV-002 COMPLETED (2026-08-15)`
 - **Gate missing:** `NONE for Week 1 closure`
+- **Roadmap review:** `NOT DUE`; next formal checkpoint remains `CP-02 — Foundation MCU Gate — 2026-09-06`.
 
 ## Repository
 
 - **Repo URL:** `https://github.com/MinhSit/embedded-firmware-journey-v3`
 - **Branch:** `main`
-- **Artifact closure:** W02D02 supplemental END DAY closure transaction; this preserves additional simulator reinforcement without creating a second day/PASS decision; containing commit recorded as `SELF — containing commit` until repository history resolves it
+- **Artifact closure:** W02D03 END DAY closure transaction; containing commit recorded as `SELF — containing commit` until repository history resolves it
 - **Current operational HEAD:** Resolve from the Git repository at `BOOT`.
 - **Release:** `NONE — no Git tag present at state generation`
 
 ## Latest Build and Test
 
-- **Latest validation path:** `learning/week-02/startup-simulator`.
-- **Build/test command:** `.\run_tests.ps1`.
-- **Latest build/test result:** `PASS`; C11/GCC 14.2 strict-warning build completed with no reported warning/error; `100%` of CTest suites passed and `30/30` individual cases passed (`9` memory-layout, `6` CPU-reset, `10` learner-startup, `5` fault-campaign cases).
-- **Latest demo result:** baseline plus all five fault modes returned exit `0`; baseline initialized `.data`, zeroed `.bss`, ran runtime init before the app, recorded BSS indices `0,1,2,3`, set MSP to `0x20000040` and preserved guards.
-- **Earlier W02D02 STM32 evidence retained:** `powershell -ExecutionPolicy Bypass -File .\build.ps1 -Clean` from `firmware/stm32/w02d02-startup-lab` passed with ELF/map/list output; the linker emitted non-blocking `nosys` warnings, and the fresh map reproduced the recorded startup symbols and `.data`/`.bss` ranges.
+- **Latest validation path:** `firmware/stm32/w02d03-gpio-lab`.
+- **Build/test command:** `powershell -ExecutionPolicy Bypass -File .\build.ps1 -Clean`.
+- **Latest build/test result:** `PASS / exit 0`; ELF/map/list generated; linker emitted inherited non-blocking `nosys` warnings for `_close`, `_lseek`, `_read` and `_write`.
+- **Latest demo result:** NUCLEO-F446RE onboard LD2: normal ON; GPIOA clock-disable negative test OFF; restored ON. Register view was `NOT MEASURED`; no capture was saved and the exact flash command/tool action was `NOT RECORDED`.
+- **Earlier W02D02 evidence retained:** startup-sequence artifact plus supplemental host startup-simulator validation remained `ARTIFACT_PASS` with `30/30` individual cases PASS.
 
 ## Hardware and Toolchain
 
@@ -79,18 +82,18 @@ If this file conflicts with a higher-authority source, the higher-authority sour
 ## Blockers and Deferred Work
 
 - **Open blockers:** `NONE`; P0 blocker: `NONE`.
-- **Known bugs:** `NONE blocking W02D02`; the clean build's `nosys` syscall warnings are non-blocking for the bounded startup-trace artifact.
+- **Known bugs:** `NONE blocking W02D03`; the clean build's inherited `nosys` syscall warnings are non-blocking for the bounded GPIO artifact.
 - **Technical debt:** Verify MPU6050 at the sensor/I2C phase; resolve ESP32 4 MB detected flash versus historical 2 MB project header when creating the clean ESP32 baseline; verify optional physical CAN hardware before any physical-bus claim; validate Wireshark capture workflow in the network/protocol phase.
 - **Carry-over:** `NONE`
 
 ## Schedule, Load, and Risk
 
-- **Schedule variance:** `W02D02 closed on its roadmap date`; Actual Focused Time is now `~3h56m — learner estimate`, including `~1h — learner estimate` of supplemental startup-simulator reinforcement after the initial END DAY. Planned Focused Time is an `UNRECOVERABLE PROCESS VARIANCE` because the Day Contract did not preserve a trusted numeric value; no schedule debt is inferred. The transient `6h` availability is not substituted for Planned Focused Time.
+- **Schedule variance:** `W02D03 closed on its roadmap date`; Available Focused Time was `6h — learner supplied at start of day`, Planned Focused Time was `6h`, and Actual Focused Time was `~3.5h — learner estimate`. The authoritative stop criteria were completed; no schedule debt is inferred solely from finishing in less time.
 - **Recovery status:** `NOT ACTIVE`
 - **Critical path risk:** `NONE currently identified`; no P0 blocker and the protected deadline is unchanged.
 - **Weekly scorecard:** `roadmap-control/weekly-scorecards/week-01.md — PASS`
 - **Career pipeline:** `N/A — no separate career task recorded for W01D07 beyond roadmap review/English explanation work`
-- **Health/load:** No new health score was supplied for W02D02. Actual Focused Time: `~3h56m — learner estimate`, including `~1h — learner estimate` supplemental simulator practice. No schedule debt or Recovery condition is inferred.
+- **Health/load:** No human-only health issue was reported for W02D03. Actual Focused Time: `~3.5h — learner estimate`. No schedule debt or Recovery condition is inferred.
 
 ## Forward Control
 
@@ -98,7 +101,7 @@ If this file conflicts with a higher-authority source, the higher-authority sour
 - **Roadmap calendar start for Week 2:** `2026-08-17`
 - **Hard deadline:** `2026-12-14 — project v1.0`
 - **Scope cuts:** `NONE active`. If schedule lag occurs later, apply roadmap-defined cut order: cut P2 first, reduce P1 polish, preserve P0.
-- **Exact Next Action:** `On the next roadmap session, BOOT W02D03 and begin RCC + register-level GPIO output work.`
+- **Exact Next Action:** `On the next roadmap session, BOOT W02D04 and begin GPIO input/pull-up plus BSRR versus ODR/read-modify-write work.`
 - **Files/links to inspect first:**
   - `roadmap-control/current-state.md`
   - `roadmap-control/execution-runbook.md`
@@ -107,6 +110,10 @@ If this file conflicts with a higher-authority source, the higher-authority sour
   - `roadmap-control/ai-usage-log.md`
   - `roadmap-control/daily-log.md`
   - `roadmap-control/weekly-scorecards/week-01.md`
+  - `learning/week-02/day-03/TODO_W02_D03.md`
+  - `learning/week-02/day-03/REGISTER_CHECKLIST_W02D03.md`
+  - `learning/week-02/day-03/SUBMIT_W02_D03.md`
+  - `firmware/stm32/w02d03-gpio-lab/main.c`
   - `learning/week-02/startup-simulator/README.md`
   - `learning/week-02/startup-simulator/src/startup.c`
   - `learning/week-02/day-01/TODO_W02_D01.md`

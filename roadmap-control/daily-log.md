@@ -1793,3 +1793,172 @@ NOT ACTIVE
 
 BOOT W02D03 and open the authoritative RCC/GPIO sources before writing the
 register-level GPIO output code.
+
+---
+
+## 2026-08-19 — Week 02 / Day 03
+
+### 1. Planned Outcome
+
+RCC + register-level GPIO output: verify official clock/pin facts,
+independently configure GPIO output, clean build, hardware LED smoke test,
+expected/actual, controlled negative case and register checklist.
+
+### 2. Actual Status
+
+GREEN
+
+The authoritative W02D03 stop criteria were satisfied.
+
+### 3. Focused Time
+
+Roadmap Standard Load: 46–49 focused hours/week
+
+Available: 6h — learner supplied at start of day
+
+Planned: 6h
+
+Actual: ~3.5h — learner estimate
+
+### 4. Independent Work
+
+What I personally implemented, reasoned about, measured, or explained:
+
+- Traced the board user LED to PA5 from UM1724.
+- Traced RCC/GPIO fields from RM0390 and derived GPIOAEN, MODER5 and BSRR
+  bit positions.
+- Wrote the core RCC/GPIO register implementation.
+- Ran clean builds, flashed the board and observed the normal LD2 behavior.
+- Performed the GPIOA clock-disable negative test and restored the working state.
+- Explained clock-before-GPIO, field-mask read-modify-write preservation, BSRR
+  rationale, active-HIGH LED polarity and the RCC -> MODER -> output -> physical
+  path diagnostic order.
+
+### 5. AI Usage
+
+Highest AI level used: AI-5
+
+What AI helped with:
+- Executor-created starter/build/vendor infrastructure.
+- Theory and official-source navigation guidance plus graded pre-check support.
+- Post-attempt code/build/debug review.
+- Material evidence/checklist/submission wording assistance and closure bookkeeping.
+
+Files/functions materially assisted:
+- W02D03 starter/infrastructure files.
+- `firmware/stm32/w02d03-gpio-lab/main.c` review only after a meaningful
+  learner attempt; no complete core implementation solution was provided.
+- W02D03 evidence documentation and closure control records.
+
+Competencies contaminated:
+- W02D03 learning/artifact evidence is not independent competency evidence.
+- No previously verified competency is invalidated and no new competency PASS
+  is claimed.
+
+Independent retest required:
+- NO special retest triggered by this learning day.
+- The normal scheduled fresh Week 2 AI-0 competency gate remains required.
+
+### 6. Artifact Result
+
+Files changed:
+- `firmware/stm32/w02d03-gpio-lab/main.c`
+- `learning/week-02/day-03/TODO_W02_D03.md`
+- `learning/week-02/day-03/REGISTER_CHECKLIST_W02D03.md`
+- `learning/week-02/day-03/SUBMIT_W02_D03.md`
+- `roadmap-control/daily-log.md`
+- `roadmap-control/ai-usage-log.md`
+- `roadmap-control/current-state.md`
+
+Build command:
+`powershell -ExecutionPolicy Bypass -File .\build.ps1 -Clean`
+
+Build result:
+PASS / exit 0. Linker reported inherited non-blocking `nosys` warnings for
+`_close`, `_lseek`, `_read` and `_write`.
+
+Test command:
+Hardware LED smoke test plus controlled GPIOA clock-disable negative case.
+
+Test result:
+PASS — normal LD2 ON; clock disabled -> LD2 OFF; clock restored -> LD2 ON.
+
+### 7. Evidence
+
+Commit:
+SELF — containing commit
+
+Logs:
+Clean-build result is recorded in this daily/evidence text; no standalone signal
+log was created.
+
+Captures:
+NONE
+
+Reports:
+- `learning/week-02/day-03/REGISTER_CHECKLIST_W02D03.md`
+- `learning/week-02/day-03/SUBMIT_W02_D03.md`
+
+Video/demo:
+Live onboard LD2 demo observed; no saved video.
+
+Other:
+- Exact flash command/tool action: NOT RECORDED.
+- Register view: NOT MEASURED.
+
+### 8. Measurements
+
+Expected:
+- PA5 HIGH -> LD2 ON.
+- With GPIOA clock enable removed, intended GPIO output behavior fails and LD2
+  remains OFF.
+
+Observed:
+- Normal LD2 ON.
+- Negative case LD2 OFF.
+- Restored LD2 ON.
+
+Relevant values/registers/timing/errors:
+- RCC_AHB1ENR.GPIOAEN bit 0.
+- GPIOA_MODER.MODER5 bits 11:10 = `01`.
+- BSRR set bit 5 and reset bit 21.
+- Direct register-view values: NOT MEASURED.
+
+### 9. Understanding Check
+
+What I can explain without AI:
+- The GPIO peripheral clock dependency.
+- Field-mask/read-modify-write preservation of unrelated register bits.
+- BSRR atomic set/reset versus ODR read-modify-write.
+- Active-HIGH LED polarity.
+- RCC -> MODER -> output -> physical path diagnostic sequence.
+
+What I still cannot explain:
+No current blocker, but Week 2 competency remains to be independently verified.
+
+### 10. Defects / Failed Tests
+
+Defect IDs or test IDs:
+NONE. The clock-disable case was an intentional negative test, not an unresolved
+defect.
+
+Root cause known?:
+N/A
+
+Current hypothesis:
+No unresolved final artifact defect. The inherited `nosys` linker warnings do
+not affect the bounded GPIO artifact.
+
+### 11. Carry-over
+
+Exactly one mandatory carry-over if needed:
+NONE from W02D03. Normal W02D04 is the next scheduled work, not recovery
+carry-over.
+
+Closure criteria:
+MET
+
+### 12. Next Action
+
+BOOT W02D04 and begin GPIO input/pull-up plus BSRR versus
+ODR/read-modify-write work.

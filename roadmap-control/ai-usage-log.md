@@ -521,6 +521,52 @@ Debugger/hardware observation was `NOT PERFORMED`.
 
 ---
 
+## 2026-08-19 — W02D03 RCC + register-level GPIO output
+
+Highest AI level:
+AI-5
+
+What AI contributed:
+- executor-created starter/build/vendor infrastructure;
+- theory and official-source navigation guidance;
+- graded pre-check support;
+- post-attempt build/debug/code review;
+- evidence/checklist/submission drafting and editing plus closure bookkeeping.
+
+Files/functions materially assisted:
+- W02D03 starter, build and vendor infrastructure;
+- `firmware/stm32/w02d03-gpio-lab/main.c` post-attempt review only;
+- `learning/week-02/day-03/**` evidence documentation and closure control records.
+
+Core implementation code provided by AI:
+NO complete core RCC/GPIO solution.
+
+Learner-owned:
+Official-source lookup, register derivation, core RCC/GPIO implementation, build
+execution, hardware observation, controlled negative test, restoration and
+self-explanation.
+
+Gate answer revealed:
+NO ACTIVE GATE — W02D03 was normal learning, not an AI-0 competency gate.
+
+Competency affected:
+The W02D03 artifact is not independent competency evidence. No new competency
+PASS is claimed, and `W01-C-FOUND — COMPETENCY_PASS` remains valid.
+
+Retest required:
+No special retest caused by this learning day. The normal scheduled fresh Week
+2 AI-0 competency gate remains required.
+
+Notes:
+The learner independently performed official-source reading, core RCC/GPIO
+reasoning and implementation, build execution, hardware observations, the
+clock-disable negative test, restoration and self-explanation. Normal LD2 ON,
+clock disabled -> LD2 OFF and clock restored -> LD2 ON were learner-supplied
+physical observations. Register view was NOT MEASURED, no capture was saved and
+the exact flash command/tool action was NOT RECORDED.
+
+---
+
 ## Pre-V3 Migration Note
 
 Known affected scope:

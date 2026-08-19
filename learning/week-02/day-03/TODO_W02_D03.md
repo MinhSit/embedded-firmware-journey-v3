@@ -9,8 +9,8 @@
 - Board: `Nucleo-F446RE`
 - MCU: `STM32F446RE`
 - Available Focused Time: `6h — learner input`
-- Planned Focused Time: `NOT YET SET — Project Chat resolves after prep verification`
-- AI boundary: `AI-1/AI-2 before implementation; AI-3 only after meaningful attempt`
+- Planned Focused Time: `6h`
+- AI boundary: `AI-1/AI-2 before implementation; AI-3 review after meaningful attempt; AI-5 overall for executor infrastructure/evidence assistance`
 - Competency status: `no new competency PASS from this day`
 
 ## Outcome
@@ -28,26 +28,32 @@ evidence.
 
 ## Official-source verification fields
 
-- RM0390 revision/date and relevant sections:
+- RM0390 revision/date and relevant sections: exact PDF revision/date not recorded
+  during the session; Sections 6.3.10, 7.4.1, 7.4.6 and 7.4.7 verified.
 - Nucleo-F446RE user manual or schematic revision/date and relevant sections:
-- STM32F446RE datasheet revision/date and relevant sections:
+  UM1724 Rev 17, Section 7.6 and Table 19.
+- STM32F446RE datasheet revision/date and relevant sections: STM32F446xC/E
+  datasheet, Section 4; exact PDF revision/date not recorded during the session.
 - Evidence that the selected board output maps to the selected MCU pin:
+  UM1724 Rev 17 Table 19 maps D13 to PA5; onboard user LED is LD2.
 - Evidence for the required clock, mode, output mechanism, and polarity:
+  RCC_AHB1ENR.GPIOAEN bit 0; GPIOA_MODER.MODER5 bits 11:10 = `01`;
+  GPIOA_BSRR BS5 bit 5 / BR5 bit 21; PA5 HIGH -> LD2 ON and LOW -> OFF.
 
 Do not copy values from tutorials or generated code. Record the source trail in
 `REGISTER_CHECKLIST_W02D03.md` before implementation.
 
 ## Learner TODO
 
-- [ ] Verify the target LED/output pin and polarity from official board sources.
-- [ ] Verify the GPIO port and peripheral clock path from official MCU sources.
-- [ ] Derive the clock-enable field and GPIO mode field without magic constants.
-- [ ] Implement the marked RCC/GPIO TODOs in `firmware/stm32/w02d03-gpio-lab/main.c`.
-- [ ] Build cleanly and inspect the compiler/linker output.
-- [ ] Flash only during the learner session after Project Chat activates the day.
-- [ ] Observe the normal behavior and one deliberate negative/failure case.
-- [ ] Complete the register checklist and submission evidence.
-- [ ] Explain the read-modify-write choices and expected/observed behavior.
+- [x] Verify the target LED/output pin and polarity from official board sources.
+- [x] Verify the GPIO port and peripheral clock path from official MCU sources.
+- [x] Derive the clock-enable field and GPIO mode field without magic constants.
+- [x] Implement the marked RCC/GPIO TODOs in `firmware/stm32/w02d03-gpio-lab/main.c`.
+- [x] Build cleanly and inspect the compiler/linker output.
+- [x] Flash only during the learner session after Project Chat activates the day.
+- [x] Observe the normal behavior and one deliberate negative/failure case.
+- [x] Complete the register checklist and submission evidence.
+- [x] Explain the read-modify-write choices and expected/observed behavior.
 
 ## Build procedure
 
