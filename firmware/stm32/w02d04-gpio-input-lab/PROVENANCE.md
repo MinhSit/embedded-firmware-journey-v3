@@ -15,16 +15,20 @@ were adapted for W02D04.
 The reused vendor files retain their existing license notices. Their source
 identity and original provenance remain documented in the W02D02/W02D03 labs.
 
-## Learner ownership boundary
+## Final learning-session provenance
 
-The core W02D04 implementation is intentionally absent. The learner must use
-the exact board documentation, schematic, MCU datasheet, and reference manual
-to derive and implement the GPIO input/output logic.
+Highest AI level used for W02D04: `AI-5`.
 
-The following remain learner-owned: input port/pin selection, RCC clock
-configuration, MODER/PUPDR configuration, IDR reading, ODR read-modify-write
-comparison code, BSRR code, and input-to-output behavior.
+During the assisted learning session, AI provided extensive theory instruction
+and later complete/reference-level core GPIO code snippets after iterative
+learner attempts. The learner required substantial theory teaching and
+iterative review; the final artifact is not independent competency evidence.
 
-This starter includes no gate answer. A compile-clean scaffold proves only that
-the inherited build infrastructure is usable; it does not prove hardware
-operation, artifact PASS, or competency PASS.
+The learner personally performed substantial reasoning and implementation
+attempts, corrected multiple register/mask mistakes interactively, and carried
+out the multimeter measurement, build, flash, button/LED hardware tests,
+ODR/BSRR comparison, negative case, restoration, and logic-analyzer capture.
+
+This artifact may receive `ARTIFACT_PASS` when its build and evidence contract
+is satisfied. It creates no competency PASS. The normal fresh Week 2 AI-0
+competency gate remains required.

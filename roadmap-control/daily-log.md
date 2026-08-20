@@ -1962,3 +1962,215 @@ MET
 
 BOOT W02D04 and begin GPIO input/pull-up plus BSRR versus
 ODR/read-modify-write work.
+
+---
+
+## 2026-08-20 — Week 02 / Day 04
+
+### 1. Planned Outcome
+
+GPIO input and BSRR: verify the NUCLEO-F446RE button topology, implement and
+test PC13 input controlling PA5/LD2, compare BSRR with ODR read-modify-write,
+run a controlled negative case, and save input/output capture evidence.
+
+### 2. Actual Status
+
+GREEN
+
+The authoritative W02D04 input/output test and capture criteria were satisfied.
+Register-view evidence was optional/non-scoring and was not measured.
+
+### 3. Focused Time
+
+Roadmap Standard Load: 46–49 focused hours/week
+
+Available: 6h — learner supplied
+
+Planned: 6h
+
+Actual: 6h — learner supplied
+
+### 4. Independent Work
+
+What I personally implemented, reasoned about, measured, or explained:
+
+- Made substantial implementation attempts and corrected multiple register and
+  mask mistakes interactively.
+- Implemented the final PC13 active-low input to PA5/LD2 behavior.
+- Ran the clean build and flashed through STM32CubeProgrammer using onboard
+  ST-LINK / SWD.
+- Measured B1/PC13 at approximately 3.19 V released and 0 V pressed.
+- Performed the button/LED normal tests, BSRR/ODR visible-behavior comparison,
+  controlled polarity-negative case, restoration, and logic-analyzer capture.
+- Demonstrated the GPIO/RCC/register/bit-mask understanding summarized below
+  during an assisted learning session.
+
+### 5. AI Usage
+
+Highest AI level used: AI-5
+
+What AI helped with:
+- Executor-prepared starter/build/vendor infrastructure.
+- Extensive theory instruction and iterative review.
+- Complete/reference-level core GPIO code snippets after learner attempts.
+- Evidence/checklist/submission wording and closure bookkeeping.
+
+Files/functions materially assisted:
+- W02D04 starter, build, and vendor infrastructure.
+- Core GPIO input/output implementation was exposed through complete/reference-
+  level snippets after iterative learner attempts.
+- W02D04 evidence documentation, provenance, and closure control records.
+
+Competencies contaminated:
+- W02D04 learning/artifact evidence is not independent competency evidence.
+- No previously verified competency is invalidated and no new competency PASS
+  is claimed.
+
+Independent retest required:
+- The normal scheduled fresh Week 2 AI-0 competency gate remains required.
+
+### 6. Artifact Result
+
+Files changed:
+- `firmware/stm32/w02d04-gpio-input-lab/main.c`
+- `firmware/stm32/w02d04-gpio-input-lab/PROVENANCE.md`
+- `learning/week-02/day-04/TODO_W02_D04.md`
+- `learning/week-02/day-04/GPIO_CHECKLIST_W02D04.md`
+- `learning/week-02/day-04/SUBMIT_W02_D04.md`
+- `learning/week-02/day-04/evidence/W02D04_PC13_PA5_CAPTURE.png`
+- `roadmap-control/daily-log.md`
+- `roadmap-control/ai-usage-log.md`
+- `roadmap-control/current-state.md`
+
+Build command:
+`powershell -ExecutionPolicy Bypass -File .\build.ps1 -Clean`
+
+Build result:
+PASS / exit 0. Final size: `text=860`, `data=0`, `bss=1568`, `dec=2428`,
+`hex=97c`. ELF: `build/w02d04-gpio-input-lab.elf`. The linker reported inherited
+non-blocking `nosys` warnings for `_close`, `_lseek`, `_read`, and `_write`.
+
+Test command:
+Learner-performed NUCLEO-F446RE B1/LD2 smoke tests, BSRR/ODR comparison,
+controlled polarity-negative case, restoration, multimeter measurement, and
+logic-analyzer capture.
+
+Test result:
+PASS — press B1 -> LD2 ON; release B1 -> LD2 OFF. Both BSRR and ODR RMW
+variants produced this visible behavior in the simple single-context test.
+The intentional polarity reversal produced the predicted inverted behavior,
+and normal active-low behavior returned after restoration.
+
+### 7. Evidence
+
+Commit:
+SELF — containing commit
+
+Logs:
+Final clean-build result is recorded in this daily/evidence text; no standalone
+build log was committed.
+
+Captures:
+`learning/week-02/day-04/evidence/W02D04_PC13_PA5_CAPTURE.png`
+
+Capture mapping supplied by learner:
+- D0 = PC13 / button input
+- D1 = PA5 / LD2 output
+- Released: PC13 HIGH; PA5 LOW; LD2 OFF
+- Pressed: PC13 LOW; PA5 HIGH; LD2 ON
+- Repeated inverse transitions are visible.
+
+Reports:
+- `learning/week-02/day-04/GPIO_CHECKLIST_W02D04.md`
+- `learning/week-02/day-04/SUBMIT_W02_D04.md`
+
+Video/demo:
+Live B1/LD2 behavior was observed by the learner; no saved video was supplied.
+
+Other:
+- Flash/programming: STM32CubeProgrammer via onboard ST-LINK / SWD.
+- Connected target observed: STM32F446xx, Cortex-M4, approximately 3.30 V,
+  512 KB flash.
+- Exact ST-LINK serial: NOT RECORDED.
+- Register view: NOT MEASURED / OPTIONAL / NON-SCORING.
+
+### 8. Measurements
+
+Expected:
+- Released -> PC13 HIGH; PA5 LOW; LD2 OFF.
+- Pressed -> PC13 LOW; PA5 HIGH; LD2 ON.
+- With software polarity intentionally reversed: released -> LD2 ON; pressed ->
+  LD2 OFF.
+
+Observed:
+- Released -> PC13 HIGH; PA5 LOW; LD2 OFF.
+- Pressed -> PC13 LOW; PA5 HIGH; LD2 ON.
+- B1/PC13 measured approximately 3.19 V released and 0 V pressed.
+- Reversed-polarity negative case matched the predicted inverted behavior.
+- After restore: pressed -> LD2 ON; released -> LD2 OFF.
+- Normal behavior remained correct after STM32CubeProgrammer was disconnected.
+
+Relevant values/registers/timing/errors:
+- Board: NUCLEO-F446RE; physical marking observed: MB1136 rev C.
+- B1/PC13 is active-low; no internal pull was selected. External pull-up
+  behavior was consistent with the schematic used during the session.
+- PC13 MODER/PUPDR field: bits 27:26; IDR mask: `(1U << 13)`.
+- PA5 BSRR set bit: 5; reset bit: 21. Learner also correctly derived the
+  general reset location as pin + 16 and PA13 reset bit as 29.
+- Direct register-view values and timing measurements: NOT MEASURED.
+
+### 9. Understanding Check
+
+What I demonstrated/explained during the assisted learning session:
+- GPIOA is a port/group; PA5 is one pin inside GPIOA.
+- An input receives an external electrical state for software to read and
+  interpret; an output is driven by the MCU.
+- RCC clocks must be enabled for the corresponding ports: PC13 belongs to
+  GPIOC and PA5 belongs to GPIOA.
+- MODER selects each pin's mode using two bits per pin; the PC13 field is bits
+  27:26 and begins at bit 26.
+- PUPDR controls pull-up, pull-down, or no-pull; active-low behavior was
+  correctly interpreted after measurement and no internal pull was selected.
+- IDR reports input logic; ODR represents the output latch/state; BSRR directly
+  sets or resets selected bits.
+- `1U << n` creates a bit mask. AND, OR, NOT, shifts, and clearing a two-bit
+  field using shifted `0b11`, NOT, then AND were correctly explained/applied.
+- BSRR reset uses pin + 16; PA13 reset was correctly derived as bit 29.
+- ODR RMW is READ -> MODIFY -> WRITE. BSRR writes set/reset directly without a
+  prior ODR read, avoiding an RMW window and a class of lost-update problems.
+
+These explanations were demonstrated after substantial theory teaching and
+iterative review. They are not claimed as perfect unaided prior knowledge, and
+no real concurrency race was experimentally reproduced.
+
+What I still cannot claim from this day:
+Independent Week 2 competency. A fresh AI-0 competency gate remains required.
+
+### 10. Defects / Failed Tests
+
+Defect IDs or test IDs:
+NONE. The reversed-polarity case was intentional and the working state was
+restored.
+
+Root cause known?:
+YES — software intentionally treated active-low hardware as active-high.
+
+Current hypothesis:
+No unresolved final artifact defect. The inherited `nosys` warnings do not
+affect this bounded GPIO artifact.
+
+### 11. Carry-over
+
+Exactly one mandatory carry-over if needed:
+NONE. W02D05 is normal scheduled work, not Recovery carry-over.
+
+Closure criteria:
+MET
+
+Recovery:
+NOT ACTIVE
+
+### 12. Next Action
+
+Open the W02D05 EXTI/NVIC day card and RM0390, then write down the PC13-to-EXTI13
+routing path before changing code.

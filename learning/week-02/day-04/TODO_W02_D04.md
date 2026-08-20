@@ -25,15 +25,15 @@ with ODR read-modify-write under verified board electrical conditions.
 
 ## Acceptance criteria
 
-- [ ] Verify the relevant board port, pin, electrical topology, and clock facts
+- [x] Verify the relevant board port, pin, electrical topology, and clock facts
       from exact official sources.
-- [ ] Implement the register-level input/output behavior as learner-owned code.
-- [ ] Produce a clean build and record the exact command and result.
-- [ ] Perform a physical hardware smoke test without fabricating observations.
-- [ ] Record expected versus actual behavior.
-- [ ] Run and record one suitable, safe negative/failure case.
-- [ ] Save input/output capture evidence and record its path.
-- [ ] Independently explain BSRR versus ODR/read-modify-write at end of day.
+- [x] Implement the register-level input/output behavior as learner-owned code.
+- [x] Produce a clean build and record the exact command and result.
+- [x] Perform a physical hardware smoke test without fabricating observations.
+- [x] Record expected versus actual behavior.
+- [x] Run and record one suitable, safe negative/failure case.
+- [x] Save input/output capture evidence and record its path.
+- [x] Independently explain BSRR versus ODR/read-modify-write at end of day.
 
 ### NON-SCORING learning feedback
 
@@ -52,18 +52,22 @@ are learning feedback only and do not add silent acceptance requirements.
 Locate and verify these facts before implementation. Do not fill them from this
 starter or from unofficial example code.
 
-- [ ] Board user-input pin and electrical topology from the exact board manual
+- [x] Board user-input pin and electrical topology from the board manual
       and schematic revision.
-- [ ] Corresponding GPIO port clock from the MCU reference manual.
-- [ ] Target pin's `MODER` field and required input-mode setting.
-- [ ] `PUPDR` requirement based on the actual schematic, without assuming an
+- [x] Corresponding GPIO port clock from the MCU reference manual.
+- [x] Target pin's `MODER` field and required input-mode setting.
+- [x] `PUPDR` requirement based on the actual schematic, without assuming an
       internal pull configuration in advance.
-- [ ] Target pin's `IDR` field and read behavior.
-- [ ] `ODR` behavior relevant to software read-modify-write.
-- [ ] `BSRR` set/reset behavior relevant to the selected output.
+- [x] Target pin's `IDR` field and read behavior.
+- [x] `ODR` behavior relevant to software read-modify-write.
+- [x] `BSRR` set/reset behavior relevant to the selected output.
 
 Record exact document identifiers, revisions, sections, pages, and the derived
 facts in `GPIO_CHECKLIST_W02D04.md`.
+
+The exact schematic document identifier, subrevision, section, and page used
+during the session were `NOT RECORDED`. The observed physical board marking was
+`MB1136 rev C`; it is not presented as a schematic document revision.
 
 ## Learner TODO
 
@@ -99,12 +103,12 @@ learner implementation, hardware behavior, artifact PASS, or competency PASS.
 
 | ID | Case | Expected before test | Actual | Evidence |
 |---|---|---|---|---|
-| W02D04-IO-01 | Normal released input | `EXPECTED_RELEASED_LEVEL = TO_BE_VERIFIED_FROM_SCHEMATIC` | `NOT RUN` | `NOT CAPTURED` |
-| W02D04-IO-02 | Active/pressed input | `EXPECTED_ACTIVE_LEVEL = TO_BE_VERIFIED_FROM_SCHEMATIC` | `NOT RUN` | `NOT CAPTURED` |
-| W02D04-IO-03 | Output response to verified input state | `TO_BE_DERIVED` | `NOT RUN` | `NOT CAPTURED` |
-| W02D04-IO-04 | Repeated released/active transitions | `TO_BE_DERIVED` | `NOT RUN` | `NOT CAPTURED` |
-| W02D04-NEG-01 | One controlled negative/fault case | `TO_BE_PREDICTED_BEFORE_TEST` | `NOT RUN` | `NOT CAPTURED` |
-| W02D04-EVD-01 | Input/output capture and register/source trace | `CAPTURE_PATH_TO_BE_RECORDED` | `NOT RUN` | `NOT CAPTURED` |
+| W02D04-IO-01 | Normal released input | PC13 HIGH; PA5 LOW; LD2 OFF | PASS — PC13 HIGH (~3.19 V at B1); PA5 LOW; LD2 OFF | `evidence/W02D04_PC13_PA5_CAPTURE.png`; learner-reported measurement/observation |
+| W02D04-IO-02 | Active/pressed input | PC13 LOW; PA5 HIGH; LD2 ON | PASS — PC13 LOW (~0 V at B1); PA5 HIGH; LD2 ON | `evidence/W02D04_PC13_PA5_CAPTURE.png`; learner-reported measurement/observation |
+| W02D04-IO-03 | Output response to verified input state | Press -> LD2 ON; release -> LD2 OFF | PASS; remained correct after STM32CubeProgrammer was disconnected | Learner-reported hardware observation |
+| W02D04-IO-04 | Repeated released/active transitions | Repeated inverse PC13/PA5 transitions | PASS | `evidence/W02D04_PC13_PA5_CAPTURE.png` |
+| W02D04-NEG-01 | Reverse only the software interpretation of button polarity | Released -> LD2 ON; pressed -> LD2 OFF | PASS — prediction matched; active-low interpretation restored; normal behavior returned | Learner-reported hardware observation; no separate capture |
+| W02D04-EVD-01 | Input/output capture; register view optional/non-scoring | Capture path recorded | PASS — capture saved; register view `NOT MEASURED / NON-SCORING` | `evidence/W02D04_PC13_PA5_CAPTURE.png` |
 
 Do not replace the schematic-derived placeholders with assumptions. Predict the
 negative case before changing one variable, avoid unsafe electrical conditions,
@@ -116,7 +120,8 @@ and restore the working state afterward.
   paths.
 - Hardware observation for released, active, output-response, and repeated
   transition cases.
-- Capture file/path and register view actually obtained.
+- Input/output capture file/path. Register view is optional/non-scoring for
+  W02D04 and remains `NOT MEASURED` because none was obtained.
 - Expected versus observed result for every executed case.
 - Exact official document identifiers, revisions, sections/pages, and facts
   used.

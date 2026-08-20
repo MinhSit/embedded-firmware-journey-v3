@@ -567,6 +567,60 @@ the exact flash command/tool action was NOT RECORDED.
 
 ---
 
+## 2026-08-20 — W02D04 GPIO input and BSRR
+
+Highest AI level:
+AI-5
+
+What AI contributed:
+- executor-prepared starter/build/vendor infrastructure;
+- extensive theory instruction and iterative review;
+- complete/reference-level core GPIO code snippets after learner attempts;
+- evidence/checklist/submission/provenance drafting and closure bookkeeping.
+
+Files/functions materially assisted:
+- W02D04 starter, build, and vendor infrastructure;
+- core GPIO input/output implementation through complete/reference-level
+  snippets after iterative learner attempts;
+- `learning/week-02/day-04/**` evidence documentation;
+- `firmware/stm32/w02d04-gpio-input-lab/PROVENANCE.md` and closure control
+  records.
+
+Core implementation code provided by AI:
+YES — complete/reference-level core GPIO snippets were supplied after iterative
+learner attempts.
+
+Learner-owned contribution:
+- substantial reasoning and multiple implementation attempts;
+- interactive correction of multiple mask/register mistakes;
+- multimeter measurement, build, flash, button/LED hardware tests, ODR/BSRR
+  comparison, negative case, restoration, and logic-analyzer capture;
+- demonstrated explanations recorded in the W02D04 daily log.
+
+Gate answer revealed:
+NO ACTIVE GATE — W02D04 was assisted normal learning, not an AI-0 competency
+gate.
+
+Competency affected:
+W02D04 may be valid artifact evidence but is not independent competency
+evidence. No new competency PASS is awarded. `W01-C-FOUND — COMPETENCY_PASS`
+remains the latest competency PASS.
+
+Retest required:
+The normal scheduled fresh Week 2 AI-0 competency gate remains required.
+
+Notes:
+- Learner-reported normal behavior: press B1 -> LD2 ON; release B1 -> LD2 OFF.
+- Both BSRR and ODR RMW produced the same visible behavior in the simple
+  single-context test. No concurrency race was experimentally reproduced.
+- The controlled active-high software-interpretation case produced the predicted
+  inverted behavior; active-low behavior was restored.
+- B1/PC13 was measured at approximately 3.19 V released and 0 V pressed.
+- Capture: `learning/week-02/day-04/evidence/W02D04_PC13_PA5_CAPTURE.png`.
+- Register view: NOT MEASURED / OPTIONAL / NON-SCORING.
+
+---
+
 ## Pre-V3 Migration Note
 
 Known affected scope:
