@@ -2174,3 +2174,192 @@ NOT ACTIVE
 
 Open the W02D05 EXTI/NVIC day card and RM0390, then write down the PC13-to-EXTI13
 routing path before changing code.
+
+---
+
+## 2026-08-21 — Week 02 / Day 05
+
+### 1. Planned Outcome
+
+Configure SYSCFG/EXTI/NVIC for B1/PC13, clear the relevant pending source
+correctly, keep the ISR minimal, demonstrate a PA5/LD2 button-interrupt toggle,
+run one controlled trigger-edge negative case, restore the working state, and
+save evidence.
+
+### 2. Actual Status
+
+GREEN
+
+Expected versus actual:
+- Expected: PC13 falling edges route through EXTI13 to the shared EXTI15_10 IRQ;
+  the handler clears PR13 and toggles PA5.
+- Actual: initial LD2 OFF; first press -> ON; release -> no change; second press
+  -> OFF. The rising-edge-only negative case moved the toggle to release, and
+  the restored falling-edge configuration passed.
+
+### 3. Focused Time
+
+Roadmap Standard Load: 46–49 focused hours/week
+
+Available: NOT SUPPLIED in the closeout input
+
+Planned: NOT SUPPLIED in the closeout input
+
+Actual: 6h — learner supplied
+
+### 4. Independent Work
+
+What I personally implemented, reasoned about, measured, or explained:
+
+- Implemented the final SYSCFG clock enable, PC13-to-EXTI13 routing, trigger,
+  pending clear, mask, NVIC enable/priority, and `EXTI15_10_IRQHandler` logic.
+- Verified the active-low relationship: PC13 released HIGH and pressed LOW.
+- Ran the hardware demo: initial LD2 OFF; first press -> ON; release -> no
+  change; second press -> OFF.
+- Predicted and ran the rising-edge-only negative case, explained the LOW-to-HIGH
+  release edge, restored falling-edge operation, and retested successfully.
+- Supplied the two LD2 state photographs used as repository evidence.
+
+### 5. AI Usage
+
+Highest AI level used: AI-5
+
+What AI helped with:
+- Executor-prepared starter/build/vendor infrastructure.
+- Substantial interactive theory teaching and review after learner attempts.
+- Evidence/submission drafting and END DAY closure bookkeeping.
+
+Files/functions materially assisted:
+- W02D05 starter, build, and vendor infrastructure.
+- `firmware/stm32/w02d05-exti-nvic-lab/main.c` post-attempt review; the learner
+  retained ownership of the final core EXTI/NVIC implementation.
+- W02D05 submission/evidence metadata and closure control records.
+
+Competencies contaminated:
+- W02D05 learning/artifact evidence is not independent competency evidence.
+- No previously verified competency is invalidated and no new competency PASS
+  is claimed.
+
+Independent retest required:
+- The normal scheduled fresh Week 2 AI-0 competency gate remains required.
+
+### 6. Artifact Result
+
+Files changed:
+- `firmware/stm32/w02d05-exti-nvic-lab/main.c`
+- `learning/week-02/day-05/SUBMIT_W02_D05.md`
+- `learning/week-02/day-05/evidence/W02D05_LD2_OFF.jpg`
+- `learning/week-02/day-05/evidence/W02D05_LD2_ON_AFTER_PRESS.jpg`
+- `roadmap-control/daily-log.md`
+- `roadmap-control/ai-usage-log.md`
+- `roadmap-control/current-state.md`
+
+Build command:
+`powershell -ExecutionPolicy Bypass -File .\build.ps1 -Clean`
+
+Build result:
+PASS / exit 0. Final size: `text=1164`, `data=0`, `bss=1568`, `dec=2732`,
+`hex=aac`. ELF: `build/w02d05-exti-nvic-lab.elf`. The linker reported only the
+inherited non-blocking `nosys` warnings for `_close`, `_lseek`, `_read`, and
+`_write`.
+
+Test command:
+Learner-performed NUCLEO-F446RE B1/LD2 interrupt demo, controlled
+rising-edge-only negative case, restoration, and two state photographs.
+
+Test result:
+PASS — initial OFF; first press ON; release unchanged; second press OFF. With
+rising-edge-only, press caused no toggle and release toggled. Falling-edge
+operation was restored and passed.
+
+### 7. Evidence
+
+Commit:
+SELF — containing commit
+
+Logs:
+Final clean-build result is recorded in this daily/evidence text; no standalone
+build log was committed.
+
+Captures:
+- `learning/week-02/day-05/evidence/W02D05_LD2_OFF.jpg`
+- `learning/week-02/day-05/evidence/W02D05_LD2_ON_AFTER_PRESS.jpg`
+
+Reports:
+- `learning/week-02/day-05/SUBMIT_W02_D05.md`
+
+Video/demo:
+Live B1/LD2 interrupt behavior was observed by the learner; no saved video was
+supplied.
+
+Other:
+- Exact flash method/command: NOT RECORDED in the closeout input.
+- Direct EXTI/NVIC debugger register capture: NOT MEASURED.
+- Exact official-document revisions/pages/sections: NOT RECORDED.
+
+### 8. Measurements
+
+Expected:
+- Released PC13 HIGH; pressed PC13 LOW.
+- Falling edge: press toggles LD2; release does not toggle.
+- Rising-edge-only negative case: press does not toggle; release toggles.
+
+Observed:
+- Initial LD2 OFF; first press -> ON; release -> no change; second press -> OFF.
+- Rising-edge-only: press -> no toggle; release -> toggle.
+- After restore: falling-edge configuration -> PASS.
+
+Relevant values/registers/timing/errors:
+- `RCC_APB2ENR.SYSCFGEN` enabled.
+- `SYSCFG_EXTICR4.EXTI13` selects GPIOC.
+- Final trigger: `FTSR.TR13=1`, `RTSR.TR13=0`; `IMR.MR13=1`.
+- Stale `PR13` is cleared before `NVIC_EnableIRQ(EXTI15_10_IRQn)`.
+- `EXTI_PR.PR13` uses write-1-to-clear behavior.
+- Voltage, timing, bounce, and direct register values: NOT MEASURED.
+
+### 9. Understanding Check
+
+What I demonstrated/explained during the assisted learning session:
+- PC13 is active-low: a press is HIGH-to-LOW and therefore a falling edge.
+- GPIOC is selected for EXTI13 through the EXTI13 field in EXTICR4.
+- EXTI13 is unmasked and uses the shared EXTI15_10 NVIC interrupt.
+- The handler must check PR13 because the vector is shared, clear PR13 using
+  write-1-to-clear semantics, and remain minimal.
+- In the negative case, release changes PC13 from LOW to HIGH, which explains
+  why rising-edge-only toggled on release rather than press.
+
+These explanations followed substantial interactive AI teaching/review and are
+learning evidence, not independent competency evidence.
+
+What I still cannot claim from this day:
+Independent Week 2 competency. A fresh AI-0 competency gate remains required.
+
+### 10. Defects / Failed Tests
+
+Defect IDs or test IDs:
+NONE. The rising-edge-only case was intentional and the working state was
+restored.
+
+Root cause known?:
+YES — release creates the configured LOW-to-HIGH rising edge.
+
+Current hypothesis:
+No unresolved final artifact defect. Button bounce was not characterized. The
+inherited `nosys` warnings do not affect this bounded EXTI/NVIC artifact.
+
+### 11. Carry-over
+
+Exactly one mandatory carry-over if needed:
+NONE. W02D06 debounce and schematic review are normal scheduled work, not
+Recovery carry-over.
+
+Closure criteria:
+MET
+
+Recovery:
+NOT ACTIVE
+
+### 12. Next Action
+
+BOOT W02D06 and begin debounce with a tick/state machine plus NUCLEO-F446RE
+schematic review.

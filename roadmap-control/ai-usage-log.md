@@ -621,6 +621,59 @@ Notes:
 
 ---
 
+## 2026-08-21 — W02D05 EXTI + NVIC
+
+Highest AI level:
+AI-5
+
+What AI contributed:
+- executor-prepared starter/build/vendor infrastructure;
+- substantial interactive theory teaching and review after learner attempts;
+- evidence/submission drafting and END DAY closure bookkeeping.
+
+Files/functions materially assisted:
+- W02D05 starter, build, and vendor infrastructure;
+- `firmware/stm32/w02d05-exti-nvic-lab/main.c` post-attempt review only; the
+  learner retained ownership of the final core SYSCFG/EXTI/NVIC implementation;
+- `learning/week-02/day-05/SUBMIT_W02_D05.md`, evidence metadata, and closure
+  control records.
+
+Core implementation code provided by AI:
+NO complete core EXTI/NVIC solution was supplied in the starter. The learner
+owned the final clock, routing, trigger, mask, pending-clear, NVIC, and ISR code.
+
+Learner-owned contribution:
+- final core SYSCFG/EXTI/NVIC implementation;
+- active-low trigger reasoning and write-1-to-clear explanation;
+- build/hardware demo, rising-edge-only negative case, root-cause explanation,
+  restoration, and two state photographs.
+
+Gate answer revealed:
+NO ACTIVE GATE — W02D05 was assisted normal learning, not an AI-0 competency
+gate.
+
+Competency affected:
+W02D05 may be valid artifact evidence but is not independent competency
+evidence. No new competency PASS is awarded. `W01-C-FOUND — COMPETENCY_PASS`
+remains the latest competency PASS.
+
+Retest required:
+The normal scheduled fresh Week 2 AI-0 competency gate remains required.
+
+Notes:
+- Build PASS / exit 0: `text=1164`, `data=0`, `bss=1568`, `dec=2732`,
+  `hex=aac`; only inherited non-blocking `nosys` warnings were present.
+- Working behavior: initial LD2 OFF; first press ON; release unchanged; second
+  press OFF.
+- Rising-edge-only: press no toggle; release toggle because release is LOW-to-HIGH;
+  falling-edge operation was restored and passed.
+- Captures: `learning/week-02/day-05/evidence/W02D05_LD2_OFF.jpg` and
+  `learning/week-02/day-05/evidence/W02D05_LD2_ON_AFTER_PRESS.jpg`.
+- Button bounce was not characterized; exact flash method and official-source
+  locations were not recorded in the closeout input.
+
+---
+
 ## Pre-V3 Migration Note
 
 Known affected scope:
