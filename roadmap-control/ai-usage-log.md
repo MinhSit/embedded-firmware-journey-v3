@@ -674,6 +674,58 @@ Notes:
 
 ---
 
+## 2026-08-22 — W02D06 debounce + schematic
+
+Highest AI level:
+AI-3
+
+What AI contributed:
+- theory/clarification and graded hints;
+- post-attempt code review/debug;
+- SysTick/integration guidance;
+- diagnosis of the release-edge hardware defect;
+- evidence-document assistance and END DAY closure bookkeeping.
+
+Files/functions materially assisted:
+- W02D06 debounce and STM32 integration after meaningful learner attempts;
+- `learning/week-02/day-06/SUBMIT_W02_D06.md`;
+- `learning/week-02/day-06/DEBOUNCE_LOG_W02D06.md`;
+- `learning/week-02/day-06/SCHEMATIC_REVIEW_W02D06.md`;
+- W02D06 closure control records.
+
+Core implementation code provided by AI:
+NO complete core debounce solution was supplied before the learner's meaningful
+implementation attempts. The learner owned the final core debounce implementation.
+
+Learner-owned contribution:
+- final core debounce state transitions and integration attempts;
+- invariant, threshold, wrap, ISR/foreground, and active-low reasoning;
+- physical board operation and repeated-press observation;
+- schematic inspection and conclusions for the B1/PC13 and PA5/LD2 paths.
+
+Gate answer revealed:
+NO ACTIVE SCORED GATE — W02D06 was assisted normal learning, not an AI-0
+competency gate.
+
+Competency affected:
+W02D06 remains assisted learning/artifact evidence only. No new competency PASS
+is awarded. `W01-C-FOUND — COMPETENCY_PASS` remains the latest competency PASS.
+
+Retest required:
+The normal scheduled fresh Week 2 AI-0 competency gate remains required.
+
+Notes:
+- Host strict compile PASS; `SUMMARY: 10 tests, 0 failed`.
+- STM32 clean build PASS / exit 0: `text=1652`, `data=0`, `bss=1576`,
+  `dec=3228`, `hex=c9c`; only inherited non-blocking `nosys` warnings.
+- SysTick is 1 ms; software threshold is 20 ticks = 20 ms.
+- Learner-observed repeated valid presses toggled LD2 OFF/ON.
+- Capture filename `VID_20260822_140328.mp4` is NOT STORED IN REPO.
+- Exact physical C03/C04 subrevision is UNRESOLVED; voltage and physical bounce
+  duration were NOT MEASURED; exact flash/debug command is NOT RECORDED.
+
+---
+
 ## Pre-V3 Migration Note
 
 Known affected scope:

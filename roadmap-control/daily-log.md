@@ -2363,3 +2363,187 @@ NOT ACTIVE
 
 BOOT W02D06 and begin debounce with a tick/state machine plus NUCLEO-F446RE
 schematic review.
+
+---
+
+## 2026-08-22 — Week 02 / Day 06
+
+### 1. Planned Outcome
+
+Implement a non-blocking debounce tick/state machine and review the
+NUCLEO-F446RE schematic for the B1/PC13 and PA5/LD2 paths.
+
+### 2. Actual Status
+
+GREEN
+
+Expected versus actual:
+- Expected: a continuously stable raw transition commits at the exact threshold,
+  interrupted candidates restart, and one semantic event is emitted per stable
+  transition; annotated schematic and debounce log exist.
+- Actual: strict host tests passed 10/10, the STM32 clean build passed, repeated
+  valid USER-button presses toggled LD2 OFF/ON, and both schematic PNGs plus the
+  debounce log are present and readable.
+
+### 3. Focused Time
+
+Roadmap Standard Load: 46–49 focused hours/week
+
+Available: 6h
+
+Planned: 6h
+
+Actual: 6h — learner supplied
+
+### 4. Independent Work
+
+What I personally implemented, reasoned about, measured, or explained:
+
+- Owned the final debounce transition logic, integration attempts, and corrected
+  press/release handling.
+- Explained continuous candidate timing, exact-threshold acceptance, candidate
+  restart, unsigned tick-wrap handling, event uniqueness, and the ISR/foreground
+  boundary.
+- Operated the physical NUCLEO-F446RE and observed repeated valid presses toggle
+  LD2 OFF/ON.
+- Inspected the C03 and C04 schematic candidate packs and recorded the verified
+  B1/PC13 and PA5/LD2 paths while leaving the physical C03/C04 match unresolved.
+
+### 5. AI Usage
+
+Highest AI level used: AI-3
+
+What AI helped with:
+- Theory/clarification and graded hints.
+- Post-attempt code review/debug.
+- SysTick/integration guidance and diagnosis of the release-edge hardware defect.
+- Evidence-document assistance and END DAY bookkeeping.
+
+Files/functions materially assisted:
+- W02D06 debounce and STM32 integration after meaningful learner attempts.
+- W02D06 submission, debounce log, schematic worksheet, and closure records.
+
+Competencies contaminated:
+- W02D06 is assisted normal-learning/artifact evidence only.
+- No new competency PASS is claimed.
+
+Independent retest required:
+- The normal scheduled fresh Week 2 AI-0 competency gate remains required.
+
+### 6. Artifact Result
+
+Files changed:
+- `firmware/stm32/w02d06-debounce-lab/**`
+- `tests/host/test_debounce.c`
+- `learning/week-02/day-06/**`
+- `roadmap-control/daily-log.md`
+- `roadmap-control/ai-usage-log.md`
+- `roadmap-control/current-state.md`
+
+Host compile command:
+`gcc -std=c17 -Wall -Wextra -Wpedantic -Werror firmware/stm32/w02d06-debounce-lab/debounce.c tests/host/test_debounce.c -Ifirmware/stm32/w02d06-debounce-lab -o tests/host/test_debounce.exe`
+
+Host compile/test result:
+PASS — `SUMMARY: 10 tests, 0 failed`.
+
+STM32 build command:
+`powershell -ExecutionPolicy Bypass -File .\build.ps1 -Clean`
+
+STM32 build result:
+PASS / exit 0. Final size: `text=1652`, `data=0`, `bss=1576`, `dec=3228`,
+`hex=c9c`. ELF: `build/w02d06-debounce-lab.elf`. Only inherited non-blocking
+`nosys` warnings for `_close`, `_lseek`, `_read`, and `_write` were emitted.
+
+### 7. Evidence
+
+Commit:
+SELF — containing commit
+
+Logs:
+- `learning/week-02/day-06/DEBOUNCE_LOG_W02D06.md`
+
+Captures:
+- `learning/week-02/day-06/schematic_b1_pc13_page3.png`
+- `learning/week-02/day-06/schematic_pa5_ld2_page5.png`
+
+Reports:
+- `learning/week-02/day-06/SUBMIT_W02_D06.md`
+- `learning/week-02/day-06/SCHEMATIC_REVIEW_W02D06.md`
+
+Video/demo:
+Learner/session capture filename: `VID_20260822_140328.mp4`. The video is
+`NOT STORED IN REPO`.
+
+Other:
+- Exact flash/debug command or tool method: NOT RECORDED.
+- Physical main-board marking: `MB1136 rev C`.
+- Exact physical C03/C04 subrevision: UNRESOLVED.
+
+### 8. Measurements
+
+Expected:
+- SysTick period: 1 ms; threshold: 20 ticks = 20 ms.
+- Released B1/PC13 HIGH; pressed LOW; one activation event per committed press.
+
+Observed:
+- Repeated valid USER-button presses toggled LD2 OFF/ON across successive
+  activations.
+- Initial stuck-after-first-activation behavior was corrected.
+
+Relevant values/registers/timing/errors:
+- `SystemCoreClock = 16000000U`.
+- `SysTick_Config(16000000U / 1000U)`.
+- Electrical voltage: NOT MEASURED.
+- Physical switch bounce duration: NOT MEASURED.
+
+### 9. Understanding Check
+
+What I demonstrated/explained during the assisted learning session:
+- A candidate must remain continuously unchanged for the full threshold; raw
+  interruption or reversal cancels/restarts it.
+- The exact threshold is accepted and each committed stable transition emits
+  exactly one semantic event.
+- Unsigned `uint32_t` subtraction preserves elapsed-time behavior across wrap
+  for the bounded debounce interval.
+- EXTI ISR work remains short; foreground sampling performs timed debounce and
+  observes both press and release stable states.
+
+These explanations are assisted learning evidence, not independent competency
+evidence.
+
+What I still cannot claim from this day:
+Independent Week 2 competency. A fresh AI-0 competency gate remains required.
+
+### 10. Defects / Failed Tests
+
+Defect IDs or test IDs:
+- Initial host iteration: 3 failed tests; corrected to 10/10 PASS.
+- Initial STM32 integration: missing SysTick functions caused link failure;
+  corrected and clean build passed.
+- Initial hardware integration: release was not incorporated correctly, leaving
+  later presses unable to toggle; corrected and repeated-press behavior passed.
+
+Root cause known?:
+YES for the resolved integration defects described above.
+
+Current hypothesis:
+No unresolved artifact defect. Exact C03/C04 physical subrevision remains
+unresolved; exact flash/debug command is NOT RECORDED; electrical voltage and
+physical bounce duration were NOT MEASURED. Inherited `nosys` warnings are
+non-blocking.
+
+### 11. Carry-over
+
+Exactly one mandatory carry-over if needed:
+NONE. The authoritative W02D06 artifact requirements passed.
+
+Closure criteria:
+MET
+
+Recovery:
+NOT ACTIVE
+
+### 12. Next Action
+
+BOOT W02D07 and begin the scheduled fresh Week-2 AI-0 competency gate/preparation
+according to the authoritative roadmap.

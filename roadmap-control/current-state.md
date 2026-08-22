@@ -1,11 +1,11 @@
 # CURRENT STATE V3 — EMBEDDED/FIRMWARE ROADMAP
 
 **Document ID:** `CURRENT_STATE_V3`
-**Version:** `3.0.32`
+**Version:** `3.0.33`
 **State type:** Operational snapshot — describes reality and creates no new policy
-**Generated at:** `2026-08-21`
+**Generated at:** `2026-08-22`
 **Timezone:** `Asia/Ho_Chi_Minh`
-**Status:** `W02D05 GREEN / CLOSED — W02D06 NOT STARTED`
+**Status:** `W02D06 GREEN / CLOSED — W02D07 NOT STARTED`
 
 ---
 
@@ -14,18 +14,18 @@
 - **System Spec version:** `SYSTEM_SPEC_V3 3.0.0`
 - **Roadmap version:** `EMBEDDED_ROADMAP_V3.1 3.1.0`
 - **Master Prompt version:** `MASTER_PROMPT_V3 3.1.3`
-- **Current State version:** `3.0.32`
+- **Current State version:** `3.0.33`
 - **Implementation runbook:** `roadmap-control/execution-runbook.md` — `NON-AUTHORITATIVE`
 
 If this file conflicts with a higher-authority source, the higher-authority source wins.
 
 ## Positions
 
-- **Calendar position:** `2026-08-21 — Week 2 / Day 5`
-- **Execution position:** `W02D05 — CLOSED; W02D06 — NOT STARTED`
-- **Artifact position:** `W02D05 EXTI + NVIC / button-interrupt demo + negative-edge test + captures — ARTIFACT_PASS`
+- **Calendar position:** `2026-08-22 — Week 2 / Day 6`
+- **Execution position:** `W02D06 — CLOSED; W02D07 — NOT STARTED`
+- **Artifact position:** `W02D06 debounce tick/state machine + schematic review — ARTIFACT_PASS`
 - **Competency position:** `W01-C-FOUND — COMPETENCY_PASS`
-- **Last artifact PASS:** `W02D05 EXTI + NVIC`, evidence at `learning/week-02/day-05/SUBMIT_W02_D05.md`, `learning/week-02/day-05/evidence/W02D05_LD2_OFF.jpg`, `learning/week-02/day-05/evidence/W02D05_LD2_ON_AFTER_PRESS.jpg` and `firmware/stm32/w02d05-exti-nvic-lab/main.c`
+- **Last artifact PASS:** `W02D06 debounce tick/state machine + schematic review`, evidence at `learning/week-02/day-06/SUBMIT_W02_D06.md`, `learning/week-02/day-06/DEBOUNCE_LOG_W02D06.md`, `learning/week-02/day-06/schematic_b1_pc13_page3.png`, `learning/week-02/day-06/schematic_pa5_ld2_page5.png` and `firmware/stm32/w02d06-debounce-lab/`
 - **Last daily assessment PASS:** `W01D07 Week 1 C Foundations competency gate — CATEGORICAL PASS`, evidence at `learning/week-01/day-07/ASSESSMENT_RESULT_W01D07.md`
 - **Last competency PASS:** `W01-C-FOUND — COMPETENCY_PASS (2026-08-15)`
 
@@ -34,12 +34,12 @@ If this file conflicts with a higher-authority source, the higher-authority sour
 - **Competencies verified:** `W01-C-FOUND — Embedded C foundation (W01D07 AI-0 gate PASS, 2026-08-15)`
 - **Competencies unverified:** `NONE currently recorded for Week 1 C foundation after the W01D07 gate`
 - **Competencies invalidated/retest required:** `NONE from the W01D07 gate or RR-019 workflow amendment`; pre-V3 Week 1 evidence remains historical/reference only and prior AI-assisted practice retains its recorded provenance.
-- **Current AI mode:** `NONE — W02D05 closed; W02D06 not started`
-- **AI-contaminated evidence:** W01D01 E06 exposed exact implementation line `*slot = target;`; W01D02 received a complete experiment scaffold and substantial evidence prose; W01D03 received bounded code/syntax assistance after attempts and AI-assisted wording in `alignment-note.md` Section 7. W01D04 used AI-3 review/debug and corrected practice explanations after meaningful learner attempts. W01D05 used AI-1 theory, AI-2 graded hints/design questioning and AI-3 post-attempt review; the learner owned the final core implementation. W01D06 and W01D07 raw scored evidence are not contaminated: each scored phase was AI-0 with external help NO, and review/administrative assistance began only after the learner's explicit closure signal. W02D01 used AI-3 post-attempt learning review. W02D02 used AI-5 executor-prepared lab/reference/infrastructure plus post-attempt review; its supplemental simulator also used AI-5 infrastructure and direct guided support for the learner-owned startup core. W02D03 used AI-5 executor infrastructure and AI-assisted evidence prose plus AI-3 post-attempt review; the core RCC/GPIO implementation and hardware observations remained learner-owned. W02D04 used AI-5 extensive theory and complete/reference-level core GPIO snippets after iterative learner attempts; the learner personally performed substantial reasoning/attempts, measurements, build, flash, hardware tests, ODR/BSRR comparison, negative case, restoration and capture. W02D05 used AI-5 executor-prepared starter/build/vendor infrastructure plus substantial interactive teaching/review and closeout documentation; the learner owned the final SYSCFG/EXTI/NVIC implementation and hardware observations. These Week 2 records are valid learning/artifact evidence only and do not independently prove a new competency; no new competency PASS is created and the normal fresh Week 2 AI-0 gate remains required.
+- **Current AI mode:** `NONE — W02D06 closed; W02D07 not started`
+- **AI-contaminated evidence:** W01D01 E06 exposed exact implementation line `*slot = target;`; W01D02 received a complete experiment scaffold and substantial evidence prose; W01D03 received bounded code/syntax assistance after attempts and AI-assisted wording in `alignment-note.md` Section 7. W01D04 used AI-3 review/debug and corrected practice explanations after meaningful learner attempts. W01D05 used AI-1 theory, AI-2 graded hints/design questioning and AI-3 post-attempt review; the learner owned the final core implementation. W01D06 and W01D07 raw scored evidence are not contaminated: each scored phase was AI-0 with external help NO, and review/administrative assistance began only after the learner's explicit closure signal. W02D01 used AI-3 post-attempt learning review. W02D02 used AI-5 executor-prepared lab/reference/infrastructure plus post-attempt review; its supplemental simulator also used AI-5 infrastructure and direct guided support for the learner-owned startup core. W02D03 used AI-5 executor infrastructure and AI-assisted evidence prose plus AI-3 post-attempt review; the core RCC/GPIO implementation and hardware observations remained learner-owned. W02D04 used AI-5 extensive theory and complete/reference-level core GPIO snippets after iterative learner attempts; the learner personally performed substantial reasoning/attempts, measurements, build, flash, hardware tests, ODR/BSRR comparison, negative case, restoration and capture. W02D05 used AI-5 executor-prepared starter/build/vendor infrastructure plus substantial interactive teaching/review and closeout documentation; the learner owned the final SYSCFG/EXTI/NVIC implementation and hardware observations. W02D06 used AI-3 theory, graded hints, post-attempt review/debug, SysTick/integration guidance, hardware diagnosis and evidence assistance; the learner owned the final core debounce implementation and physical-board observations. These Week 2 records are valid learning/artifact evidence only and do not independently prove a new competency; no new competency PASS is created and the normal fresh Week 2 AI-0 gate remains required.
 
 ## Outcome and Gates
 
-- **Current outcome:** `W02D05 GREEN / CLOSED / ARTIFACT_PASS; W02D06 NOT STARTED`
+- **Current outcome:** `W02D06 GREEN / CLOSED / ARTIFACT_PASS; W02D07 NOT STARTED`
 - **Status correction:** The previous W01D03 `YELLOW` was based solely on an incomplete generated pre-check flow. Authority audit found that flow was a baseline diagnostic, not a roadmap-required daily completion criterion. Its interruption remains recorded as `MENTOR/SYSTEM WORKFLOW VARIANCE — NON-SCORING`; artifact, AI, competency, schedule and recovery semantics are unchanged.
 - **W01D06/W01D07 correction:** `W01D06 is the roadmap's 45-minute independent daily coding gate. W01D07 contains the separate approximately 60-minute Week 1 competency gate required for W01-C-FOUND COMPETENCY_PASS and Week 1 PASS.`
 - **Week 1 daily status:** `W01D01 GREEN; W01D02 GREEN; W01D03 GREEN; W01D04 GREEN; W01D05 GREEN; W01D06 GREEN; W01D07 GREEN — FINAL`
@@ -53,6 +53,7 @@ If this file conflicts with a higher-authority source, the higher-authority sour
 - **W02D03:** `GREEN / CLOSED / ARTIFACT_PASS`
 - **W02D04:** `GREEN / CLOSED / ARTIFACT_PASS — AI-5; NOT independent competency evidence`
 - **W02D05:** `GREEN / CLOSED / ARTIFACT_PASS — AI-5; NOT independent competency evidence`
+- **W02D06:** `GREEN / CLOSED / ARTIFACT_PASS — AI-3; NOT independent competency evidence`
 - **Current gate:** `NONE ACTIVE`
 - **Gate completed:** `CP-00 Sprint 0 operational/bootstrap gate — CONTINUE (2026-08-09); W01D06-C-CODING-01 daily coding gate — 98/100 PASS (2026-08-15); W01D07 Week 1 C Foundations competency gate — CATEGORICAL PASS / AI-0 integrity PASS (2026-08-15); MASTER CHECK — PASS WITH FINDINGS / MEDIUM RESOLVED / LOW ACCEPTED; CP-01 — RV-002 COMPLETED (2026-08-15)`
 - **Gate missing:** `NONE for Week 1 closure`
@@ -62,16 +63,16 @@ If this file conflicts with a higher-authority source, the higher-authority sour
 
 - **Repo URL:** `https://github.com/MinhSit/embedded-firmware-journey-v3`
 - **Branch:** `main`
-- **Artifact closure:** W02D05 END DAY closure transaction; containing commit recorded as `SELF — containing commit` until repository history resolves it
+- **Artifact closure:** W02D06 END DAY closure transaction; containing commit recorded as `SELF — containing commit`
 - **Current operational HEAD:** Resolve from the Git repository at `BOOT`.
 - **Release:** `NONE — no Git tag present at state generation`
 
 ## Latest Build and Test
 
-- **Latest validation path:** `firmware/stm32/w02d05-exti-nvic-lab`.
-- **Build/test command:** `powershell -ExecutionPolicy Bypass -File .\build.ps1 -Clean`.
-- **Latest build/test result:** `PASS / exit 0`; final size `text=1164`, `data=0`, `bss=1568`, `dec=2732`, `hex=aac`; ELF/map/list generated; linker emitted inherited non-blocking `nosys` warnings for `_close`, `_lseek`, `_read` and `_write`.
-- **Latest demo result:** NUCLEO-F446RE B1/PC13 active-low falling-edge EXTI13 toggles PA5/LD2: initial OFF; first press -> ON; release -> no change; second press -> OFF. With rising-edge-only, press caused no toggle and release toggled, matching the LOW-to-HIGH release edge; falling-edge operation was restored and passed. Captures saved at `learning/week-02/day-05/evidence/W02D05_LD2_OFF.jpg` and `learning/week-02/day-05/evidence/W02D05_LD2_ON_AFTER_PRESS.jpg`. Button bounce was not characterized.
+- **Latest validation path:** `firmware/stm32/w02d06-debounce-lab` and `tests/host/test_debounce.c`.
+- **Build/test command:** strict host C17 compile/test, then `powershell -ExecutionPolicy Bypass -File .\build.ps1 -Clean` from the STM32 lab.
+- **Latest build/test result:** host compile PASS and `SUMMARY: 10 tests, 0 failed`; STM32 build PASS / exit 0 with final size `text=1652`, `data=0`, `bss=1576`, `dec=3228`, `hex=c9c`; ELF/map/list generated; linker emitted inherited non-blocking `nosys` warnings for `_close`, `_lseek`, `_read` and `_write`.
+- **Latest demo result:** On the physical NUCLEO-F446RE, repeated valid active-low USER-button presses toggled LD2 OFF/ON across successive activations. SysTick is 1 ms and the software threshold is 20 ms. The capture filename is `VID_20260822_140328.mp4` and is NOT STORED IN REPO. Schematic evidence covers B1/PC13 on C03+C04 page 3 and PA5/LD2 on C03+C04 page 5; exact physical C03/C04 remains unresolved and physical bounce duration was NOT MEASURED.
 - **Earlier W02D02 evidence retained:** startup-sequence artifact plus supplemental host startup-simulator validation remained `ARTIFACT_PASS` with `30/30` individual cases PASS.
 
 ## Hardware and Toolchain
@@ -83,18 +84,18 @@ If this file conflicts with a higher-authority source, the higher-authority sour
 ## Blockers and Deferred Work
 
 - **Open blockers:** `NONE`; P0 blocker: `NONE`.
-- **Known bugs:** `NONE blocking W02D05`; the clean build's inherited `nosys` syscall warnings are non-blocking for the bounded EXTI/NVIC artifact; button bounce was not characterized.
+- **Known bugs:** `NONE blocking W02D06`; inherited `nosys` syscall warnings are non-blocking; exact physical C03/C04 is unresolved; exact flash/debug command is NOT RECORDED; electrical voltage and physical bounce duration were NOT MEASURED.
 - **Technical debt:** Verify MPU6050 at the sensor/I2C phase; resolve ESP32 4 MB detected flash versus historical 2 MB project header when creating the clean ESP32 baseline; verify optional physical CAN hardware before any physical-bus claim; validate Wireshark capture workflow in the network/protocol phase.
 - **Carry-over:** `NONE`
 
 ## Schedule, Load, and Risk
 
-- **Schedule variance:** `W02D05 closed on its roadmap date`; Actual Focused Time was `6h — learner supplied`. Available and Planned Focused Time were not supplied in the closeout input. The authoritative stop criteria were completed; no quota judgment or schedule debt is inferred.
+- **Schedule variance:** `W02D06 closed on its roadmap date`; Available Focused Time was `6h`, Planned Focused Time was `6h`, and Actual Focused Time was `6h — learner supplied`. Hours are planning/history only, not a PASS quota; no schedule debt is inferred.
 - **Recovery status:** `NOT ACTIVE`
 - **Critical path risk:** `NONE currently identified`; no P0 blocker and the protected deadline is unchanged.
 - **Weekly scorecard:** `roadmap-control/weekly-scorecards/week-01.md — PASS`
 - **Career pipeline:** `N/A — no separate career task recorded for W01D07 beyond roadmap review/English explanation work`
-- **Health/load:** No health/load issue was supplied for W02D05; no inference was made. Actual Focused Time: `6h — learner supplied`. No schedule debt or Recovery condition is inferred.
+- **Health/load:** No health/load issue was supplied for W02D06; no inference was made. Actual Focused Time: `6h — learner supplied`. No schedule debt or Recovery condition is inferred.
 
 ## Forward Control
 
@@ -102,7 +103,7 @@ If this file conflicts with a higher-authority source, the higher-authority sour
 - **Roadmap calendar start for Week 2:** `2026-08-17`
 - **Hard deadline:** `2026-12-14 — project v1.0`
 - **Scope cuts:** `NONE active`. If schedule lag occurs later, apply roadmap-defined cut order: cut P2 first, reduce P1 polish, preserve P0.
-- **Exact Next Action:** `BOOT W02D06 and begin debounce with a tick/state machine plus NUCLEO-F446RE schematic review.`
+- **Exact Next Action:** `BOOT W02D07 and begin the scheduled fresh Week-2 AI-0 competency gate/preparation according to the authoritative roadmap.`
 - **Files/links to inspect first:**
   - `roadmap-control/current-state.md`
   - `roadmap-control/execution-runbook.md`
@@ -111,11 +112,16 @@ If this file conflicts with a higher-authority source, the higher-authority sour
   - `roadmap-control/ai-usage-log.md`
   - `roadmap-control/daily-log.md`
   - `roadmap-control/weekly-scorecards/week-01.md`
-  - `learning/week-02/day-05/TODO_W02_D05.md`
-  - `learning/week-02/day-05/SUBMIT_W02_D05.md`
-  - `learning/week-02/day-05/evidence/W02D05_LD2_OFF.jpg`
-  - `learning/week-02/day-05/evidence/W02D05_LD2_ON_AFTER_PRESS.jpg`
-  - `firmware/stm32/w02d05-exti-nvic-lab/main.c`
+  - `learning/week-02/day-06/TODO_W02_D06.md`
+  - `learning/week-02/day-06/SUBMIT_W02_D06.md`
+  - `learning/week-02/day-06/DEBOUNCE_LOG_W02D06.md`
+  - `learning/week-02/day-06/SCHEMATIC_REVIEW_W02D06.md`
+  - `learning/week-02/day-06/schematic_b1_pc13_page3.png`
+  - `learning/week-02/day-06/schematic_pa5_ld2_page5.png`
+  - `firmware/stm32/w02d06-debounce-lab/debounce.h`
+  - `firmware/stm32/w02d06-debounce-lab/debounce.c`
+  - `firmware/stm32/w02d06-debounce-lab/main.c`
+  - `tests/host/test_debounce.c`
   - `learning/week-02/startup-simulator/README.md`
   - `learning/week-02/startup-simulator/src/startup.c`
   - `learning/week-02/day-01/TODO_W02_D01.md`
