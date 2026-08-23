@@ -779,8 +779,74 @@ YES — a fresh unseen W02D07 variant under a prospectively declared contract.
 Notes:
 Technical review observed broadly PASS-level reasoning, and the learner's
 post-gate correction is retained as learning evidence only. Official outcome is
-`INVALID / RETEST REQUIRED`. Week 2 remains open. No firmware, build, flash,
-hardware, debugger, or measurement evidence was created for W02D07.
+`INVALID / RETEST REQUIRED`. At the close of that original attempt, Week 2 was
+still open. No firmware, build, flash, hardware, debugger, or measurement
+evidence was created for the original attempt.
+
+---
+
+## 2026-08-23 — W02D07 fresh retest and Week 2 career/final closure
+
+Highest AI level:
+AI-3 — post-retest review, career/admin drafting, and evidence/control-plane
+administration.
+
+Fresh scored retest mode:
+AI-0 — official reference manual, datasheet, and vendor header were allowed
+prospectively only for register, bitfield, and IRQ-name lookup. AI, tutorials,
+previous answers, and answer-search were prohibited.
+
+Learner integrity declaration after close:
+`RETEST INTEGRITY: CLEAN — chỉ dùng official manual/datasheet/header được cho phép, không AI/tutorial/lời giải.`
+
+Scored-phase integrity:
+CLEAN under the prospectively declared retest contract.
+
+What AI contributed after close:
+- recorded the learner-supplied authoritative retest result and integrity
+  declaration without fabricating unavailable raw answers;
+- documented the three non-blocking technical precision findings;
+- drafted the CV master skeleton and ready-to-publish GitHub profile baseline;
+- prepared career evidence, delta MASTER CHECK, weekly scorecard, ledger, daily
+  submission/log, AI log, and Current State updates;
+- ran read-only/validation checks and did not modify firmware behavior.
+
+Files/functions materially assisted:
+- `learning/week-02/day-07/RAW_COMPETENCY_RETEST_W02D07.md`;
+- `learning/week-02/day-07/ASSESSMENT_RESULT_RETEST_W02D07.md`;
+- `learning/week-02/day-07/SUBMIT_W02_D07.md`;
+- `career/CV_MASTER.md`;
+- `career/GITHUB_PROFILE_BASELINE.md`;
+- `learning/week-02/CAREER_EVIDENCE_W02.md`;
+- `learning/week-02/MASTER_CHECK_W02.md`;
+- `roadmap-control/weekly-scorecards/week-02.md`;
+- Week 2 ledger/log/state closure records.
+
+Implementation code provided during scored phase:
+NO.
+
+Gate answer revealed during scored phase:
+NO evidence of AI/tutorial/previous-answer/answer-search use. Exact raw answer
+text was not available to the executor and remains authoritative in the Project
+Chat transcript.
+
+Competency affected:
+`W02-C-MCU-FOUND — COMPETENCY_PASS` based on the fresh valid AI-0 retest. Assisted
+W02D01–W02D06 artifacts and the original invalid attempt are not used alone as
+independent competency proof.
+
+Fresh independent retest required:
+NO.
+
+Career provenance:
+Executor-assisted administrative drafting. GitHub profile repo `MinhSit/MinhSit`
+was not found; no external repository was created or public README deployed.
+
+Notes:
+The original W02D07 attempt remains historical `INVALID / RETEST REQUIRED` and
+is not rewritten. Fresh validation reran startup simulator `30/30 PASS`, debounce
+host tests `10/10 PASS`, and W02D06 STM32 clean build `PASS / exit 0`. Week 2 is
+eligible for `PASS / CLOSED`; no Week 3 work is started here.
 
 ---
 

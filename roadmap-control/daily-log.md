@@ -2560,7 +2560,8 @@ and transfer/fault reasoning.
 
 ### 2. Actual Status
 
-YELLOW — ORIGINAL GATE ATTEMPT CLOSED / `INVALID / RETEST REQUIRED`
+GREEN — W02D07 CLOSED after a valid fresh retest; original attempt retained as
+historical `INVALID / RETEST REQUIRED`
 
 Technical review found broadly PASS-level reasoning, with precision findings
 around half-open `.data`/`.bss` range arithmetic, an over-broad peripheral-clock
@@ -2571,6 +2572,11 @@ true one-shot/silent interrupt symptom.
 The attempt is invalid for competency because external lookup occurred during a
 scored phase whose declared contract prohibited documentation, search, notes,
 and previous solutions. This is not a technical competency FAIL.
+
+A fresh unseen retest was then completed under a prospectively declared AI-0
+contract allowing only official manual/datasheet/vendor-header lookup for
+register, bitfield, and IRQ names. Technical result was `PASS`; learner
+integrity declaration was `CLEAN`; official result was `COMPETENCY PASS`.
 
 ### 3. Focused Time
 
@@ -2593,14 +2599,16 @@ Gate timing: 10:22 local start recorded in Project Chat; 11:11 local close;
 - After the scored phase, disclosed limited external lookup transparently.
 - Produced a post-gate correction distinguishing uncleared EXTI pending state
   from stronger hypotheses for an ISR that runs once and becomes silent.
+- Completed a fresh unseen retest covering startup, GPIO concurrency/BSRR,
+  EXTI/vector/pending-clear diagnosis, and evidence-based fault isolation.
 
 The raw attempt remains historical/learning evidence but is not admissible as
 independent competency evidence under the contract actually used.
 
 ### 5. AI Usage
 
-Highest AI level used: AI-3 — post-gate technical review and evidence/control
-administration.
+Highest AI level used: AI-3 — post-gate review, career/admin drafting, and
+evidence/control-plane administration. The fresh scored retest remained AI-0.
 
 Scored-phase disclosure:
 `YES 1 tí, tôi dùng để tra cứu 1 số tên thanh ghi thôi ko tra cả đáp án`
@@ -2609,33 +2617,53 @@ The exact external lookup source/tool is not available to the executor and is
 not inferred. The scored phase must not be represented as clean AI-0/closed-book
 integrity.
 
-Competencies contaminated:
-The W02D07 attempt cannot independently award Week 2 competency.
+Original-attempt competency effect:
+The original W02D07 attempt cannot independently award Week 2 competency.
 
-Independent retest required:
-YES — fresh unseen W02D07 variant.
+Fresh retest integrity:
+`CLEAN — learner-supplied authoritative declaration`; official references were
+allowed prospectively and AI/tutorial/previous-answer/answer-search use was
+prohibited.
+
+Independent retest required after the fresh attempt:
+NO.
 
 ### 6. Artifact Result
 
-Files changed:
+Full W02D07/Week 2 closeout paths (the three original-attempt files below remain
+historical and were not modified by the fresh-retest transaction):
 - `learning/week-02/day-07/RAW_COMPETENCY_SUBMISSION_W02D07.md`
 - `learning/week-02/day-07/ASSESSMENT_RESULT_W02D07.md`
 - `learning/week-02/day-07/POST_GATE_REVIEW_W02D07.md`
+- `learning/week-02/day-07/RAW_COMPETENCY_RETEST_W02D07.md`
+- `learning/week-02/day-07/ASSESSMENT_RESULT_RETEST_W02D07.md`
 - `learning/week-02/day-07/SUBMIT_W02_D07.md`
-- W02D07 evidence/control-plane records.
+- `career/CV_MASTER.md`
+- `career/GITHUB_PROFILE_BASELINE.md`
+- `learning/week-02/CAREER_EVIDENCE_W02.md`
+- `learning/week-02/MASTER_CHECK_W02.md`
+- `roadmap-control/weekly-scorecards/week-02.md`
+- Week 2 evidence/control-plane records.
 
 Build:
-NOT PERFORMED — no firmware/source behavior changed.
+W02D06 STM32 clean rebuild `PASS / exit 0`; size
+`text=1652 data=0 bss=1576 dec=3228 hex=c9c`. No firmware/source behavior was
+modified.
 
 Tests:
-NOT PERFORMED — this transaction records assessment evidence only.
+Startup simulator `30/30 PASS`; debounce strict host tests `10/10 PASS`.
 
 ### 7. Evidence
 
 - Raw: `learning/week-02/day-07/RAW_COMPETENCY_SUBMISSION_W02D07.md`
 - Result: `learning/week-02/day-07/ASSESSMENT_RESULT_W02D07.md`
 - Review: `learning/week-02/day-07/POST_GATE_REVIEW_W02D07.md`
+- Fresh retest raw boundary: `learning/week-02/day-07/RAW_COMPETENCY_RETEST_W02D07.md`
+- Fresh retest result: `learning/week-02/day-07/ASSESSMENT_RESULT_RETEST_W02D07.md`
 - Submission: `learning/week-02/day-07/SUBMIT_W02_D07.md`
+- Career: `learning/week-02/CAREER_EVIDENCE_W02.md`
+- MASTER CHECK: `learning/week-02/MASTER_CHECK_W02.md`
+- Scorecard: `roadmap-control/weekly-scorecards/week-02.md`
 
 No W02D07 build, flash, debugger, hardware, register-capture, or electrical
 measurement evidence was created or claimed.
@@ -2650,6 +2678,9 @@ Health/load: 2 — sustainable — learner supplied
 
 Assessment elapsed: ~49 minutes based on recorded 10:22–11:11 local timestamps.
 
+Fresh retest/admin/career additional actual time: NOT SUPPLIED; no time is
+invented or added to the learner-supplied `~2h` daily value.
+
 ### 9. Understanding Check
 
 Post-gate correction recorded:
@@ -2662,31 +2693,35 @@ Post-gate correction recorded:
 
 This correction does not retroactively repair the invalid scored attempt.
 
+Fresh retest findings — non-blocking:
+- the FPU example is conditional on project/system requirements;
+- prefer `single write / no RMW / peripheral-supported atomic bit set-reset`
+  for BSRR rather than a universal single-cycle-bus claim;
+- for `PR |= BIT`, the primary RMW risk is clearing other pending bits already
+  read as `1`.
+
 ### 10. Defects / Failed Tests
 
-Technical FAIL: NO
+Original attempt: `INVALID / RETEST REQUIRED`; technical FAIL `NO`.
 
-Assessment integrity: INVALID
+Fresh retest: `PASS`; integrity `CLEAN`; official result `COMPETENCY PASS`.
 
-Official outcome: INVALID / RETEST REQUIRED
-
-Career task — CV master skeleton + GitHub profile baseline: NOT DONE
+Career task: `PASS — CV master skeleton + GitHub profile baseline draft complete`.
+Public profile README remains `NOT DEPLOYED` and is not claimed live.
 
 ### 11. Carry-over
 
-Exactly one mandatory carry-over:
-Fresh W02D07 retest using a new unseen variant under a prospectively declared
-reference contract.
+Carry-over: NONE.
 
 Recovery:
-NOT ACTIVE — no technical FAIL, no P0 blocker, and no governing rule found that
-requires Recovery for this invalid attempt.
+NOT ACTIVE — fresh retest passed, no P0 blocker exists, and Week 2 closure
+criteria are satisfied.
 
 ### 12. Next Action
 
-Run a fresh W02D07 retest on a new variant. Do not repeat today's exact
-questions. If governing policy permits, declare before the retest whether
-official manuals/datasheets may be used only for register/bitfield-name lookup.
+BOOT Week 3 according to the authoritative roadmap. Do not mark the calendar as
+Week 3 until that BOOT occurs.
 
-Week 2 remains open. Career task remains NOT DONE. Roadmap review is NOT DUE;
-the next formal checkpoint remains CP-02 on 2026-09-06.
+Week 2 is `PASS / CLOSED`; `W02-C-MCU-FOUND = COMPETENCY_PASS`; Week 3 eligibility
+is `YES`. Roadmap review is `NOT DUE`; the next formal checkpoint remains CP-02
+on 2026-09-06.

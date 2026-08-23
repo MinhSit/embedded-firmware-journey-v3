@@ -109,6 +109,62 @@ pending MASTER CHECK and CP-01 / WEEKLY REVIEW.
 
 ---
 
+## W02-C-MCU-FOUND — Cortex-M startup, GPIO, and EXTI foundations
+
+Roadmap source:
+Week 2 — Cortex-M startup, RCC/GPIO, EXTI/NVIC, schematic reasoning, and
+evidence-based fault isolation.
+
+Required level:
+Independently trace power-on to `main()`, reason about `.data`/`.bss`, explain
+RCC-to-GPIO flow and ODR read-modify-write concurrency risk, use precise BSRR
+semantics, diagnose EXTI/vector/pending-clear faults, and select evidence that
+distinguishes competing hypotheses.
+
+Artifact evidence:
+- W02D01 Cortex-M exception-flow artifact — `ARTIFACT_PASS`.
+- W02D02 startup sequence/lab and supplemental startup simulator —
+  `ARTIFACT_PASS`; fresh validation `30/30 PASS`.
+- W02D03 register-level RCC/GPIO output — `ARTIFACT_PASS`.
+- W02D04 GPIO input, ODR/BSRR comparison, negative case, and physical capture —
+  `ARTIFACT_PASS`.
+- W02D05 EXTI/NVIC implementation, negative edge case, and physical evidence —
+  `ARTIFACT_PASS`.
+- W02D06 debounce state machine, host tests, physical behavior, and schematic
+  review — `ARTIFACT_PASS`; fresh host validation `10/10 PASS` and clean STM32
+  build exit `0`.
+- Assisted W02D01–W02D06 artifacts support the weekly record but do not
+  independently award this competency.
+
+Independent gate:
+Fresh unseen W02D07 retest on 2026-08-23 — `PASS`. The prospectively declared
+contract allowed only official reference manual/datasheet/vendor-header lookup
+for register, bitfield, and IRQ names; AI, tutorials, previous answers, and
+answer-search were prohibited. Learner integrity declaration: `CLEAN`.
+
+AI mode:
+AI-0 for the scored fresh retest. Official reference lookup was allowed under
+the prospective contract and does not violate the recorded AI-0 boundary.
+
+Status:
+COMPETENCY_PASS
+
+Last verified:
+2026-08-23
+
+Retest condition:
+NONE REQUIRED from the passed fresh retest. Retest only if later evidence
+invalidates this independent result or a higher-authority gate requires it.
+
+Notes:
+Evidence is `RAW_COMPETENCY_RETEST_W02D07.md` and
+`ASSESSMENT_RESULT_RETEST_W02D07.md`; exact raw answer text remains authoritative
+in the Project Chat transcript and was not fabricated by the executor. The
+original W02D07 attempt remains separately recorded below as `INVALID / RETEST
+REQUIRED`; it is historical, not rewritten, and was not a technical FAIL.
+
+---
+
 # Non-awarding Assessment Attempts
 
 ## W02D07 — Week 2 Cortex-M / GPIO / EXTI competency-gate attempt

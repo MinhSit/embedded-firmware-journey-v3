@@ -2,62 +2,96 @@
 
 ## Canonical submission fields
 
-- Task: `W02D07 — Week 2 Cortex-M / GPIO / EXTI competency gate`
+- Task: `W02D07 — Week 2 Cortex-M / GPIO / EXTI competency gate and fresh retest`
 - Date: `2026-08-23`
 - Available Focused Time: `~6h — learner supplied`
 - Actual Focused Time: `~2h — learner supplied`
 - Health/load: `2 — sustainable — learner supplied`
-- Planned assessment start: `10:30 local`
-- Actual assessment start recorded in Project Chat: `10:22 local`
-- Assessment close: `11:11 local`
-- Gate duration: `~49 minutes` (`60-minute` maximum)
-- Highest AI Level Used: `AI-3 — post-gate review and evidence administration; scored-phase integrity invalid due to external reference lookup`
+- Original gate duration: `~49 minutes` (`60-minute` maximum)
+- Fresh retest duration: `NOT SUPPLIED`
+- Highest AI Level Used: `AI-3 — post-gate review, career/admin drafting, and evidence/control-plane administration; fresh scored retest remained AI-0`
 - Commit: `SELF — containing commit`
 
 ## Evidence paths
+
+Original attempt:
 
 - Raw evidence: `learning/week-02/day-07/RAW_COMPETENCY_SUBMISSION_W02D07.md`
 - Assessment result: `learning/week-02/day-07/ASSESSMENT_RESULT_W02D07.md`
 - Post-gate review: `learning/week-02/day-07/POST_GATE_REVIEW_W02D07.md`
 
-## Assistance and integrity disclosure
+Fresh retest:
 
-Declared scored-phase contract:
+- Raw evidence boundary: `learning/week-02/day-07/RAW_COMPETENCY_RETEST_W02D07.md`
+- Assessment result: `learning/week-02/day-07/ASSESSMENT_RESULT_RETEST_W02D07.md`
+- Exact raw answers: `Project Chat transcript; not available to executor`
 
-`AI-0 / closed-book / no documentation, search, notes, or previous solutions`
+Weekly closure:
 
-Learner disclosure after the gate:
+- Career evidence: `learning/week-02/CAREER_EVIDENCE_W02.md`
+- MASTER CHECK: `learning/week-02/MASTER_CHECK_W02.md`
+- Scorecard: `roadmap-control/weekly-scorecards/week-02.md`
 
-> YES 1 tí, tôi dùng để tra cứu 1 số tên thanh ghi thôi ko tra cả đáp án
+## Attempt 1 — historical original
 
-The learner states that external reference/help was used only to look up some
-register names and not complete answers. The exact lookup source/tool is not
-available to this executor and is not inferred. Because any such lookup was
-prohibited by the contract used for this scored attempt, assessment integrity is
-`INVALID`.
-
-Project Chat review and this executor's evidence/control-plane administration
-occurred after the scored attempt closed. Those activities are recorded
-separately and do not retroactively repair the scored-phase integrity.
-
-## Outcome
-
+- Declared contract: `AI-0 / closed-book / no documentation, search, notes, or previous solutions`
+- Learner disclosure after close: `YES 1 tí, tôi dùng để tra cứu 1 số tên thanh ghi thôi ko tra cả đáp án`
 - Official outcome: `INVALID / RETEST REQUIRED`
-- Technical performance: `PASS-LEVEL / sufficient reasoning observed in review`
 - Technical competency FAIL: `NO`
-- New competency PASS: `NO`
-- Week 2: `OPEN / competency NOT YET VERIFIED`
-- Career task — CV master skeleton + GitHub profile baseline: `NOT DONE`
-- Blockers: `NONE inferred`
+- Competency PASS from this attempt: `NO`
+
+The original raw and assessment files remain unchanged. The fresh retest does
+not retroactively repair, replace, erase, or relabel this attempt.
+
+## Fresh retest — valid attempt
+
+- Variant: `FRESH / UNSEEN`
+- Scored mode: `AI-0`
+- Allowed references: official reference manual, datasheet, and vendor header
+  for register, bitfield, and IRQ-name lookup
+- Prohibited: AI, tutorials, previous answers, and answer-search
+- Learner integrity declaration: `RETEST INTEGRITY: CLEAN — chỉ dùng official manual/datasheet/header được cho phép, không AI/tutorial/lời giải.`
+- Technical result: `PASS`
+- Mandatory Week 2 technical areas: `PASS`
+- Official result: `COMPETENCY PASS`
+- Retest required: `NO`
+
+## Assistance and provenance
+
+- Original scored phase: invalid under its closed-book contract because of the
+  disclosed lookup; post-close review was AI-3.
+- Fresh scored retest: AI-0 under the prospective allowed-reference contract;
+  no AI was used during the scored attempt.
+- After the fresh retest closed, executor assistance prepared the separate
+  evidence, CV/profile baseline, MASTER CHECK, scorecard, and control-plane
+  updates. This administrative assistance does not replace the scored answers.
+
+## Validation
+
+- Startup simulator rerun: `30/30 PASS`.
+- Debounce strict host tests rerun: `10/10 PASS`.
+- W02D06 clean STM32 build: `PASS / exit 0`, size
+  `text=1652 data=0 bss=1576 dec=3228 hex=c9c`.
+- Firmware/source behavior changed by this transaction: `NO`.
+- W02D07 hardware/debugger/register/electrical measurement created: `NO`.
+
+## Final outcome
+
+- W02D07: `GREEN / CLOSED`
+- W02-C-MCU-FOUND: `COMPETENCY_PASS`
+- Week 2: `PASS / CLOSED`
+- Career baseline: `PASS — CV skeleton + GitHub profile draft complete`
+- Public profile README: `NOT DEPLOYED`
+- Carry-over: `NONE`
 - Recovery: `NOT ACTIVE`
-- Roadmap review: `NOT DUE`; next formal checkpoint remains `CP-02 — 2026-09-06`
+- Week 3 eligibility: `YES`
+- Roadmap review: `NOT DUE`; CP-02 remains `2026-09-06`
 
 ## Evidence boundary
 
-- No firmware/source behavior was modified for W02D07.
-- No W02D07 build, flash, debugger, hardware observation, register capture, or
-  electrical measurement was performed or claimed in this closeout.
-- The raw attempt remains historical/learning evidence but cannot independently
-  create `COMPETENCY_PASS`.
-- A fresh unseen retest variant is required; today's exact questions must not be
-  reused.
+- No focused time is added for retest/admin/career work; additional actual time
+  was `NOT SUPPLIED`.
+- No future Week 3+ skill, application, outreach, production experience, or
+  public-profile deployment is claimed.
+- The calendar remains `2026-08-23 — Week 2 / Day 7`; Week 3 is eligible but is
+  not activated by this closure.
