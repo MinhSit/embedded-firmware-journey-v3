@@ -726,6 +726,64 @@ Notes:
 
 ---
 
+## 2026-08-23 — W02D07 Week 2 competency-gate attempt and post-gate review
+
+Highest AI level:
+AI-3 — post-gate technical review and evidence/control-plane administration.
+
+Scored phase declared mode:
+AI-0 — closed-book, with no documentation, search, notes, previous solutions,
+or other external help allowed.
+
+External help during scored phase:
+YES — learner disclosure: `YES 1 tí, tôi dùng để tra cứu 1 số tên thanh ghi thôi ko tra cả đáp án`
+
+The learner states that the lookup was limited to some register names and did
+not search for complete answers. The exact source/tool used for the lookup is
+not available to this executor and is not inferred.
+
+Scored-phase integrity:
+INVALID — external reference lookup occurred during a scored phase whose
+prospectively declared contract was closed-book.
+
+What AI contributed after close:
+- reviewed the submitted technical reasoning and recorded precision findings;
+- supported post-gate correction/review of the EXTI pending-clear symptom;
+- prepared W02D07 raw-evidence transcription, assessment result, post-gate
+  review, submission, and bounded control-plane bookkeeping.
+
+Files/functions materially assisted:
+- `learning/week-02/day-07/RAW_COMPETENCY_SUBMISSION_W02D07.md` — executor
+  transcription of supplied learner text plus explicit unavailable-text markers;
+- `learning/week-02/day-07/ASSESSMENT_RESULT_W02D07.md`;
+- `learning/week-02/day-07/POST_GATE_REVIEW_W02D07.md`;
+- `learning/week-02/day-07/SUBMIT_W02_D07.md`;
+- W02D07 evidence/control-plane records.
+
+Implementation code provided during scored phase:
+NO evidence of implementation code being provided is recorded. The disclosed
+external lookup still violates the closed-book contract.
+
+Gate answer revealed during scored phase:
+The learner states no complete answers were searched. Because the scored-phase
+reference lookup itself was prohibited, the executor does not infer clean
+integrity from that statement.
+
+Competency affected:
+The original W02D07 attempt cannot independently award Week 2 competency. No
+new `COMPETENCY_PASS` is created. This is not a technical competency FAIL.
+
+Fresh independent retest required:
+YES — a fresh unseen W02D07 variant under a prospectively declared contract.
+
+Notes:
+Technical review observed broadly PASS-level reasoning, and the learner's
+post-gate correction is retained as learning evidence only. Official outcome is
+`INVALID / RETEST REQUIRED`. Week 2 remains open. No firmware, build, flash,
+hardware, debugger, or measurement evidence was created for W02D07.
+
+---
+
 ## Pre-V3 Migration Note
 
 Known affected scope:

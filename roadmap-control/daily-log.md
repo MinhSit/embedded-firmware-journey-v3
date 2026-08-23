@@ -2547,3 +2547,146 @@ NOT ACTIVE
 
 BOOT W02D07 and begin the scheduled fresh Week-2 AI-0 competency gate/preparation
 according to the authoritative roadmap.
+
+---
+
+## 2026-08-23 — Week 02 / Day 07
+
+### 1. Planned Outcome
+
+Attempt the Week 2 Cortex-M / GPIO / EXTI competency gate covering power-on to
+`main()`, startup, RCC/GPIO, BSRR versus ODR read-modify-write, EXTI diagnosis,
+and transfer/fault reasoning.
+
+### 2. Actual Status
+
+YELLOW — ORIGINAL GATE ATTEMPT CLOSED / `INVALID / RETEST REQUIRED`
+
+Technical review found broadly PASS-level reasoning, with precision findings
+around half-open `.data`/`.bss` range arithmetic, an over-broad peripheral-clock
+bus-fault assumption, and an EXTI symptom mismatch. The learner then produced a
+post-gate correction distinguishing interrupt storm/retrigger behavior from a
+true one-shot/silent interrupt symptom.
+
+The attempt is invalid for competency because external lookup occurred during a
+scored phase whose declared contract prohibited documentation, search, notes,
+and previous solutions. This is not a technical competency FAIL.
+
+### 3. Focused Time
+
+Roadmap Standard Load: 46–49 focused hours/week
+
+Available: ~6h — learner supplied
+
+Planned: Assessment start planned for 10:30 local; no full-day planned focused
+time value is recorded.
+
+Actual: ~2h — learner supplied
+
+Gate timing: 10:22 local start recorded in Project Chat; 11:11 local close;
+~49 minutes elapsed within the 60-minute maximum.
+
+### 4. Independent Work
+
+- Completed the original assessment attempt across startup, GPIO, EXTI, and
+  transfer/fault reasoning.
+- After the scored phase, disclosed limited external lookup transparently.
+- Produced a post-gate correction distinguishing uncleared EXTI pending state
+  from stronger hypotheses for an ISR that runs once and becomes silent.
+
+The raw attempt remains historical/learning evidence but is not admissible as
+independent competency evidence under the contract actually used.
+
+### 5. AI Usage
+
+Highest AI level used: AI-3 — post-gate technical review and evidence/control
+administration.
+
+Scored-phase disclosure:
+`YES 1 tí, tôi dùng để tra cứu 1 số tên thanh ghi thôi ko tra cả đáp án`
+
+The exact external lookup source/tool is not available to the executor and is
+not inferred. The scored phase must not be represented as clean AI-0/closed-book
+integrity.
+
+Competencies contaminated:
+The W02D07 attempt cannot independently award Week 2 competency.
+
+Independent retest required:
+YES — fresh unseen W02D07 variant.
+
+### 6. Artifact Result
+
+Files changed:
+- `learning/week-02/day-07/RAW_COMPETENCY_SUBMISSION_W02D07.md`
+- `learning/week-02/day-07/ASSESSMENT_RESULT_W02D07.md`
+- `learning/week-02/day-07/POST_GATE_REVIEW_W02D07.md`
+- `learning/week-02/day-07/SUBMIT_W02_D07.md`
+- W02D07 evidence/control-plane records.
+
+Build:
+NOT PERFORMED — no firmware/source behavior changed.
+
+Tests:
+NOT PERFORMED — this transaction records assessment evidence only.
+
+### 7. Evidence
+
+- Raw: `learning/week-02/day-07/RAW_COMPETENCY_SUBMISSION_W02D07.md`
+- Result: `learning/week-02/day-07/ASSESSMENT_RESULT_W02D07.md`
+- Review: `learning/week-02/day-07/POST_GATE_REVIEW_W02D07.md`
+- Submission: `learning/week-02/day-07/SUBMIT_W02_D07.md`
+
+No W02D07 build, flash, debugger, hardware, register-capture, or electrical
+measurement evidence was created or claimed.
+
+### 8. Measurements
+
+Available Focused Time: ~6h — learner supplied
+
+Actual Focused Time: ~2h — learner supplied
+
+Health/load: 2 — sustainable — learner supplied
+
+Assessment elapsed: ~49 minutes based on recorded 10:22–11:11 local timestamps.
+
+### 9. Understanding Check
+
+Post-gate correction recorded:
+- uncleared pending state can immediately retrigger and cause an interrupt storm
+  or severe main starvation;
+- true one-shot/silent behavior more strongly suggests no new edge, masking or
+  disabling, or an ISR/called path that does not return normally;
+- for write-1-to-clear `EXTI_PR`, direct `EXTI->PR = bit` is clearer than the
+  dangerous read-modify-write form `EXTI->PR |= bit`.
+
+This correction does not retroactively repair the invalid scored attempt.
+
+### 10. Defects / Failed Tests
+
+Technical FAIL: NO
+
+Assessment integrity: INVALID
+
+Official outcome: INVALID / RETEST REQUIRED
+
+Career task — CV master skeleton + GitHub profile baseline: NOT DONE
+
+### 11. Carry-over
+
+Exactly one mandatory carry-over:
+Fresh W02D07 retest using a new unseen variant under a prospectively declared
+reference contract.
+
+Recovery:
+NOT ACTIVE — no technical FAIL, no P0 blocker, and no governing rule found that
+requires Recovery for this invalid attempt.
+
+### 12. Next Action
+
+Run a fresh W02D07 retest on a new variant. Do not repeat today's exact
+questions. If governing policy permits, declare before the retest whether
+official manuals/datasheets may be used only for register/bitfield-name lookup.
+
+Week 2 remains open. Career task remains NOT DONE. Roadmap review is NOT DUE;
+the next formal checkpoint remains CP-02 on 2026-09-06.

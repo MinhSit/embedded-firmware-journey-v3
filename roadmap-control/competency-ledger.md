@@ -106,3 +106,40 @@ with a skipped availability/planned-time precheck; this is recorded as
 `MENTOR/SYSTEM WORKFLOW VARIANCE — NON-SCORING` and did not invalidate the
 established assessment scope, time or AI firewall. Week 1 final closure remains
 pending MASTER CHECK and CP-01 / WEEKLY REVIEW.
+
+---
+
+# Non-awarding Assessment Attempts
+
+## W02D07 — Week 2 Cortex-M / GPIO / EXTI competency-gate attempt
+
+Roadmap source:
+Week 2 — Cortex-M, startup, RCC/GPIO, EXTI/NVIC and transfer/fault reasoning.
+
+Artifact evidence:
+- `learning/week-02/day-07/RAW_COMPETENCY_SUBMISSION_W02D07.md`
+- `learning/week-02/day-07/ASSESSMENT_RESULT_W02D07.md`
+- `learning/week-02/day-07/POST_GATE_REVIEW_W02D07.md`
+
+Independent gate:
+W02D07 original attempt on 2026-08-23 — `INVALID / RETEST REQUIRED`.
+
+AI mode:
+Declared `AI-0 / closed-book`; integrity invalid because the learner disclosed
+external reference lookup of some register names during the scored phase.
+
+Status:
+COMPETENCY_UNVERIFIED
+
+Last verified:
+NOT VERIFIED
+
+Retest condition:
+Fresh unseen W02D07 variant under a prospectively declared contract. The
+original questions must not be reused.
+
+Notes:
+Post-attempt review observed broadly PASS-level technical reasoning, but this
+attempt cannot independently award competency under the contract actually used.
+This is not a technical competency FAIL. No new `COMPETENCY_PASS` is created;
+`W01-C-FOUND` remains the latest verified competency.
