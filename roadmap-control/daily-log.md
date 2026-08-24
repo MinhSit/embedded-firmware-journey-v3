@@ -2725,3 +2725,131 @@ Week 3 until that BOOT occurs.
 Week 2 is `PASS / CLOSED`; `W02-C-MCU-FOUND = COMPETENCY_PASS`; Week 3 eligibility
 is `YES`. Roadmap review is `NOT DUE`; the next formal checkpoint remains CP-02
 on 2026-09-06.
+
+---
+
+## 2026-08-24 — Week 03 / Day 01
+
+### 1. Planned Outcome
+
+Derive the actual USART2 peripheral clock and baud divider, implement register-level
+polling TX/RX, and capture a physical echo at the intended baud.
+
+### 2. Actual Status
+
+GREEN — W03D01 CLOSED / ARTIFACT_PASS.
+
+The clean firmware build and physical USART2 polling echo passed. This normal
+learning day did not contain an independent competency gate.
+
+### 3. Focused Time
+
+Available: 6h — learner supplied
+
+Planned: UNRECOVERABLE PROCESS VARIANCE — no Planned Focused Time value was
+supplied in the W03D01 closure input; no value is inferred.
+
+Actual: 2h — learner supplied
+
+### 4. Independent Work
+
+- Reasoned the active clock path as HSI 16 MHz -> SYSCLK 16 MHz -> HPRE /1 ->
+  HCLK 16 MHz -> PPRE1 /1 -> PCLK1 16 MHz -> USART2.
+- Derived and used BRR 139 decimal / `0x008B` for 16 MHz, 115200 baud,
+  oversampling by 16, and 8N1 framing.
+- Implemented register-level GPIOA/USART2 setup, PA2/PA3 AF7, polling TX/RX,
+  and one-byte echo after meaningful learner attempts.
+- Performed the flash/terminal workflow and observed the physical echo on COM4.
+
+These are assisted learning facts and artifact evidence, not independent
+competency evidence.
+
+### 5. AI Usage
+
+Highest AI level used: AI-3
+
+What AI helped with: theory/explanation, graded hints, and post-attempt
+review/debug after meaningful learner core implementation attempts.
+
+Files/functions materially assisted: W03D01 UART learning/review and closure
+evidence/control-plane administration.
+
+Competencies contaminated: W03D01 cannot be used as independent competency
+evidence.
+
+Independent retest required: NO special retest created by this normal learning
+day; no AI-0 gate occurred and no competency result is awarded.
+
+### 6. Artifact Result
+
+Files changed: W03D01 learning evidence/submission, UART lab artifact, and the
+allowlisted daily/AI/current-state closure records.
+
+Build command: `powershell -ExecutionPolicy Bypass -File .\build.ps1 -Clean`
+from `firmware/stm32/w03d01-uart-polling-lab`.
+
+Build result: PASS / exit 0; `text=1084`, `data=0`, `bss=1568`, `dec=2652`,
+`hex=a5c`; only inherited non-blocking `nosys` warnings for `_close`, `_lseek`,
+`_read`, and `_write`.
+
+Test command: `python -m serial.tools.miniterm --parity N COM4 115200`
+
+Test result: physical polling echo PASS at 115200, 8N1, with hardware/software
+flow control inactive.
+
+### 7. Evidence
+
+Commit: `SELF — containing commit`
+
+Logs: miniterm visibly reported `COM4 115200,8,N,1`.
+
+Captures: `learning/week-03/day-01/Screenshot_1.png`
+
+Reports: `learning/week-03/day-01/SUBMIT_W03_D01.md`
+
+Video/demo: NONE.
+
+Other: STM32CubeProgrammer GUI was used to flash; exact GUI steps/settings and
+no CLI flashing command were recorded.
+
+### 8. Measurements
+
+Expected: receive one byte by polling `RXNE`, then echo it by polling `TXE` and
+writing `USART2->DR` at 115200, 8N1.
+
+Observed: `UART123 -> UART123`; the ANSI Right Arrow sequence `ESC [ C` was also
+echoed as `ESC [ C`.
+
+Relevant numbers/registers/timing/errors: USART2 peripheral clock 16 MHz; BRR
+139 decimal / `0x008B`; logic-analyzer/oscilloscope baud timing NOT MEASURED.
+
+### 9. Understanding Check
+
+What I demonstrated/explained during the assisted learning session: the
+HSI-to-PCLK1 clock path, baud-divider relationship, explicit 8N1 configuration,
+and why `TXE` and `RXNE` guard the transmit/receive data-register accesses.
+
+What I still cannot claim from this day: independent competency. Exact official
+source locations, connector/debugger routing, and wire timing were not recorded.
+
+### 10. Defects / Failed Tests
+
+Defect IDs or test IDs: NONE unresolved. The expected inherited `nosys` linker
+warnings are non-blocking.
+
+Root cause known?: N/A.
+
+Current hypothesis: no unresolved artifact defect supported by the supplied
+build and physical echo evidence.
+
+### 11. Carry-over
+
+Exactly one mandatory carry-over if needed: NONE.
+
+Closure criteria: MET.
+
+Recovery: NOT ACTIVE.
+
+### 12. Next Action
+
+BOOT W03D02.

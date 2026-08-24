@@ -850,6 +850,52 @@ eligible for `PASS / CLOSED`; no Week 3 work is started here.
 
 ---
 
+## 2026-08-24 — W03D01 UART clock and polling
+
+Highest AI level:
+AI-3
+
+What AI contributed:
+- theory/explanation and graded hints;
+- review/debug after meaningful learner core implementation attempts;
+- evidence/submission and END DAY closure bookkeeping.
+
+Files/functions materially assisted:
+- W03D01 UART learning/review after learner attempts;
+- `learning/week-03/day-01/SUBMIT_W03_D01.md`;
+- W03D01 closure control records.
+
+Core implementation code provided by AI:
+NO complete core implementation was supplied before the learner's meaningful
+attempts. The learner wrote the core register-level UART implementation attempts.
+
+Learner-owned contribution:
+- active USART2 clock-path and BRR reasoning;
+- final GPIOA/USART2 register configuration and polling TX/RX/echo implementation;
+- physical flash/terminal operation and echo observation.
+
+Gate answer revealed:
+NO ACTIVE GATE — W03D01 was normal assisted learning, not an AI-0 competency gate.
+
+Competency affected:
+W03D01 may be valid artifact evidence but is not independent competency evidence.
+No new competency PASS is awarded. `W02-C-MCU-FOUND — COMPETENCY_PASS` remains
+the latest competency PASS.
+
+Retest required:
+No W03D01-specific retest is created by this normal learning day. No AI-0 gate
+occurred.
+
+Notes:
+- Clean build PASS / exit 0: `text=1084`, `data=0`, `bss=1568`, `dec=2652`,
+  `hex=a5c`; only inherited non-blocking `nosys` warnings were present.
+- Physical COM4 polling echo PASS at 115200, 8N1: `UART123 -> UART123` and
+  Right Arrow / `ESC [ C -> ESC [ C`.
+- Evidence: `learning/week-03/day-01/Screenshot_1.png`.
+- Logic-analyzer/oscilloscope baud timing was NOT MEASURED.
+
+---
+
 ## Pre-V3 Migration Note
 
 Known affected scope:
