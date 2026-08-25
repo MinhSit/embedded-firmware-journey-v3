@@ -896,6 +896,60 @@ Notes:
 
 ---
 
+## 2026-08-25 — W03D02 USART2 RX interrupt
+
+Highest AI level:
+AI-3
+
+What AI contributed:
+- compile-clean W03D02 starter/infrastructure preparation only;
+- review/debug assistance after meaningful learner core implementation attempts;
+- evidence/submission, provenance, and END DAY closure bookkeeping.
+
+Files/functions materially assisted:
+- W03D02 starter infrastructure and learning review after learner attempts;
+- `learning/week-03/day-02/SUBMIT_W03_D02.md`;
+- `firmware/stm32/w03d02-uart-rx-irq-lab/PROVENANCE.md`;
+- W03D02 closure control records.
+
+Core implementation code provided by AI:
+NO complete core RX interrupt/shared-state implementation was supplied before
+the learner's meaningful attempts. The learner owned the final RXNE/NVIC/ISR,
+mailbox, foreground-consumption, physical-debug, and error-recovery work.
+
+Learner-owned contribution:
+- USART2 RXNE interrupt and NVIC configuration;
+- exact `USART2_IRQHandler` implementation and bounded ISR/foreground split;
+- depth-1 shared-mailbox implementation and limitation analysis;
+- physical COM4 IRQ/echo demo, register capture, controlled ORE experiment,
+  recovery, and post-recovery echo.
+
+Gate answer revealed:
+NO ACTIVE GATE — W03D02 was normal assisted learning, not an AI-0 competency gate.
+
+Competency affected:
+W03D02 may be valid artifact evidence but is not independent competency evidence.
+No new competency PASS is awarded. `W02-C-MCU-FOUND — COMPETENCY_PASS` remains
+the latest competency PASS.
+
+Retest required:
+No W03D02-specific retest is created by this normal learning day. No AI-0 gate
+occurred.
+
+Notes:
+- Clean build PASS / exit 0: `text=1420`, `data=0`, `bss=1568`, `dec=2988`,
+  `hex=bac`; only inherited non-blocking `nosys` warnings were present.
+- Physical COM4 USART2 RX IRQ and foreground echo PASS at 115200, 8N1.
+- Normal capture: `CR1=0x202C`, `SR=0x00F0`, `NVIC->ISER[1]=0x00000040`.
+- Forced ORE capture: `SR=0x00F8`; recovery capture: `SR=0x00C0`, ORE=0,
+  RXNE=0; post-recovery `R -> R` PASS.
+- Evidence: `learning/week-03/day-02/Screenshot_1.png` through
+  `learning/week-03/day-02/Screenshot_4.png`.
+- Known limitation: single-byte mailbox depth=1; burst traffic may overwrite or
+  drop data. Ring buffer intentionally remains W03D03 work.
+
+---
+
 ## Pre-V3 Migration Note
 
 Known affected scope:

@@ -2853,3 +2853,146 @@ Recovery: NOT ACTIVE.
 ### 12. Next Action
 
 BOOT W03D02.
+
+---
+
+## 2026-08-25 — Week 03 / Day 02
+
+### 1. Planned Outcome
+
+Add USART2 RXNE interrupt reception, keep the ISR short, reason explicitly about
+shared state, and produce a physical IRQ demo plus register/evidence capture.
+
+### 2. Actual Status
+
+GREEN — W03D02 CLOSED / ARTIFACT_PASS.
+
+The clean firmware build, physical USART2 RX interrupt demo, register capture,
+controlled ORE case, recovery, and post-recovery echo passed. This normal
+learning day did not contain an independent competency gate.
+
+### 3. Focused Time
+
+Available: 6h — learner supplied
+
+Planned: UNRECOVERABLE PROCESS VARIANCE — no Planned Focused Time value was
+supplied in the W03D02 closure input; no value is inferred.
+
+Actual: 3h — learner supplied
+
+### 4. Independent Work
+
+- Implemented USART2 RXNE interrupt enable, NVIC configuration, and the exact
+  `USART2_IRQHandler` vector symbol after learner-first attempts.
+- Kept the ISR bounded to condition checks, one DR read, one mailbox-byte store,
+  and one ready-flag update; foreground performs mailbox consumption and polling TX.
+- Reasoned about ISR-producer/foreground-consumer ownership and protected the
+  foreground copy/clear sequence by temporarily masking `USART2_IRQn`.
+- Performed the COM4 physical IRQ/echo demo, breakpoint/register inspection,
+  controlled ORE experiment, SR-to-DR recovery, and post-recovery echo.
+
+These are assisted learning facts and artifact evidence, not independent
+competency evidence.
+
+### 5. AI Usage
+
+Highest AI level used: AI-3
+
+What AI helped with: executor starter preparation only, followed by post-attempt
+review/debug assistance and END DAY evidence/control-plane administration.
+
+Files/functions materially assisted: W03D02 starter infrastructure, learning
+review/debug after learner attempts, submission/provenance, and closure records.
+
+Competencies contaminated: W03D02 cannot be used as independent competency
+evidence.
+
+Independent retest required: NO special retest created by this normal learning
+day; no AI-0 gate occurred and no competency result is awarded.
+
+### 6. Artifact Result
+
+Files changed: W03D02 learning evidence/submission, learner UART RX IRQ lab
+artifact, provenance, and the allowlisted daily/AI/current-state closure records.
+
+Build command: `powershell -ExecutionPolicy Bypass -File .\build.ps1 -Clean`
+from `firmware/stm32/w03d02-uart-rx-irq-lab`.
+
+Build result: PASS / exit 0; `text=1420`, `data=0`, `bss=1568`, `dec=2988`,
+`hex=bac`; only inherited non-blocking `nosys` warnings for `_close`, `_lseek`,
+`_read`, and `_write`.
+
+Test setup: physical COM4 USART2 path at 115200, 8N1, line ending None; VS Code
+Cortex-Debug breakpoint/register inspection through ST-LINK GDB Server.
+
+Test result: physical RX IRQ and foreground echo PASS; controlled ORE capture,
+SR-to-DR recovery, and post-recovery `R` echo PASS.
+
+### 7. Evidence
+
+Commit: `SELF — containing commit`
+
+Logs: VS Code Serial Monitor showed the sent/echoed bytes on COM4.
+
+Captures: `learning/week-03/day-02/Screenshot_1.png` through
+`learning/week-03/day-02/Screenshot_4.png`.
+
+Reports: `learning/week-03/day-02/SUBMIT_W03_D02.md`
+
+Video/demo: NONE.
+
+Other: exact backend flash command and terminal extension/version were NOT
+RECORDED; no value is inferred.
+
+### 8. Measurements
+
+Expected: each slow single-byte input triggers USART2 RX interrupt service,
+moves the byte into the depth-1 mailbox, permits foreground consumption, and is
+echoed through polling TX. Holding the CPU before the DR read while more bytes
+arrive should assert ORE; the SR-read then DR-read sequence should recover.
+
+Observed: normal breakpoint capture showed `USART2->CR1=8236 / 0x202C`,
+`USART2->SR=240 / 0x00F0`, and `NVIC->ISER[1]=64 / 0x00000040`; forced ORE showed
+`USART2->SR=248 / 0x00F8`; recovery showed `USART2->SR=192 / 0x00C0` with ORE=0
+and RXNE=0; post-recovery `R -> R` passed.
+
+Relevant numbers/registers/timing/errors: COM4, 115200 8N1; no independent wire
+timing measurement was supplied.
+
+### 9. Understanding Check
+
+What I demonstrated/explained during the assisted learning session: RXNE/RXNEIE
+and NVIC gating, exact vector symbol, bounded ISR versus foreground work,
+producer/consumer shared state, the depth-1 mailbox limitation, ORE cause, and
+SR-to-DR recovery behavior.
+
+What I still cannot claim from this day: independent competency. Exact official
+document revisions, backend flash command, and terminal extension/version were
+not recorded.
+
+### 10. Defects / Failed Tests
+
+Defect IDs or test IDs: NONE unresolved. The expected inherited `nosys` linker
+warnings are non-blocking.
+
+Root cause known?: N/A.
+
+Current hypothesis: no unresolved artifact defect supported by the supplied
+build and physical/debug evidence.
+
+### 11. Carry-over
+
+Exactly one mandatory carry-over if needed: NONE.
+
+Closure criteria: MET.
+
+Recovery: NOT ACTIVE.
+
+Known limitation: receive storage is a single-byte mailbox (depth=1); burst
+traffic can overwrite/drop data. Ring buffer integration is intentionally the
+W03D03 target, not a W03D02 defect repair.
+
+### 12. Next Action
+
+BOOT W03D03 — open the W03D03 roadmap day card and define the ring-buffer
+producer/consumer invariants before implementation.
