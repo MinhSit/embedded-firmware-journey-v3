@@ -950,6 +950,58 @@ Notes:
 
 ---
 
+## 2026-08-26 — W03D03 UART RX ring-buffer integration
+
+Highest AI level:
+AI-3
+
+What AI contributed:
+- executor-prepared starter/repository infrastructure and visible host-test
+  scaffolding;
+- theory and graded hints;
+- post-attempt review/debug support;
+- hardware/debug setup guidance;
+- closure and evidence administration.
+
+Files/functions materially assisted:
+- W03D03 starter infrastructure and learning review after learner attempts;
+- `learning/week-03/day-03/SUBMIT_W03_D03.md`;
+- W03D03 closure control records.
+
+Core implementation code provided by AI:
+NO complete final ring-buffer core or UART integration was supplied before the
+learner's meaningful attempts.
+
+Learner-owned contribution:
+- ring-buffer state, push/pop/wrap implementation;
+- DROP_NEWEST policy selection and justification;
+- overflow counter implementation;
+- USART2 ISR/foreground integration;
+- host/build/flash/terminal/debug execution and physical observations;
+- final invariant and state-transition explanation.
+
+Gate answer revealed:
+NO ACTIVE GATE — W03D03 was normal assisted learning, not an AI-0 competency gate.
+
+Competency affected:
+W03D03 may be valid artifact evidence but is not independent competency evidence.
+No new competency PASS is awarded. `W02-C-MCU-FOUND — COMPETENCY_PASS` remains
+the latest competency PASS.
+
+Special retest:
+NOT REQUIRED. No W03D03-specific retest is created by this normal learning day.
+
+Notes:
+- Host compile/test PASS / exit 0: `11 tests, 0 failed`.
+- Clean build PASS / exit 0: `text=1720`, `data=0`, `bss=1592`, `dec=3312`,
+  `hex=cf0`; only inherited non-blocking `nosys` warnings were present.
+- Physical normal UART echo PASS: COM4, 115200 8N1, `UART123 -> UART123`.
+- Forced DROP_NEWEST overflow PASS; final observed overflow counter: `14`.
+- Evidence: `learning/week-03/day-03/Screenshot_1.png` through
+  `Screenshot_3.png`.
+
+---
+
 ## Pre-V3 Migration Note
 
 Known affected scope:

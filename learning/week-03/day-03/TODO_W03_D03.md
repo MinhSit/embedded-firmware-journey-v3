@@ -26,16 +26,16 @@ repeatable host/firmware evidence for correct buffering behavior.
 
 ### MUST — traceable to the authoritative W03D03 roadmap card
 
-- [ ] Integrate a fixed-size ring buffer into the USART2 RX interrupt path.
-- [ ] Define and document one bounded overflow policy before completing the
+- [x] Integrate a fixed-size ring buffer into the USART2 RX interrupt path.
+- [x] Define and document one bounded overflow policy before completing the
   policy-specific overflow test.
-- [ ] Maintain an observable overflow/error counter.
-- [ ] Pass repeatable host tests for normal FIFO, boundary, invalid-input where
+- [x] Maintain an observable overflow/error counter.
+- [x] Pass repeatable host tests for normal FIFO, boundary, invalid-input where
   the API permits it, full/empty, wrap, repeated-wrap, failed-operation state
   preservation, and overflow-counter behavior.
-- [ ] Clean-build the integrated STM32 firmware and record exact build evidence.
-- [ ] Record final overflow evidence and counter values from an attributable run.
-- [ ] Explain producer/consumer ownership, head/tail/state invariants, full versus
+- [x] Clean-build the integrated STM32 firmware and record exact build evidence.
+- [x] Record final overflow evidence and counter values from an attributable run.
+- [x] Explain producer/consumer ownership, head/tail/state invariants, full versus
   empty, wrap, failed-operation preservation, and overflow transitions in the
   learner's own words without looking at the implementation.
 

@@ -2996,3 +2996,143 @@ W03D03 target, not a W03D02 defect repair.
 
 BOOT W03D03 — open the W03D03 roadmap day card and define the ring-buffer
 producer/consumer invariants before implementation.
+
+---
+
+## 2026-08-26 — Week 03 / Day 03
+
+### 1. Planned Outcome
+
+Replace the depth-1 USART2 RX mailbox with a fixed-size ring buffer, define a
+bounded overflow policy and observable error counter, and verify the integrated
+artifact with repeatable host tests, a clean STM32 build, and physical evidence.
+
+### 2. Actual Status
+
+GREEN — W03D03 CLOSED / ARTIFACT_PASS.
+
+A fixed-size 8-byte USART2 RX ring buffer was integrated with DROP_NEWEST
+overflow behavior and an observable overflow counter. Host, STM32 build, normal
+UART, and forced-overflow evidence passed. This normal learning day creates no
+new competency result.
+
+### 3. Focused Time
+
+Available: 6h — learner supplied
+
+Planned: 6h — learner supplied
+
+Actual: 3.5h — learner supplied
+
+Hours are planning/history only. No schedule debt is inferred merely because
+Actual is lower than Planned. Health impact: NOT RECORDED.
+
+### 4. Independent Work
+
+- Implemented fixed-capacity static ring-buffer state with head, tail, count,
+  and overflow_count.
+- Selected and justified DROP_NEWEST, preserving accepted FIFO contents while
+  making sustained-overflow loss observable.
+- Integrated the ISR producer with foreground consumption under a short
+  USART2_IRQn-disabled critical section.
+- Ran the host suite, clean firmware build, physical UART demo, forced-overflow
+  experiment, and debugger counter observation.
+- Explained empty, partial, full, push, pop, wrap, and failed-push transitions.
+
+These are assisted learning facts and artifact evidence, not independent
+competency evidence.
+
+### 5. AI Usage
+
+Highest AI level used: AI-3
+
+What AI helped with: executor-prepared starter/repository infrastructure,
+visible host-test scaffolding, theory and graded hints, post-attempt review/debug,
+hardware/debug setup guidance, and closure/evidence administration.
+
+Files/functions materially assisted: W03D03 starter infrastructure, learning
+review/debug after learner attempts, submission, and closure records.
+
+Competencies contaminated: W03D03 cannot be used as independent competency
+evidence.
+
+Independent retest required: NO special retest created by this normal learning
+day; no AI-0 gate occurred and no competency result is awarded.
+
+### 6. Artifact Result
+
+Files changed: learner-owned W03D03 ring-buffer/UART source, W03D03 screenshots,
+TODO/submission, and the allowlisted daily/AI/current-state closure records.
+
+Host compile command: `gcc -std=c17 -Wall -Wextra -Wpedantic -Werror firmware/stm32/w03d03-uart-ring-buffer-lab/rx_ring_buffer.c tests/host/test_w03d03_rx_ring_buffer.c -Ifirmware/stm32/w03d03-uart-ring-buffer-lab -o tests/host/test_w03d03_rx_ring_buffer.exe`.
+
+Host result: PASS / exit 0; `SUMMARY: 11 tests, 0 failed`.
+
+Build command: `powershell -ExecutionPolicy Bypass -File .\build.ps1 -Clean`
+from `firmware/stm32/w03d03-uart-ring-buffer-lab`.
+
+Build result: PASS / exit 0; `text=1720`, `data=0`, `bss=1592`, `dec=3312`,
+`hex=cf0`; only inherited non-blocking `nosys` warnings for `_close`, `_lseek`,
+`_read`, and `_write`.
+
+### 7. Evidence
+
+Commit: `SELF — containing closure commit`
+
+Logs: VS Code Serial Monitor on COM4 at 115200, 8N1.
+
+Captures: `learning/week-03/day-03/Screenshot_1.png`, `Screenshot_2.png`, and
+`Screenshot_3.png`.
+
+Reports: `learning/week-03/day-03/SUBMIT_W03_D03.md`
+
+Video/demo: NONE.
+
+### 8. Measurements
+
+Expected: normal input is echoed in FIFO order; under forced sustained overflow,
+DROP_NEWEST preserves accepted queued bytes and increments overflow_count.
+
+Observed: normal `UART123 -> UART123` PASS; forced overflow produced attributable
+truncated FIFO output `BCDEFGHI`; final observed overflow counter was `14`.
+
+Relevant setup: NUCLEO-F446RE, COM4, 115200 baud, 8N1; STM32CubeProgrammer flash;
+GDB hardware debug through arm-none-eabi-gdb, ST-LINK_gdbserver, SWD, and
+localhost:61234.
+
+### 9. Understanding Check
+
+What I demonstrated/explained during the assisted learning session: empty,
+partial, and full invariants; successful push/pop and wrap transitions;
+DROP_NEWEST failed-push state preservation; producer/consumer ownership; and why
+volatile is not a lock.
+
+What I still cannot claim from this day: independent competency.
+
+### 10. Defects / Failed Tests
+
+Defect IDs or test IDs: NONE unresolved. Temporary foreground delay and
+overflow_snapshot instrumentation were removed before final verification. The
+expected inherited `nosys` linker warnings are non-blocking.
+
+Root cause known?: N/A.
+
+Current hypothesis: no unresolved artifact defect supported by the verified
+host, build, and physical evidence.
+
+### 11. Carry-over
+
+Exactly one mandatory carry-over if needed: NONE.
+
+Closure criteria: MET.
+
+Recovery: NOT ACTIVE.
+
+Known limitations: fixed 8-byte RX capacity; DROP_NEWEST intentionally loses new
+bytes during sustained overflow; foreground uses a short USART2 IRQ-disabled
+critical section; TX remains polling; no DMA, parser, or RTOS is in W03D03 scope.
+
+### 12. Next Action
+
+BOOT W03D04 — open the authoritative W03D04 roadmap day card before defining the
+next Day Contract.

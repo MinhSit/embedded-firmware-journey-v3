@@ -1,11 +1,12 @@
 #include "uart_polling.h"
 #include "stm32f446xx.h"
+#include "rx_ring_buffer.h"
 
-static volatile uint8_t s_rx_byte = 0U;
-static volatile bool    s_rx_ready = false;
+static rx_ring_buffer_t s_rx_buffer;
 
 void uart_init(uint32_t peripheral_clock_hz, uint32_t baud_rate)
 {
+    rx_ring_buffer_init(&s_rx_buffer);
     RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;
     RCC->APB1ENR |= RCC_APB1ENR_USART2EN;
 
@@ -47,26 +48,16 @@ bool uart_rx_get_byte(uint8_t *out_byte)
     if (out_byte == 0) {
         return false;
     }
-
-    bool has_data = false;
-
     NVIC_DisableIRQ(USART2_IRQn);
-
-    if (s_rx_ready) {
-        *out_byte = s_rx_byte;
-        s_rx_ready = false;
-        has_data = true;
-    }
-
+    bool status = rx_ring_buffer_pop(&s_rx_buffer, out_byte);
     NVIC_EnableIRQ(USART2_IRQn);
-
-    return has_data;
+    return status;
 }
 
 void USART2_IRQHandler(void)
 {
     if ((USART2->SR & USART_SR_RXNE) && (USART2->CR1 & USART_CR1_RXNEIE)) {
-        s_rx_byte = (uint8_t)(USART2->DR & 0xFFU);
-        s_rx_ready = true;
+        uint8_t rx_byte = (uint8_t)(USART2->DR & 0xFFU);
+        (void)rx_ring_buffer_push(&s_rx_buffer, rx_byte);
     }
 }

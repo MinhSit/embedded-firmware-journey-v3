@@ -1,11 +1,11 @@
 # CURRENT STATE V3 — EMBEDDED/FIRMWARE ROADMAP
 
 **Document ID:** `CURRENT_STATE_V3`
-**Version:** `3.0.37`
+**Version:** `3.0.38`
 **State type:** Operational snapshot — describes reality and creates no new policy
-**Generated at:** `2026-08-25`
+**Generated at:** `2026-08-26`
 **Timezone:** `Asia/Ho_Chi_Minh`
-**Status:** `W03D02 GREEN / CLOSED / ARTIFACT_PASS`
+**Status:** `W03D03 GREEN / CLOSED / ARTIFACT_PASS`
 
 ---
 
@@ -14,18 +14,18 @@
 - **System Spec version:** `SYSTEM_SPEC_V3 3.0.0`
 - **Roadmap version:** `EMBEDDED_ROADMAP_V3.1 3.1.0`
 - **Master Prompt version:** `MASTER_PROMPT_V3 3.1.3`
-- **Current State version:** `3.0.37`
+- **Current State version:** `3.0.38`
 - **Implementation runbook:** `roadmap-control/execution-runbook.md` — `NON-AUTHORITATIVE`
 
 If this file conflicts with a higher-authority source, the higher-authority source wins.
 
 ## Positions
 
-- **Calendar position:** `2026-08-25 — Week 3 / Day 2 CLOSED; next calendar/execution target W03D03`
-- **Execution position:** `W03D02 CLOSED; W03D03 NOT STARTED`
-- **Artifact position:** `W03D02 USART2 RX interrupt, shared mailbox, and ORE recovery — ARTIFACT_PASS`
+- **Calendar position:** `2026-08-26 — Week 3 / Day 3 CLOSED; next execution target W03D04`
+- **Execution position:** `W03D03 CLOSED; W03D04 NOT STARTED`
+- **Artifact position:** `W03D03 USART2 RX fixed-size ring buffer + DROP_NEWEST overflow/error counter — ARTIFACT_PASS`
 - **Competency position:** `W02-C-MCU-FOUND — COMPETENCY_PASS`
-- **Last artifact PASS:** `W03D02 USART2 RX interrupt + foreground echo + ORE recovery`, evidence at `learning/week-03/day-02/SUBMIT_W03_D02.md`, `learning/week-03/day-02/Screenshot_1.png` through `Screenshot_4.png`, and `firmware/stm32/w03d02-uart-rx-irq-lab/`
+- **Last artifact PASS:** `W03D03 USART2 RX fixed-size ring buffer + DROP_NEWEST overflow/error counter`, evidence at `learning/week-03/day-03/SUBMIT_W03_D03.md`, `learning/week-03/day-03/Screenshot_1.png` through `Screenshot_3.png`, `firmware/stm32/w03d03-uart-ring-buffer-lab/`, and `tests/host/test_w03d03_rx_ring_buffer.c`
 - **Last daily assessment PASS:** `W02D07 fresh Week 2 competency retest — PASS`, evidence at `learning/week-02/day-07/ASSESSMENT_RESULT_RETEST_W02D07.md`
 - **Last competency PASS:** `W02-C-MCU-FOUND — COMPETENCY_PASS (2026-08-23)`
 
@@ -34,13 +34,13 @@ If this file conflicts with a higher-authority source, the higher-authority sour
 - **Competencies verified:** `W01-C-FOUND — Embedded C foundation (2026-08-15); W02-C-MCU-FOUND — Cortex-M startup, GPIO, and EXTI foundations (fresh W02D07 AI-0 retest PASS, 2026-08-23)`
 - **Competencies unverified:** `NONE currently recorded for completed Week 1 or Week 2 foundations`
 - **Competencies invalidated/retest required:** The W02D07 original Week 2 gate attempt remains historical `INVALID / RETEST REQUIRED` because external reference lookup occurred during that scored closed-book phase. It was not a technical competency FAIL and is not rewritten. The separate fresh unseen retest passed under a prospectively declared allowed-reference contract and validly awarded `W02-C-MCU-FOUND`.
-- **Current AI mode:** `NONE — W03D02 assisted normal-learning closure complete; highest assistance used AI-3`
-- **AI-contaminated evidence:** W01D01 E06 exposed exact implementation line `*slot = target;`; W01D02 received a complete experiment scaffold and substantial evidence prose; W01D03 received bounded code/syntax assistance after attempts and AI-assisted wording in `alignment-note.md` Section 7. W01D04 used AI-3 review/debug and corrected practice explanations after meaningful learner attempts. W01D05 used AI-1 theory, AI-2 graded hints/design questioning and AI-3 post-attempt review; the learner owned the final core implementation. W01D06 and W01D07 raw scored evidence are not contaminated: each scored phase was AI-0 with external help NO, and review/administrative assistance began only after the learner's explicit closure signal. W02D01 used AI-3 post-attempt learning review. W02D02 used AI-5 executor-prepared lab/reference/infrastructure plus post-attempt review; its supplemental simulator also used AI-5 infrastructure and direct guided support for the learner-owned startup core. W02D03 used AI-5 executor infrastructure and AI-assisted evidence prose plus AI-3 post-attempt review; the core RCC/GPIO implementation and hardware observations remained learner-owned. W02D04 used AI-5 extensive theory and complete/reference-level core GPIO snippets after iterative learner attempts; the learner personally performed substantial reasoning/attempts, measurements, build, flash, hardware tests, ODR/BSRR comparison, negative case, restoration and capture. W02D05 used AI-5 executor-prepared starter/build/vendor infrastructure plus substantial interactive teaching/review and closeout documentation; the learner owned the final SYSCFG/EXTI/NVIC implementation and hardware observations. W02D06 used AI-3 theory, graded hints, post-attempt review/debug, SysTick/integration guidance, hardware diagnosis and evidence assistance; the learner owned the final core debounce implementation and physical-board observations. These assisted Week 2 records remain learning/artifact evidence and do not independently prove the new competency. W03D01 used AI-3 theory, graded hints, post-attempt review/debug, and closure assistance after meaningful learner UART implementation attempts. W03D02 used executor starter infrastructure plus AI-3 post-attempt review/debug and closure assistance; the learner owned the final RX IRQ/shared-state implementation and physical/debug work. W03D01 and W03D02 are artifact evidence only and create no competency result. `W02-C-MCU-FOUND` remains based on the separate fresh valid W02D07 AI-0 retest.
+- **Current AI mode:** `NONE — W03D03 assisted normal-learning closure complete; highest assistance used AI-3`
+- **AI-contaminated evidence:** W01D01 E06 exposed exact implementation line `*slot = target;`; W01D02 received a complete experiment scaffold and substantial evidence prose; W01D03 received bounded code/syntax assistance after attempts and AI-assisted wording in `alignment-note.md` Section 7. W01D04 used AI-3 review/debug and corrected practice explanations after meaningful learner attempts. W01D05 used AI-1 theory, AI-2 graded hints/design questioning and AI-3 post-attempt review; the learner owned the final core implementation. W01D06 and W01D07 raw scored evidence are not contaminated: each scored phase was AI-0 with external help NO, and review/administrative assistance began only after the learner's explicit closure signal. W02D01 used AI-3 post-attempt learning review. W02D02 used AI-5 executor-prepared lab/reference/infrastructure plus post-attempt review; its supplemental simulator also used AI-5 infrastructure and direct guided support for the learner-owned startup core. W02D03 used AI-5 executor infrastructure and AI-assisted evidence prose plus AI-3 post-attempt review; the core RCC/GPIO implementation and hardware observations remained learner-owned. W02D04 used AI-5 extensive theory and complete/reference-level core GPIO snippets after iterative learner attempts; the learner personally performed substantial reasoning/attempts, measurements, build, flash, hardware tests, ODR/BSRR comparison, negative case, restoration and capture. W02D05 used AI-5 executor-prepared starter/build/vendor infrastructure plus substantial interactive teaching/review and closeout documentation; the learner owned the final SYSCFG/EXTI/NVIC implementation and hardware observations. W02D06 used AI-3 theory, graded hints, post-attempt review/debug, SysTick/integration guidance, hardware diagnosis and evidence assistance; the learner owned the final core debounce implementation and physical-board observations. These assisted Week 2 records remain learning/artifact evidence and do not independently prove the new competency. W03D01 used AI-3 theory, graded hints, post-attempt review/debug, and closure assistance after meaningful learner UART implementation attempts. W03D02 used executor starter infrastructure plus AI-3 post-attempt review/debug and closure assistance; the learner owned the final RX IRQ/shared-state implementation and physical/debug work. W03D03 used executor starter infrastructure plus AI-3 theory, hints, post-attempt review/debug, hardware/debug guidance, and closure assistance; the learner owned the final ring-buffer core, DROP_NEWEST policy, USART2 integration, executions, observations, and explanation. W03D01-W03D03 are artifact evidence only and create no competency result. `W02-C-MCU-FOUND` remains based on the separate fresh valid W02D07 AI-0 retest.
 - **W02D07 integrity note:** The learner disclosed external lookup of some register names during the original scored phase. The declared contract prohibited documentation/search, so that attempt remains historical `INVALID / RETEST REQUIRED`. A separate fresh unseen retest used a prospectively declared AI-0 contract allowing official manual/datasheet/vendor-header lookup only for register/bitfield/IRQ names; learner integrity declaration was `CLEAN`, technical result `PASS`, and official result `COMPETENCY PASS`. Post-close AI-3 career/admin/evidence assistance does not replace the scored answers.
 
 ## Outcome and Gates
 
-- **Current outcome:** `W03D02 GREEN / CLOSED / ARTIFACT_PASS; no new competency result`
+- **Current outcome:** `W03D03 GREEN / CLOSED / ARTIFACT_PASS; no new competency result`
 - **Status correction:** The previous W01D03 `YELLOW` was based solely on an incomplete generated pre-check flow. Authority audit found that flow was a baseline diagnostic, not a roadmap-required daily completion criterion. Its interruption remains recorded as `MENTOR/SYSTEM WORKFLOW VARIANCE — NON-SCORING`; artifact, AI, competency, schedule and recovery semantics are unchanged.
 - **W01D06/W01D07 correction:** `W01D06 is the roadmap's 45-minute independent daily coding gate. W01D07 contains the separate approximately 60-minute Week 1 competency gate required for W01-C-FOUND COMPETENCY_PASS and Week 1 PASS.`
 - **Week 1 daily status:** `W01D01 GREEN; W01D02 GREEN; W01D03 GREEN; W01D04 GREEN; W01D05 GREEN; W01D06 GREEN; W01D07 GREEN — FINAL`
@@ -59,28 +59,29 @@ If this file conflicts with a higher-authority source, the higher-authority sour
 - **Week 2:** `PASS / CLOSED`
 - **Week 2 career baseline:** `PASS — CV master skeleton + GitHub profile draft complete; public README NOT DEPLOYED`
 - **Week 2 MASTER CHECK:** `PASS WITH LOW FINDINGS — BLOCKER NONE / HIGH NONE`
-- **Week 3 eligibility:** `YES — ACTIVE; W03D01-W03D02 CLOSED; W03D03 NOT STARTED`
+- **Week 3 eligibility:** `YES — ACTIVE; W03D01-W03D03 CLOSED; W03D04 NOT STARTED`
 - **W03D01:** `GREEN / CLOSED / ARTIFACT_PASS — AI-3; NOT independent competency evidence`
 - **W03D02:** `GREEN / CLOSED / ARTIFACT_PASS — AI-3; NOT independent competency evidence`
+- **W03D03:** `GREEN / CLOSED / ARTIFACT_PASS — AI-3; NOT independent competency evidence`
 - **Current gate:** `NONE ACTIVE`
 - **Gate completed:** `CP-00 Sprint 0 operational/bootstrap gate — CONTINUE (2026-08-09); W01D06-C-CODING-01 daily coding gate — 98/100 PASS (2026-08-15); W01D07 Week 1 C Foundations competency gate — CATEGORICAL PASS / AI-0 integrity PASS (2026-08-15); Week 1 MASTER CHECK — PASS WITH FINDINGS / MEDIUM RESOLVED / LOW ACCEPTED; CP-01 — RV-002 COMPLETED (2026-08-15); W02D07 original attempt — INVALID / RETEST REQUIRED (historical, 2026-08-23); W02D07 fresh unseen retest — PASS / CLEAN / COMPETENCY PASS (2026-08-23); Week 2 MASTER CHECK — PASS WITH LOW FINDINGS`
-- **Gate missing:** `NONE for W03D02 closure; no competency gate was scheduled for this normal learning day`
+- **Gate missing:** `NONE for W03D03 closure; no competency gate was scheduled for this normal learning day`
 - **Roadmap review:** `NOT DUE`; next formal checkpoint remains `CP-02 — Foundation MCU Gate — 2026-09-06`.
 
 ## Repository
 
 - **Repo URL:** `https://github.com/MinhSit/embedded-firmware-journey-v3`
-- **Branch:** `feature/w03d02-uart-rx-irq`
-- **Artifact closure:** W03D02 USART2 RX interrupt END DAY transaction; containing commit recorded as `SELF — containing commit`; learner technical code was preserved during closure.
+- **Branch:** `feature/w03d03-uart-ring-buffer`
+- **Artifact closure:** W03D03 USART2 RX ring-buffer END DAY transaction; containing commit recorded as `SELF — containing closure commit`; learner technical code was preserved except for directly authorized trailing-whitespace removal.
 - **Current operational HEAD:** Resolve from the Git repository at `BOOT`.
 - **Release:** `NONE — no Git tag present at state generation`
 
 ## Latest Build and Test
 
-- **Latest validation path:** `firmware/stm32/w03d02-uart-rx-irq-lab` and `learning/week-03/day-02/Screenshot_1.png` through `Screenshot_4.png`.
-- **Build/test command:** `powershell -ExecutionPolicy Bypass -File .\build.ps1 -Clean` from the W03D02 STM32 lab; physical COM4 serial monitor at 115200, 8N1 and VS Code Cortex-Debug register/breakpoint inspection.
-- **Latest build/test result:** STM32 build PASS / exit 0 with final size `text=1420`, `data=0`, `bss=1568`, `dec=2988`, `hex=bac`; ELF/map/list generated; linker emitted inherited non-blocking `nosys` warnings for `_close`, `_lseek`, `_read`, and `_write`.
-- **Latest demo result:** Physical USART2 RX interrupt and foreground echo PASS on COM4 at 115200, 8N1. Breakpoint entered `USART2_IRQHandler`; normal capture was `CR1=0x202C`, `SR=0x00F0`, `NVIC->ISER[1]=0x00000040`; forced ORE was `SR=0x00F8`; SR-to-DR recovery produced `SR=0x00C0`, ORE=0, RXNE=0; post-recovery `R -> R` passed. Evidence is `learning/week-03/day-02/Screenshot_1.png` through `Screenshot_4.png`.
+- **Latest validation path:** `firmware/stm32/w03d03-uart-ring-buffer-lab`, `tests/host/test_w03d03_rx_ring_buffer.c`, and `learning/week-03/day-03/Screenshot_1.png` through `Screenshot_3.png`.
+- **Build/test command:** host GCC C17 strict compile followed by `.\tests\host\test_w03d03_rx_ring_buffer.exe`; `powershell -ExecutionPolicy Bypass -File .\build.ps1 -Clean` from the W03D03 STM32 lab; physical COM4 serial monitor at 115200, 8N1 and GDB hardware debug through ST-LINK_gdbserver.
+- **Latest build/test result:** host `11/11 PASS / exit 0`; STM32 build PASS / exit 0 with final size `text=1720`, `data=0`, `bss=1592`, `dec=3312`, `hex=cf0`; ELF/map/list generated; linker emitted inherited non-blocking `nosys` warnings for `_close`, `_lseek`, `_read`, and `_write`.
+- **Latest demo result:** Physical normal UART echo PASS on COM4 at 115200, 8N1 (`UART123 -> UART123`), plus forced DROP_NEWEST overflow with attributable truncated FIFO output `BCDEFGHI` and final observed counter `14`. Evidence is `learning/week-03/day-03/Screenshot_1.png` through `Screenshot_3.png`.
 - **Earlier W02D02 evidence retained:** startup-sequence artifact plus supplemental host startup-simulator validation remained `ARTIFACT_PASS` with `30/30` individual cases PASS.
 
 ## Hardware and Toolchain
@@ -93,18 +94,18 @@ If this file conflicts with a higher-authority source, the higher-authority sour
 
 - **Open blockers:** `NONE`; P0 blocker: `NONE`.
 - **W02D07 assessment status:** Original attempt historical `INVALID / RETEST REQUIRED`; no technical FAIL. Fresh unseen retest `PASS / CLEAN`; no further retest required.
-- **Known bugs:** `NONE blocking W03D03`; inherited `nosys` syscall warnings are non-blocking. Exact official document revisions, backend flash command, terminal extension/version, and wire timing were not recorded or measured.
-- **Technical debt:** W03D02 receive storage is a single-byte mailbox (depth=1), so burst traffic may overwrite/drop data; W03D03 is the planned ring-buffer integration, not a retroactive W03D02 repair. Verify MPU6050 at the sensor/I2C phase; resolve ESP32 4 MB detected flash versus historical 2 MB project header when creating the clean ESP32 baseline; verify optional physical CAN hardware before any physical-bus claim; validate Wireshark capture workflow in the network/protocol phase.
+- **Known bugs:** `NONE blocking W03D04`; inherited `nosys` syscall warnings are non-blocking. Exact official document revisions and wire timing were not recorded or measured.
+- **Technical debt:** W03D03 has fixed 8-byte RX capacity, DROP_NEWEST intentionally loses new bytes during sustained overflow, foreground uses a short USART2 IRQ-disabled critical section, and TX remains polling; no DMA, parser, or RTOS is in W03D03 scope. Verify MPU6050 at the sensor/I2C phase; resolve ESP32 4 MB detected flash versus historical 2 MB project header when creating the clean ESP32 baseline; verify optional physical CAN hardware before any physical-bus claim; validate Wireshark capture workflow in the network/protocol phase.
 - **Carry-over:** `NONE`
 
 ## Schedule, Load, and Risk
 
-- **Schedule variance:** `W03D02 closed on 2026-08-25`; Available Focused Time was `6h — learner supplied` and Actual Focused Time was `3h — learner supplied`. Planned Focused Time is `UNRECOVERABLE PROCESS VARIANCE — no value was supplied in the closure input`; no value is inferred. Hours are planning/history only, not a PASS quota; no schedule debt is inferred.
+- **Schedule variance:** `W03D03 closed on 2026-08-26`; Available Focused Time was `6h — learner supplied`, Planned Focused Time was `6h — learner supplied`, and Actual Focused Time was `3.5h — learner supplied`. Hours are planning/history only, not a PASS quota; no schedule debt is inferred merely because Actual is lower than Planned.
 - **Recovery status:** `NOT ACTIVE`
-- **Critical path risk:** `NONE currently identified`; W03D02 has no carry-over, no P0 blocker exists, and the protected deadline is unchanged.
+- **Critical path risk:** `NONE currently identified`; W03D03 has no carry-over, no P0 blocker exists, and the protected deadline is unchanged.
 - **Weekly scorecard:** `roadmap-control/weekly-scorecards/week-02.md — PASS / CLOSED`
 - **Career pipeline:** `Week 2 baseline PASS — CV master skeleton + ready-to-publish GitHub profile draft complete; public profile README NOT DEPLOYED`
-- **Health/load:** `Blocker/health impact NONE — learner supplied`. Actual Focused Time: `3h — learner supplied`. No schedule debt or Recovery condition is inferred.
+- **Health/load:** `Health impact NOT RECORDED`; blocker NONE. Actual Focused Time: `3.5h — learner supplied`. No schedule debt or Recovery condition is inferred.
 
 ## Forward Control
 
@@ -113,7 +114,7 @@ If this file conflicts with a higher-authority source, the higher-authority sour
 - **Roadmap calendar start for Week 2:** `2026-08-17`
 - **Hard deadline:** `2026-12-14 — project v1.0`
 - **Scope cuts:** `NONE active`. If schedule lag occurs later, apply roadmap-defined cut order: cut P2 first, reduce P1 polish, preserve P0.
-- **Exact Next Action:** `BOOT W03D03 — open the W03D03 roadmap day card and define ring-buffer producer/consumer invariants before implementation`
+- **Exact Next Action:** `BOOT W03D04 — open the authoritative W03D04 roadmap day card before defining the next Day Contract`
 - **Files/links to inspect first:**
   - `roadmap-control/current-state.md`
   - `roadmap-control/execution-runbook.md`
@@ -121,14 +122,16 @@ If this file conflicts with a higher-authority source, the higher-authority sour
   - `roadmap-control/competency-ledger.md`
   - `roadmap-control/ai-usage-log.md`
   - `roadmap-control/daily-log.md`
-  - `learning/week-03/day-02/TODO_W03_D02.md`
-  - `learning/week-03/day-02/SUBMIT_W03_D02.md`
-  - `learning/week-03/day-02/Screenshot_1.png`
-  - `learning/week-03/day-02/Screenshot_2.png`
-  - `learning/week-03/day-02/Screenshot_3.png`
-  - `learning/week-03/day-02/Screenshot_4.png`
-  - `firmware/stm32/w03d02-uart-rx-irq-lab/uart_polling.c`
-  - `firmware/stm32/w03d02-uart-rx-irq-lab/main.c`
+  - `learning/week-03/day-03/TODO_W03_D03.md`
+  - `learning/week-03/day-03/SUBMIT_W03_D03.md`
+  - `learning/week-03/day-03/Screenshot_1.png`
+  - `learning/week-03/day-03/Screenshot_2.png`
+  - `learning/week-03/day-03/Screenshot_3.png`
+  - `firmware/stm32/w03d03-uart-ring-buffer-lab/rx_ring_buffer.c`
+  - `firmware/stm32/w03d03-uart-ring-buffer-lab/rx_ring_buffer.h`
+  - `firmware/stm32/w03d03-uart-ring-buffer-lab/uart_polling.c`
+  - `firmware/stm32/w03d03-uart-ring-buffer-lab/main.c`
+  - `tests/host/test_w03d03_rx_ring_buffer.c`
   - `roadmap-control/weekly-scorecards/week-01.md`
   - `learning/week-02/day-06/TODO_W02_D06.md`
   - `learning/week-02/day-06/SUBMIT_W02_D06.md`
