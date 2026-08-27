@@ -3136,3 +3136,146 @@ critical section; TX remains polling; no DMA, parser, or RTOS is in W03D03 scope
 
 BOOT W03D04 — open the authoritative W03D04 roadmap day card before defining the
 next Day Contract.
+
+---
+
+## 2026-08-27 — Week 03 / Day 04
+
+### 1. Planned Outcome
+
+Implement a bounded non-blocking parser for `help`, `status`, `led`, and `rate`
+commands with line timeout, invalid-input handling, length protection, and clean
+state recovery, then verify it with repeatable host tests.
+
+### 2. Actual Status
+
+GREEN — W03D04 CLOSED / ARTIFACT_PASS.
+
+The hardware-independent parser passed all normal, boundary, malformed,
+overlong, timeout, tick-wrap, recovery, and repeated-use host cases. The STM32
+target clean-built with the parser object included. This normal learning day
+creates no new competency result.
+
+### 3. Focused Time
+
+Available: 6h — learner supplied
+
+Planned: 6h — learner supplied
+
+Actual: 2.5h — learner supplied
+
+Planned-vs-actual variance: -3.5h. Hours are planning/history only. The lower
+actual time is not a failure or Recovery trigger. Health impact: NOT RECORDED.
+
+### 4. Independent Work
+
+- Implemented parser initialization and reusable state invariants.
+- Implemented bounded accumulation with NUL termination and LF/CRLF handling.
+- Recognized `help`, `status`, `led on|off|toggle`, and bounded decimal `rate`.
+- Distinguished malformed arguments from unknown commands.
+- Implemented exact-length handling, one-shot overlong reporting, and
+  discard-until-EOL resynchronization.
+- Implemented inter-byte timeout with unsigned tick-wrap-safe arithmetic.
+- Demonstrated recovery after invalid, overlong, and timed-out input.
+- Explained timeout, overlong recovery, and ISR/foreground separation without
+  source lookup.
+
+These are assisted learning facts and artifact evidence, not independent
+competency evidence.
+
+### 5. AI Usage
+
+Highest AI level used: AI-3
+
+What AI helped with: executor-prepared starter/repository infrastructure,
+visible host tests, theory and mental-model guidance, graded hints, post-attempt
+review, timeout debugging guidance, and closure/evidence administration.
+
+Files/functions materially assisted: W03D04 starter infrastructure, learning
+review/debug after learner attempts, submission, and closure records.
+
+Competencies contaminated: W03D04 cannot be used as independent competency
+evidence.
+
+Independent retest required: NO special retest created by this normal learning
+day; no AI-0 gate occurred and no competency result is awarded.
+
+### 6. Artifact Result
+
+Files changed: learner-owned `uart_parser.c`, W03D04 TODO/submission, and the
+allowlisted daily/AI/current-state closure records.
+
+Host compile command: `gcc -std=c17 -Wall -Wextra -Wpedantic -Werror firmware/stm32/w03d04-uart-parser-lab/uart_parser.c tests/host/test_w03d04_uart_parser.c -Ifirmware/stm32/w03d04-uart-parser-lab -o tests/host/test_w03d04_uart_parser.exe`.
+
+Host result: PASS / exit 0; `SUMMARY: 16 tests, 0 failed`.
+
+Build command: `powershell -ExecutionPolicy Bypass -File .\build.ps1 -Clean`
+from `firmware/stm32/w03d04-uart-parser-lab`.
+
+Build result: PASS / exit 0; `text=1720`, `data=0`, `bss=1592`, `dec=3312`,
+`hex=cf0`; only inherited non-blocking `nosys` warnings for `_close`, `_lseek`,
+`_read`, and `_write`.
+
+### 7. Evidence
+
+Commit: `SELF — containing closure commit`
+
+Logs: executor-reproduced strict host output showed all W03D04-T01 through
+W03D04-T16 PASS and `SUMMARY: 16 tests, 0 failed`.
+
+Captures: NONE.
+
+Reports: `learning/week-03/day-04/SUBMIT_W03_D04.md`
+
+Video/demo: NONE.
+
+Hardware parser observations: NOT PERFORMED / NOT RECORDED; none are inferred.
+
+### 8. Measurements
+
+Expected: every parser call performs bounded work; a complete valid line emits
+the matching command event; invalid and overlong lines cannot corrupt parser
+state; timeout and newline reset the active line so a later command can recover.
+
+Observed: 16/16 visible host cases passed, including exact-length bounds,
+guarded overlong input, partial-line timeout, `uint32_t` tick wrap, and recovery
+after invalid, overlong, and timed-out input.
+
+Relevant values: maximum line length `32` bytes; valid `rate` range `1..10000`.
+No physical UART timing or command-action behavior was measured.
+
+### 9. Understanding Check
+
+What I demonstrated/explained during the assisted learning session: the partial
+line and timeout transition, why unsigned elapsed subtraction survives tick
+wrap, why overlong suffix bytes must be discarded until newline, and why ISR RX
+buffering should remain separate from foreground parsing/action handling.
+
+Self-check result: PASS as learning evidence. What I still cannot claim from
+this day: independent competency.
+
+### 10. Defects / Failed Tests
+
+Defect IDs or test IDs: NONE unresolved. The expected inherited `nosys` linker
+warnings are non-blocking.
+
+Root cause known?: N/A.
+
+Current hypothesis: no unresolved artifact defect supported by the verified
+source audit, host suite, and clean build.
+
+### 11. Carry-over
+
+Exactly one mandatory carry-over if needed: NONE.
+
+Closure criteria: MET.
+
+Recovery: NOT ACTIVE.
+
+Known limitation: this closure proves the hardware-independent parser core. It
+does not claim physical UART command dispatch or LED/status/rate action behavior.
+
+### 12. Next Action
+
+BOOT W03D05 — open the authoritative W03D05 roadmap day card before defining the
+next Day Contract.

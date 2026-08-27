@@ -6,9 +6,13 @@
 - Week/Day: `W03D04`
 - Day type: `LEARNING`
 - Topic: `Non-blocking UART command parser`
-- Lifecycle: `NOT STARTED — starter preparation only`
+- Lifecycle: `GREEN / CLOSED / ARTIFACT_PASS`
 - Available Focused Time: `6h — learner supplied`
-- Planned Focused Time: `NOT YET LOCKED — Project Chat resolves after Pre-check`
+- Planned Focused Time: `6h — learner supplied`
+- Actual Focused Time: `2.5h — learner supplied`
+- Planned-vs-actual variance: `-3.5h`
+- Health impact: `NOT RECORDED`
+- Highest AI level used: `AI-3`
 - Latest independent competency: `W02-C-MCU-FOUND — COMPETENCY_PASS`
 
 ## Outcome
@@ -21,15 +25,15 @@ suite. This normal learning day is not a competency gate.
 
 ## Roadmap-derived MUST criteria
 
-- [ ] Support command behavior covering `help`, `led`, `status`, and `rate`.
-- [ ] Keep the parser non-blocking; no input polling loop inside parser calls.
-- [ ] Define and implement line timeout behavior.
-- [ ] Reject invalid input without corrupting parser state.
-- [ ] Keep all length/bounds behavior memory-safe.
-- [ ] Pass repeatable host tests for normal, boundary, invalid, length/bounds,
+- [x] Support command behavior covering `help`, `led`, `status`, and `rate`.
+- [x] Keep the parser non-blocking; no input polling loop inside parser calls.
+- [x] Define and implement line timeout behavior.
+- [x] Reject invalid input without corrupting parser state.
+- [x] Keep all length/bounds behavior memory-safe.
+- [x] Pass repeatable host tests for normal, boundary, invalid, length/bounds,
       timeout, tick-wrap, and state-recovery paths.
-- [ ] Explain parser invariants and state transitions without looking at code.
-- [ ] Save parser host-test evidence before closure.
+- [x] Explain parser invariants and state transitions without looking at code.
+- [x] Save parser host-test evidence before closure.
 
 ## STARTER CONTRACT — implementation detail, not roadmap policy
 
@@ -146,3 +150,24 @@ remaining defects are visible, and a concrete next action is written. Day
 closure, artifact status, AI provenance, and any hardware facts require actual
 evidence and the separate authorized END DAY workflow. No competency PASS is
 created by W03D04 starter preparation or normal assisted learning.
+
+## Closure evidence — 2026-08-27
+
+- Strict host compile: `PASS / exit 0` with C17,
+  `-Wall -Wextra -Wpedantic -Werror`.
+- Host suite: `PASS / exit 0 — 16 tests, 0 failed`.
+- Timeout, `uint32_t` tick-wrap, overlong bounds, invalid-input recovery,
+  overlong recovery, timeout recovery, and repeated-use cases: `PASS`.
+- STM32 clean build: `PASS / exit 0`.
+- Final size: `text=1720`, `data=0`, `bss=1592`, `dec=3312`, `hex=cf0`.
+- Warnings: inherited non-blocking `nosys` warnings for `_close`, `_lseek`,
+  `_read`, and `_write` only; no new W03D04 warning or error.
+- Self-check: `PASS — learner explained timeout, overlong resynchronization,
+  and ISR/foreground separation without source lookup`.
+- Hardware parser demo: `NOT PERFORMED — not required for core W03D04 parser evidence`.
+- Learner implementation: preserved without semantic or mechanical cleanup.
+- Artifact: `ARTIFACT_PASS`.
+- Competency: `NONE — normal learning day; no competency gate`.
+- Carry-over: `NONE`.
+- Recovery: `NOT ACTIVE`.
+- Next scheduled day: `W03D05`.

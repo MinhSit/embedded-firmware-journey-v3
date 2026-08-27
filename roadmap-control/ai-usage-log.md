@@ -1002,6 +1002,59 @@ Notes:
 
 ---
 
+## 2026-08-27 — W03D04 non-blocking UART parser
+
+Highest AI level:
+AI-3
+
+What AI contributed:
+- executor-prepared starter/repository infrastructure, public API, compile-clean
+  stubs, and visible host-test scaffolding;
+- theory and mental-model guidance plus graded hints;
+- post-attempt review and timeout-debugging guidance;
+- closure and evidence administration.
+
+Files/functions materially assisted:
+- W03D04 starter infrastructure and learning review after learner attempts;
+- `learning/week-03/day-04/SUBMIT_W03_D04.md`;
+- W03D04 closure control records.
+
+Core implementation code provided by AI:
+NO complete final parser implementation was supplied. The learner wrote the core
+parser implementation after meaningful attempts.
+
+Learner-owned contribution:
+- parser initialization and invariants;
+- bounded accumulation, NUL termination, LF/CRLF handling, and exact command
+  recognition;
+- bounded decimal `rate` parsing and malformed/unknown distinction;
+- exact-length boundary and one-shot overlong discard/resynchronization;
+- inter-byte timeout, unsigned tick-wrap handling, and recovery transitions;
+- host/build execution and self-explanation of timeout, overlong recovery, and
+  ISR/foreground separation.
+
+Gate answer revealed:
+NO ACTIVE GATE — W03D04 was normal assisted learning, not an AI-0 competency gate.
+
+Competency affected:
+W03D04 may be valid artifact evidence but is not independent competency evidence.
+No new competency PASS is awarded. `W02-C-MCU-FOUND — COMPETENCY_PASS` remains
+the latest competency PASS.
+
+Special retest:
+NOT REQUIRED. No W03D04-specific retest is created by this normal learning day.
+
+Notes:
+- Host compile/test PASS / exit 0: `16 tests, 0 failed`.
+- Timeout, tick-wrap, bounds/overlong, invalid-input, recovery, and repeated-use
+  cases passed.
+- Clean build PASS / exit 0: `text=1720`, `data=0`, `bss=1592`, `dec=3312`,
+  `hex=cf0`; only inherited non-blocking `nosys` warnings were present.
+- No hardware parser demo was performed or required for the core D04 evidence;
+  no physical command-action behavior is claimed.
+
+---
+
 ## Pre-V3 Migration Note
 
 Known affected scope:
