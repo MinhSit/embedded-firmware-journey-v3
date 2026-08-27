@@ -3279,3 +3279,159 @@ does not claim physical UART command dispatch or LED/status/rate action behavior
 
 BOOT W03D05 — open the authoritative W03D05 roadmap day card before defining the
 next Day Contract.
+
+---
+
+## 2026-08-27 — Week 03 / Day 05
+
+### 1. Planned Outcome
+
+Implement a Python serial logger that timestamps newline-terminated UART
+records, persists authoritative raw bytes plus a readable view, and use it with
+the physical board to create an attributable sample log.
+
+Roadmap card date: `2026-08-28`. Execution intentionally started early within
+Week 3 on calendar date `2026-08-27`.
+
+### 2. Actual Status
+
+GREEN — W03D05 CLOSED / ARTIFACT_PASS.
+
+The learner-owned logger ran with the NUCLEO-F446RE on COM4 at 115200 baud and
+persisted one attributable `LOGGER_TEST\r\n` record. Executor syntax, interface,
+contract-regression, evidence, and firmware-restoration checks passed. This
+normal learning day creates no new competency result.
+
+### 3. Focused Time
+
+Available: 5h — learner supplied
+
+Planned: 5h — learner supplied
+
+Actual: 3h — learner supplied
+
+Planned-vs-actual variance: -2h. Hours are planning/history only. The lower
+actual time creates no schedule debt and is not a Recovery trigger. Health
+impact: NOT RECORDED.
+
+### 4. Independent Work
+
+- Implemented the required argparse interface, timestamp generation, persisted
+  hex/readable record format, serial receive loop, and error/shutdown paths.
+- Selected PC/logger UTC observation time with ISO 8601 microsecond precision.
+- Defined complete records as newline-terminated and bounded pending/record
+  storage with `MAX_PENDING_BYTES = 4096`.
+- Used COM4 at 115200, 8N1 with the physical board and created the required
+  sample log.
+- Explained timeout-as-idle behavior and why HEX_RAW is authoritative for bytes
+  delivered to software while DECODED_VIEW is secondary.
+- Temporarily used deterministic `LOGGER_TEST\r\n` firmware output for evidence,
+  then restored W03D04 to its original UART echo behavior.
+
+These are assisted learning facts and artifact evidence, not independent
+competency evidence.
+
+### 5. AI Usage
+
+Highest AI level used: AI-3
+
+What AI helped with: executor-prepared starter/repository infrastructure plus
+Project Chat theory, review, and debugging after meaningful learner attempts;
+closure/evidence administration and additional post-attempt bounded validation.
+
+Files/functions materially assisted: W03D05 starter infrastructure, learning
+review/debug after learner attempts, submission, and closure records.
+
+Competencies contaminated: W03D05 cannot be used as independent competency
+evidence.
+
+Independent retest required: NO special retest created by this normal learning
+day; no AI-0 gate occurred and no competency result is awarded.
+
+### 6. Artifact Result
+
+Files changed: learner-owned `tools/serial_logger.py`, W03D05 TODO/submission,
+physical `sample_uart.log`, and the allowlisted daily/AI/current-state closure
+records.
+
+Syntax command: `python -m py_compile .\tools\serial_logger.py`.
+
+Syntax result: PASS / exit 0 after an executor rerun with permission to create
+the ignored bytecode cache.
+
+Interface command: `python -B .\tools\serial_logger.py --help`.
+
+Interface result: PASS / exit 0.
+
+Bounded executor regression result: PASS / exit 0; `SUMMARY: 5 tests, 0 failed`
+covering timestamp/persistence, split and multiple records, Ctrl+C, oversized
+complete record, oversized pending fragment, and SerialException behavior.
+
+### 7. Evidence
+
+Commit: `SELF — containing closure commit`
+
+Logs: `learning/week-03/day-05/sample_uart.log` — 76 bytes, one record.
+
+Captures: NONE.
+
+Reports: `learning/week-03/day-05/SUBMIT_W03_D05.md`
+
+Video/demo: NONE.
+
+Physical invocation: `python -B .\tools\serial_logger.py --port COM4 --baud
+115200 --output .\learning\week-03\day-05\sample_uart.log`.
+
+### 8. Measurements
+
+Expected: the deterministic board payload `LOGGER_TEST\r\n` is delivered as one
+complete newline-terminated record and persisted with a UTC PC-observation
+timestamp, authoritative hex, and a one-line decoded/escaped view.
+
+Observed: `[2026-08-27T10:51:49.572892Z]
+4c4f474745525f544553540d0a | LOGGER_TEST\r\n`.
+
+Relevant values: pyserial 3.5; Python 3.12.0; COM4; 115200 baud; 8N1;
+timeout 1.0 s; read size 128 bytes; `MAX_PENDING_BYTES = 4096`.
+
+### 9. Understanding Check
+
+What I demonstrated/explained during the assisted learning session: timeout
+1.0 s is bounded blocking and an empty read means idle/continue rather than
+disconnect; HEX_RAW preserves bytes delivered to software without text-decoding
+loss, while DECODED_VIEW is transformed/escaped and secondary.
+
+Precision boundary: HEX_RAW does not prove electrical bit-level integrity on
+the wire. What I still cannot claim from this day: independent competency.
+
+Self-check result: PASS as learning evidence.
+
+### 10. Defects / Failed Tests
+
+Defect IDs or test IDs: NONE unresolved. One trailing-whitespace line and the
+missing final newline in `tools/serial_logger.py` were corrected mechanically
+without changing tokens or behavior. Empty untracked `test_log.txt` scratch was
+removed explicitly; it contained zero bytes and no evidence.
+
+Root cause known?: N/A for the final artifact.
+
+Current hypothesis: no unresolved artifact defect supported by the physical
+sample, source audit, and bounded executor regressions.
+
+### 11. Carry-over
+
+Exactly one mandatory carry-over if needed: NONE.
+
+Closure criteria: MET.
+
+Recovery: NOT ACTIVE.
+
+Known limitations: timestamp is PC observation time, not board/wire timing;
+only complete newline-terminated records are persisted; a short pending
+fragment is not persisted on shutdown; fixed 4096-byte bound; exact flow-control
+and connector/bridge details were not recorded.
+
+### 12. Next Action
+
+BOOT W03D06 — open the authoritative W03D06 roadmap day card before defining the
+controlled fault-injection/debug Day Contract.

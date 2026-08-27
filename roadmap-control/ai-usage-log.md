@@ -1055,6 +1055,58 @@ Notes:
 
 ---
 
+## 2026-08-27 — W03D05 Python serial logger
+
+Highest AI level:
+AI-3
+
+What AI contributed:
+- executor-prepared TODO/submission templates and TODO-only argparse/function
+  scaffold;
+- Project Chat theory, review, and debugging after meaningful learner attempts;
+- closure/evidence administration and post-attempt bounded regression checks.
+
+Files/functions materially assisted:
+- W03D05 starter infrastructure and learning review after learner attempts;
+- `learning/week-03/day-05/SUBMIT_W03_D05.md`;
+- W03D05 closure control records.
+
+Core implementation code provided by AI:
+NO complete core serial-logger solution was supplied before the learner's
+meaningful attempts. The learner owned the final receive loop, timestamp,
+persistence, boundary/error handling, physical run, and self-explanation.
+
+Learner-owned contribution:
+- required argparse CLI and pyserial configuration;
+- UTC PC-observation timestamp and hex/readable persistence contracts;
+- newline record assembly, fixed 4096-byte bound, timeout policy, and errors;
+- physical COM4 run with the NUCLEO-F446RE and sample-log capture;
+- explanation of idle timeout semantics and authoritative HEX_RAW limitations.
+
+Gate answer revealed:
+NO ACTIVE GATE — W03D05 was normal assisted learning, not an AI-0 competency gate.
+
+Competency affected:
+W03D05 may be valid artifact evidence but is not independent competency evidence.
+No new competency PASS is awarded. `W02-C-MCU-FOUND — COMPETENCY_PASS` remains
+the latest competency PASS.
+
+Special retest:
+NOT REQUIRED. No W03D05-specific retest is created by this normal learning day.
+
+Notes:
+- Python 3.12.0 and pyserial 3.5 verified.
+- Syntax and `--help` checks passed; bounded executor regression result was
+  `5 tests, 0 failed`.
+- Physical COM4 run used 115200, 8N1, timeout 1.0 s and persisted one 76-byte
+  attributable `LOGGER_TEST\r\n` record.
+- HEX_RAW proves bytes delivered to logger software, not electrical wire-level
+  integrity.
+- The temporary W03D04 deterministic startup transmit was removed; final
+  W03D04 source remains its original 115200-baud UART echo loop.
+
+---
+
 ## Pre-V3 Migration Note
 
 Known affected scope:

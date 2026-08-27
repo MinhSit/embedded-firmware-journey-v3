@@ -26,11 +26,11 @@ attributable sample log. This normal learning day is not a competency gate.
 
 ### MUST — authoritative W03D05 scope
 
-- [ ] `tools/serial_logger.py` timestamps received serial data.
-- [ ] The tool persists the received serial evidence to a log.
-- [ ] The learner runs the tool with the physical board.
-- [ ] A working-tool result and attributable sample log are saved.
-- [ ] The learner explains the timestamp and persistence contracts in their own
+- [x] `tools/serial_logger.py` timestamps received serial data.
+- [x] The tool persists the received serial evidence to a log.
+- [x] The learner runs the tool with the physical board.
+- [x] A working-tool result and attributable sample log are saved.
+- [x] The learner explains the timestamp and persistence contracts in their own
       words and distinguishes observed facts from assumptions.
 
 ### NON-SCORING learning feedback — engineering quality
