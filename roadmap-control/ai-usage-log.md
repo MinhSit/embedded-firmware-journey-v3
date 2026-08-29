@@ -1107,6 +1107,63 @@ Notes:
 
 ---
 
+## 2026-08-29 — W03D06 UART RX/ring-buffer overflow debugging
+
+Highest AI level:
+AI-3
+
+What AI contributed:
+- executor-prepared neutral W03D06 TODO/debug-report infrastructure and
+  known-good baseline validation;
+- Project Chat pre-check after which the learner supplied expected behavior,
+  known facts, unknowns, H1, reproduction design, and measurement plan;
+- post-measurement evidence review and normalization into report prose;
+- the concrete temporary foreground busy-delay mechanism for controlled fault
+  injection, suggested only after the learner-owned pre-experiment reasoning;
+- closure and evidence administration.
+
+Files/functions materially assisted:
+- W03D06 starter/report infrastructure and post-attempt learning review;
+- `learning/week-03/day-06/DEBUG_REPORT_W03_D06.md`;
+- W03D06 closure control records.
+
+Core implementation code provided by AI:
+NO ring-buffer algorithm patch was supplied. AI suggested only the temporary
+fault-injection mechanism. The final production behavior was restored by
+removing that artificial foreground slowdown.
+
+Learner-owned contribution:
+- fault-category selection and expected behavior;
+- known facts, unknowns, H1, reproduction design, and measurement plan before
+  physical execution;
+- physical NUCLEO-F446RE fault run and exact input/output observations;
+- debugger measurement `overflow_count = 12`;
+- recovery and regression runs and independent self-explanation.
+
+Gate answer revealed:
+NO ACTIVE GATE — W03D06 was normal assisted learning, not an AI-0 competency
+gate.
+
+Competency affected:
+W03D06 may be valid artifact evidence but is not independent competency evidence.
+No new competency PASS is awarded. `W02-C-MCU-FOUND — COMPETENCY_PASS` remains
+the latest competency PASS.
+
+Special retest:
+NOT REQUIRED. No W03D06-specific retest is created by this normal learning day.
+
+Notes:
+- Fault: `ABCDEFGHIJKLMNOPQRST -> ABCDEFGH`; software
+  `overflow_count = 12`.
+- Recovery: `XYZ -> XYZ`; counter remained 12.
+- Regression: full 20-byte echo; `overflow_count = 0`.
+- UART hardware ORE history was NOT MEASURED sufficiently.
+- Host compile/test PASS / exit 0: `11 tests, 0 failed`.
+- STM32 clean build PASS / exit 0: `text=1720`, `data=0`, `bss=1592`,
+  `dec=3312`, `hex=cf0`; only inherited non-blocking `nosys` warnings.
+
+---
+
 ## Pre-V3 Migration Note
 
 Known affected scope:

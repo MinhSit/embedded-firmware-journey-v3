@@ -3435,3 +3435,146 @@ and connector/bridge details were not recorded.
 
 BOOT W03D06 — open the authoritative W03D06 roadmap day card before defining the
 controlled fault-injection/debug Day Contract.
+
+---
+
+## 2026-08-29 — Week 03 / Day 06
+
+### 1. Planned Outcome
+
+Intentionally reproduce one UART fault, preserve expected versus actual,
+measure before fixing, apply the minimum fix, prove regression/recovery, and
+complete Debug Report #1 with remaining limitations visible.
+
+### 2. Actual Status
+
+GREEN — W03D06 CLOSED / ARTIFACT_PASS.
+
+The learner completed a controlled RX/ring-buffer overflow debug story on the
+NUCLEO-F446RE. The final normal firmware no longer contains the artificial
+foreground slowdown. This normal learning day creates no new competency result.
+
+### 3. Focused Time
+
+Available: 5h — learner supplied
+
+Planned: 5h — learner supplied
+
+Actual: 3h — learner supplied
+
+Planned-vs-actual variance: -2h. Hours are planning/history only. Completing
+the required evidence in 3h does not downgrade the result, create schedule
+debt, or activate Recovery. Health impact: NOT RECORDED.
+
+### 4. Independent Work
+
+- Selected RX/ring-buffer overflow with fixed capacity 8 and DROP_NEWEST.
+- Supplied expected behavior, known facts, unknowns, H1, reproduction design,
+  and measurement plan before the physical fault run.
+- Deliberately slowed the foreground consumer while leaving the USART2 ISR
+  unslowed.
+- Reproduced `ABCDEFGHIJKLMNOPQRST -> ABCDEFGH` and measured
+  `overflow_count = 12`.
+- Verified post-overload recovery with `XYZ -> XYZ`; the counter remained 12.
+- Removed the artificial slowdown as the minimum fix and verified the full
+  20-byte regression with `overflow_count = 0`.
+- Independently explained reproduce, measure-before-fix, and recovery checks.
+
+These are assisted learning facts and artifact evidence, not independent
+competency evidence.
+
+### 5. AI Usage
+
+Highest AI level used: AI-3
+
+What AI helped with: executor-prepared neutral W03D06 TODO/debug-report
+infrastructure and baseline validation; Project Chat pre-check, post-attempt
+evidence review, report normalization, and closure administration. AI suggested
+the concrete temporary foreground busy-delay mechanism after the learner had
+already supplied the pre-experiment reasoning and measurement plan.
+
+Files/functions materially assisted: W03D06 starter/report infrastructure,
+learning review after learner measurements, and closure records.
+
+Core ring-buffer algorithm patch supplied: NO.
+
+Competencies contaminated: W03D06 cannot be used as independent competency
+evidence.
+
+Independent retest required: NO special retest created by this normal learning
+day; no AI-0 gate occurred and no competency result is awarded.
+
+### 6. Artifact Result
+
+Files changed: W03D06 TODO/debug report and the allowlisted daily/AI/current-state
+closure records. The only final-firmware cleanup was restoration of the missing
+newline at the end of W03D03 `main.c`; no semantic token or behavior changed.
+
+Host compile result: PASS / exit 0.
+
+Host test result: PASS / exit 0; `SUMMARY: 11 tests, 0 failed`.
+
+STM32 clean build result: PASS / exit 0; `text=1720`, `data=0`, `bss=1592`,
+`dec=3312`, `hex=cf0`; only inherited non-blocking `nosys` warnings for
+`_close`, `_lseek`, `_read`, and `_write`.
+
+### 7. Evidence
+
+Commit: `SELF — containing closure commit`
+
+Report: `learning/week-03/day-06/DEBUG_REPORT_W03_D06.md`
+
+Raw terminal/test log: NOT STORED — learner supplied the exact Serial Monitor
+observations in Project Chat.
+
+Measurement/recovery/regression standalone files: NOT STORED. Exact values are
+preserved in Debug Report #1.
+
+### 8. Measurements
+
+Fault input/output: `ABCDEFGHIJKLMNOPQRST -> ABCDEFGH`.
+
+Fault software counter: `overflow_count = 12`.
+
+Recovery: `XYZ -> XYZ`; `overflow_count` remained 12.
+
+Regression after removing the artificial foreground slowdown:
+`ABCDEFGHIJKLMNOPQRST -> ABCDEFGHIJKLMNOPQRST`; `overflow_count = 0`.
+
+UART hardware ORE history: NOT MEASURED sufficiently. No claim is made that ORE
+was absent throughout the fault run.
+
+### 9. Understanding Check
+
+The learner independently explained the first three actions for an unknown UART
+overflow: reproduce deterministically and record expected/actual; measure at the
+hardware/software boundary before fixing; then stop the overload and verify
+post-overload recovery/liveness.
+
+Self-check result: PASS as learning evidence. What this day cannot claim:
+independent competency.
+
+### 10. Defects / Failed Tests
+
+Defect IDs or test IDs: NONE unresolved in the tested case.
+
+Root cause: intentional producer/consumer rate imbalance caused by the temporary
+foreground busy delay.
+
+Remaining limitations: fixed 8-byte capacity; DROP_NEWEST under sustained
+overload; foreground critical section around pop; polling TX; no retained
+`count/head/tail/storage` snapshot; insufficient ORE-history measurement; and
+regression limited to the tested 20-byte payload.
+
+### 11. Carry-over
+
+Exactly one mandatory carry-over if needed: NONE.
+
+Closure criteria: MET.
+
+Recovery: NOT ACTIVE.
+
+### 12. Next Action
+
+BOOT W03D07 — open the authoritative W03D07 competency-gate day card and
+establish the fresh AI-0 contract before any scored work.

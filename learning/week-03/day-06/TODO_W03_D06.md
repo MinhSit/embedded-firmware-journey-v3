@@ -4,11 +4,13 @@
 
 - Date: `2026-08-29`
 - Week/Day: `W03D06`
-- Execution Position: `W03D06 NOT_STARTED / PREP COMPLETE`
+- Execution Position: `W03D06 CLOSED / ARTIFACT_PASS`
 - Available Focused Time: `5h — learner supplied`
-- Planned Focused Time: `TBD after Project Chat pre-check`
+- Planned Focused Time: `5h — learner supplied`
+- Actual Focused Time: `3h — learner supplied`
 - AI Mode: `AI-1/AI-2 before meaningful attempt only as permitted; AI-3 review/debug only after meaningful attempt`
 - Competency Status: `no competency gate today`
+- Closure Result: `GREEN / CLOSED / ARTIFACT_PASS — no new competency result`
 
 ## Outcome
 
@@ -93,39 +95,39 @@ Hardware claims made by preparation: `NONE`.
 
 ## Learner-owned checkpoints
 
-- [ ] Fault selected: `<learner fills after selection>`
-- [ ] Injection method designed: `<learner fills before injection>`
-- [ ] Expected: `<learner fills before measurement>`
-- [ ] Observed: `<learner fills from actual evidence>`
-- [ ] Known facts: `<learner fills>`
-- [ ] Unknowns: `<learner fills>`
-- [ ] Hypothesis H1: `<learner fills before fixing>`
-- [ ] Measurement chosen: `<learner fills before measurement>`
-- [ ] Measurement result: `<learner fills from actual evidence>`
-- [ ] Hypothesis update: `<learner fills after measurement>`
-- [ ] Root cause: `<learner fills after evidence supports it>`
-- [ ] Minimal fix: `<learner fills after measurement>`
-- [ ] Regression: `<learner fills from actual rerun>`
-- [ ] Remaining limitation: `<learner fills>`
+- [x] Fault selected: `RX / ring-buffer overflow`.
+- [x] Injection method designed: `temporary foreground busy_delay before uart_rx_get_byte(); USART2 ISR was not deliberately slowed`.
+- [x] Expected: `8-byte buffer preserves the first 8 bytes and rejects 12 later pushes under DROP_NEWEST`.
+- [x] Observed: `ABCDEFGHIJKLMNOPQRST -> ABCDEFGH`.
+- [x] Known facts: `capacity 8; DROP_NEWEST; foreground consumer deliberately slowed`.
+- [x] Unknowns: `UART ORE history was not measured sufficiently`.
+- [x] Hypothesis H1: `producer/consumer rate imbalance will fill the software RX ring buffer and increment overflow_count`.
+- [x] Measurement chosen: `UART output plus software overflow_count; planned ORE/internal snapshots were not fully retained`.
+- [x] Measurement result: `overflow_count == 12`.
+- [x] Hypothesis update: `software overflow prediction supported; no general claim about hardware ORE`.
+- [x] Root cause: `intentional foreground slowdown created the producer/consumer imbalance`.
+- [x] Minimal fix: `remove only the temporary busy_delay`.
+- [x] Regression: `ABCDEFGHIJKLMNOPQRST -> ABCDEFGHIJKLMNOPQRST; overflow_count == 0`.
+- [x] Remaining limitation: `fixed 8-byte capacity, DROP_NEWEST under sustained overload, ORE history NOT MEASURED, and unretained internal snapshots`.
 
 ## Day completion checks — authoritative learner-owned requirements
 
-- [ ] One fault is intentionally reproducible or created by a clearly defined case.
-- [ ] Expected and actual behavior are both preserved.
-- [ ] At least one measurement is recorded before any technical fix.
-- [ ] The minimum fix is applied only after the evidence narrows the cause.
-- [ ] A regression check proves the defect does not return in the tested case.
-- [ ] The learner writes one evidence-based root-cause story.
-- [ ] Debug Report #1 exists and links the evidence.
-- [ ] Remaining open issues or limitations are visible.
-- [ ] One concrete 5–15 minute NEXT ACTION is written.
+- [x] One fault is intentionally reproducible or created by a clearly defined case.
+- [x] Expected and actual behavior are both preserved.
+- [x] At least one measurement is recorded before any technical fix.
+- [x] The minimum fix is applied only after the evidence narrows the cause.
+- [x] A regression check proves the defect does not return in the tested case.
+- [x] The learner writes one evidence-based root-cause story.
+- [x] Debug Report #1 exists and links the evidence.
+- [x] Remaining open issues or limitations are visible.
+- [x] One concrete 5–15 minute NEXT ACTION is written.
 
 ## Evidence
 
 - Debug report: `learning/week-03/day-06/DEBUG_REPORT_W03_D06.md`
-- Raw terminal/test log: `<learner records path after experiment>`
-- Screenshot/capture if applicable: `<learner records path or NOT PERFORMED>`
-- Regression output: `<learner records path after rerun>`
+- Raw terminal/test log: `NOT STORED — learner supplied exact Serial Monitor observations in Project Chat`
+- Screenshot/capture if applicable: `NOT PERFORMED / NOT RECORDED`
+- Regression output: `NOT STORED — exact learner-supplied input/output and overflow_count are preserved in the debug report`
 
 Do not fabricate or reconstruct missing hardware, terminal, timing, counter, or
 test evidence.
