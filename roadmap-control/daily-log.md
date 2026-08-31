@@ -3578,3 +3578,168 @@ Recovery: NOT ACTIVE.
 
 BOOT W03D07 — open the authoritative W03D07 competency-gate day card and
 establish the fresh AI-0 contract before any scored work.
+
+---
+
+## 2026-08-31 — Week 03 / Day 07
+
+### 1. Planned Outcome
+
+Complete the independent 65-minute Week 3 UART IRQ / ring-buffer /
+non-blocking-parser competency gate under AI-0, preserve the raw attempt before
+review, resolve the historical MASTER CHECK findings, and close Week 3 without
+activating Week 4 learner work.
+
+### 2. Actual Status
+
+GREEN — W03D07 CLOSED.
+
+Gate result: `87/100 PASS / AI-0 CLEAN`.
+
+Competency result: `W03-C-UART-FOUND — COMPETENCY_PASS`.
+
+Week 3 result: `CONDITIONAL PASS / CLOSED` with exactly one P1 evidence
+carry-over. W04D01 learner work remains `NOT STARTED`.
+
+### 3. Focused Time
+
+Available: NOT RECORDED.
+
+Planned: assessment time limit `65 minutes`; this is the gate limit, not a
+learner-supplied focused-time estimate.
+
+Actual: NOT RECORDED — learner did not supply exact value; do not infer from
+timestamps.
+
+Health/load: `2 — sustainable — learner supplied`; learner statement:
+`sức khoẻ rất ổn`. No unsafe load or health blocker is reported.
+
+### 4. Independent Work
+
+- Derived baud/divisor/error from the supplied clock and proposed bit-width and
+  frame-structure measurements.
+- Reasoned about empty/full ring-buffer states, traced five producer arrivals,
+  and preserved an explicit `DROP_NEWEST` overflow policy.
+- Rejected blocking/long-running ISR behavior and identified the shared-count
+  read-modify-write race.
+- Submitted a fresh bounded parser with discard-until-newline recovery and a
+  concrete overlong-to-valid trace.
+- Distinguished ORE, software ring overflow, and shared-state corruption using
+  separate measurements.
+- Defended DMA and stated when larger buffer or shorter ISR latency is the
+  smaller relevant change.
+
+The verbatim scored answers are preserved in
+`learning/week-03/day-07/RAW_COMPETENCY_SUBMISSION_W03D07.md`.
+
+### 5. AI Usage
+
+Highest AI level used: AI-3 — post-close review and evidence/control-plane
+administration only; scored phase remained AI-0.
+
+Scored assistance: NONE.
+
+Allowed during gate: paper/pen and ordinary calculator.
+
+Prohibited during gate: AI, Copilot, web/search, old answers/solutions, notes,
+and another person.
+
+Learner integrity declaration after close: `CLEAN ko dùng bất kì cái gì ngoài
+máy tình cầm tay`.
+
+Normalized metadata only: `CLEAN — no AI/search/notes/other person; ordinary
+calculator only.`
+
+### 6. Artifact Result
+
+This day creates assessment/evidence closure records only; it does not invent a
+new firmware artifact.
+
+Fresh technical validation:
+- ring buffer: `11 tests, 0 failed`;
+- parser: `16 tests, 0 failed`;
+- serial logger syntax/help: `PASS / exit 0`;
+- W03D06 STM32 clean build: `PASS / exit 0`, `text=1720`, `data=0`,
+  `bss=1592`, `dec=3312`, `hex=cf0`;
+- production `busy_delay`: absent;
+- learner `main.c`: byte-identical to prep baseline.
+
+Learner implementation changed by this transaction: NO.
+
+### 7. Evidence
+
+Commit: `SELF — containing closure commit`
+
+Raw scored evidence:
+`learning/week-03/day-07/RAW_COMPETENCY_SUBMISSION_W03D07.md`
+
+Assessment:
+`learning/week-03/day-07/ASSESSMENT_RESULT_W03D07.md`
+
+Post-gate review:
+`learning/week-03/day-07/POST_GATE_REVIEW_W03D07.md`
+
+Submission:
+`learning/week-03/day-07/SUBMIT_W03_D07.md`
+
+MASTER CHECK disposition:
+`learning/week-03/MASTER_CHECK_DISPOSITION_W03.md`
+
+Weekly scorecard:
+`roadmap-control/weekly-scorecards/week-03.md`
+
+### 8. Measurements
+
+Rubric:
+- baud/clock reasoning: `20/20`;
+- ISR + ring buffer: `17/20`;
+- fresh parser: `19/25`;
+- fault diagnosis: `19/20`;
+- transfer/trade-off: `12/15`;
+- total: `87/100 PASS`.
+
+Mandatory conditions:
+- no blocking ISR design: PASS;
+- explicit overflow policy: PASS;
+- no serious bounds/lifetime violation sufficient for automatic failure: PASS.
+
+### 9. Understanding Check
+
+Independent gate result: PASS. The learner demonstrated the required Week 3
+competency scope under AI-0. Post-close review findings are precision/design
+feedback only and do not replace or rewrite the scored answers.
+
+### 10. Defects / Failed Tests
+
+Gate-blocking defect: NONE.
+
+Non-gate-blocking post-close findings:
+- `volatile` is not a synchronization primitive or general memory barrier;
+- submitted parser mishandles the exact 15-data-character-plus-CRLF boundary;
+- shorter ISR/interrupt latency is the smaller first remediation for the
+  measured ORE symptom before introducing DMA complexity.
+
+No learner source is modified for these findings in this closure transaction.
+
+### 11. Carry-over
+
+Exactly one mandatory carry-over:
+Capture correct-baud UART wire timing / logic-analyzer evidence.
+
+Deadline: `2026-09-06 — CP-02 / Foundation MCU gate`.
+
+Closure criterion: a genuine logic-analyzer capture or equivalent direct
+measurement demonstrates the configured UART baud/timing sufficiently to close
+the roadmap evidence item. Do not claim independent measurement-procedure
+design unless separately demonstrated.
+
+Classification: `P1 EVIDENCE CARRY-OVER — NON-COMPETENCY-BLOCKING`.
+
+Recovery: NOT ACTIVE.
+
+Week 4 eligibility: YES.
+
+### 12. Next Action
+
+BOOT W04D01 — timer clock / PSC / ARR / CCR Day Contract with learner Available
+Focused Time = 6h.

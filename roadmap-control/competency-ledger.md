@@ -165,6 +165,62 @@ REQUIRED`; it is historical, not rewritten, and was not a technical FAIL.
 
 ---
 
+## W03-C-UART-FOUND — UART IRQ, ring buffer, and bounded parser foundations
+
+Roadmap source:
+Week 3 — UART polling/IRQ, SPSC ring buffer, non-blocking parser, serial logger,
+overflow policy, and evidence-based UART fault diagnosis.
+
+Required level:
+Independently derive baud from the active clock, reason about ISR constraints
+and producer/consumer ownership, preserve bounded parser and overflow behavior,
+and diagnose UART data loss using measurements that distinguish hardware ORE,
+software ring overflow, parser loss, and shared-state corruption.
+
+Artifact evidence:
+- W03D01 polling UART, clock/BRR derivation, and physical terminal echo —
+  `ARTIFACT_PASS`.
+- W03D02 RX IRQ, NVIC/register capture, controlled ORE, and recovery —
+  `ARTIFACT_PASS`.
+- W03D03 fixed-size SPSC ring buffer, `DROP_NEWEST`, overflow counter, host
+  tests, and physical overflow evidence — `ARTIFACT_PASS`.
+- W03D04 bounded non-blocking parser and strict host suite — `ARTIFACT_PASS`.
+- W03D05 timestamped serial logger and physical sample log — `ARTIFACT_PASS`.
+- W03D06 controlled overflow Debug Report #1 with measurement, minimum fix,
+  recovery, and regression — `ARTIFACT_PASS`.
+- Assisted W03D01–W03D06 artifacts support the weekly record but do not
+  independently award competency.
+
+Independent gate:
+`W03D07-UART-IRQ-PARSER-GATE` on 2026-08-31 — `87/100 PASS`. Mandatory
+no-blocking-ISR, explicit-overflow-policy, and bounds/lifetime conditions all
+passed. Raw evidence is preserved in
+`learning/week-03/day-07/RAW_COMPETENCY_SUBMISSION_W03D07.md`.
+
+AI mode:
+AI-0 for the scored gate. Allowed aids were paper/pen and an ordinary
+calculator only. Learner integrity declaration after close: `CLEAN — no
+AI/search/notes/other person; ordinary calculator only.`
+
+Status:
+COMPETENCY_PASS
+
+Last verified:
+2026-08-31
+
+Retest condition:
+NONE REQUIRED from the passed W03D07 gate. Retest only if later evidence
+invalidates the independent result or a higher-authority gate requires it.
+
+Notes:
+Post-close findings about `volatile` precision, the submitted parser's exact
+15-data-character CRLF boundary, and DMA versus shorter ISR latency are retained
+separately in `POST_GATE_REVIEW_W03D07.md`. They are non-gate-blocking and do not
+rewrite the raw submission. Week 3 is `CONDITIONAL PASS / CLOSED` with exactly
+one P1 carry-over for direct correct-baud wire-timing evidence, due 2026-09-06.
+
+---
+
 # Non-awarding Assessment Attempts
 
 ## W02D07 — Week 2 Cortex-M / GPIO / EXTI competency-gate attempt

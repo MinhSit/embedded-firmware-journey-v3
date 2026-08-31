@@ -1164,6 +1164,62 @@ Notes:
 
 ---
 
+## 2026-08-31 — W03D07 UART IRQ / parser competency gate and Week 3 closure
+
+Highest AI level:
+AI-3 — post-close review and evidence/control-plane administration only. The
+scored phase remained AI-0.
+
+What AI contributed:
+- neutral gate logistics, contract, timing, and rubric administration;
+- scoring/result record supplied by Project Chat only after `CLOSE GATE`;
+- post-close review of `volatile` precision, parser CRLF boundary behavior, and
+  DMA-versus-shorter-ISR trade-off;
+- executor persistence of verbatim raw answers, assessment metadata, Week 3
+  scorecard, competency ledger, logs, state, and findings disposition;
+- technical baseline reruns and authorized repository publication mechanics.
+
+Files/functions materially assisted:
+- `learning/week-03/day-07/ASSESSMENT_RESULT_W03D07.md`;
+- `learning/week-03/day-07/POST_GATE_REVIEW_W03D07.md`;
+- `learning/week-03/day-07/SUBMIT_W03_D07.md`;
+- Week 3 closure control records.
+
+Core implementation code provided by AI:
+NO. No learner firmware, parser, ring-buffer, or logger implementation was
+modified in this closure transaction.
+
+Learner-owned contribution:
+- the entire scored W03D07 answer preserved verbatim in
+  `RAW_COMPETENCY_SUBMISSION_W03D07.md`;
+- baud/clock calculations and measurement proposal;
+- ISR/ring-buffer reasoning and trace;
+- fresh bounded parser submission and trace;
+- fault hypotheses, measurement choices, conclusion, and trade-off defense;
+- post-close integrity declaration: `CLEAN ko dùng bất kì cái gì ngoài máy
+  tình cầm tay`.
+
+Gate answer revealed:
+YES — but only after the scored gate was closed. No targeted theory, hint,
+example, answer, or review was supplied during the scored AI-0 phase.
+
+Competency affected:
+`W03-C-UART-FOUND — COMPETENCY_PASS`, based on the independent W03D07 AI-0 gate
+at `87/100 PASS` with all mandatory conditions PASS.
+
+Special retest:
+NOT REQUIRED.
+
+Notes:
+- Scored assistance: `NONE`.
+- Integrity: `AI-0 CLEAN`.
+- Post-close findings are separated from raw scored evidence and do not alter
+  the gate result.
+- Week 3 is `CONDITIONAL PASS / CLOSED` with exactly one P1 evidence carry-over:
+  direct correct-baud UART wire-timing evidence due `2026-09-06`.
+
+---
+
 ## Pre-V3 Migration Note
 
 Known affected scope:
