@@ -850,6 +850,376 @@ eligible for `PASS / CLOSED`; no Week 3 work is started here.
 
 ---
 
+## 2026-08-24 — W03D01 UART clock and polling
+
+Highest AI level:
+AI-3
+
+What AI contributed:
+- theory/explanation and graded hints;
+- review/debug after meaningful learner core implementation attempts;
+- evidence/submission and END DAY closure bookkeeping.
+
+Files/functions materially assisted:
+- W03D01 UART learning/review after learner attempts;
+- `learning/week-03/day-01/SUBMIT_W03_D01.md`;
+- W03D01 closure control records.
+
+Core implementation code provided by AI:
+NO complete core implementation was supplied before the learner's meaningful
+attempts. The learner wrote the core register-level UART implementation attempts.
+
+Learner-owned contribution:
+- active USART2 clock-path and BRR reasoning;
+- final GPIOA/USART2 register configuration and polling TX/RX/echo implementation;
+- physical flash/terminal operation and echo observation.
+
+Gate answer revealed:
+NO ACTIVE GATE — W03D01 was normal assisted learning, not an AI-0 competency gate.
+
+Competency affected:
+W03D01 may be valid artifact evidence but is not independent competency evidence.
+No new competency PASS is awarded. `W02-C-MCU-FOUND — COMPETENCY_PASS` remains
+the latest competency PASS.
+
+Retest required:
+No W03D01-specific retest is created by this normal learning day. No AI-0 gate
+occurred.
+
+Notes:
+- Clean build PASS / exit 0: `text=1084`, `data=0`, `bss=1568`, `dec=2652`,
+  `hex=a5c`; only inherited non-blocking `nosys` warnings were present.
+- Physical COM4 polling echo PASS at 115200, 8N1: `UART123 -> UART123` and
+  Right Arrow / `ESC [ C -> ESC [ C`.
+- Evidence: `learning/week-03/day-01/Screenshot_1.png`.
+- Logic-analyzer/oscilloscope baud timing was NOT MEASURED.
+
+---
+
+## 2026-08-25 — W03D02 USART2 RX interrupt
+
+Highest AI level:
+AI-3
+
+What AI contributed:
+- compile-clean W03D02 starter/infrastructure preparation only;
+- review/debug assistance after meaningful learner core implementation attempts;
+- evidence/submission, provenance, and END DAY closure bookkeeping.
+
+Files/functions materially assisted:
+- W03D02 starter infrastructure and learning review after learner attempts;
+- `learning/week-03/day-02/SUBMIT_W03_D02.md`;
+- `firmware/stm32/w03d02-uart-rx-irq-lab/PROVENANCE.md`;
+- W03D02 closure control records.
+
+Core implementation code provided by AI:
+NO complete core RX interrupt/shared-state implementation was supplied before
+the learner's meaningful attempts. The learner owned the final RXNE/NVIC/ISR,
+mailbox, foreground-consumption, physical-debug, and error-recovery work.
+
+Learner-owned contribution:
+- USART2 RXNE interrupt and NVIC configuration;
+- exact `USART2_IRQHandler` implementation and bounded ISR/foreground split;
+- depth-1 shared-mailbox implementation and limitation analysis;
+- physical COM4 IRQ/echo demo, register capture, controlled ORE experiment,
+  recovery, and post-recovery echo.
+
+Gate answer revealed:
+NO ACTIVE GATE — W03D02 was normal assisted learning, not an AI-0 competency gate.
+
+Competency affected:
+W03D02 may be valid artifact evidence but is not independent competency evidence.
+No new competency PASS is awarded. `W02-C-MCU-FOUND — COMPETENCY_PASS` remains
+the latest competency PASS.
+
+Retest required:
+No W03D02-specific retest is created by this normal learning day. No AI-0 gate
+occurred.
+
+Notes:
+- Clean build PASS / exit 0: `text=1420`, `data=0`, `bss=1568`, `dec=2988`,
+  `hex=bac`; only inherited non-blocking `nosys` warnings were present.
+- Physical COM4 USART2 RX IRQ and foreground echo PASS at 115200, 8N1.
+- Normal capture: `CR1=0x202C`, `SR=0x00F0`, `NVIC->ISER[1]=0x00000040`.
+- Forced ORE capture: `SR=0x00F8`; recovery capture: `SR=0x00C0`, ORE=0,
+  RXNE=0; post-recovery `R -> R` PASS.
+- Evidence: `learning/week-03/day-02/Screenshot_1.png` through
+  `learning/week-03/day-02/Screenshot_4.png`.
+- Known limitation: single-byte mailbox depth=1; burst traffic may overwrite or
+  drop data. Ring buffer intentionally remains W03D03 work.
+
+---
+
+## 2026-08-26 — W03D03 UART RX ring-buffer integration
+
+Highest AI level:
+AI-3
+
+What AI contributed:
+- executor-prepared starter/repository infrastructure and visible host-test
+  scaffolding;
+- theory and graded hints;
+- post-attempt review/debug support;
+- hardware/debug setup guidance;
+- closure and evidence administration.
+
+Files/functions materially assisted:
+- W03D03 starter infrastructure and learning review after learner attempts;
+- `learning/week-03/day-03/SUBMIT_W03_D03.md`;
+- W03D03 closure control records.
+
+Core implementation code provided by AI:
+NO complete final ring-buffer core or UART integration was supplied before the
+learner's meaningful attempts.
+
+Learner-owned contribution:
+- ring-buffer state, push/pop/wrap implementation;
+- DROP_NEWEST policy selection and justification;
+- overflow counter implementation;
+- USART2 ISR/foreground integration;
+- host/build/flash/terminal/debug execution and physical observations;
+- final invariant and state-transition explanation.
+
+Gate answer revealed:
+NO ACTIVE GATE — W03D03 was normal assisted learning, not an AI-0 competency gate.
+
+Competency affected:
+W03D03 may be valid artifact evidence but is not independent competency evidence.
+No new competency PASS is awarded. `W02-C-MCU-FOUND — COMPETENCY_PASS` remains
+the latest competency PASS.
+
+Special retest:
+NOT REQUIRED. No W03D03-specific retest is created by this normal learning day.
+
+Notes:
+- Host compile/test PASS / exit 0: `11 tests, 0 failed`.
+- Clean build PASS / exit 0: `text=1720`, `data=0`, `bss=1592`, `dec=3312`,
+  `hex=cf0`; only inherited non-blocking `nosys` warnings were present.
+- Physical normal UART echo PASS: COM4, 115200 8N1, `UART123 -> UART123`.
+- Forced DROP_NEWEST overflow PASS; final observed overflow counter: `14`.
+- Evidence: `learning/week-03/day-03/Screenshot_1.png` through
+  `Screenshot_3.png`.
+
+---
+
+## 2026-08-27 — W03D04 non-blocking UART parser
+
+Highest AI level:
+AI-3
+
+What AI contributed:
+- executor-prepared starter/repository infrastructure, public API, compile-clean
+  stubs, and visible host-test scaffolding;
+- theory and mental-model guidance plus graded hints;
+- post-attempt review and timeout-debugging guidance;
+- closure and evidence administration.
+
+Files/functions materially assisted:
+- W03D04 starter infrastructure and learning review after learner attempts;
+- `learning/week-03/day-04/SUBMIT_W03_D04.md`;
+- W03D04 closure control records.
+
+Core implementation code provided by AI:
+NO complete final parser implementation was supplied. The learner wrote the core
+parser implementation after meaningful attempts.
+
+Learner-owned contribution:
+- parser initialization and invariants;
+- bounded accumulation, NUL termination, LF/CRLF handling, and exact command
+  recognition;
+- bounded decimal `rate` parsing and malformed/unknown distinction;
+- exact-length boundary and one-shot overlong discard/resynchronization;
+- inter-byte timeout, unsigned tick-wrap handling, and recovery transitions;
+- host/build execution and self-explanation of timeout, overlong recovery, and
+  ISR/foreground separation.
+
+Gate answer revealed:
+NO ACTIVE GATE — W03D04 was normal assisted learning, not an AI-0 competency gate.
+
+Competency affected:
+W03D04 may be valid artifact evidence but is not independent competency evidence.
+No new competency PASS is awarded. `W02-C-MCU-FOUND — COMPETENCY_PASS` remains
+the latest competency PASS.
+
+Special retest:
+NOT REQUIRED. No W03D04-specific retest is created by this normal learning day.
+
+Notes:
+- Host compile/test PASS / exit 0: `16 tests, 0 failed`.
+- Timeout, tick-wrap, bounds/overlong, invalid-input, recovery, and repeated-use
+  cases passed.
+- Clean build PASS / exit 0: `text=1720`, `data=0`, `bss=1592`, `dec=3312`,
+  `hex=cf0`; only inherited non-blocking `nosys` warnings were present.
+- No hardware parser demo was performed or required for the core D04 evidence;
+  no physical command-action behavior is claimed.
+
+---
+
+## 2026-08-27 — W03D05 Python serial logger
+
+Highest AI level:
+AI-3
+
+What AI contributed:
+- executor-prepared TODO/submission templates and TODO-only argparse/function
+  scaffold;
+- Project Chat theory, review, and debugging after meaningful learner attempts;
+- closure/evidence administration and post-attempt bounded regression checks.
+
+Files/functions materially assisted:
+- W03D05 starter infrastructure and learning review after learner attempts;
+- `learning/week-03/day-05/SUBMIT_W03_D05.md`;
+- W03D05 closure control records.
+
+Core implementation code provided by AI:
+NO complete core serial-logger solution was supplied before the learner's
+meaningful attempts. The learner owned the final receive loop, timestamp,
+persistence, boundary/error handling, physical run, and self-explanation.
+
+Learner-owned contribution:
+- required argparse CLI and pyserial configuration;
+- UTC PC-observation timestamp and hex/readable persistence contracts;
+- newline record assembly, fixed 4096-byte bound, timeout policy, and errors;
+- physical COM4 run with the NUCLEO-F446RE and sample-log capture;
+- explanation of idle timeout semantics and authoritative HEX_RAW limitations.
+
+Gate answer revealed:
+NO ACTIVE GATE — W03D05 was normal assisted learning, not an AI-0 competency gate.
+
+Competency affected:
+W03D05 may be valid artifact evidence but is not independent competency evidence.
+No new competency PASS is awarded. `W02-C-MCU-FOUND — COMPETENCY_PASS` remains
+the latest competency PASS.
+
+Special retest:
+NOT REQUIRED. No W03D05-specific retest is created by this normal learning day.
+
+Notes:
+- Python 3.12.0 and pyserial 3.5 verified.
+- Syntax and `--help` checks passed; bounded executor regression result was
+  `5 tests, 0 failed`.
+- Physical COM4 run used 115200, 8N1, timeout 1.0 s and persisted one 76-byte
+  attributable `LOGGER_TEST\r\n` record.
+- HEX_RAW proves bytes delivered to logger software, not electrical wire-level
+  integrity.
+- The temporary W03D04 deterministic startup transmit was removed; final
+  W03D04 source remains its original 115200-baud UART echo loop.
+
+---
+
+## 2026-08-29 — W03D06 UART RX/ring-buffer overflow debugging
+
+Highest AI level:
+AI-3
+
+What AI contributed:
+- executor-prepared neutral W03D06 TODO/debug-report infrastructure and
+  known-good baseline validation;
+- Project Chat pre-check after which the learner supplied expected behavior,
+  known facts, unknowns, H1, reproduction design, and measurement plan;
+- post-measurement evidence review and normalization into report prose;
+- the concrete temporary foreground busy-delay mechanism for controlled fault
+  injection, suggested only after the learner-owned pre-experiment reasoning;
+- closure and evidence administration.
+
+Files/functions materially assisted:
+- W03D06 starter/report infrastructure and post-attempt learning review;
+- `learning/week-03/day-06/DEBUG_REPORT_W03_D06.md`;
+- W03D06 closure control records.
+
+Core implementation code provided by AI:
+NO ring-buffer algorithm patch was supplied. AI suggested only the temporary
+fault-injection mechanism. The final production behavior was restored by
+removing that artificial foreground slowdown.
+
+Learner-owned contribution:
+- fault-category selection and expected behavior;
+- known facts, unknowns, H1, reproduction design, and measurement plan before
+  physical execution;
+- physical NUCLEO-F446RE fault run and exact input/output observations;
+- debugger measurement `overflow_count = 12`;
+- recovery and regression runs and independent self-explanation.
+
+Gate answer revealed:
+NO ACTIVE GATE — W03D06 was normal assisted learning, not an AI-0 competency
+gate.
+
+Competency affected:
+W03D06 may be valid artifact evidence but is not independent competency evidence.
+No new competency PASS is awarded. `W02-C-MCU-FOUND — COMPETENCY_PASS` remains
+the latest competency PASS.
+
+Special retest:
+NOT REQUIRED. No W03D06-specific retest is created by this normal learning day.
+
+Notes:
+- Fault: `ABCDEFGHIJKLMNOPQRST -> ABCDEFGH`; software
+  `overflow_count = 12`.
+- Recovery: `XYZ -> XYZ`; counter remained 12.
+- Regression: full 20-byte echo; `overflow_count = 0`.
+- UART hardware ORE history was NOT MEASURED sufficiently.
+- Host compile/test PASS / exit 0: `11 tests, 0 failed`.
+- STM32 clean build PASS / exit 0: `text=1720`, `data=0`, `bss=1592`,
+  `dec=3312`, `hex=cf0`; only inherited non-blocking `nosys` warnings.
+
+---
+
+## 2026-08-31 — W03D07 UART IRQ / parser competency gate and Week 3 closure
+
+Highest AI level:
+AI-3 — post-close review and evidence/control-plane administration only. The
+scored phase remained AI-0.
+
+What AI contributed:
+- neutral gate logistics, contract, timing, and rubric administration;
+- scoring/result record supplied by Project Chat only after `CLOSE GATE`;
+- post-close review of `volatile` precision, parser CRLF boundary behavior, and
+  DMA-versus-shorter-ISR trade-off;
+- executor persistence of verbatim raw answers, assessment metadata, Week 3
+  scorecard, competency ledger, logs, state, and findings disposition;
+- technical baseline reruns and authorized repository publication mechanics.
+
+Files/functions materially assisted:
+- `learning/week-03/day-07/ASSESSMENT_RESULT_W03D07.md`;
+- `learning/week-03/day-07/POST_GATE_REVIEW_W03D07.md`;
+- `learning/week-03/day-07/SUBMIT_W03_D07.md`;
+- Week 3 closure control records.
+
+Core implementation code provided by AI:
+NO. No learner firmware, parser, ring-buffer, or logger implementation was
+modified in this closure transaction.
+
+Learner-owned contribution:
+- the entire scored W03D07 answer preserved verbatim in
+  `RAW_COMPETENCY_SUBMISSION_W03D07.md`;
+- baud/clock calculations and measurement proposal;
+- ISR/ring-buffer reasoning and trace;
+- fresh bounded parser submission and trace;
+- fault hypotheses, measurement choices, conclusion, and trade-off defense;
+- post-close integrity declaration: `CLEAN ko dùng bất kì cái gì ngoài máy
+  tình cầm tay`.
+
+Gate answer revealed:
+YES — but only after the scored gate was closed. No targeted theory, hint,
+example, answer, or review was supplied during the scored AI-0 phase.
+
+Competency affected:
+`W03-C-UART-FOUND — COMPETENCY_PASS`, based on the independent W03D07 AI-0 gate
+at `87/100 PASS` with all mandatory conditions PASS.
+
+Special retest:
+NOT REQUIRED.
+
+Notes:
+- Scored assistance: `NONE`.
+- Integrity: `AI-0 CLEAN`.
+- Post-close findings are separated from raw scored evidence and do not alter
+  the gate result.
+- Week 3 is `CONDITIONAL PASS / CLOSED` with exactly one P1 evidence carry-over:
+  direct correct-baud UART wire-timing evidence due `2026-09-06`.
+
+---
+
 ## Pre-V3 Migration Note
 
 Known affected scope:

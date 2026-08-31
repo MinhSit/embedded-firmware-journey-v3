@@ -2725,3 +2725,1021 @@ Week 3 until that BOOT occurs.
 Week 2 is `PASS / CLOSED`; `W02-C-MCU-FOUND = COMPETENCY_PASS`; Week 3 eligibility
 is `YES`. Roadmap review is `NOT DUE`; the next formal checkpoint remains CP-02
 on 2026-09-06.
+
+---
+
+## 2026-08-24 — Week 03 / Day 01
+
+### 1. Planned Outcome
+
+Derive the actual USART2 peripheral clock and baud divider, implement register-level
+polling TX/RX, and capture a physical echo at the intended baud.
+
+### 2. Actual Status
+
+GREEN — W03D01 CLOSED / ARTIFACT_PASS.
+
+The clean firmware build and physical USART2 polling echo passed. This normal
+learning day did not contain an independent competency gate.
+
+### 3. Focused Time
+
+Available: 6h — learner supplied
+
+Planned: UNRECOVERABLE PROCESS VARIANCE — no Planned Focused Time value was
+supplied in the W03D01 closure input; no value is inferred.
+
+Actual: 2h — learner supplied
+
+### 4. Independent Work
+
+- Reasoned the active clock path as HSI 16 MHz -> SYSCLK 16 MHz -> HPRE /1 ->
+  HCLK 16 MHz -> PPRE1 /1 -> PCLK1 16 MHz -> USART2.
+- Derived and used BRR 139 decimal / `0x008B` for 16 MHz, 115200 baud,
+  oversampling by 16, and 8N1 framing.
+- Implemented register-level GPIOA/USART2 setup, PA2/PA3 AF7, polling TX/RX,
+  and one-byte echo after meaningful learner attempts.
+- Performed the flash/terminal workflow and observed the physical echo on COM4.
+
+These are assisted learning facts and artifact evidence, not independent
+competency evidence.
+
+### 5. AI Usage
+
+Highest AI level used: AI-3
+
+What AI helped with: theory/explanation, graded hints, and post-attempt
+review/debug after meaningful learner core implementation attempts.
+
+Files/functions materially assisted: W03D01 UART learning/review and closure
+evidence/control-plane administration.
+
+Competencies contaminated: W03D01 cannot be used as independent competency
+evidence.
+
+Independent retest required: NO special retest created by this normal learning
+day; no AI-0 gate occurred and no competency result is awarded.
+
+### 6. Artifact Result
+
+Files changed: W03D01 learning evidence/submission, UART lab artifact, and the
+allowlisted daily/AI/current-state closure records.
+
+Build command: `powershell -ExecutionPolicy Bypass -File .\build.ps1 -Clean`
+from `firmware/stm32/w03d01-uart-polling-lab`.
+
+Build result: PASS / exit 0; `text=1084`, `data=0`, `bss=1568`, `dec=2652`,
+`hex=a5c`; only inherited non-blocking `nosys` warnings for `_close`, `_lseek`,
+`_read`, and `_write`.
+
+Test command: `python -m serial.tools.miniterm --parity N COM4 115200`
+
+Test result: physical polling echo PASS at 115200, 8N1, with hardware/software
+flow control inactive.
+
+### 7. Evidence
+
+Commit: `SELF — containing commit`
+
+Logs: miniterm visibly reported `COM4 115200,8,N,1`.
+
+Captures: `learning/week-03/day-01/Screenshot_1.png`
+
+Reports: `learning/week-03/day-01/SUBMIT_W03_D01.md`
+
+Video/demo: NONE.
+
+Other: STM32CubeProgrammer GUI was used to flash; exact GUI steps/settings and
+no CLI flashing command were recorded.
+
+### 8. Measurements
+
+Expected: receive one byte by polling `RXNE`, then echo it by polling `TXE` and
+writing `USART2->DR` at 115200, 8N1.
+
+Observed: `UART123 -> UART123`; the ANSI Right Arrow sequence `ESC [ C` was also
+echoed as `ESC [ C`.
+
+Relevant numbers/registers/timing/errors: USART2 peripheral clock 16 MHz; BRR
+139 decimal / `0x008B`; logic-analyzer/oscilloscope baud timing NOT MEASURED.
+
+### 9. Understanding Check
+
+What I demonstrated/explained during the assisted learning session: the
+HSI-to-PCLK1 clock path, baud-divider relationship, explicit 8N1 configuration,
+and why `TXE` and `RXNE` guard the transmit/receive data-register accesses.
+
+What I still cannot claim from this day: independent competency. Exact official
+source locations, connector/debugger routing, and wire timing were not recorded.
+
+### 10. Defects / Failed Tests
+
+Defect IDs or test IDs: NONE unresolved. The expected inherited `nosys` linker
+warnings are non-blocking.
+
+Root cause known?: N/A.
+
+Current hypothesis: no unresolved artifact defect supported by the supplied
+build and physical echo evidence.
+
+### 11. Carry-over
+
+Exactly one mandatory carry-over if needed: NONE.
+
+Closure criteria: MET.
+
+Recovery: NOT ACTIVE.
+
+### 12. Next Action
+
+BOOT W03D02.
+
+---
+
+## 2026-08-25 — Week 03 / Day 02
+
+### 1. Planned Outcome
+
+Add USART2 RXNE interrupt reception, keep the ISR short, reason explicitly about
+shared state, and produce a physical IRQ demo plus register/evidence capture.
+
+### 2. Actual Status
+
+GREEN — W03D02 CLOSED / ARTIFACT_PASS.
+
+The clean firmware build, physical USART2 RX interrupt demo, register capture,
+controlled ORE case, recovery, and post-recovery echo passed. This normal
+learning day did not contain an independent competency gate.
+
+### 3. Focused Time
+
+Available: 6h — learner supplied
+
+Planned: UNRECOVERABLE PROCESS VARIANCE — no Planned Focused Time value was
+supplied in the W03D02 closure input; no value is inferred.
+
+Actual: 3h — learner supplied
+
+### 4. Independent Work
+
+- Implemented USART2 RXNE interrupt enable, NVIC configuration, and the exact
+  `USART2_IRQHandler` vector symbol after learner-first attempts.
+- Kept the ISR bounded to condition checks, one DR read, one mailbox-byte store,
+  and one ready-flag update; foreground performs mailbox consumption and polling TX.
+- Reasoned about ISR-producer/foreground-consumer ownership and protected the
+  foreground copy/clear sequence by temporarily masking `USART2_IRQn`.
+- Performed the COM4 physical IRQ/echo demo, breakpoint/register inspection,
+  controlled ORE experiment, SR-to-DR recovery, and post-recovery echo.
+
+These are assisted learning facts and artifact evidence, not independent
+competency evidence.
+
+### 5. AI Usage
+
+Highest AI level used: AI-3
+
+What AI helped with: executor starter preparation only, followed by post-attempt
+review/debug assistance and END DAY evidence/control-plane administration.
+
+Files/functions materially assisted: W03D02 starter infrastructure, learning
+review/debug after learner attempts, submission/provenance, and closure records.
+
+Competencies contaminated: W03D02 cannot be used as independent competency
+evidence.
+
+Independent retest required: NO special retest created by this normal learning
+day; no AI-0 gate occurred and no competency result is awarded.
+
+### 6. Artifact Result
+
+Files changed: W03D02 learning evidence/submission, learner UART RX IRQ lab
+artifact, provenance, and the allowlisted daily/AI/current-state closure records.
+
+Build command: `powershell -ExecutionPolicy Bypass -File .\build.ps1 -Clean`
+from `firmware/stm32/w03d02-uart-rx-irq-lab`.
+
+Build result: PASS / exit 0; `text=1420`, `data=0`, `bss=1568`, `dec=2988`,
+`hex=bac`; only inherited non-blocking `nosys` warnings for `_close`, `_lseek`,
+`_read`, and `_write`.
+
+Test setup: physical COM4 USART2 path at 115200, 8N1, line ending None; VS Code
+Cortex-Debug breakpoint/register inspection through ST-LINK GDB Server.
+
+Test result: physical RX IRQ and foreground echo PASS; controlled ORE capture,
+SR-to-DR recovery, and post-recovery `R` echo PASS.
+
+### 7. Evidence
+
+Commit: `SELF — containing commit`
+
+Logs: VS Code Serial Monitor showed the sent/echoed bytes on COM4.
+
+Captures: `learning/week-03/day-02/Screenshot_1.png` through
+`learning/week-03/day-02/Screenshot_4.png`.
+
+Reports: `learning/week-03/day-02/SUBMIT_W03_D02.md`
+
+Video/demo: NONE.
+
+Other: exact backend flash command and terminal extension/version were NOT
+RECORDED; no value is inferred.
+
+### 8. Measurements
+
+Expected: each slow single-byte input triggers USART2 RX interrupt service,
+moves the byte into the depth-1 mailbox, permits foreground consumption, and is
+echoed through polling TX. Holding the CPU before the DR read while more bytes
+arrive should assert ORE; the SR-read then DR-read sequence should recover.
+
+Observed: normal breakpoint capture showed `USART2->CR1=8236 / 0x202C`,
+`USART2->SR=240 / 0x00F0`, and `NVIC->ISER[1]=64 / 0x00000040`; forced ORE showed
+`USART2->SR=248 / 0x00F8`; recovery showed `USART2->SR=192 / 0x00C0` with ORE=0
+and RXNE=0; post-recovery `R -> R` passed.
+
+Relevant numbers/registers/timing/errors: COM4, 115200 8N1; no independent wire
+timing measurement was supplied.
+
+### 9. Understanding Check
+
+What I demonstrated/explained during the assisted learning session: RXNE/RXNEIE
+and NVIC gating, exact vector symbol, bounded ISR versus foreground work,
+producer/consumer shared state, the depth-1 mailbox limitation, ORE cause, and
+SR-to-DR recovery behavior.
+
+What I still cannot claim from this day: independent competency. Exact official
+document revisions, backend flash command, and terminal extension/version were
+not recorded.
+
+### 10. Defects / Failed Tests
+
+Defect IDs or test IDs: NONE unresolved. The expected inherited `nosys` linker
+warnings are non-blocking.
+
+Root cause known?: N/A.
+
+Current hypothesis: no unresolved artifact defect supported by the supplied
+build and physical/debug evidence.
+
+### 11. Carry-over
+
+Exactly one mandatory carry-over if needed: NONE.
+
+Closure criteria: MET.
+
+Recovery: NOT ACTIVE.
+
+Known limitation: receive storage is a single-byte mailbox (depth=1); burst
+traffic can overwrite/drop data. Ring buffer integration is intentionally the
+W03D03 target, not a W03D02 defect repair.
+
+### 12. Next Action
+
+BOOT W03D03 — open the W03D03 roadmap day card and define the ring-buffer
+producer/consumer invariants before implementation.
+
+---
+
+## 2026-08-26 — Week 03 / Day 03
+
+### 1. Planned Outcome
+
+Replace the depth-1 USART2 RX mailbox with a fixed-size ring buffer, define a
+bounded overflow policy and observable error counter, and verify the integrated
+artifact with repeatable host tests, a clean STM32 build, and physical evidence.
+
+### 2. Actual Status
+
+GREEN — W03D03 CLOSED / ARTIFACT_PASS.
+
+A fixed-size 8-byte USART2 RX ring buffer was integrated with DROP_NEWEST
+overflow behavior and an observable overflow counter. Host, STM32 build, normal
+UART, and forced-overflow evidence passed. This normal learning day creates no
+new competency result.
+
+### 3. Focused Time
+
+Available: 6h — learner supplied
+
+Planned: 6h — learner supplied
+
+Actual: 3.5h — learner supplied
+
+Hours are planning/history only. No schedule debt is inferred merely because
+Actual is lower than Planned. Health impact: NOT RECORDED.
+
+### 4. Independent Work
+
+- Implemented fixed-capacity static ring-buffer state with head, tail, count,
+  and overflow_count.
+- Selected and justified DROP_NEWEST, preserving accepted FIFO contents while
+  making sustained-overflow loss observable.
+- Integrated the ISR producer with foreground consumption under a short
+  USART2_IRQn-disabled critical section.
+- Ran the host suite, clean firmware build, physical UART demo, forced-overflow
+  experiment, and debugger counter observation.
+- Explained empty, partial, full, push, pop, wrap, and failed-push transitions.
+
+These are assisted learning facts and artifact evidence, not independent
+competency evidence.
+
+### 5. AI Usage
+
+Highest AI level used: AI-3
+
+What AI helped with: executor-prepared starter/repository infrastructure,
+visible host-test scaffolding, theory and graded hints, post-attempt review/debug,
+hardware/debug setup guidance, and closure/evidence administration.
+
+Files/functions materially assisted: W03D03 starter infrastructure, learning
+review/debug after learner attempts, submission, and closure records.
+
+Competencies contaminated: W03D03 cannot be used as independent competency
+evidence.
+
+Independent retest required: NO special retest created by this normal learning
+day; no AI-0 gate occurred and no competency result is awarded.
+
+### 6. Artifact Result
+
+Files changed: learner-owned W03D03 ring-buffer/UART source, W03D03 screenshots,
+TODO/submission, and the allowlisted daily/AI/current-state closure records.
+
+Host compile command: `gcc -std=c17 -Wall -Wextra -Wpedantic -Werror firmware/stm32/w03d03-uart-ring-buffer-lab/rx_ring_buffer.c tests/host/test_w03d03_rx_ring_buffer.c -Ifirmware/stm32/w03d03-uart-ring-buffer-lab -o tests/host/test_w03d03_rx_ring_buffer.exe`.
+
+Host result: PASS / exit 0; `SUMMARY: 11 tests, 0 failed`.
+
+Build command: `powershell -ExecutionPolicy Bypass -File .\build.ps1 -Clean`
+from `firmware/stm32/w03d03-uart-ring-buffer-lab`.
+
+Build result: PASS / exit 0; `text=1720`, `data=0`, `bss=1592`, `dec=3312`,
+`hex=cf0`; only inherited non-blocking `nosys` warnings for `_close`, `_lseek`,
+`_read`, and `_write`.
+
+### 7. Evidence
+
+Commit: `SELF — containing closure commit`
+
+Logs: VS Code Serial Monitor on COM4 at 115200, 8N1.
+
+Captures: `learning/week-03/day-03/Screenshot_1.png`, `Screenshot_2.png`, and
+`Screenshot_3.png`.
+
+Reports: `learning/week-03/day-03/SUBMIT_W03_D03.md`
+
+Video/demo: NONE.
+
+### 8. Measurements
+
+Expected: normal input is echoed in FIFO order; under forced sustained overflow,
+DROP_NEWEST preserves accepted queued bytes and increments overflow_count.
+
+Observed: normal `UART123 -> UART123` PASS; forced overflow produced attributable
+truncated FIFO output `BCDEFGHI`; final observed overflow counter was `14`.
+
+Relevant setup: NUCLEO-F446RE, COM4, 115200 baud, 8N1; STM32CubeProgrammer flash;
+GDB hardware debug through arm-none-eabi-gdb, ST-LINK_gdbserver, SWD, and
+localhost:61234.
+
+### 9. Understanding Check
+
+What I demonstrated/explained during the assisted learning session: empty,
+partial, and full invariants; successful push/pop and wrap transitions;
+DROP_NEWEST failed-push state preservation; producer/consumer ownership; and why
+volatile is not a lock.
+
+What I still cannot claim from this day: independent competency.
+
+### 10. Defects / Failed Tests
+
+Defect IDs or test IDs: NONE unresolved. Temporary foreground delay and
+overflow_snapshot instrumentation were removed before final verification. The
+expected inherited `nosys` linker warnings are non-blocking.
+
+Root cause known?: N/A.
+
+Current hypothesis: no unresolved artifact defect supported by the verified
+host, build, and physical evidence.
+
+### 11. Carry-over
+
+Exactly one mandatory carry-over if needed: NONE.
+
+Closure criteria: MET.
+
+Recovery: NOT ACTIVE.
+
+Known limitations: fixed 8-byte RX capacity; DROP_NEWEST intentionally loses new
+bytes during sustained overflow; foreground uses a short USART2 IRQ-disabled
+critical section; TX remains polling; no DMA, parser, or RTOS is in W03D03 scope.
+
+### 12. Next Action
+
+BOOT W03D04 — open the authoritative W03D04 roadmap day card before defining the
+next Day Contract.
+
+---
+
+## 2026-08-27 — Week 03 / Day 04
+
+### 1. Planned Outcome
+
+Implement a bounded non-blocking parser for `help`, `status`, `led`, and `rate`
+commands with line timeout, invalid-input handling, length protection, and clean
+state recovery, then verify it with repeatable host tests.
+
+### 2. Actual Status
+
+GREEN — W03D04 CLOSED / ARTIFACT_PASS.
+
+The hardware-independent parser passed all normal, boundary, malformed,
+overlong, timeout, tick-wrap, recovery, and repeated-use host cases. The STM32
+target clean-built with the parser object included. This normal learning day
+creates no new competency result.
+
+### 3. Focused Time
+
+Available: 6h — learner supplied
+
+Planned: 6h — learner supplied
+
+Actual: 2.5h — learner supplied
+
+Planned-vs-actual variance: -3.5h. Hours are planning/history only. The lower
+actual time is not a failure or Recovery trigger. Health impact: NOT RECORDED.
+
+### 4. Independent Work
+
+- Implemented parser initialization and reusable state invariants.
+- Implemented bounded accumulation with NUL termination and LF/CRLF handling.
+- Recognized `help`, `status`, `led on|off|toggle`, and bounded decimal `rate`.
+- Distinguished malformed arguments from unknown commands.
+- Implemented exact-length handling, one-shot overlong reporting, and
+  discard-until-EOL resynchronization.
+- Implemented inter-byte timeout with unsigned tick-wrap-safe arithmetic.
+- Demonstrated recovery after invalid, overlong, and timed-out input.
+- Explained timeout, overlong recovery, and ISR/foreground separation without
+  source lookup.
+
+These are assisted learning facts and artifact evidence, not independent
+competency evidence.
+
+### 5. AI Usage
+
+Highest AI level used: AI-3
+
+What AI helped with: executor-prepared starter/repository infrastructure,
+visible host tests, theory and mental-model guidance, graded hints, post-attempt
+review, timeout debugging guidance, and closure/evidence administration.
+
+Files/functions materially assisted: W03D04 starter infrastructure, learning
+review/debug after learner attempts, submission, and closure records.
+
+Competencies contaminated: W03D04 cannot be used as independent competency
+evidence.
+
+Independent retest required: NO special retest created by this normal learning
+day; no AI-0 gate occurred and no competency result is awarded.
+
+### 6. Artifact Result
+
+Files changed: learner-owned `uart_parser.c`, W03D04 TODO/submission, and the
+allowlisted daily/AI/current-state closure records.
+
+Host compile command: `gcc -std=c17 -Wall -Wextra -Wpedantic -Werror firmware/stm32/w03d04-uart-parser-lab/uart_parser.c tests/host/test_w03d04_uart_parser.c -Ifirmware/stm32/w03d04-uart-parser-lab -o tests/host/test_w03d04_uart_parser.exe`.
+
+Host result: PASS / exit 0; `SUMMARY: 16 tests, 0 failed`.
+
+Build command: `powershell -ExecutionPolicy Bypass -File .\build.ps1 -Clean`
+from `firmware/stm32/w03d04-uart-parser-lab`.
+
+Build result: PASS / exit 0; `text=1720`, `data=0`, `bss=1592`, `dec=3312`,
+`hex=cf0`; only inherited non-blocking `nosys` warnings for `_close`, `_lseek`,
+`_read`, and `_write`.
+
+### 7. Evidence
+
+Commit: `SELF — containing closure commit`
+
+Logs: executor-reproduced strict host output showed all W03D04-T01 through
+W03D04-T16 PASS and `SUMMARY: 16 tests, 0 failed`.
+
+Captures: NONE.
+
+Reports: `learning/week-03/day-04/SUBMIT_W03_D04.md`
+
+Video/demo: NONE.
+
+Hardware parser observations: NOT PERFORMED / NOT RECORDED; none are inferred.
+
+### 8. Measurements
+
+Expected: every parser call performs bounded work; a complete valid line emits
+the matching command event; invalid and overlong lines cannot corrupt parser
+state; timeout and newline reset the active line so a later command can recover.
+
+Observed: 16/16 visible host cases passed, including exact-length bounds,
+guarded overlong input, partial-line timeout, `uint32_t` tick wrap, and recovery
+after invalid, overlong, and timed-out input.
+
+Relevant values: maximum line length `32` bytes; valid `rate` range `1..10000`.
+No physical UART timing or command-action behavior was measured.
+
+### 9. Understanding Check
+
+What I demonstrated/explained during the assisted learning session: the partial
+line and timeout transition, why unsigned elapsed subtraction survives tick
+wrap, why overlong suffix bytes must be discarded until newline, and why ISR RX
+buffering should remain separate from foreground parsing/action handling.
+
+Self-check result: PASS as learning evidence. What I still cannot claim from
+this day: independent competency.
+
+### 10. Defects / Failed Tests
+
+Defect IDs or test IDs: NONE unresolved. The expected inherited `nosys` linker
+warnings are non-blocking.
+
+Root cause known?: N/A.
+
+Current hypothesis: no unresolved artifact defect supported by the verified
+source audit, host suite, and clean build.
+
+### 11. Carry-over
+
+Exactly one mandatory carry-over if needed: NONE.
+
+Closure criteria: MET.
+
+Recovery: NOT ACTIVE.
+
+Known limitation: this closure proves the hardware-independent parser core. It
+does not claim physical UART command dispatch or LED/status/rate action behavior.
+
+### 12. Next Action
+
+BOOT W03D05 — open the authoritative W03D05 roadmap day card before defining the
+next Day Contract.
+
+---
+
+## 2026-08-27 — Week 03 / Day 05
+
+### 1. Planned Outcome
+
+Implement a Python serial logger that timestamps newline-terminated UART
+records, persists authoritative raw bytes plus a readable view, and use it with
+the physical board to create an attributable sample log.
+
+Roadmap card date: `2026-08-28`. Execution intentionally started early within
+Week 3 on calendar date `2026-08-27`.
+
+### 2. Actual Status
+
+GREEN — W03D05 CLOSED / ARTIFACT_PASS.
+
+The learner-owned logger ran with the NUCLEO-F446RE on COM4 at 115200 baud and
+persisted one attributable `LOGGER_TEST\r\n` record. Executor syntax, interface,
+contract-regression, evidence, and firmware-restoration checks passed. This
+normal learning day creates no new competency result.
+
+### 3. Focused Time
+
+Available: 5h — learner supplied
+
+Planned: 5h — learner supplied
+
+Actual: 3h — learner supplied
+
+Planned-vs-actual variance: -2h. Hours are planning/history only. The lower
+actual time creates no schedule debt and is not a Recovery trigger. Health
+impact: NOT RECORDED.
+
+### 4. Independent Work
+
+- Implemented the required argparse interface, timestamp generation, persisted
+  hex/readable record format, serial receive loop, and error/shutdown paths.
+- Selected PC/logger UTC observation time with ISO 8601 microsecond precision.
+- Defined complete records as newline-terminated and bounded pending/record
+  storage with `MAX_PENDING_BYTES = 4096`.
+- Used COM4 at 115200, 8N1 with the physical board and created the required
+  sample log.
+- Explained timeout-as-idle behavior and why HEX_RAW is authoritative for bytes
+  delivered to software while DECODED_VIEW is secondary.
+- Temporarily used deterministic `LOGGER_TEST\r\n` firmware output for evidence,
+  then restored W03D04 to its original UART echo behavior.
+
+These are assisted learning facts and artifact evidence, not independent
+competency evidence.
+
+### 5. AI Usage
+
+Highest AI level used: AI-3
+
+What AI helped with: executor-prepared starter/repository infrastructure plus
+Project Chat theory, review, and debugging after meaningful learner attempts;
+closure/evidence administration and additional post-attempt bounded validation.
+
+Files/functions materially assisted: W03D05 starter infrastructure, learning
+review/debug after learner attempts, submission, and closure records.
+
+Competencies contaminated: W03D05 cannot be used as independent competency
+evidence.
+
+Independent retest required: NO special retest created by this normal learning
+day; no AI-0 gate occurred and no competency result is awarded.
+
+### 6. Artifact Result
+
+Files changed: learner-owned `tools/serial_logger.py`, W03D05 TODO/submission,
+physical `sample_uart.log`, and the allowlisted daily/AI/current-state closure
+records.
+
+Syntax command: `python -m py_compile .\tools\serial_logger.py`.
+
+Syntax result: PASS / exit 0 after an executor rerun with permission to create
+the ignored bytecode cache.
+
+Interface command: `python -B .\tools\serial_logger.py --help`.
+
+Interface result: PASS / exit 0.
+
+Bounded executor regression result: PASS / exit 0; `SUMMARY: 5 tests, 0 failed`
+covering timestamp/persistence, split and multiple records, Ctrl+C, oversized
+complete record, oversized pending fragment, and SerialException behavior.
+
+### 7. Evidence
+
+Commit: `SELF — containing closure commit`
+
+Logs: `learning/week-03/day-05/sample_uart.log` — 76 bytes, one record.
+
+Captures: NONE.
+
+Reports: `learning/week-03/day-05/SUBMIT_W03_D05.md`
+
+Video/demo: NONE.
+
+Physical invocation: `python -B .\tools\serial_logger.py --port COM4 --baud
+115200 --output .\learning\week-03\day-05\sample_uart.log`.
+
+### 8. Measurements
+
+Expected: the deterministic board payload `LOGGER_TEST\r\n` is delivered as one
+complete newline-terminated record and persisted with a UTC PC-observation
+timestamp, authoritative hex, and a one-line decoded/escaped view.
+
+Observed: `[2026-08-27T10:51:49.572892Z]
+4c4f474745525f544553540d0a | LOGGER_TEST\r\n`.
+
+Relevant values: pyserial 3.5; Python 3.12.0; COM4; 115200 baud; 8N1;
+timeout 1.0 s; read size 128 bytes; `MAX_PENDING_BYTES = 4096`.
+
+### 9. Understanding Check
+
+What I demonstrated/explained during the assisted learning session: timeout
+1.0 s is bounded blocking and an empty read means idle/continue rather than
+disconnect; HEX_RAW preserves bytes delivered to software without text-decoding
+loss, while DECODED_VIEW is transformed/escaped and secondary.
+
+Precision boundary: HEX_RAW does not prove electrical bit-level integrity on
+the wire. What I still cannot claim from this day: independent competency.
+
+Self-check result: PASS as learning evidence.
+
+### 10. Defects / Failed Tests
+
+Defect IDs or test IDs: NONE unresolved. One trailing-whitespace line and the
+missing final newline in `tools/serial_logger.py` were corrected mechanically
+without changing tokens or behavior. Empty untracked `test_log.txt` scratch was
+removed explicitly; it contained zero bytes and no evidence.
+
+Root cause known?: N/A for the final artifact.
+
+Current hypothesis: no unresolved artifact defect supported by the physical
+sample, source audit, and bounded executor regressions.
+
+### 11. Carry-over
+
+Exactly one mandatory carry-over if needed: NONE.
+
+Closure criteria: MET.
+
+Recovery: NOT ACTIVE.
+
+Known limitations: timestamp is PC observation time, not board/wire timing;
+only complete newline-terminated records are persisted; a short pending
+fragment is not persisted on shutdown; fixed 4096-byte bound; exact flow-control
+and connector/bridge details were not recorded.
+
+### 12. Next Action
+
+BOOT W03D06 — open the authoritative W03D06 roadmap day card before defining the
+controlled fault-injection/debug Day Contract.
+
+---
+
+## 2026-08-29 — Week 03 / Day 06
+
+### 1. Planned Outcome
+
+Intentionally reproduce one UART fault, preserve expected versus actual,
+measure before fixing, apply the minimum fix, prove regression/recovery, and
+complete Debug Report #1 with remaining limitations visible.
+
+### 2. Actual Status
+
+GREEN — W03D06 CLOSED / ARTIFACT_PASS.
+
+The learner completed a controlled RX/ring-buffer overflow debug story on the
+NUCLEO-F446RE. The final normal firmware no longer contains the artificial
+foreground slowdown. This normal learning day creates no new competency result.
+
+### 3. Focused Time
+
+Available: 5h — learner supplied
+
+Planned: 5h — learner supplied
+
+Actual: 3h — learner supplied
+
+Planned-vs-actual variance: -2h. Hours are planning/history only. Completing
+the required evidence in 3h does not downgrade the result, create schedule
+debt, or activate Recovery. Health impact: NOT RECORDED.
+
+### 4. Independent Work
+
+- Selected RX/ring-buffer overflow with fixed capacity 8 and DROP_NEWEST.
+- Supplied expected behavior, known facts, unknowns, H1, reproduction design,
+  and measurement plan before the physical fault run.
+- Deliberately slowed the foreground consumer while leaving the USART2 ISR
+  unslowed.
+- Reproduced `ABCDEFGHIJKLMNOPQRST -> ABCDEFGH` and measured
+  `overflow_count = 12`.
+- Verified post-overload recovery with `XYZ -> XYZ`; the counter remained 12.
+- Removed the artificial slowdown as the minimum fix and verified the full
+  20-byte regression with `overflow_count = 0`.
+- Independently explained reproduce, measure-before-fix, and recovery checks.
+
+These are assisted learning facts and artifact evidence, not independent
+competency evidence.
+
+### 5. AI Usage
+
+Highest AI level used: AI-3
+
+What AI helped with: executor-prepared neutral W03D06 TODO/debug-report
+infrastructure and baseline validation; Project Chat pre-check, post-attempt
+evidence review, report normalization, and closure administration. AI suggested
+the concrete temporary foreground busy-delay mechanism after the learner had
+already supplied the pre-experiment reasoning and measurement plan.
+
+Files/functions materially assisted: W03D06 starter/report infrastructure,
+learning review after learner measurements, and closure records.
+
+Core ring-buffer algorithm patch supplied: NO.
+
+Competencies contaminated: W03D06 cannot be used as independent competency
+evidence.
+
+Independent retest required: NO special retest created by this normal learning
+day; no AI-0 gate occurred and no competency result is awarded.
+
+### 6. Artifact Result
+
+Files changed: W03D06 TODO/debug report and the allowlisted daily/AI/current-state
+closure records. The only final-firmware cleanup was restoration of the missing
+newline at the end of W03D03 `main.c`; no semantic token or behavior changed.
+
+Host compile result: PASS / exit 0.
+
+Host test result: PASS / exit 0; `SUMMARY: 11 tests, 0 failed`.
+
+STM32 clean build result: PASS / exit 0; `text=1720`, `data=0`, `bss=1592`,
+`dec=3312`, `hex=cf0`; only inherited non-blocking `nosys` warnings for
+`_close`, `_lseek`, `_read`, and `_write`.
+
+### 7. Evidence
+
+Commit: `SELF — containing closure commit`
+
+Report: `learning/week-03/day-06/DEBUG_REPORT_W03_D06.md`
+
+Raw terminal/test log: NOT STORED — learner supplied the exact Serial Monitor
+observations in Project Chat.
+
+Measurement/recovery/regression standalone files: NOT STORED. Exact values are
+preserved in Debug Report #1.
+
+### 8. Measurements
+
+Fault input/output: `ABCDEFGHIJKLMNOPQRST -> ABCDEFGH`.
+
+Fault software counter: `overflow_count = 12`.
+
+Recovery: `XYZ -> XYZ`; `overflow_count` remained 12.
+
+Regression after removing the artificial foreground slowdown:
+`ABCDEFGHIJKLMNOPQRST -> ABCDEFGHIJKLMNOPQRST`; `overflow_count = 0`.
+
+UART hardware ORE history: NOT MEASURED sufficiently. No claim is made that ORE
+was absent throughout the fault run.
+
+### 9. Understanding Check
+
+The learner independently explained the first three actions for an unknown UART
+overflow: reproduce deterministically and record expected/actual; measure at the
+hardware/software boundary before fixing; then stop the overload and verify
+post-overload recovery/liveness.
+
+Self-check result: PASS as learning evidence. What this day cannot claim:
+independent competency.
+
+### 10. Defects / Failed Tests
+
+Defect IDs or test IDs: NONE unresolved in the tested case.
+
+Root cause: intentional producer/consumer rate imbalance caused by the temporary
+foreground busy delay.
+
+Remaining limitations: fixed 8-byte capacity; DROP_NEWEST under sustained
+overload; foreground critical section around pop; polling TX; no retained
+`count/head/tail/storage` snapshot; insufficient ORE-history measurement; and
+regression limited to the tested 20-byte payload.
+
+### 11. Carry-over
+
+Exactly one mandatory carry-over if needed: NONE.
+
+Closure criteria: MET.
+
+Recovery: NOT ACTIVE.
+
+### 12. Next Action
+
+BOOT W03D07 — open the authoritative W03D07 competency-gate day card and
+establish the fresh AI-0 contract before any scored work.
+
+---
+
+## 2026-08-31 — Week 03 / Day 07
+
+### 1. Planned Outcome
+
+Complete the independent 65-minute Week 3 UART IRQ / ring-buffer /
+non-blocking-parser competency gate under AI-0, preserve the raw attempt before
+review, resolve the historical MASTER CHECK findings, and close Week 3 without
+activating Week 4 learner work.
+
+### 2. Actual Status
+
+GREEN — W03D07 CLOSED.
+
+Gate result: `87/100 PASS / AI-0 CLEAN`.
+
+Competency result: `W03-C-UART-FOUND — COMPETENCY_PASS`.
+
+Week 3 result: `CONDITIONAL PASS / CLOSED` with exactly one P1 evidence
+carry-over. W04D01 learner work remains `NOT STARTED`.
+
+### 3. Focused Time
+
+Available: NOT RECORDED.
+
+Planned: assessment time limit `65 minutes`; this is the gate limit, not a
+learner-supplied focused-time estimate.
+
+Actual: NOT RECORDED — learner did not supply exact value; do not infer from
+timestamps.
+
+Health/load: `2 — sustainable — learner supplied`; learner statement:
+`sức khoẻ rất ổn`. No unsafe load or health blocker is reported.
+
+### 4. Independent Work
+
+- Derived baud/divisor/error from the supplied clock and proposed bit-width and
+  frame-structure measurements.
+- Reasoned about empty/full ring-buffer states, traced five producer arrivals,
+  and preserved an explicit `DROP_NEWEST` overflow policy.
+- Rejected blocking/long-running ISR behavior and identified the shared-count
+  read-modify-write race.
+- Submitted a fresh bounded parser with discard-until-newline recovery and a
+  concrete overlong-to-valid trace.
+- Distinguished ORE, software ring overflow, and shared-state corruption using
+  separate measurements.
+- Defended DMA and stated when larger buffer or shorter ISR latency is the
+  smaller relevant change.
+
+The verbatim scored answers are preserved in
+`learning/week-03/day-07/RAW_COMPETENCY_SUBMISSION_W03D07.md`.
+
+### 5. AI Usage
+
+Highest AI level used: AI-3 — post-close review and evidence/control-plane
+administration only; scored phase remained AI-0.
+
+Scored assistance: NONE.
+
+Allowed during gate: paper/pen and ordinary calculator.
+
+Prohibited during gate: AI, Copilot, web/search, old answers/solutions, notes,
+and another person.
+
+Learner integrity declaration after close: `CLEAN ko dùng bất kì cái gì ngoài
+máy tình cầm tay`.
+
+Normalized metadata only: `CLEAN — no AI/search/notes/other person; ordinary
+calculator only.`
+
+### 6. Artifact Result
+
+This day creates assessment/evidence closure records only; it does not invent a
+new firmware artifact.
+
+Fresh technical validation:
+- ring buffer: `11 tests, 0 failed`;
+- parser: `16 tests, 0 failed`;
+- serial logger syntax/help: `PASS / exit 0`;
+- W03D06 STM32 clean build: `PASS / exit 0`, `text=1720`, `data=0`,
+  `bss=1592`, `dec=3312`, `hex=cf0`;
+- production `busy_delay`: absent;
+- learner `main.c`: byte-identical to prep baseline.
+
+Learner implementation changed by this transaction: NO.
+
+### 7. Evidence
+
+Commit: `SELF — containing closure commit`
+
+Raw scored evidence:
+`learning/week-03/day-07/RAW_COMPETENCY_SUBMISSION_W03D07.md`
+
+Assessment:
+`learning/week-03/day-07/ASSESSMENT_RESULT_W03D07.md`
+
+Post-gate review:
+`learning/week-03/day-07/POST_GATE_REVIEW_W03D07.md`
+
+Submission:
+`learning/week-03/day-07/SUBMIT_W03_D07.md`
+
+MASTER CHECK disposition:
+`learning/week-03/MASTER_CHECK_DISPOSITION_W03.md`
+
+Weekly scorecard:
+`roadmap-control/weekly-scorecards/week-03.md`
+
+### 8. Measurements
+
+Rubric:
+- baud/clock reasoning: `20/20`;
+- ISR + ring buffer: `17/20`;
+- fresh parser: `19/25`;
+- fault diagnosis: `19/20`;
+- transfer/trade-off: `12/15`;
+- total: `87/100 PASS`.
+
+Mandatory conditions:
+- no blocking ISR design: PASS;
+- explicit overflow policy: PASS;
+- no serious bounds/lifetime violation sufficient for automatic failure: PASS.
+
+### 9. Understanding Check
+
+Independent gate result: PASS. The learner demonstrated the required Week 3
+competency scope under AI-0. Post-close review findings are precision/design
+feedback only and do not replace or rewrite the scored answers.
+
+### 10. Defects / Failed Tests
+
+Gate-blocking defect: NONE.
+
+Non-gate-blocking post-close findings:
+- `volatile` is not a synchronization primitive or general memory barrier;
+- submitted parser mishandles the exact 15-data-character-plus-CRLF boundary;
+- shorter ISR/interrupt latency is the smaller first remediation for the
+  measured ORE symptom before introducing DMA complexity.
+
+No learner source is modified for these findings in this closure transaction.
+
+### 11. Carry-over
+
+Exactly one mandatory carry-over:
+Capture correct-baud UART wire timing / logic-analyzer evidence.
+
+Deadline: `2026-09-06 — CP-02 / Foundation MCU gate`.
+
+Closure criterion: a genuine logic-analyzer capture or equivalent direct
+measurement demonstrates the configured UART baud/timing sufficiently to close
+the roadmap evidence item. Do not claim independent measurement-procedure
+design unless separately demonstrated.
+
+Classification: `P1 EVIDENCE CARRY-OVER — NON-COMPETENCY-BLOCKING`.
+
+Recovery: NOT ACTIVE.
+
+Week 4 eligibility: YES.
+
+### 12. Next Action
+
+BOOT W04D01 — timer clock / PSC / ARR / CCR Day Contract with learner Available
+Focused Time = 6h.
