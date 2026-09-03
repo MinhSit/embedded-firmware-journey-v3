@@ -1,11 +1,11 @@
 # CURRENT STATE V3 — EMBEDDED/FIRMWARE ROADMAP
 
 **Document ID:** `CURRENT_STATE_V3`
-**Version:** `3.0.42`
+**Version:** `3.0.43`
 **State type:** Operational snapshot — describes reality and creates no new policy
-**Generated at:** `2026-08-31`
+**Generated at:** `2026-09-03`
 **Timezone:** `Asia/Ho_Chi_Minh`
-**Status:** `W03 CONDITIONAL PASS / CLOSED; W03D07 PASS / AI-0 CLEAN`
+**Status:** `W04D01 GREEN / CLOSED / ARTIFACT_PASS; Week 3 CONDITIONAL PASS / CLOSED; W04D02 NOT STARTED`
 
 ---
 
@@ -14,18 +14,18 @@
 - **System Spec version:** `SYSTEM_SPEC_V3 3.0.0`
 - **Roadmap version:** `EMBEDDED_ROADMAP_V3.1 3.1.0`
 - **Master Prompt version:** `MASTER_PROMPT_V3 3.1.3`
-- **Current State version:** `3.0.42`
+- **Current State version:** `3.0.43`
 - **Implementation runbook:** `roadmap-control/execution-runbook.md` — `NON-AUTHORITATIVE`
 
 If this file conflicts with a higher-authority source, the higher-authority source wins.
 
 ## Positions
 
-- **Calendar position:** `2026-08-31 — W04D01 calendar date; Week 3 closure completed before Week 4 learner work`
-- **Execution position:** `W03D07 CLOSED; Week 3 CONDITIONAL PASS / CLOSED; W04D01 NOT STARTED`
-- **Artifact position:** `W03D07 assessment/evidence closure complete; no new firmware artifact invented`
+- **Calendar position:** `2026-09-03 — calendar drift beyond W04D01; W04D01 closed; W04D02 next`
+- **Execution position:** `W04D01 CLOSED / ARTIFACT_PASS; Week 3 CONDITIONAL PASS / CLOSED; W04D02 NOT STARTED`
+- **Artifact position:** `W04D01 TIM2 1 kHz timebase / 500 Hz GPIO square wave logic-analyzer capture complete`
 - **Competency position:** `W03-C-UART-FOUND — COMPETENCY_PASS`
-- **Last artifact PASS:** `W03D06 controlled UART RX/ring-buffer overflow debug story`, evidence at `learning/week-03/day-06/DEBUG_REPORT_W03_D06.md`
+- **Last artifact PASS:** `W04D01 TIM2 1 kHz timebase / 500 Hz GPIO square wave logic-analyzer capture`, evidence at `learning/week-04/day-01/Screenshot_1.png` and `learning/week-04/day-01/timer-calculation-note.md`
 - **Last daily assessment PASS:** `W03D07 UART IRQ / parser competency gate — 87/100 PASS / AI-0 CLEAN`, evidence at `learning/week-03/day-07/ASSESSMENT_RESULT_W03D07.md`
 - **Last competency PASS:** `W03-C-UART-FOUND — COMPETENCY_PASS (2026-08-31)`
 
@@ -62,7 +62,8 @@ If this file conflicts with a higher-authority source, the higher-authority sour
 - **Week 2 career baseline:** `PASS — CV master skeleton + GitHub profile draft complete; public README NOT DEPLOYED`
 - **Week 2 MASTER CHECK:** `PASS WITH LOW FINDINGS — BLOCKER NONE / HIGH NONE`
 - **Week 3:** `CONDITIONAL PASS / CLOSED`
-- **Week 4 eligibility:** `YES — W04D01 learner work NOT STARTED`
+- **Week 4 eligibility:** `YES — ACTIVE; W04D01 CLOSED; W04D02 NOT STARTED`
+- **W04D01:** `GREEN / CLOSED / ARTIFACT_PASS — AI-3; NOT independent competency evidence; initial ~88.9 Hz measurement debugged to 16 MHz clock tree; corrected PSC=15 ARR=999 verified on logic analyzer (~500 Hz / ~2 ms)`
 - **W03D01:** `GREEN / CLOSED / ARTIFACT_PASS — AI-3; NOT independent competency evidence`
 - **W03D02:** `GREEN / CLOSED / ARTIFACT_PASS — AI-3; NOT independent competency evidence`
 - **W03D03:** `GREEN / CLOSED / ARTIFACT_PASS — AI-3; NOT independent competency evidence`
@@ -78,17 +79,18 @@ If this file conflicts with a higher-authority source, the higher-authority sour
 ## Repository
 
 - **Repo URL:** `https://github.com/MinhSit/embedded-firmware-journey-v3`
-- **Branch:** `feature/w03d06-uart-fault-injection`
-- **Artifact closure:** W03D06 Debug Report #1 END DAY transaction; containing commit recorded as `SELF — containing closure commit`. Learner evidence and final normal firmware behavior were preserved. Executor cleanup was limited to restoring the missing final newline in `firmware/stm32/w03d03-uart-ring-buffer-lab/main.c`; no semantic token or behavior changed.
+- **Branch:** `feature/w04d01-timer-timebase`
+- **Artifact closure:** W04D01 Timer timebase END DAY transaction; containing commit recorded as `SELF — containing closure commit`. Learner evidence and corrected configuration preserved. Executor cleanup was limited to mechanical trailing whitespace removal and final newline in `firmware/stm32/w04d01-timer-timebase/timer_timebase.c`.
 - **Current operational HEAD:** Resolve from the Git repository at `BOOT`.
 - **Release:** `uart-shell-v0.1 — annotated Week 3 milestone tag on the containing closure commit`
 
 ## Latest Build and Test
 
-- **Latest validation path:** `learning/week-03/day-06/DEBUG_REPORT_W03_D06.md` and the restored normal W03D03 ring-buffer firmware.
-- **Build/test command:** strict C17 W03D03 ring-buffer host compile and `tests/host/test_w03d03_rx_ring_buffer.exe`; `powershell -ExecutionPolicy Bypass -File .\build.ps1 -Clean` from the W03D03 STM32 lab.
-- **Latest build/test result:** ring-buffer strict host compile/test PASS, `11 tests, 0 failed`; parser strict host compile/test PASS, `16 tests, 0 failed`; serial logger help PASS / exit 0; W03D06 STM32 clean build PASS / exit 0 with `text=1720`, `data=0`, `bss=1592`, `dec=3312`, `hex=cf0`; only inherited non-blocking `nosys` warnings for `_close`, `_lseek`, `_read`, and `_write`.
-- **Latest demo result:** Learner-supplied physical NUCLEO-F446RE fault run: `ABCDEFGHIJKLMNOPQRST -> ABCDEFGH`, measured software `overflow_count = 12`; post-overload recovery `XYZ -> XYZ` with the counter remaining `12`; after removing the artificial foreground slowdown, regression `ABCDEFGHIJKLMNOPQRST -> ABCDEFGHIJKLMNOPQRST` with `overflow_count = 0`. UART hardware ORE history was `NOT MEASURED` sufficiently and no broader ORE claim is made.
+- **Latest validation path:** `learning/week-04/day-01/Screenshot_1.png`, `learning/week-04/day-01/timer-calculation-note.md` and `firmware/stm32/w04d01-timer-timebase/`.
+- **Build/test command:** `powershell -ExecutionPolicy Bypass -File .\build.ps1 -Clean` from `firmware/stm32/w04d01-timer-timebase`.
+- **Latest build/test result:** STM32 clean build PASS / exit 0 with `text=1188`, `data=0`, `bss=1568`, `dec=2756`, `hex=ac4`; only inherited non-blocking `nosys` warnings for `_close`, `_lseek`, `_read`, and `_write`.
+- **Latest demo result:** Learner-supplied physical NUCLEO-F446RE capture with 8-channel logic analyzer via PulseView (`Screenshot_1.png`): observed stable digital waveform on PA5 with approximately 2 ms period, approximately 500 Hz frequency, approximately 1 ms HIGH, approximately 1 ms LOW, approximately 50% duty. Mismatch debug story: initial PSC=89 ARR=999 yielded ~88.9 Hz / ~11.25 ms due to actual project clock being 16 MHz HSI rather than assumed 90 MHz; recalculated PSC=15 ARR=999 resolved to expected 500 Hz / 2 ms.
+- **Earlier W03D06 evidence retained:** controlled UART RX/ring-buffer overflow debug story with measured `overflow_count = 12`, post-overload recovery, and clean regression.
 - **Earlier W02D02 evidence retained:** startup-sequence artifact plus supplemental host startup-simulator validation remained `ARTIFACT_PASS` with `30/30` individual cases PASS.
 
 ## Hardware and Toolchain
@@ -107,12 +109,12 @@ If this file conflicts with a higher-authority source, the higher-authority sour
 
 ## Schedule, Load, and Risk
 
-- **Schedule variance:** `W03D07 resolved on 2026-08-31 after the calendar reached W04D01 but before Week 4 learner activation`; assessment limit was `65 minutes`; Actual Focused Time was `NOT RECORDED — learner did not supply exact value; do not infer from timestamps.`
+- **Schedule variance:** `W04D01 completed on 2026-09-03 with calendar drift from 2026-08-31; W04D01 closed; W04D02 next`; Available Focused Time was `6h`; Actual Focused Time was `NOT RECORDED — learner did not supply exact value; do not infer from timestamps.`
 - **Recovery status:** `NOT ACTIVE`
 - **Critical path risk:** `P1 evidence carry-over due 2026-09-06`; no P0 blocker exists and Week 4 eligibility is unaffected.
 - **Weekly scorecard:** `roadmap-control/weekly-scorecards/week-03.md — CONDITIONAL PASS / CLOSED`
 - **Career pipeline:** `Week 2 baseline PASS — CV master skeleton + ready-to-publish GitHub profile draft complete; public profile README NOT DEPLOYED`
-- **Health/load:** `2 — sustainable — learner supplied`; learner statement `sức khoẻ rất ổn`; W03D07 Actual Focused Time `NOT RECORDED` and not inferred. Recovery remains inactive.
+- **Health/load:** `2 — sustainable — learner supplied`; learner statement `sức khoẻ rất ổn`; W04D01 Actual Focused Time `NOT RECORDED` and not inferred. Recovery remains inactive.
 
 ## Forward Control
 
@@ -122,8 +124,13 @@ If this file conflicts with a higher-authority source, the higher-authority sour
 - **Roadmap calendar start for Week 2:** `2026-08-17`
 - **Hard deadline:** `2026-12-14 — project v1.0`
 - **Scope cuts:** `NONE active`. If schedule lag occurs later, apply roadmap-defined cut order: cut P2 first, reduce P1 polish, preserve P0.
-- **Exact Next Action:** `BOOT W04D01 — timer clock / PSC / ARR / CCR Day Contract with learner Available Focused Time = 6h`
+- **Exact Next Action:** `BOOT W04D02 — PWM implementation using timer capture/compare/PWM channel, starting from the now-verified timer-clock mental model`
 - **Files/links to inspect first:**
+  - `learning/week-04/day-01/timer-calculation-note.md`
+  - `learning/week-04/day-01/Screenshot_1.png`
+  - `learning/week-04/day-01/SUBMIT_W04D01.md`
+  - `firmware/stm32/w04d01-timer-timebase/timer_timebase.c`
+  - `firmware/stm32/w04d01-timer-timebase/timer_timebase.h`
   - `roadmap-control/current-state.md`
   - `roadmap-control/execution-runbook.md`
   - `docs/system/ROADMAP_REVIEW_LOG.md`

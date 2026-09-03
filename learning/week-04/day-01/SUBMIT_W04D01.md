@@ -1,14 +1,22 @@
 # SUBMIT — W04D01
 
-- Task:
-- Date:
-- Highest AI Level Used:
-- Commit:
+- Task: W04D01 Timer clock / TIM2 time-base
+- Date: 2026-09-03
+- Highest AI Level Used: AI-3 after meaningful learner attempt
+- Commit: SELF — containing closure commit
 - Files Changed:
-- Build Command:
-- Build Result:
-- Smoke Result:
-- Evidence:
-- Measurements:
-- Known Failures:
-- Questions:
+  - `firmware/stm32/w04d01-timer-timebase/timer_timebase.c`
+  - `learning/week-04/day-01/Screenshot_1.png`
+  - `learning/week-04/day-01/timer-calculation-note.md`
+  - `learning/week-04/day-01/SUBMIT_W04D01.md`
+  - `learning/week-04/day-01/TODO_W04D01_TIMER_CLOCK.md`
+  - `roadmap-control/daily-log.md`
+  - `roadmap-control/ai-usage-log.md`
+  - `roadmap-control/current-state.md`
+- Build Command: `powershell -ExecutionPolicy Bypass -File .\build.ps1 -Clean`
+- Build Result: PASS / exit 0; `text=1188`, `data=0`, `bss=1568`, `dec=2756`, `hex=ac4`; inherited non-blocking `nosys` linker warnings only.
+- Smoke Result: PASS — TIM2 periodic interrupt and PA5 GPIO square wave verified on physical hardware.
+- Evidence: `learning/week-04/day-01/Screenshot_1.png`
+- Measurements: Observed GPIO square wave on PA5: approximately 500 Hz; period approximately 2 ms; HIGH approximately 1 ms; LOW approximately 1 ms; duty approximately 50%. Debug story: wrong 90 MHz timer-clock assumption (PSC=89, ARR=999) gave measured ~88.9 Hz (~11.25 ms period); investigation identified actual `SystemCoreClock = 16 MHz` with default HSI reset clock; recalculated PSC 89 -> 15 with ARR=999 for actual 16 MHz clock; measured timing matched expected ~500 Hz / 2 ms.
+- Known Failures: NONE
+- Questions: NONE

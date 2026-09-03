@@ -3743,3 +3743,182 @@ Week 4 eligibility: YES.
 
 BOOT W04D01 — timer clock / PSC / ARR / CCR Day Contract with learner Available
 Focused Time = 6h.
+
+---
+
+## 2026-09-03 — Week 04 / Day 01
+
+### 1. Planned Outcome
+
+Reason from the actual timer clock tree, derive PSC and ARR for a 1 kHz TIM2
+time-base update interrupt, implement `timer2_init_1khz()` and `TIM2_IRQHandler()`
+at the register level, verify periodic PA5 GPIO toggling on hardware with a logic
+analyzer, document expected versus actual timing, and explain the difference
+between counter tick and update event without advancing into W04D02 PWM scope.
+
+### 2. Actual Status
+
+GREEN — W04D01 CLOSED / ARTIFACT_PASS.
+
+Technical implementation, clean build, hardware logic analyzer evidence, and
+documentation completed. W04D01 is a learning day and creates no new independent
+competency award.
+
+### 3. Focused Time
+
+Available: 6h — learner supplied at START DAY.
+
+Planned: 6h — learner supplied.
+
+Actual: NOT RECORDED — learner did not supply exact actual focused-time total.
+
+Health/load: 2 — sustainable; no physical or cognitive blocker reported.
+
+### 4. Independent Work
+
+What I personally implemented, reasoned about, measured, or explained:
+
+- Derived the core timer formulas: $f_{\text{counter}} = \text{TIMxCLK} / (\text{PSC} + 1)$
+  and $f_{\text{update}} = f_{\text{counter}} / (\text{ARR} + 1)$.
+- Performed initial calculation drills for hypothetical 90 MHz APB timer clock
+  (PSC=89, ARR=999 -> 1 kHz; PSC=89, ARR=99 -> 10 kHz; PSC=89, ARR=9999 -> 100 Hz;
+  and compared PWM resolution between ARR=999 and ARR=99).
+- Reasoned that toggling a GPIO once per 1 kHz update event creates a 500 Hz square
+  wave with a 2 ms full period.
+- Designed and wrote the complete register sequence for `timer2_init_1khz()` and
+  `TIM2_IRQHandler()` in `timer_timebase.c`.
+- Corrected the UIF clear sequence to direct `rc_w0` write (`TIM2->SR = ~TIM_SR_UIF`)
+  to avoid RMW flag clearing races.
+- Flashed physical NUCLEO-F446RE, connected USB logic analyzer, and discovered
+  the initial ~88.9 Hz (~11.25 ms period) timing mismatch.
+- Investigated the project clock source, confirmed `SystemInit()` ran on minimal
+  16 MHz default HSI without PLL configuration (`SystemCoreClock = 16000000U`),
+  identified the wrong input-clock assumption as root cause, and kept the 16 MHz
+  project baseline unchanged.
+- Recalculated PSC for actual 16 MHz clock: PSC 89 -> 15 (with ARR=999), rebuilt,
+  reflashed, and captured final logic analyzer trace showing ~500 Hz / ~2 ms square wave.
+
+### 5. AI Usage
+
+Highest AI level used: AI-3 — post-attempt code review, debug assistance, and
+closure administration only. Core learning and implementation were learner-owned.
+
+What AI contributed:
+- Theory explanation and APB clock formula verification.
+- Review of learner-written register flow after meaningful attempt.
+- Identified the RMW hazard on `TIM2->SR` and recommended direct `rc_w0` clearing.
+- Suggested investigating actual `SystemCoreClock` after the first measurement mismatch.
+- Documentation formatting and repository closure administration via executor.
+
+Files/functions materially assisted:
+- `firmware/stm32/w04d01-timer-timebase/timer_timebase.c` post-attempt review only.
+- `learning/week-04/day-01/**` documentation templates and control bookkeeping.
+
+Core implementation code provided by AI:
+NO. The core TIM2 initialization and ISR were authored by the learner before review.
+
+Gate answer revealed:
+NO ACTIVE GATE — W04D01 was a normal learning day, not an AI-0 competency gate.
+
+Competencies contaminated:
+NONE. W04D01 is normal assisted learning and valid artifact evidence; it does not
+award an independent competency result. `W03-C-UART-FOUND — COMPETENCY_PASS` remains
+valid and unpolluted.
+
+Independent retest required:
+NO special retest created by this normal learning day.
+
+### 6. Artifact Result
+
+Files changed:
+- `firmware/stm32/w04d01-timer-timebase/timer_timebase.c`
+- `learning/week-04/day-01/Screenshot_1.png`
+- `learning/week-04/day-01/timer-calculation-note.md`
+- `learning/week-04/day-01/SUBMIT_W04D01.md`
+- `learning/week-04/day-01/TODO_W04D01_TIMER_CLOCK.md`
+- `roadmap-control/daily-log.md`
+- `roadmap-control/ai-usage-log.md`
+- `roadmap-control/current-state.md`
+
+Clean build command:
+`powershell -ExecutionPolicy Bypass -File .\build.ps1 -Clean` from `firmware/stm32/w04d01-timer-timebase/`
+
+Clean build result:
+PASS / exit 0; `text=1188`, `data=0`, `bss=1568`, `dec=2756`, `hex=ac4`; only inherited
+non-blocking `nosys` linker warnings for `_close`, `_lseek`, `_read`, and `_write`.
+
+### 7. Evidence
+
+Commit: `SELF — containing closure commit`
+
+Capture: `learning/week-04/day-01/Screenshot_1.png` — PulseView digital capture on D0
+(PA5 / LD2) showing stable square wave with cursors at 2 ms, 3 ms.
+
+Calculation note: `learning/week-04/day-01/timer-calculation-note.md`
+
+Submission: `learning/week-04/day-01/SUBMIT_W04D01.md`
+
+Checklist: `learning/week-04/day-01/TODO_W04D01_TIMER_CLOCK.md`
+
+### 8. Measurements
+
+Negative / initial measurement:
+- Assumed TIM2CLK = 90 MHz, PSC = 89, ARR = 999.
+- Expected under assumption: $f_{\text{gpio}} = 500\text{ Hz}$, $T_{\text{gpio}} = 2\text{ ms}$.
+- Observed on logic analyzer: $f_{\text{gpio}} \approx 88.9\text{ Hz}$, $T_{\text{gpio}} \approx 11.25\text{ ms}$.
+- Inference: Clock was $16\text{ MHz}$, yielding $f_{\text{counter}} = 16\text{ MHz} / 90 \approx 177.78\text{ kHz}$,
+  $f_{\text{update}} \approx 177.78\text{ Hz}$, $f_{\text{gpio}} \approx 88.89\text{ Hz}$, $T_{\text{gpio}} \approx 11.25\text{ ms}$.
+
+Final corrected measurement:
+- Actual TIM2CLK = 16 MHz, PSC = 15, ARR = 999.
+- Expected: $f_{\text{counter}} = 1\text{ MHz}$, $f_{\text{update}} = 1\text{ kHz}$, $f_{\text{gpio}} = 500\text{ Hz}$,
+  $T_{\text{gpio}} = 2\text{ ms}$, HIGH $\approx 1\text{ ms}$, LOW $\approx 1\text{ ms}$, duty $\approx 50\%$.
+- Observed on PulseView capture (`Screenshot_1.png`):
+  - Period: approximately 2 ms
+  - Frequency: approximately 500 Hz
+  - HIGH duration: approximately 1 ms
+  - LOW duration: approximately 1 ms
+  - Duty cycle: approximately 50%
+
+### 9. Understanding Check
+
+The learner independently explained:
+- Why $f_{\text{counter}} = \text{TIMxCLK} / (\text{PSC} + 1)$ and $f_{\text{update}} = f_{\text{counter}} / (\text{ARR} + 1)$.
+- Why toggling GPIO once per 1 kHz update produces a 500 Hz square wave (two toggles per full cycle).
+- How CCR compares against CNT to establish duty cycle in future PWM work, and why ARR=999 provides better resolution than ARR=99.
+- Why direct write (`TIM2->SR = ~TIM_SR_UIF`) is required for `rc_w0` interrupt flags instead of RMW.
+- How the initial measurement mismatch was diagnosed to a clock tree assumption rather than a calculation error.
+
+Self-check result: PASS as Day-1 learning evidence. What this day cannot claim:
+independent competency.
+
+### 10. Defects / Failed Tests
+
+Defect/Test IDs: NONE unresolved.
+
+Root cause: Initial timing mismatch caused by unverified assumption of 90 MHz APB
+timer clock. Minimal project ran at default 16 MHz HSI.
+
+Resolution: Recalculated PSC for 16 MHz clock (15 instead of 89) while keeping ARR=999.
+Verified timing on hardware.
+
+Remaining limitations:
+- Project clock runs at minimal default 16 MHz without PLL configuration.
+- PA5 GPIO toggling is handled in software ISR, subject to interrupt latency and jitter.
+
+### 11. Carry-over
+
+From Week 3: Exactly one P1 carry-over remains — capture correct-baud UART wire
+timing / logic-analyzer evidence by 2026-09-06.
+From W04D01: NONE.
+
+Closure criteria: MET.
+
+Recovery: NOT ACTIVE.
+
+Week 4 execution: W04D01 CLOSED; W04D02 NOT STARTED.
+
+### 12. Next Action
+
+BOOT W04D02 — PWM implementation using timer capture/compare/PWM channel, starting
+from the now-verified timer-clock mental model.

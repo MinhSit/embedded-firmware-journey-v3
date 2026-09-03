@@ -1220,6 +1220,55 @@ Notes:
 
 ---
 
+## 2026-09-03 — W04D01 Timer clock / TIM2 time-base
+
+Highest AI level:
+AI-3
+
+What AI contributed:
+- theory explanation and APB clock formula verification;
+- post-attempt review of the learner-designed TIM2 register sequence;
+- identified the read-modify-write risk on `TIM2->SR` and recommended direct `rc_w0` clearing;
+- suggested measurement and debug workflow;
+- helped interpret the initial logic analyzer timing mismatch (~88.9 Hz vs expected 500 Hz);
+- suggested investigating actual project `SystemCoreClock`, confirming minimal 16 MHz HSI clock tree without PLL;
+- documentation formatting and repository closure administration via executor.
+
+Files/functions materially assisted:
+- `firmware/stm32/w04d01-timer-timebase/timer_timebase.c` post-attempt review only;
+- `learning/week-04/day-01/**` documentation templates and closure control records.
+
+Core implementation code provided by AI:
+NO. The core TIM2 register initialization and ISR were designed and authored by
+the learner before review.
+
+Learner-owned contribution:
+- APB clock formula derivation and calculation drills;
+- TIM2 register flow design and implementation (`timer2_init_1khz()`, `TIM2_IRQHandler()`);
+- corrected `rc_w0` status clearing based on review feedback;
+- physical flashing and logic analyzer measurement;
+- discovery and investigation of actual 16 MHz project clock;
+- recalculation of PSC (89 -> 15) for actual 16 MHz clock with ARR=999;
+- regression logic analyzer measurement and capture showing ~500 Hz / ~2 ms square wave.
+
+Gate answer revealed:
+NO ACTIVE GATE — W04D01 was a normal learning day, not an AI-0 competency gate.
+
+Competency affected:
+W04D01 is normal assisted learning and valid artifact evidence; it is not an
+independent competency gate. No new competency PASS is awarded. `W03-C-UART-FOUND — COMPETENCY_PASS`
+remains the latest verified competency.
+
+Special retest:
+NOT REQUIRED. No competency contamination occurred.
+
+Notes:
+- Clean build exit 0: `text=1188`, `data=0`, `bss=1568`, `dec=2756`, `hex=ac4`; only inherited `nosys` linker warnings.
+- Physical capture `learning/week-04/day-01/Screenshot_1.png` confirms ~500 Hz square wave on PA5 with ~2 ms period, ~1 ms HIGH, ~1 ms LOW, ~50% duty.
+- Debug story: wrong 90 MHz clock assumption -> measured ~88.9 Hz -> identified 16 MHz clock -> PSC 89->15 -> verified ~500 Hz.
+
+---
+
 ## Pre-V3 Migration Note
 
 Known affected scope:
