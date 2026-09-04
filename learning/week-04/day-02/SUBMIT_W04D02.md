@@ -1,0 +1,45 @@
+# SUBMIT — W04D02 PWM Implementation & UART Shell
+
+- Task: W04D02 PWM implementation and duty/frequency adjustment via UART shell
+- Date: [TODO: learner fill, e.g. 2026-09-04]
+- Highest AI Level Used: [TODO: learner fill, e.g. AI-2 / AI-3 after attempt]
+- Commit: [TODO: learner fill commit hash or SELF]
+- Files Changed:
+  - `firmware/stm32/w04d02-pwm-uart-shell/pwm.c`
+  - `firmware/stm32/w04d02-pwm-uart-shell/pwm.h`
+  - `firmware/stm32/w04d02-pwm-uart-shell/main.c`
+  - `learning/week-04/day-02/TODO_W04D02_PWM.md`
+  - `learning/week-04/day-02/SUBMIT_W04D02.md`
+  - [TODO: any additional files modified]
+- Build Command: `powershell -ExecutionPolicy Bypass -File .\build.ps1 -Clean`
+- Build Result: [TODO: PASS / exit 0; text=..., data=..., bss=...]
+- Hardware Smoke Result: [TODO: PASS / FAIL — describe physical observation on NUCLEO-F446RE]
+- UART Command Cases:
+  - Case 1 (Default startup):
+    - Command / action: [TODO: system startup / default PWM]
+    - Expected: [TODO: e.g. 1 kHz, 50% duty]
+    - Observed: [TODO: physical observation]
+  - Case 2 (Duty adjustment):
+    - Command / action: [TODO: e.g. pwm duty 25]
+    - Expected: [TODO: e.g. duty changes to 25%, frequency remains 1 kHz]
+    - Observed: [TODO: physical observation]
+  - Case 3 (Frequency adjustment):
+    - Command / action: [TODO: e.g. pwm freq 2000]
+    - Expected: [TODO: e.g. frequency changes to 2 kHz, period 500 µs]
+    - Observed: [TODO: physical observation]
+  - Case 4 (Boundary / error case):
+    - Command / action: [TODO: e.g. pwm duty 150 or invalid argument]
+    - Expected: [TODO: error reported, previous PWM settings preserved]
+    - Observed: [TODO: physical observation / UART response]
+- Expected: [TODO: summary of expected behavior across tests]
+- Observed: [TODO: summary of actual behavior observed]
+- Evidence: [TODO: path to logic analyzer screenshot, terminal capture, or scope trace]
+- Measurements:
+  - Verified bus clock: [TODO: e.g. 16 MHz HSI]
+  - Timer / Channel / Pin: [TODO: e.g. TIMx_CHy on Pxy]
+  - Measured frequency at 1 kHz target: [TODO: e.g. 1.00 kHz]
+  - Measured period at 1 kHz target: [TODO: e.g. 1.00 ms]
+  - Measured pulse width at 50% duty target: [TODO: e.g. 500 µs]
+  - Measured pulse width at 25% duty target: [TODO: e.g. 250 µs]
+- Known Failures: [TODO: NONE or list any issues]
+- Questions: [TODO: NONE or list open technical questions]
