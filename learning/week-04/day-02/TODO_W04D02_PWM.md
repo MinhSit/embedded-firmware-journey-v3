@@ -6,11 +6,12 @@
 - Week/Day: `W04D02`
 - Day type: `LEARNING`
 - Topic: `PWM generation, duty cycle and frequency adjustment via UART shell`
-- Lifecycle: `NOT STARTED`
-- Available Focused Time: `[TODO: learner fill, e.g. 6h]`
-- Planned Focused Time: `[TODO: learner fill, e.g. 6h]`
-- Actual Focused Time: `[TODO: learner fill at close]`
-- Highest AI level used: `[TODO: learner record at close, max AI-3 after attempt]`
+- Lifecycle: `GREEN / CLOSED / ARTIFACT_PASS`
+- Available Focused Time: `Available through 22:30; exact numeric hours not recorded`
+- Planned Focused Time: `Work through W04D02 stop condition before 22:30; exact numeric hours not recorded`
+- Actual Focused Time: `NOT RECORDED`
+- Highest AI level used: `AI-3`
+- Reason: `AI-3 occurred only after meaningful learner attempts; learner wrote and tested the core PWM implementation before receiving code-level review/debug guidance. This is NOT independent competency evidence.`
 - Latest independent competency: `W03-C-UART-FOUND — COMPETENCY_PASS`
 
 ## Outcome
@@ -34,55 +35,55 @@ Verify these facts from official project sources (RM0390 reference manual,
 STM32F446xx datasheet, `system_stm32f4xx.c`) before implementing.
 
 - MCU: `STM32F446RE` / Board: `NUCLEO-F446RE`
-- Core clock / HCLK: `[TODO: verify from system_stm32f4xx.c — e.g. 16 MHz HSI reset baseline]`
-- Chosen Timer: `[TODO: learner choose e.g. TIM2, TIM3, or TIM4]`
-- Timer bus (APB1 or APB2): `[TODO: learner verify bus connection]`
-- Bus prescaler / timer clock frequency: `[TODO: learner verify timer clock, e.g. APB1 timer clock]`
-- Chosen Channel & Pin: `[TODO: learner identify pin and channel from datasheet pinout]`
-- Alternate Function (AF) number for chosen pin: `[TODO: learner verify from datasheet alternate function table]`
+- Core clock / HCLK: `16 MHz HSI reset baseline`
+- Chosen Timer: `TIM2`
+- Timer bus (APB1 or APB2): `APB1`
+- Bus prescaler / timer clock frequency: `APB1 prescaler /1, PCLK1 = 16 MHz, TIM2CLK = 16 MHz, counter tick rate = 1 MHz (PSC = 15)`
+- Chosen Channel & Pin: `TIM2_CH1 on PA5 (onboard LD2, Arduino D13 / CN5 pin 6)`
+- Alternate Function (AF) number for chosen pin: `AF1 (TIM2_CH1)`
 
 ## B. Learner PWM Design Decisions
 
 Record your technical design decisions before coding:
 
-- Target default PWM frequency: `[TODO: e.g. 1 kHz]`
-- Target default duty cycle: `[TODO: e.g. 50%]`
-- Timer counting mode: `[TODO: upcounting edge-aligned / center-aligned]`
-- Output compare mode: `[TODO: PWM Mode 1 or PWM Mode 2, preload enabled/disabled]`
-- Output polarity: `[TODO: active high / active low]`
-- Frequency range supported by shell: `[TODO: min Hz .. max Hz]`
-- Duty cycle range supported by shell: `[TODO: e.g. 0% .. 100%]`
+- Target default PWM frequency: `1 kHz`
+- Target default duty cycle: `50%`
+- Timer counting mode: `upcounting edge-aligned`
+- Output compare mode: `PWM Mode 1 (OC1M = 110), OC1 preload enabled (OC1PE = 1), ARR preload enabled (ARPE = 1)`
+- Output polarity: `active high (CC1P = 0)`
+- Frequency range supported by shell: `10 Hz .. 100000 Hz`
+- Duty cycle range supported by shell: `0% .. 100%`
 
 ## C. Learner PWM Implementation TODO
 
 Implement the register-level configuration in `pwm.c`:
 
-- [ ] Enable RCC bus clock for the chosen GPIO port.
-- [ ] Configure GPIO pin to Alternate Function mode in `MODER`.
-- [ ] Configure the specific AF number in `AFR[0]` or `AFR[1]`.
-- [ ] Configure GPIO output speed (`OSPEEDR`) and pull-up/pull-down (`PUPDR`) as appropriate.
-- [ ] Enable RCC bus clock for the chosen timer in `RCC->APBxENR`.
-- [ ] Configure timer prescaler (`PSC`) and auto-reload (`ARR`) for the desired initial frequency.
-- [ ] Configure capture/compare register (`CCR`) for the initial duty cycle.
-- [ ] Configure PWM mode (e.g. OCxM bits in `CCMRx`) and preload (`OCxPE`).
-- [ ] Enable auto-reload preload (`ARPE` in `CR1`) if desired.
-- [ ] Configure output polarity and enable output in `CCER` (e.g. `CCxE`).
-- [ ] Generate an update event (`TIM_EGR_UG`) to load shadow registers.
-- [ ] Start the counter (`TIM_CR1_CEN`).
-- [ ] Implement `pwm_set_frequency(uint32_t frequency_hz)` with boundary checks.
-- [ ] Implement `pwm_set_duty_cycle(uint32_t duty_percent)` with boundary checks.
-- [ ] Implement `pwm_get_frequency()` and `pwm_get_duty_cycle()`.
+- [x] Enable RCC bus clock for the chosen GPIO port (`RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN`).
+- [x] Configure GPIO pin to Alternate Function mode in `MODER` (`MODER5 = 10`).
+- [x] Configure the specific AF number in `AFR[0]` (`AF1` on pin 5).
+- [x] Configure GPIO output speed (`OSPEEDR` high speed) and pull-up/pull-down (`PUPDR` none) as appropriate.
+- [x] Enable RCC bus clock for the chosen timer in `RCC->APBxENR` (`RCC->APB1ENR |= RCC_APB1ENR_TIM2EN`).
+- [x] Configure timer prescaler (`PSC = 15`) and auto-reload (`ARR = 999`) for the desired initial 1 kHz frequency.
+- [x] Configure capture/compare register (`CCR1 = 500`) for the initial 50% duty cycle.
+- [x] Configure PWM mode (`OC1M = 110` PWM Mode 1) and preload (`OC1PE = 1`).
+- [x] Enable auto-reload preload (`ARPE = 1` in `CR1`).
+- [x] Configure output polarity (active-high) and enable output in `CCER` (`CC1E = 1`).
+- [x] Generate an update event (`TIM_EGR_UG`) to load shadow registers.
+- [x] Start the counter (`TIM_CR1_CEN`).
+- [x] Implement `pwm_set_frequency(uint32_t frequency_hz)` with boundary checks (10 Hz .. 100 kHz) and ratio-preserving CCR recalculation.
+- [x] Implement `pwm_set_duty_cycle(uint32_t duty_percent)` with boundary checks (0% .. 100%) and uint64_t overflow-safe arithmetic.
+- [x] Implement `pwm_get_frequency()` and `pwm_get_duty_cycle()`.
 
 ## D. UART Shell Integration TODO
 
 Integrate PWM adjustment into the shell / parser in `main.c` (or parser module):
 
-- [ ] Define command syntax for frequency adjustment: `[TODO: e.g. pwm freq <hz>]`.
-- [ ] Define command syntax for duty cycle adjustment: `[TODO: e.g. pwm duty <percent>]`.
-- [ ] Define command syntax for status/query: `[TODO: e.g. pwm status or status]`.
-- [ ] Parse argument strings and convert to numerical values.
-- [ ] Dispatch parsed commands to `pwm_set_frequency()` and `pwm_set_duty_cycle()`.
-- [ ] Provide clear feedback over UART on success, invalid argument, or out-of-range value.
+- [x] Define command syntax for frequency adjustment: `pwm freq <hz>`.
+- [x] Define command syntax for duty cycle adjustment: `pwm duty <percent>`.
+- [x] Define command syntax for status/query: `pwm status`.
+- [x] Parse argument strings and convert to numerical values (`parse_u32` with uint32 overflow guard).
+- [x] Dispatch parsed commands to `pwm_set_frequency()` and `pwm_set_duty_cycle()`.
+- [x] Provide clear feedback over UART on success, invalid argument, or out-of-range value.
 
 ## E. Build Verification
 
@@ -92,38 +93,44 @@ Build from `firmware/stm32/w04d02-pwm-uart-shell/`:
 powershell -ExecutionPolicy Bypass -File .\build.ps1 -Clean
 ```
 
-- [ ] Build exit code is `0`.
-- [ ] Zero compiler errors.
-- [ ] Zero compiler warnings (only inherited non-blocking `nosys` linker warnings).
-- [ ] `build/w04d02-pwm-uart-shell.elf`, `.map`, and `.list` generated.
-- [ ] Record image size (`text`, `data`, `bss`).
+- [x] Build exit code is `0`.
+- [x] Zero compiler errors.
+- [x] Zero compiler warnings (only inherited non-blocking `nosys` linker warnings).
+- [x] `build/w04d02-pwm-uart-shell.elf`, `.map`, and `.list` generated.
+- [x] Record image size: `text = 4876`, `data = 0`, `bss = 1592`, `dec = 6468`, `hex = 1944`.
 
 ## F. Hardware Smoke & PWM Demo
 
-- [ ] Flash binary to NUCLEO-F446RE.
-- [ ] Connect oscilloscope / logic analyzer / LED to the configured PWM pin.
-- [ ] Open serial terminal at 115200 baud.
-- [ ] Verify startup banner on terminal.
-- [ ] Observe default PWM waveform: verify frequency and duty cycle physically.
-- [ ] Send command to change duty cycle (e.g. 25%, 75%): observe physical change.
-- [ ] Send command to change frequency: observe physical period change.
-- [ ] Record expected vs observed physical measurements.
+- [x] Flash binary to NUCLEO-F446RE.
+- [x] Connect oscilloscope / logic analyzer / LED to the configured PWM pin (PA5).
+- [x] Open serial terminal at 115200 baud.
+- [x] Verify startup banner on terminal (`W04D02 PWM UART Shell Ready`).
+- [x] Observe default PWM waveform: verify frequency (~1 kHz) and duty cycle (~50%) physically (`Screenshot_1.png`).
+- [x] Send command to change duty cycle (e.g. 25%, 75%): observe physical change.
+- [x] Send command to change frequency (500 Hz, 2000 Hz): observe physical period change.
+- [x] Record expected vs observed physical measurements (final state 500 Hz / 25%: `Screenshot_2.png`).
 
 ## G. Boundary & Error Cases
 
 Test and record at least one boundary/invalid case:
 
-- [ ] Out-of-bounds duty cycle (e.g. > 100% or negative/malformed): verify rejection without crash.
-- [ ] Out-of-bounds frequency (e.g. 0 Hz, too high for timer resolution, or overflow): verify rejection.
-- [ ] Malformed or incomplete shell command: verify parser reports error and remains responsive.
+- [x] Out-of-bounds duty cycle (e.g. `pwm duty 101`, `pwm duty abc`, `pwm duty 25x`): verify rejection without crash (`ERR: Invalid duty`).
+- [x] Out-of-bounds frequency (e.g. `pwm freq 0`, `pwm freq 9`, `pwm freq 100001`, `pwm freq abc`, `pwm freq 500x`, `pwm freq -100`, `pwm freq 42949672960`): verify rejection (`ERR: Invalid frequency`).
+- [x] Malformed or incomplete shell command (`foo`, `pwm`, `pwm xyz 123`): verify parser reports error (`ERR: Unknown command`) and remains responsive.
 
 ## H. Evidence & Self-Explanation
 
-- [ ] Complete `learning/week-04/day-02/SUBMIT_W04D02.md`.
-- [ ] Capture physical evidence (logic analyzer screenshot, scope trace, or terminal log).
-- [ ] Self-explanation: Explain how `ARR` and `CCR` interact to determine duty cycle percentage.
-- [ ] Self-explanation: Explain what happens when `CCR >= ARR` or `CCR == 0`.
-- [ ] Self-explanation: Explain the role of preload registers (`OCxPE` and `ARPE`) when updating duty/frequency on the fly.
+- [x] Complete `learning/week-04/day-02/SUBMIT_W04D02.md`.
+- [x] Capture physical evidence:
+  - `learning/week-04/day-02/Screenshot_1.png` (PulseView default ~1 kHz / 50% PWM)
+  - `learning/week-04/day-02/Screenshot_2.png` (PulseView UART-controlled ~500 Hz / 25% PWM)
+  - `learning/week-04/day-02/Screenshot_3.png` (VS Code Serial Monitor terminal capture)
+- [x] Self-explanation: Explain how `ARR` and `CCR` interact to determine duty cycle percentage:
+  `ARR` defines the full PWM period count ($f_{\text{PWM}} = f_{\text{timer}} / ((\text{PSC} + 1) \times (\text{ARR} + 1))$), while `CCR` defines the threshold comparison for the output signal. In upcounting PWM Mode 1 active-high, the output is HIGH while $\text{CNT} < \text{CCR}$ and LOW while $\text{CNT} \ge \text{CCR}$. Thus, $\text{duty} \approx \text{CCR} / (\text{ARR} + 1)$. With fixed PSC and ARR, changing CCR scales the active pulse width without altering the frequency.
+- [x] Self-explanation: Explain what happens when `CCR >= ARR` or `CCR == 0`:
+  When $\text{CCR} == 0$, $\text{CNT} < 0$ is never true for an unsigned counter, so the output remains constantly LOW (0% duty). When $\text{CCR} \ge \text{ARR} + 1$, $\text{CNT} < \text{CCR}$ is always true throughout the entire counting cycle $0 \dots \text{ARR}$, so the output remains constantly HIGH (100% duty).
+- [x] Self-explanation: Explain the role of preload registers (`OCxPE` and `ARPE`) when updating duty/frequency on the fly:
+  Preload registers decouple software register writes from active timing. When preload is enabled, writing to ARR or CCR updates only the preload register, while the timer's current cycle continues to run off shadow registers. The newly programmed values transfer to shadow registers synchronously at the next Update Event (UEV, counter rollover), preventing mid-cycle glitches, runt pulses, or distorted periods.
 
 ## AI Rules
 
@@ -149,5 +156,5 @@ Test and record at least one boundary/invalid case:
 ## Next Physical Action Placeholder
 
 ```
-Next physical action (5-15 min): [TODO: learner fill, e.g. Open STM32F446RE datasheet Table 10 to select timer channel pin and AF mapping]
+Next physical action (5-15 min): BOOT W04D03 — measure PWM frequency and duty against calculations using the logic analyzer and create the annotated PWM capture.
 ```

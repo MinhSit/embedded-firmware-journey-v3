@@ -1,11 +1,11 @@
 # CURRENT STATE V3 — EMBEDDED/FIRMWARE ROADMAP
 
 **Document ID:** `CURRENT_STATE_V3`
-**Version:** `3.0.43`
+**Version:** `3.0.44`
 **State type:** Operational snapshot — describes reality and creates no new policy
-**Generated at:** `2026-09-03`
+**Generated at:** `2026-09-04`
 **Timezone:** `Asia/Ho_Chi_Minh`
-**Status:** `W04D01 GREEN / CLOSED / ARTIFACT_PASS; Week 3 CONDITIONAL PASS / CLOSED; W04D02 NOT STARTED`
+**Status:** `W04D02 GREEN / CLOSED / ARTIFACT_PASS; Week 3 CONDITIONAL PASS / CLOSED; W04D03 NOT STARTED`
 
 ---
 
@@ -14,18 +14,18 @@
 - **System Spec version:** `SYSTEM_SPEC_V3 3.0.0`
 - **Roadmap version:** `EMBEDDED_ROADMAP_V3.1 3.1.0`
 - **Master Prompt version:** `MASTER_PROMPT_V3 3.1.3`
-- **Current State version:** `3.0.43`
+- **Current State version:** `3.0.44`
 - **Implementation runbook:** `roadmap-control/execution-runbook.md` — `NON-AUTHORITATIVE`
 
 If this file conflicts with a higher-authority source, the higher-authority source wins.
 
 ## Positions
 
-- **Calendar position:** `2026-09-03 — calendar drift beyond W04D01; W04D01 closed; W04D02 next`
-- **Execution position:** `W04D01 CLOSED / ARTIFACT_PASS; Week 3 CONDITIONAL PASS / CLOSED; W04D02 NOT STARTED`
-- **Artifact position:** `W04D01 TIM2 1 kHz timebase / 500 Hz GPIO square wave logic-analyzer capture complete`
+- **Calendar position:** `2026-09-04 — calendar drift beyond W04D02; W04D02 closed; W04D03 next`
+- **Execution position:** `W04D02 CLOSED / ARTIFACT_PASS; Week 3 CONDITIONAL PASS / CLOSED; W04D03 NOT STARTED`
+- **Artifact position:** `W04D02 PWM UART shell demo complete: TIM2_CH1 / PA5, default ~1 kHz / 50%, runtime frequency/duty control, physical logic-analyzer evidence, negative and recovery tests`
 - **Competency position:** `W03-C-UART-FOUND — COMPETENCY_PASS`
-- **Last artifact PASS:** `W04D01 TIM2 1 kHz timebase / 500 Hz GPIO square wave logic-analyzer capture`, evidence at `learning/week-04/day-01/Screenshot_1.png` and `learning/week-04/day-01/timer-calculation-note.md`
+- **Last artifact PASS:** `W04D02 PWM UART shell demo complete`, evidence at `learning/week-04/day-02/Screenshot_1.png`, `learning/week-04/day-02/Screenshot_2.png`, `learning/week-04/day-02/Screenshot_3.png`
 - **Last daily assessment PASS:** `W03D07 UART IRQ / parser competency gate — 87/100 PASS / AI-0 CLEAN`, evidence at `learning/week-03/day-07/ASSESSMENT_RESULT_W03D07.md`
 - **Last competency PASS:** `W03-C-UART-FOUND — COMPETENCY_PASS (2026-08-31)`
 
@@ -62,7 +62,8 @@ If this file conflicts with a higher-authority source, the higher-authority sour
 - **Week 2 career baseline:** `PASS — CV master skeleton + GitHub profile draft complete; public README NOT DEPLOYED`
 - **Week 2 MASTER CHECK:** `PASS WITH LOW FINDINGS — BLOCKER NONE / HIGH NONE`
 - **Week 3:** `CONDITIONAL PASS / CLOSED`
-- **Week 4 eligibility:** `YES — ACTIVE; W04D01 CLOSED; W04D02 NOT STARTED`
+- **Week 4 eligibility:** `YES — ACTIVE; W04D02 CLOSED; W04D03 NOT STARTED`
+- **W04D02:** `GREEN / CLOSED / ARTIFACT_PASS — AI-3; NOT independent competency evidence; TIM2_CH1 PA5 default ~1 kHz / 50% PWM, runtime shell control (10–100000 Hz, 0–100% duty), negative/recovery tests verified on hardware`
 - **W04D01:** `GREEN / CLOSED / ARTIFACT_PASS — AI-3; NOT independent competency evidence; initial ~88.9 Hz measurement debugged to 16 MHz clock tree; corrected PSC=15 ARR=999 verified on logic analyzer (~500 Hz / ~2 ms)`
 - **W03D01:** `GREEN / CLOSED / ARTIFACT_PASS — AI-3; NOT independent competency evidence`
 - **W03D02:** `GREEN / CLOSED / ARTIFACT_PASS — AI-3; NOT independent competency evidence`
@@ -79,17 +80,17 @@ If this file conflicts with a higher-authority source, the higher-authority sour
 ## Repository
 
 - **Repo URL:** `https://github.com/MinhSit/embedded-firmware-journey-v3`
-- **Branch:** `feature/w04d01-timer-timebase`
-- **Artifact closure:** W04D01 Timer timebase END DAY transaction; containing commit recorded as `SELF — containing closure commit`. Learner evidence and corrected configuration preserved. Executor cleanup was limited to mechanical trailing whitespace removal and final newline in `firmware/stm32/w04d01-timer-timebase/timer_timebase.c`.
+- **Branch:** `feature/w04d02-pwm-uart-shell`
+- **Artifact closure:** W04D02 PWM UART shell END DAY transaction; containing commit recorded as `SELF — containing closure commit`. Learner evidence, pwm.c, and main.c preserved without semantic modification.
 - **Current operational HEAD:** Resolve from the Git repository at `BOOT`.
 - **Release:** `uart-shell-v0.1 — annotated Week 3 milestone tag on the containing closure commit`
 
 ## Latest Build and Test
 
-- **Latest validation path:** `learning/week-04/day-01/Screenshot_1.png`, `learning/week-04/day-01/timer-calculation-note.md` and `firmware/stm32/w04d01-timer-timebase/`.
-- **Build/test command:** `powershell -ExecutionPolicy Bypass -File .\build.ps1 -Clean` from `firmware/stm32/w04d01-timer-timebase`.
-- **Latest build/test result:** STM32 clean build PASS / exit 0 with `text=1188`, `data=0`, `bss=1568`, `dec=2756`, `hex=ac4`; only inherited non-blocking `nosys` warnings for `_close`, `_lseek`, `_read`, and `_write`.
-- **Latest demo result:** Learner-supplied physical NUCLEO-F446RE capture with 8-channel logic analyzer via PulseView (`Screenshot_1.png`): observed stable digital waveform on PA5 with approximately 2 ms period, approximately 500 Hz frequency, approximately 1 ms HIGH, approximately 1 ms LOW, approximately 50% duty. Mismatch debug story: initial PSC=89 ARR=999 yielded ~88.9 Hz / ~11.25 ms due to actual project clock being 16 MHz HSI rather than assumed 90 MHz; recalculated PSC=15 ARR=999 resolved to expected 500 Hz / 2 ms.
+- **Latest validation path:** `learning/week-04/day-02/Screenshot_1.png`, `learning/week-04/day-02/Screenshot_2.png`, `learning/week-04/day-02/Screenshot_3.png`, and `firmware/stm32/w04d02-pwm-uart-shell/`.
+- **Build/test command:** `powershell -ExecutionPolicy Bypass -File .\build.ps1 -Clean` from `firmware/stm32/w04d02-pwm-uart-shell/`.
+- **Latest build/test result:** STM32 clean build PASS / exit 0 with `text=4876`, `data=0`, `bss=1592`, `dec=6468`, `hex=1944`; only inherited non-blocking `nosys` warnings for `_close`, `_lseek`, `_read`, and `_write`.
+- **Latest demo result:** Learner-supplied physical NUCLEO-F446RE capture with 8-channel logic analyzer via PulseView (`Screenshot_1.png`, `Screenshot_2.png`) and VS Code Serial Monitor (`Screenshot_3.png`): default startup ~1 kHz / 50% PWM on PA5 (TIM2_CH1 / LD2); runtime UART shell command control over frequency (10 Hz .. 100 kHz) and duty (0% .. 100%); successful verification of 1 kHz 25%/75%, 500 Hz 75%, 2 kHz 75%, and final 500 Hz / 25% (period ~2 ms, HIGH ~0.5 ms, LOW ~1.5 ms); clean rejection of invalid arguments, non-numeric strings, syntax errors, and uint32 overflow; overlong-line RX/TX integration bug resolved during session.
 - **Earlier W03D06 evidence retained:** controlled UART RX/ring-buffer overflow debug story with measured `overflow_count = 12`, post-overload recovery, and clean regression.
 - **Earlier W02D02 evidence retained:** startup-sequence artifact plus supplemental host startup-simulator validation remained `ARTIFACT_PASS` with `30/30` individual cases PASS.
 
@@ -109,8 +110,8 @@ If this file conflicts with a higher-authority source, the higher-authority sour
 
 ## Schedule, Load, and Risk
 
-- **Schedule variance:** `W04D01 completed on 2026-09-03 with calendar drift from 2026-08-31; W04D01 closed; W04D02 next`; Available Focused Time was `6h`; Actual Focused Time was `NOT RECORDED — learner did not supply exact value; do not infer from timestamps.`
-- **Recovery status:** `NOT ACTIVE`
+- **Schedule variance:** `W04D02 completed on 2026-09-04 with calendar drift from 2026-09-01; W04D02 closed; W04D03 next; Available Focused Time was window through 22:30; Planned Focused Time was work through stop condition before 22:30; Actual Focused Time was NOT RECORDED (do not infer from timestamps)`
+- **Recovery status:** `ACTIVE EXECUTION RECOVERY — execution is behind canonical Week 4 calendar; learner recovery plan: 2026-09-05 W04D03 then W04D04 as separate closures; 2026-09-06 W04D05 then W04D06 as separate closures; 2026-09-07 Foundation MCU Gate; only after a PASS gate may W05D01 start. Canonical roadmap dates remain unchanged; recorded as execution/recovery scheduling, not a roadmap revision.`
 - **Critical path risk:** `P1 evidence carry-over due 2026-09-06`; no P0 blocker exists and Week 4 eligibility is unaffected.
 - **Weekly scorecard:** `roadmap-control/weekly-scorecards/week-03.md — CONDITIONAL PASS / CLOSED`
 - **Career pipeline:** `Week 2 baseline PASS — CV master skeleton + ready-to-publish GitHub profile draft complete; public profile README NOT DEPLOYED`
@@ -124,13 +125,16 @@ If this file conflicts with a higher-authority source, the higher-authority sour
 - **Roadmap calendar start for Week 2:** `2026-08-17`
 - **Hard deadline:** `2026-12-14 — project v1.0`
 - **Scope cuts:** `NONE active`. If schedule lag occurs later, apply roadmap-defined cut order: cut P2 first, reduce P1 polish, preserve P0.
-- **Exact Next Action:** `BOOT W04D02 — PWM implementation using timer capture/compare/PWM channel, starting from the now-verified timer-clock mental model`
+- **Exact Next Action:** `BOOT W04D03 — measure PWM frequency and duty against calculations using the logic analyzer and create the annotated PWM capture`
 - **Files/links to inspect first:**
-  - `learning/week-04/day-01/timer-calculation-note.md`
-  - `learning/week-04/day-01/Screenshot_1.png`
-  - `learning/week-04/day-01/SUBMIT_W04D01.md`
-  - `firmware/stm32/w04d01-timer-timebase/timer_timebase.c`
-  - `firmware/stm32/w04d01-timer-timebase/timer_timebase.h`
+  - `learning/week-04/day-02/Screenshot_1.png`
+  - `learning/week-04/day-02/Screenshot_2.png`
+  - `learning/week-04/day-02/Screenshot_3.png`
+  - `learning/week-04/day-02/SUBMIT_W04D02.md`
+  - `learning/week-04/day-02/TODO_W04D02_PWM.md`
+  - `firmware/stm32/w04d02-pwm-uart-shell/pwm.c`
+  - `firmware/stm32/w04d02-pwm-uart-shell/pwm.h`
+  - `firmware/stm32/w04d02-pwm-uart-shell/main.c`
   - `roadmap-control/current-state.md`
   - `roadmap-control/execution-runbook.md`
   - `docs/system/ROADMAP_REVIEW_LOG.md`

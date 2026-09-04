@@ -1,45 +1,57 @@
 # SUBMIT — W04D02 PWM Implementation & UART Shell
 
 - Task: W04D02 PWM implementation and duty/frequency adjustment via UART shell
-- Date: [TODO: learner fill, e.g. 2026-09-04]
-- Highest AI Level Used: [TODO: learner fill, e.g. AI-2 / AI-3 after attempt]
-- Commit: [TODO: learner fill commit hash or SELF]
+- Date: 2026-09-04
+- Highest AI Level Used: AI-3
+- Commit: SELF — containing closure commit
 - Files Changed:
-  - `firmware/stm32/w04d02-pwm-uart-shell/pwm.c`
-  - `firmware/stm32/w04d02-pwm-uart-shell/pwm.h`
   - `firmware/stm32/w04d02-pwm-uart-shell/main.c`
+  - `firmware/stm32/w04d02-pwm-uart-shell/pwm.c`
+  - `learning/week-04/day-02/Screenshot_1.png`
+  - `learning/week-04/day-02/Screenshot_2.png`
+  - `learning/week-04/day-02/Screenshot_3.png`
   - `learning/week-04/day-02/TODO_W04D02_PWM.md`
   - `learning/week-04/day-02/SUBMIT_W04D02.md`
-  - [TODO: any additional files modified]
+  - `roadmap-control/current-state.md`
+  - `roadmap-control/daily-log.md`
+  - `roadmap-control/ai-usage-log.md`
 - Build Command: `powershell -ExecutionPolicy Bypass -File .\build.ps1 -Clean`
-- Build Result: [TODO: PASS / exit 0; text=..., data=..., bss=...]
-- Hardware Smoke Result: [TODO: PASS / FAIL — describe physical observation on NUCLEO-F446RE]
+- Build Result: PASS / exit 0; text=4876, data=0, bss=1592, dec=6468, hex=1944; only inherited non-blocking nosys linker warnings (_close, _lseek, _read, _write)
+- Hardware Smoke Result: PASS — verified on NUCLEO-F446RE (PA5 / onboard LD2) with logic analyzer via PulseView and serial terminal at 115200 baud
 - UART Command Cases:
   - Case 1 (Default startup):
-    - Command / action: [TODO: system startup / default PWM]
-    - Expected: [TODO: e.g. 1 kHz, 50% duty]
-    - Observed: [TODO: physical observation]
+    - Command / action: `pwm status`
+    - Expected: `PWM Freq: 1000 Hz, Duty: 50%`
+    - Observed: Terminal returned `PWM Freq: 1000 Hz, Duty: 50%`; PulseView confirmed waveform period approximately 1 ms, HIGH approximately 0.5 ms, LOW approximately 0.5 ms (`Screenshot_1.png`)
   - Case 2 (Duty adjustment):
-    - Command / action: [TODO: e.g. pwm duty 25]
-    - Expected: [TODO: e.g. duty changes to 25%, frequency remains 1 kHz]
-    - Observed: [TODO: physical observation]
+    - Command / action: `pwm duty 25`, followed by `pwm duty 75`
+    - Expected: OK feedback; duty updates to 25% then 75% at 1 kHz frequency
+    - Observed: Terminal returned `OK: Duty set to 25%` and `OK: Duty set to 75%`; PulseView confirmed duty adjustment with period remaining approximately 1 ms (1 kHz / 25%, 1 kHz / 75%)
   - Case 3 (Frequency adjustment):
-    - Command / action: [TODO: e.g. pwm freq 2000]
-    - Expected: [TODO: e.g. frequency changes to 2 kHz, period 500 µs]
-    - Observed: [TODO: physical observation]
+    - Command / action: `pwm freq 500`, followed by `pwm freq 2000`
+    - Expected: OK feedback; frequency updates to 500 Hz then 2000 Hz while preserving duty cycle ratio
+    - Observed: Terminal returned `OK: Frequency set to 500 Hz` and `OK: Frequency set to 2000 Hz`; PulseView confirmed period approximately 2 ms and 0.5 ms with duty ratio preserved (500 Hz / 75%, 2000 Hz / 75%)
   - Case 4 (Boundary / error case):
-    - Command / action: [TODO: e.g. pwm duty 150 or invalid argument]
-    - Expected: [TODO: error reported, previous PWM settings preserved]
-    - Observed: [TODO: physical observation / UART response]
-- Expected: [TODO: summary of expected behavior across tests]
-- Observed: [TODO: summary of actual behavior observed]
-- Evidence: [TODO: path to logic analyzer screenshot, terminal capture, or scope trace]
+    - Command / action: `pwm duty 101`, `pwm freq 0`, `pwm freq 100001`, `pwm duty abc`, `pwm freq 42949672960`, overlong line
+    - Expected: Rejected with clear error messages, previous PWM settings preserved, uint32 overflow rejected, parser remains responsive
+    - Observed: Terminal returned `ERR: Invalid duty`, `ERR: Invalid frequency`, `ERR: Unknown command`, `ERR: Line too long`; state remained stable and responsive
+- Expected: Hardware PWM on PA5 (TIM2_CH1) with default 1 kHz / 50%; dynamic runtime frequency (10 Hz .. 100 kHz) and duty (0% .. 100%) adjustment via UART shell; reject invalid parameters/commands without altering timer state.
+- Observed: Startup default 1 kHz / 50% verified physically. Dynamic shell adjustments executed cleanly. Final configuration `pwm duty 25` and `pwm freq 500` verified on hardware (`Screenshot_2.png`: period ~2 ms, HIGH ~0.5 ms, LOW ~1.5 ms, duty ~25%). All boundary, syntax, and overflow cases cleanly rejected (`Screenshot_3.png`).
+- Evidence:
+  - `learning/week-04/day-02/Screenshot_1.png` — PulseView digital capture showing default approximately 1 kHz / 50% PWM waveform (period ~1 ms, HIGH ~0.5 ms, LOW ~0.5 ms)
+  - `learning/week-04/day-02/Screenshot_2.png` — PulseView digital capture showing UART-controlled approximately 500 Hz / 25% PWM waveform (period ~2 ms, HIGH ~0.5 ms, LOW ~1.5 ms)
+  - `learning/week-04/day-02/Screenshot_3.png` — VS Code Serial Monitor terminal log showing successful command execution, status queries, negative/error validation, and overlong line recovery
 - Measurements:
-  - Verified bus clock: [TODO: e.g. 16 MHz HSI]
-  - Timer / Channel / Pin: [TODO: e.g. TIMx_CHy on Pxy]
-  - Measured frequency at 1 kHz target: [TODO: e.g. 1.00 kHz]
-  - Measured period at 1 kHz target: [TODO: e.g. 1.00 ms]
-  - Measured pulse width at 50% duty target: [TODO: e.g. 500 µs]
-  - Measured pulse width at 25% duty target: [TODO: e.g. 250 µs]
-- Known Failures: [TODO: NONE or list any issues]
-- Questions: [TODO: NONE or list open technical questions]
+  - Verified bus clock: 16 MHz HSI baseline, APB1 prescaler /1, PCLK1 = 16 MHz, TIM2CLK = 16 MHz, timer tick rate = 1 MHz (PSC = 15)
+  - Timer / Channel / Pin: TIM2_CH1 on PA5 (AF1) / onboard LD2 / Arduino D13 / CN5 pin 6
+  - Measured frequency at 1 kHz target: approximately 1 kHz
+  - Measured period at 1 kHz target: approximately 1 ms
+  - Measured pulse width at 50% duty target (1 kHz): approximately 0.5 ms
+  - Measured pulse width at 25% duty target (1 kHz): approximately 0.25 ms
+  - Measured final 500 Hz / 25%: period approximately 2 ms, HIGH approximately 0.5 ms, LOW approximately 1.5 ms
+  (Note: Visual estimations from time scale; detailed annotated cursor measurements belong to W04D03)
+- Known Failures: NONE unresolved.
+  Resolved during session: Overlong line handling bug.
+  - Root cause: Shell detected line overflow and immediately transmitted "ERR: Line too long" via blocking UART TX before line was fully drained. Incoming bytes arrived via IRQ into small 8-byte DROP_NEWEST ring buffer, causing the terminating newline to be dropped. `discarding_overlong` remained stuck true, causing the subsequent valid command to be discarded.
+  - Resolution: Upon detecting line overflow, set `discarding_overlong = true` without blocking TX; continue draining incoming bytes until newline is received; clear discard flag; then transmit "ERR: Line too long". Retest verified overlong line rejected and immediately following `pwm status` executed correctly.
+- Questions: NONE.

@@ -1269,6 +1269,62 @@ Notes:
 
 ---
 
+## 2026-09-04 — W04D02 PWM Implementation & UART Shell
+
+Highest AI level:
+AI-3
+
+What AI contributed:
+- Guided conceptual pre-check and PWM mental model review (AI-1 / AI-2);
+- Post-attempt review of the learner's first working `pwm_init()` and register configuration;
+- Explained preload register semantics (`OC1PE`, `ARPE`) and update event (`TIM_EGR_UG`) mechanics;
+- Suggested improving frequency setter from integer percentage preservation to direct CCR/ARR ratio preservation to reduce duty quantization loss;
+- Recommended 64-bit unsigned intermediate arithmetic in `pwm_set_duty_cycle()` to prevent 32-bit multiplication overflow;
+- Reviewed UART shell boundary checks and unsigned parsing against uint32 overflow;
+- Helped diagnose the overlong-line integration bug (blocking TX while RX ring buffer overflows, causing newline drop and discard state lock);
+- Repository closure administration and control record synchronization via bounded executor.
+
+Files/functions materially assisted:
+- `firmware/stm32/w04d02-pwm-uart-shell/pwm.c` (`pwm_set_frequency`, `pwm_set_duty_cycle` review/hardening);
+- `firmware/stm32/w04d02-pwm-uart-shell/main.c` (overlong-line drain logic review);
+- `learning/week-04/day-02/**` (closure documentation and records).
+
+Core implementation code provided by AI:
+NO. The core PWM peripheral initialization, register calculations (TIM2CLK = 16 MHz,
+PSC = 15, ARR = 999, CCR1 = 500), and first working physical 1 kHz / 50% waveform
+were designed, coded, and verified by the learner prior to AI-3 review.
+
+Learner-owned contribution:
+- Official documentation pinout/AF lookup: selected TIM2_CH1 on PA5 (AF1);
+- Clock verification: 16 MHz HSI baseline, APB1 prescaler /1, TIM2CLK = 16 MHz;
+- Mathematical derivations for PSC, ARR, CCR1 for 1 kHz 50% PWM;
+- Authored initial working `pwm_init()` and produced initial physical logic-analyzer waveform;
+- Implemented shell command dispatching in `main.c` (`pwm freq`, `pwm duty`, `pwm status`);
+- Physical hardware testing on NUCLEO-F446RE with PulseView logic analyzer;
+- Boundary testing (invalid duty, out-of-range frequency, non-numeric strings, uint32 overflow);
+- Fixed overlong-line newline-drain logic based on diagnosis and retested successfully.
+
+Gate answer revealed:
+NO ACTIVE GATE — W04D02 was a normal learning day, not an AI-0 competency gate.
+
+Competency affected:
+W04D02 is normal assisted learning and valid artifact evidence; it is not an
+independent competency gate. No new competency PASS is awarded.
+`W03-C-UART-FOUND — COMPETENCY_PASS` remains the latest verified competency.
+
+Special retest:
+NOT REQUIRED. No competency contamination occurred.
+
+Notes:
+- Clean build exit 0: `text=4876`, `data=0`, `bss=1592`, `dec=6468`, `hex=1944`; only inherited `nosys` linker warnings.
+- Physical captures:
+  - `learning/week-04/day-02/Screenshot_1.png` (PulseView default ~1 kHz / 50% PWM)
+  - `learning/week-04/day-02/Screenshot_2.png` (PulseView UART-controlled ~500 Hz / 25% PWM)
+  - `learning/week-04/day-02/Screenshot_3.png` (VS Code Serial Monitor terminal log)
+- Overlong-line bug resolved during session: blocking TX moved after newline drain.
+
+---
+
 ## Pre-V3 Migration Note
 
 Known affected scope:

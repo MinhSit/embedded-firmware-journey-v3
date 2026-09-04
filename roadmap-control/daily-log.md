@@ -3922,3 +3922,179 @@ Week 4 execution: W04D01 CLOSED; W04D02 NOT STARTED.
 
 BOOT W04D02 — PWM implementation using timer capture/compare/PWM channel, starting
 from the now-verified timer-clock mental model.
+
+---
+
+## 2026-09-04 — Week 04 / Day 02
+
+### 1. Planned Outcome
+
+Implement hardware PWM output on TIM2_CH1 (PA5 / onboard LD2) at 1 kHz default
+frequency and 50% duty cycle. Integrate frequency (10 Hz .. 100 kHz) and duty
+cycle (0% .. 100%) runtime adjustment into the existing UART shell (`pwm freq`,
+`pwm duty`, `pwm status`). Verify PWM waveform physically via logic analyzer, test
+boundary/invalid cases, and resolve any integration bugs.
+
+### 2. Actual Status
+
+GREEN / CLOSED / ARTIFACT_PASS
+
+### 3. Focused Time
+
+Planned: Work through W04D02 stop condition before 22:30; exact numeric hours not recorded
+Actual: NOT RECORDED — learner did not supply exact numeric hours; do not infer from timestamps
+
+### 4. Independent Work
+
+What I personally implemented, reasoned about, measured, or explained:
+
+- Selected and verified hardware pins and clocking from official STM32 documentation:
+  TIM2_CH1 on PA5 (AF1), TIM2 on APB1, 16 MHz HSI baseline, APB1 prescaler /1, TIM2CLK = 16 MHz.
+- Derived timer register settings for 1 kHz / 50% PWM:
+  counter tick rate = 1 MHz (PSC = 15), period count = 1000 (ARR = 999), CCR1 = 500.
+- Implemented full register-level PWM driver in `firmware/stm32/w04d02-pwm-uart-shell/pwm.c`:
+  RCC clock gating for GPIOA and TIM2, PA5 AF1 configuration, TIM2 timebase setup,
+  PWM Mode 1 (`OC1M = 110`), OC1 preload enable (`OC1PE = 1`), auto-reload preload
+  enable (`ARPE = 1`), active-high polarity, and update generation (`UG`).
+- Implemented runtime API:
+  `pwm_set_frequency()` with ratio-preserving CCR recalculation to minimize duty quantization loss;
+  `pwm_set_duty_cycle()` with 64-bit intermediate arithmetic to prevent 32-bit multiplication overflow;
+  `pwm_get_frequency()` and `pwm_get_duty_cycle()`.
+- Extended UART shell in `main.c` with commands:
+  `pwm freq <hz>`, `pwm duty <percent>`, `pwm status`.
+- Integrated boundary checks and robust unsigned decimal parsing with uint32 overflow protection.
+- Performed physical hardware testing on NUCLEO-F446RE with 8-channel logic analyzer via PulseView:
+  verified default 1 kHz / 50%, duty transitions (25%, 75%), frequency transitions (500 Hz, 2000 Hz),
+  and final state (500 Hz / 25%).
+- Tested negative/error cases (`pwm duty 101`, `pwm freq 0`, `pwm freq 100001`, `pwm duty abc`, `pwm freq 42949672960`, malformed commands).
+- Diagnosed and resolved overlong-line RX/TX integration bug during hardware testing.
+
+### 5. AI Usage
+
+Highest AI level used: AI-3
+
+What AI helped with:
+- Initial PWM mental model and pre-check: AI-1 / AI-2.
+- Learner independently selected TIM2_CH1 / PA5 / AF1 with official-source verification.
+- Learner independently calculated: TIM2CLK = 16 MHz, PSC = 15, ARR = 999, CCR1 = 500.
+- Learner wrote the first working `pwm_init()` attempt before AI-3 review.
+- Learner produced physical 1 kHz / 50% waveform before code-level AI review.
+- AI-3 was then used for review/hardening/debugging:
+  preload/shadow semantics,
+  frequency change duty ratio preservation,
+  uint64_t overflow-safe arithmetic for CCR calculation,
+  UART shell robustness and boundary parsing,
+  diagnosis of overlong-line RX ring buffer overflow / blocking TX interaction.
+- Closure administration and control record updates via executor.
+
+Files/functions materially assisted:
+- `firmware/stm32/w04d02-pwm-uart-shell/pwm.c` (review/hardening of preload semantics and uint64_t arithmetic)
+- `firmware/stm32/w04d02-pwm-uart-shell/main.c` (diagnosis of overlong-line newline-drain logic)
+- `learning/week-04/day-02/**` (documentation and submission records)
+
+Competencies contaminated:
+- NONE newly awarded. W04D02 is normal assisted learning and valid artifact evidence; it is NOT independent competency evidence.
+
+Independent retest required:
+- NOT REQUIRED. No competency PASS claimed from this day.
+
+### 6. Artifact Result
+
+Files changed:
+- `firmware/stm32/w04d02-pwm-uart-shell/pwm.c`
+- `firmware/stm32/w04d02-pwm-uart-shell/main.c`
+- `learning/week-04/day-02/Screenshot_1.png`
+- `learning/week-04/day-02/Screenshot_2.png`
+- `learning/week-04/day-02/Screenshot_3.png`
+- `learning/week-04/day-02/TODO_W04D02_PWM.md`
+- `learning/week-04/day-02/SUBMIT_W04D02.md`
+- `roadmap-control/current-state.md`
+- `roadmap-control/daily-log.md`
+- `roadmap-control/ai-usage-log.md`
+
+Clean build command:
+`powershell -ExecutionPolicy Bypass -File .\build.ps1 -Clean` from `firmware/stm32/w04d02-pwm-uart-shell/`
+
+Clean build result:
+PASS / exit 0; `text=4876`, `data=0`, `bss=1592`, `dec=6468`, `hex=1944`; only inherited
+non-blocking `nosys` linker warnings for `_close`, `_lseek`, `_read`, and `_write`.
+
+### 7. Evidence
+
+Commit: `SELF — containing closure commit`
+
+Captures:
+- `learning/week-04/day-02/Screenshot_1.png` — PulseView digital capture showing default approximately 1 kHz / 50% PWM waveform (period ~1 ms, HIGH ~0.5 ms, LOW ~0.5 ms)
+- `learning/week-04/day-02/Screenshot_2.png` — PulseView digital capture showing UART-controlled approximately 500 Hz / 25% PWM waveform (period ~2 ms, HIGH ~0.5 ms, LOW ~1.5 ms)
+- `learning/week-04/day-02/Screenshot_3.png` — VS Code Serial Monitor terminal log showing successful command execution, status queries, negative/error validation, and overlong line recovery
+
+Submission: `learning/week-04/day-02/SUBMIT_W04D02.md`
+
+Checklist: `learning/week-04/day-02/TODO_W04D02_PWM.md`
+
+### 8. Measurements
+
+Physical measurements (logic analyzer PulseView capture):
+- TIM2 clock baseline: 16 MHz HSI, APB1 prescaler /1, TIM2CLK = 16 MHz, PSC = 15 -> 1 MHz tick rate.
+- Pin / Alternate function: PA5 / TIM2_CH1 / AF1 (onboard LD2).
+- Default startup target: 1 kHz / 50% duty:
+  - Period: approximately 1 ms
+  - Frequency: approximately 1 kHz
+  - HIGH time: approximately 0.5 ms
+  - LOW time: approximately 0.5 ms
+  - Duty cycle: approximately 50%
+- Dynamic runtime adjustments tested and observed:
+  - `pwm duty 25` -> approximately 1 kHz / 25% (period ~1 ms, HIGH ~0.25 ms)
+  - `pwm duty 75` -> approximately 1 kHz / 75% (period ~1 ms, HIGH ~0.75 ms)
+  - `pwm freq 500` -> approximately 500 Hz / 75% (period ~2 ms, HIGH ~1.5 ms)
+  - `pwm freq 2000` -> approximately 2 kHz / 75% (period ~0.5 ms, HIGH ~0.375 ms)
+- Final physical smoke state (`pwm duty 25`, `pwm freq 500`):
+  - Period: approximately 2 ms
+  - Frequency: approximately 500 Hz
+  - HIGH time: approximately 0.5 ms
+  - LOW time: approximately 1.5 ms
+  - Duty cycle: approximately 25%
+(Note: Visual estimations from time scale; detailed annotated cursor measurements belong to W04D03)
+
+### 9. Understanding Check
+
+The learner independently demonstrated and explained:
+- PSC controls counter tick rate ($f_{\text{counter}} = f_{\text{timer}} / (\text{PSC} + 1)$).
+- ARR defines PWM period count together with PSC ($f_{\text{PWM}} = f_{\text{timer}} / ((\text{PSC} + 1) \times (\text{ARR} + 1))$).
+- CCR controls the compare threshold and high-time in PWM Mode 1.
+- For upcounting PWM Mode 1 active-high: output is active while $\text{CNT} < \text{CCR}$ and inactive while $\text{CNT} \ge \text{CCR}$.
+- With fixed PSC and ARR, changing CCR adjusts duty cycle without affecting frequency.
+- Concrete arithmetic: ARR 999 / CCR 500 -> ~50%. To double frequency ARR-only: ARR 999 -> 499, CCR 500 -> 250 to preserve ~50%.
+- Preload and shadow register mental model: software writes to preload registers while active/shadow registers continue generating the current PWM cycle; the update event (UEV) synchronously transfers new values at period rollover, preventing runt pulses or corrupted waveforms.
+- Recognized that modifying ARR without adjusting CCR alters the duty ratio; improved frequency setter to preserve the direct $\text{CCR}/(\text{ARR}+1)$ ratio to minimize quantization loss.
+
+Self-check result: PASS as Day-2 learning evidence. What this day cannot claim: independent competency.
+
+### 10. Defects / Failed Tests
+
+Defect/Test IDs: NONE unresolved.
+
+Resolved bug during session: Overlong line handling deadlock/drop bug.
+- Root cause: The shell detected line overflow and immediately transmitted "ERR: Line too long" via blocking UART TX before the line was fully drained. Incoming characters arrived via IRQ into an 8-byte DROP_NEWEST ring buffer. While the CPU was blocked transmitting, incoming bytes overflowed the ring buffer and the terminating newline was dropped. `discarding_overlong` remained stuck true, causing the subsequent valid command to be consumed only to clear the discard state.
+- Resolution: Upon detecting line overflow, set `discarding_overlong = true` without blocking TX; continue draining all incoming line characters until newline is received; clear discard state; only then transmit "ERR: Line too long".
+- Retest: Overlong line generated "ERR: Line too long", immediately followed by `pwm status` which executed successfully with "PWM Freq: 1000 Hz, Duty: 50%". PASS.
+
+### 11. Carry-over
+
+From Week 3: Exactly one P1 carry-over remains — capture correct-baud UART wire
+timing / logic-analyzer evidence by 2026-09-06 (today's PWM capture does not close
+this UART timing carry-over).
+From W04D02: NONE.
+
+Closure criteria: MET.
+
+Recovery: ACTIVE EXECUTION RECOVERY — execution is behind canonical Week 4 calendar;
+stated recovery plan: 2026-09-05 W04D03 + W04D04; 2026-09-06 W04D05 + W04D06;
+2026-09-07 Foundation MCU Gate; canonical dates unchanged.
+
+Week 4 execution: W04D02 CLOSED; W04D03 NOT STARTED.
+
+### 12. Next Action
+
+BOOT W04D03 — measure PWM frequency and duty against calculations using the logic
+analyzer and create the annotated PWM capture.
