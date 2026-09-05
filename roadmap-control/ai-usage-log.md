@@ -1339,3 +1339,57 @@ No V3 competency PASS is imported.
 Fresh AI-0 verification is required before a V3 competency PASS. W01D07 now
 provides new independent evidence for `W01-C-FOUND`; it does not import or
 reclassify the pre-V3 evidence.
+
+
+---
+
+## 2026-09-05 — W04D03 PWM Measurement
+
+Highest AI level:
+AI-3
+
+What AI contributed:
+- Before meaningful learner work: AI-1/AI-2 theory and pre-check, PWM timer
+  mental-model review, calculation/reasoning questions and measurement planning.
+- After meaningful learner attempt: AI-3 review of calculations/measurements,
+  PulseView cursor guidance, mismatch interpretation, debugger workflow guidance,
+  runtime readback review, evidence selection and closure administration.
+- Executor visually verified four supplied screenshots, ran the fresh clean
+  build and populated the authorized evidence/control documents from session facts.
+
+Files/functions materially assisted:
+- learning/week-04/day-03/TODO_W04D03_PWM_MEASUREMENT.md
+- learning/week-04/day-03/PWM_MEASUREMENT_WORKSHEET_W04D03.md
+- learning/week-04/day-03/SUBMIT_W04D03.md
+- roadmap-control/current-state.md, daily-log.md, ai-usage-log.md
+- No firmware source or screenshot content modified.
+
+Core implementation code provided by AI:
+NO for W04D03; no code/calibration/retuning/compensation was introduced.
+
+Learner-owned contribution:
+- Independent pre-measurement derivation for 1 kHz / 25% (nominal 16 MHz;
+  PSC=15, ARR=999, CCR1=250; tick=1 us, T=1000 us, HIGH=250 us, LOW=750 us).
+- Physical 24 MHz PulseView capture, period/HIGH cursor placement and measurements.
+- Runtime ST-Link/GDB readback and physical 500 Hz cross-check.
+- Reasoning that common scaling discrepancy does not immediately prove a
+  firmware defect; supplied screenshots remain byte-for-byte learner evidence.
+
+Gate answer revealed:
+NO ACTIVE GATE; no independent competency answer supplied.
+
+Competency affected:
+Normal assisted learning evidence only; NO new COMPETENCY_PASS.
+W03-C-UART-FOUND — COMPETENCY_PASS remains the latest verified competency.
+
+Special retest:
+NOT REQUIRED for this normal learning closure; no new competency result awarded.
+
+External technical help outside Project Chat / Cowork:
+NO — learner supplied.
+
+Notes:
+- AI did not fabricate screenshots, physically measure, alter timer registers
+  or claim calibration/one proven source for the approximately 0.8% discrepancy.
+- Actual Focused Time: ~2h30m — learner estimate; no inference from timestamps.
+- Week 3 UART timing carry-over remains OPEN; W04D04 remains NOT STARTED.

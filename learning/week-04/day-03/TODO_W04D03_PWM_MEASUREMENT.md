@@ -4,20 +4,22 @@
 
 - Week/Day: W04D03; day type: LEARNING.
 - Preparation date: 2026-09-05. Canonical day-card date: 2026-09-02 (unchanged).
-- Preparation only; W04D03 remains NOT STARTED pending Project Chat verification.
+- Status: W04D03 GREEN / CLOSED / ARTIFACT_PASS — 2026-09-05 END DAY; AI-3 normal learning only.
 - Available Focused Time = 6h — learner supplied
 - Planned Focused Time: 6h maximum, stop earlier when authoritative stop condition is satisfied.
-- Actual Focused Time: NOT RECORDED.
+- Actual Focused Time: ~2h30m — learner estimate.
+- External technical help outside Project Chat / Cowork: NO.
+- Highest AI level used: AI-3.
 - AI mode: normal learning; AI-1/AI-2 before meaningful attempt, AI-3 review after attempt; not an AI-0 competency gate.
 - Prerequisite: W04D02 GREEN / CLOSED / ARTIFACT_PASS.
 - Primary outcome: learner calculates expected PWM timing, physically measures frequency/duty with the logic analyzer, compares expected versus observed, investigates discrepancies, and produces genuine annotated PWM measurement evidence.
-- Executor contribution: neutral preparation documents and baseline build validation only; no learner answers or evidence.
+- Executor contribution: neutral preparation, fresh baseline build, visual evidence verification and authorized closure transcription/control updates. Learner screenshots and firmware preserved; no physical measurements or new learner answers supplied.
 
 ## Authority and scope
 
 Sources, in precedence order: `docs/system/SYSTEM_SPEC_V3.md` (3.0.0),
 `docs/system/EMBEDDED_ROADMAP_V3.1.docx` (Week 4, Day 3: “Đo tín hiệu và đối chiếu tính toán”),
-`docs/system/MASTER_PROMPT_V3.md` (3.1.3), and `roadmap-control/current-state.md` (3.0.44).
+`docs/system/MASTER_PROMPT_V3.md` (3.1.3), and `roadmap-control/current-state.md` (3.0.45 at closure; 3.0.44 at preparation).
 The execution runbook and review log govern operational context, not new scoring rules.
 
 MUST items below trace to the day card, higher-authority evidence/AI rules, or
@@ -26,7 +28,7 @@ a measured case, or arbitrary percent-error threshold is introduced.
 
 - W04D01 and W04D02 remain CLOSED / ARTIFACT_PASS.
 - Latest verified competency remains W03-C-UART-FOUND — COMPETENCY_PASS; no active gate.
-- Active execution recovery remains in place; this preparation changes no schedule or control record.
+- Active execution recovery remains in place; canonical schedule unchanged. W04D04 remains NOT STARTED.
 - Week 3 P1 correct-baud UART wire-timing evidence remains due 2026-09-06. PWM evidence does not close it.
 - No W04D04 DMA or HardFault work belongs to this pack.
 
@@ -37,7 +39,7 @@ a measured case, or arbitrary percent-error threshold is introduced.
 - Existing W04D02 TODO/submission for context; independently confirm the current configuration rather than treating historical values as a new measurement.
 - Official references for the actual board, clock, timer mode, pin and analyzer electrical limits. Record what was verified; do not assume hardware setup from this scaffold.
 
-## MUST — learner measurement workflow after Project Chat verification
+## Original MUST workflow — retained contract
 
 1. Record the selected target configuration and command sequence in the worksheet. Independently confirm clock/timer data and measurement wiring from the actual setup and applicable official sources.
 2. Calculate expected tick, period, frequency, HIGH/LOW time and duty before the physical measurement. Include units and the assumptions used.
@@ -61,7 +63,7 @@ a measured case, or arbitrary percent-error threshold is introduced.
 - Evidence metadata must allow the reviewer to identify what/when, hardware, tool/version, command/configuration, expected/actual, AI level and known limitations (Master Prompt section 59). Unknown facts stay explicitly unknown.
 - Never infer actual focused time, hardware observations or understanding from this preparation or its build result.
 
-## Authoritative stop condition — later learner session
+## Authoritative stop condition
 
 Stop when the genuine annotated PWM capture exists, expected/observed are recorded,
 open issues are visible, and one next action of 5–15 minutes for the following
@@ -70,7 +72,7 @@ explain 2–3 core points or predict a small case with AI/documents closed. If u
 report YELLOW/UNVERIFIED for review; do not hide it behind a build log.
 No arbitrary tolerance or second configuration is a new daily PASS criterion.
 Reaching the time limit without required evidence is not completion.
-Project Chat assesses closure; this pack awards neither ARTIFACT_PASS nor a new COMPETENCY_PASS.
+The authorized END DAY records ARTIFACT_PASS from completed learning evidence; no new COMPETENCY_PASS is awarded.
 
 ## SHOULD / NON-SCORING
 
@@ -86,8 +88,23 @@ Project Chat assesses closure; this pack awards neither ARTIFACT_PASS nor a new 
 - Do not substitute a W04D02 screenshot or UART shell readout for newly claimed measurement evidence.
 - No firmware edits, control/log/ledger/scorecard updates, carry-over closure, gate activation or push in this preparation transaction.
 
-## Preparation handoff
+## END DAY evidence disposition
 
-Exact next action: return this repository preparation to Project Chat for independent
-verification. Do not begin learner technical work from this pack until Project Chat
-verifies preparation and completes the Day Contract.
+- [x] Learner prediction recorded: Case A nominal 16 MHz / PSC=15 / ARR=999 / CCR1=250; 1 kHz / 25% expected timing.
+- [x] Genuine 24 MHz PulseView period/HIGH measurements: Screenshot_1.png and Screenshot_2.png.
+- [x] Runtime register readback: Screenshot_3.png; source and readback kept distinct from calibrated physical-clock claims.
+- [x] Optional 500 Hz cross-check completed: Screenshot_4.png; remains NON-SCORING as an extra case.
+- [x] Expected/observed and approximately 0.8% discrepancy documented in the completed worksheet; no sole HSI/analyzer root cause claimed.
+- [x] Existing learner cursor annotations retained byte-for-byte; no generated replacement images.
+- [x] Fresh clean build PASS / exit 0, text=4876, data=0, bss=1592; inherited nosys warnings only.
+- [x] Submission and required daily/AI/current-state closure records populated from authorized session facts.
+- Understanding evidence: learner-owned derivation and common-scaling reasoning preserved as a session summary; no verbatim closed-book answer or new scored self-check is invented.
+- Code boundary/error check: not applicable to this source-unchanged measurement day; no new coding requirement added.
+- Remaining issue: unseparated timing-reference contributions; no unresolved firmware defect demonstrated.
+- Preparation restrictions above describe the earlier prep transaction; this separately authorized END DAY permits closure records, one commit and feature-only push.
+
+## Closure handoff
+
+Exact next action: BOOT W04D04 only after Project Chat independently verifies this
+END DAY report. First 5–15 minutes: verify closure, read the W04D04 card and complete
+the next Day Contract. W04D04 remains NOT STARTED here.

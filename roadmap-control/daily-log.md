@@ -3941,7 +3941,7 @@ GREEN / CLOSED / ARTIFACT_PASS
 
 ### 3. Focused Time
 
-Planned: Work through W04D02 stop condition before 22:30; exact numeric hours not recorded
+Planned: Work through W04D02 stop condition before 22:30
 Actual: NOT RECORDED — learner did not supply exact numeric hours; do not infer from timestamps
 
 ### 4. Independent Work
@@ -4098,3 +4098,123 @@ Week 4 execution: W04D02 CLOSED; W04D03 NOT STARTED.
 
 BOOT W04D03 — measure PWM frequency and duty against calculations using the logic
 analyzer and create the annotated PWM capture.
+
+
+---
+
+## 2026-09-05 — Week 04 / Day 03
+
+### 1. Planned Outcome
+
+Measure PWM frequency/duty with the logic analyzer against learner calculations,
+characterize discrepancies and retain genuine annotated PWM capture evidence.
+Canonical W04D03 date remains 2026-09-02; execution completed 2026-09-05.
+
+### 2. Actual Status
+
+GREEN / CLOSED / ARTIFACT_PASS
+
+Normal assisted learning only; W04D04 NOT STARTED; no active competency gate.
+
+### 3. Focused Time
+
+Available: 6h — learner supplied at BOOT
+Planned: maximum 6h; stop earlier when authoritative W04D03 stop condition is satisfied
+Actual: ~2h30m — learner estimate
+
+External technical help outside Project Chat / Cowork: NO.
+No time was inferred from timestamps, screenshots or Git history.
+
+### 4. Independent Work
+
+Learner independently derived Case A (nominal TIM2CLK=16 MHz, PSC=15, ARR=999,
+CCR1=250, tick=1 us, period=1000 us, frequency=1000 Hz, HIGH=250 us, LOW=750 us,
+duty=25%) before measurement. Learner acquired the 24 MHz PulseView capture,
+placed period/HIGH cursors, performed ST-Link/GDB runtime readback and physically
+cross-checked 500 Hz. Learner reasoned that common scaling should not immediately
+be labeled a firmware defect. No firmware source change was needed.
+
+### 5. AI Usage
+
+Highest AI level used: AI-3
+What AI helped with: AI-1/AI-2 theory/pre-check, timer mental model, calculation
+questions and measurement planning before meaningful work; AI-3 calculation and
+measurement review, cursor/debugger guidance, mismatch interpretation, runtime
+readback review, evidence selection and closure administration after attempt.
+Files/functions materially assisted: W04D03 worksheet, submission, TODO and
+daily/AI/current-state records; no firmware function modified.
+Competencies contaminated: NONE newly awarded; W04D03 is assisted artifact evidence.
+Independent retest required: NOT REQUIRED for this normal learning closure; no new competency PASS.
+
+### 6. Artifact Result
+
+Files changed: three W04D03 Markdown documents, four learner PNG screenshots,
+and roadmap-control/current-state.md, daily-log.md, ai-usage-log.md; exact paths
+listed in learning/week-04/day-03/SUBMIT_W04D03.md.
+Build command: `powershell -ExecutionPolicy Bypass -File .\build.ps1 -Clean`
+from `firmware/stm32/w04d02-pwm-uart-shell/`.
+Build result: fresh PASS / exit 0; text=4876, data=0, bss=1592, dec=6468, hex=1944;
+inherited non-blocking nosys warnings _close, _lseek, _read, _write only.
+Test result: physical evidence verified from learner screenshots; no executor
+hardware run, firmware repair or additional code test requirement.
+
+### 7. Evidence
+
+Commit: SELF — containing closure commit
+Firmware base: a412a7909611673e3f91293449310aa2629d16c6, source unchanged.
+Captures:
+- learning/week-04/day-03/Screenshot_1.png — Case A period/frequency cursors.
+- learning/week-04/day-03/Screenshot_2.png — Case A HIGH-time cursors.
+- learning/week-04/day-03/Screenshot_3.png — runtime PSC/ARR/CCR1/CFGR readback.
+- learning/week-04/day-03/Screenshot_4.png — 500 Hz period/frequency cross-check.
+Reports: learning/week-04/day-03/PWM_MEASUREMENT_WORKSHEET_W04D03.md and SUBMIT_W04D03.md.
+Screenshots preserve learner tool annotations without executor edits; native
+acquisition file, calibrated reference and exact tool revisions are not supplied.
+
+### 8. Measurements
+
+Expected Case A: 1000 Hz / 25%, period 1000 us, HIGH 250 us, LOW 750 us.
+Observed Case A: period approximately 991.913 us; frequency approximately
+1008.153 Hz; HIGH approximately 247.917 us; derived duty approximately 25.0%.
+Errors: period -0.81%, frequency +0.82%, HIGH -0.83%.
+Readback: PSC=0x0000000f (15), ARR=0x000003e7 (999), CCR1=0x000000fa (250),
+RCC->CFGR=0x00000000. Source SystemCoreClock=16000000U is nominal, not calibration.
+Expected Case B: target 500 Hz / 25%, period 2000 us.
+Observed Case B: period approximately 1984.864 us, frequency approximately
+503.813 Hz; errors -0.76% period / +0.76% frequency.
+Raw UI display strings are retained in the worksheet without claiming that
+all displayed digits represent physical accuracy. No separate LOW measurement claimed.
+
+### 9. Understanding Check
+
+Session-summary evidence: learner-owned pre-measurement timer derivation and
+reasoning that similar fractional timing discrepancy across both cases does not
+prove a frequency-specific firmware defect. Verbatim self-check answers are not
+supplied to the executor and are not reconstructed or independently scored.
+Unresolved explanation: MCU and analyzer reference contributions cannot be
+separated by the available evidence. This normal learning record awards no competency.
+
+### 10. Defects / Failed Tests
+
+Defect/Test IDs: No unresolved firmware defect demonstrated.
+Root cause known?: No sole root cause established; residual common reference/time-base
+discrepancy is characterized. No calibration, compensation or PSC/ARR retuning.
+Current hypothesis: common time-base/reference scaling discrepancy, consistent
+with approximately 0.8% faster waveform and approximately unchanged duty ratio.
+HSI alone and analyzer alone are not proven causes. SystemCoreClock symbol lookup
+unavailable in the final ELF context is a debugger observation, not a technical defect.
+
+### 11. Carry-over
+
+Task: Week 3 exactly one P1 correct-baud UART wire-timing evidence item remains OPEN,
+due 2026-09-06. PWM evidence does not close the UART item.
+Closure criteria: genuine UART logic-analyzer capture or equivalent direct
+measurement demonstrating configured baud/timing; unchanged.
+From W04D03: no new blocking carry-over; residual reference uncertainty documented.
+Recovery: ACTIVE EXECUTION RECOVERY; existing plan/canonical dates unchanged.
+W04D04 NOT STARTED. Latest competency remains W03-C-UART-FOUND — COMPETENCY_PASS.
+
+### 12. Next Action
+
+BOOT W04D04 only after Project Chat independently verifies this END DAY report;
+first 5–15 minutes: verify closure and establish the W04D04 Day Contract.

@@ -1,11 +1,11 @@
 # CURRENT STATE V3 — EMBEDDED/FIRMWARE ROADMAP
 
 **Document ID:** `CURRENT_STATE_V3`
-**Version:** `3.0.44`
+**Version:** `3.0.45`
 **State type:** Operational snapshot — describes reality and creates no new policy
-**Generated at:** `2026-09-04`
+**Generated at:** `2026-09-05`
 **Timezone:** `Asia/Ho_Chi_Minh`
-**Status:** `W04D02 GREEN / CLOSED / ARTIFACT_PASS; Week 3 CONDITIONAL PASS / CLOSED; W04D03 NOT STARTED`
+**Status:** `W04D03 GREEN / CLOSED / ARTIFACT_PASS; Week 3 CONDITIONAL PASS / CLOSED; W04D04 NOT STARTED`
 
 ---
 
@@ -14,18 +14,18 @@
 - **System Spec version:** `SYSTEM_SPEC_V3 3.0.0`
 - **Roadmap version:** `EMBEDDED_ROADMAP_V3.1 3.1.0`
 - **Master Prompt version:** `MASTER_PROMPT_V3 3.1.3`
-- **Current State version:** `3.0.44`
+- **Current State version:** `3.0.45`
 - **Implementation runbook:** `roadmap-control/execution-runbook.md` — `NON-AUTHORITATIVE`
 
 If this file conflicts with a higher-authority source, the higher-authority source wins.
 
 ## Positions
 
-- **Calendar position:** `2026-09-04 — calendar drift beyond W04D02; W04D02 closed; W04D03 next`
-- **Execution position:** `W04D02 CLOSED / ARTIFACT_PASS; Week 3 CONDITIONAL PASS / CLOSED; W04D03 NOT STARTED`
-- **Artifact position:** `W04D02 PWM UART shell demo complete: TIM2_CH1 / PA5, default ~1 kHz / 50%, runtime frequency/duty control, physical logic-analyzer evidence, negative and recovery tests`
+- **Calendar position:** `2026-09-05 — W04D03 completed after canonical 2026-09-02; W04D04 next; canonical dates unchanged`
+- **Execution position:** `W04D03 CLOSED / ARTIFACT_PASS; Week 3 CONDITIONAL PASS / CLOSED; W04D04 NOT STARTED`
+- **Artifact position:** `W04D03 PWM measurement complete: annotated 1 kHz / 25% period/HIGH capture, runtime register readback and 500 Hz cross-check; approximately 0.8% common reference discrepancy characterized`
 - **Competency position:** `W03-C-UART-FOUND — COMPETENCY_PASS`
-- **Last artifact PASS:** `W04D02 PWM UART shell demo complete`, evidence at `learning/week-04/day-02/Screenshot_1.png`, `learning/week-04/day-02/Screenshot_2.png`, `learning/week-04/day-02/Screenshot_3.png`
+- **Last artifact PASS:** `W04D03 PWM measurement / annotated capture`, evidence at `learning/week-04/day-03/Screenshot_1.png`, `learning/week-04/day-03/Screenshot_2.png`, `learning/week-04/day-03/Screenshot_3.png`, `learning/week-04/day-03/Screenshot_4.png`
 - **Last daily assessment PASS:** `W03D07 UART IRQ / parser competency gate — 87/100 PASS / AI-0 CLEAN`, evidence at `learning/week-03/day-07/ASSESSMENT_RESULT_W03D07.md`
 - **Last competency PASS:** `W03-C-UART-FOUND — COMPETENCY_PASS (2026-08-31)`
 
@@ -34,11 +34,13 @@ If this file conflicts with a higher-authority source, the higher-authority sour
 - **Competencies verified:** `W01-C-FOUND — Embedded C foundation (2026-08-15); W02-C-MCU-FOUND — Cortex-M startup, GPIO, and EXTI foundations (2026-08-23); W03-C-UART-FOUND — UART IRQ, ring buffer, and bounded parser foundations (W03D07 AI-0 gate 87/100 PASS, 2026-08-31)`
 - **Competencies unverified:** `NONE currently recorded for completed Week 1 through Week 3 P0 foundations`
 - **Competencies invalidated/retest required:** The W02D07 original Week 2 gate attempt remains historical `INVALID / RETEST REQUIRED` because external reference lookup occurred during that scored closed-book phase. It was not a technical competency FAIL and is not rewritten. The separate fresh unseen retest passed under a prospectively declared allowed-reference contract and validly awarded `W02-C-MCU-FOUND`.
-- **Current AI mode:** `NONE — W03D07 scored phase closed AI-0 CLEAN; post-close review/administration used AI-3`
+- **Current AI mode:** `NONE ACTIVE — W04D03 normal learning closed with highest AI-3; no active gate`
 - **AI-contaminated evidence:** Assisted learning evidence remains separated from independent competency evidence. Detailed per-day assistance for W01D01–W03D06 is preserved in `roadmap-control/ai-usage-log.md`; those assisted artifacts do not independently award competency. W01D06/W01D07 scored phases and the valid W02D07 fresh retest retain their recorded AI-0 boundaries. The W03D07 scored phase was AI-0 CLEAN and independently awards `W03-C-UART-FOUND`; AI-3 review/administration began only after gate closure.
 - **W03D06 AI integrity note:** Executor prepared neutral starter/report infrastructure. Project Chat performed the pre-check and post-attempt evidence review. The learner supplied expected behavior, known facts, unknowns, H1, reproduction design, and measurement plan before the physical run. AI later suggested the concrete temporary foreground busy-delay mechanism, but supplied no ring-buffer algorithm patch. W03D06 remains AI-3 artifact evidence only and creates no competency result.
 - **W03D07 AI integrity note:** The 65-minute scored phase used AI-0 with paper/pen and ordinary calculator only; scored assistance was NONE. Learner declaration after close was `CLEAN ko dùng bất kì cái gì ngoài máy tình cầm tay`, normalized only as metadata to `CLEAN — no AI/search/notes/other person; ordinary calculator only.` Raw answers are preserved verbatim. AI-3 review and closure administration began only after `CLOSE GATE`.
 - **W02D07 integrity note:** The learner disclosed external lookup of some register names during the original scored phase. The declared contract prohibited documentation/search, so that attempt remains historical `INVALID / RETEST REQUIRED`. A separate fresh unseen retest used a prospectively declared AI-0 contract allowing official manual/datasheet/vendor-header lookup only for register/bitfield/IRQ names; learner integrity declaration was `CLEAN`, technical result `PASS`, and official result `COMPETENCY PASS`. Post-close AI-3 career/admin/evidence assistance does not replace the scored answers.
+
+- **W04D03 AI integrity note:** Learner owned prediction, physical capture/cursors, runtime register readback, cross-check and common-scaling reasoning. AI-1/AI-2 preceded meaningful work; AI-3 review/debugger/cursor guidance and closure administration followed attempt. No new competency result; no firmware or screenshot alteration.
 
 ## Outcome and Gates
 
@@ -62,7 +64,9 @@ If this file conflicts with a higher-authority source, the higher-authority sour
 - **Week 2 career baseline:** `PASS — CV master skeleton + GitHub profile draft complete; public README NOT DEPLOYED`
 - **Week 2 MASTER CHECK:** `PASS WITH LOW FINDINGS — BLOCKER NONE / HIGH NONE`
 - **Week 3:** `CONDITIONAL PASS / CLOSED`
-- **Week 4 eligibility:** `YES — ACTIVE; W04D02 CLOSED; W04D03 NOT STARTED`
+- **Week 4 eligibility:** `YES — ACTIVE; W04D03 CLOSED; W04D04 NOT STARTED`
+- **W04D03:** `GREEN / CLOSED / ARTIFACT_PASS — AI-3; normal assisted measurement evidence only; NO new competency PASS`
+- **W04D04:** `NOT STARTED`
 - **W04D02:** `GREEN / CLOSED / ARTIFACT_PASS — AI-3; NOT independent competency evidence; TIM2_CH1 PA5 default ~1 kHz / 50% PWM, runtime shell control (10–100000 Hz, 0–100% duty), negative/recovery tests verified on hardware`
 - **W04D01:** `GREEN / CLOSED / ARTIFACT_PASS — AI-3; NOT independent competency evidence; initial ~88.9 Hz measurement debugged to 16 MHz clock tree; corrected PSC=15 ARR=999 verified on logic analyzer (~500 Hz / ~2 ms)`
 - **W03D01:** `GREEN / CLOSED / ARTIFACT_PASS — AI-3; NOT independent competency evidence`
@@ -80,17 +84,17 @@ If this file conflicts with a higher-authority source, the higher-authority sour
 ## Repository
 
 - **Repo URL:** `https://github.com/MinhSit/embedded-firmware-journey-v3`
-- **Branch:** `feature/w04d02-pwm-uart-shell`
-- **Artifact closure:** W04D02 PWM UART shell END DAY transaction; containing commit recorded as `SELF — containing closure commit`. Learner evidence, pwm.c, and main.c preserved without semantic modification.
+- **Branch:** `feature/w04d03-pwm-measurement`
+- **Artifact closure:** W04D03 PWM measurement END DAY transaction; commit `SELF — containing closure commit`. Four learner screenshots preserved byte-for-byte; firmware unchanged versus W04D02 base `a412a7909611673e3f91293449310aa2629d16c6`.
 - **Current operational HEAD:** Resolve from the Git repository at `BOOT`.
 - **Release:** `uart-shell-v0.1 — annotated Week 3 milestone tag on the containing closure commit`
 
 ## Latest Build and Test
 
-- **Latest validation path:** `learning/week-04/day-02/Screenshot_1.png`, `learning/week-04/day-02/Screenshot_2.png`, `learning/week-04/day-02/Screenshot_3.png`, and `firmware/stm32/w04d02-pwm-uart-shell/`.
+- **Latest validation path:** `learning/week-04/day-03/Screenshot_1.png` through `Screenshot_4.png`, completed W04D03 worksheet/submission, and `firmware/stm32/w04d02-pwm-uart-shell/`.
 - **Build/test command:** `powershell -ExecutionPolicy Bypass -File .\build.ps1 -Clean` from `firmware/stm32/w04d02-pwm-uart-shell/`.
 - **Latest build/test result:** STM32 clean build PASS / exit 0 with `text=4876`, `data=0`, `bss=1592`, `dec=6468`, `hex=1944`; only inherited non-blocking `nosys` warnings for `_close`, `_lseek`, `_read`, and `_write`.
-- **Latest demo result:** Learner-supplied physical NUCLEO-F446RE capture with 8-channel logic analyzer via PulseView (`Screenshot_1.png`, `Screenshot_2.png`) and VS Code Serial Monitor (`Screenshot_3.png`): default startup ~1 kHz / 50% PWM on PA5 (TIM2_CH1 / LD2); runtime UART shell command control over frequency (10 Hz .. 100 kHz) and duty (0% .. 100%); successful verification of 1 kHz 25%/75%, 500 Hz 75%, 2 kHz 75%, and final 500 Hz / 25% (period ~2 ms, HIGH ~0.5 ms, LOW ~1.5 ms); clean rejection of invalid arguments, non-numeric strings, syntax errors, and uint32 overflow; overlong-line RX/TX integration bug resolved during session.
+- **Latest demo result:** Learner PulseView 24 MHz measurement: Case A target 1 kHz / 25%, observed period approximately 991.913 us, frequency 1008.153 Hz, HIGH 247.917 us, derived duty approximately 25.0%; runtime PSC=15, ARR=999, CCR1=250, RCC->CFGR=0. Case B target 500 Hz, observed period approximately 1984.864 us / 503.813 Hz. Approximately 0.8% common time-base/reference scaling discrepancy; no sole HSI/analyzer cause established, no calibration or firmware compensation. Details and limitations in the W04D03 worksheet.
 - **Earlier W03D06 evidence retained:** controlled UART RX/ring-buffer overflow debug story with measured `overflow_count = 12`, post-overload recovery, and clean regression.
 - **Earlier W02D02 evidence retained:** startup-sequence artifact plus supplemental host startup-simulator validation remained `ARTIFACT_PASS` with `30/30` individual cases PASS.
 
@@ -110,12 +114,12 @@ If this file conflicts with a higher-authority source, the higher-authority sour
 
 ## Schedule, Load, and Risk
 
-- **Schedule variance:** `W04D02 completed on 2026-09-04 with calendar drift from 2026-09-01; W04D02 closed; W04D03 next; Available Focused Time was window through 22:30; Planned Focused Time was work through stop condition before 22:30; Actual Focused Time was NOT RECORDED (do not infer from timestamps)`
+- **Schedule variance:** `W04D03 completed on 2026-09-05 after canonical 2026-09-02; W04D04 NOT STARTED; Available Focused Time: 6h — learner supplied; Planned Focused Time: maximum 6h, stop on authoritative condition; Actual Focused Time: ~2h30m — learner estimate; external technical help outside Project Chat / Cowork: NO`
 - **Recovery status:** `ACTIVE EXECUTION RECOVERY — execution is behind canonical Week 4 calendar; learner recovery plan: 2026-09-05 W04D03 then W04D04 as separate closures; 2026-09-06 W04D05 then W04D06 as separate closures; 2026-09-07 Foundation MCU Gate; only after a PASS gate may W05D01 start. Canonical roadmap dates remain unchanged; recorded as execution/recovery scheduling, not a roadmap revision.`
 - **Critical path risk:** `P1 evidence carry-over due 2026-09-06`; no P0 blocker exists and Week 4 eligibility is unaffected.
 - **Weekly scorecard:** `roadmap-control/weekly-scorecards/week-03.md — CONDITIONAL PASS / CLOSED`
 - **Career pipeline:** `Week 2 baseline PASS — CV master skeleton + ready-to-publish GitHub profile draft complete; public profile README NOT DEPLOYED`
-- **Health/load:** `2 — sustainable — learner supplied`; learner statement `sức khoẻ rất ổn`; W04D01 Actual Focused Time `NOT RECORDED` and not inferred. Recovery remains inactive.
+- **Health/load:** `2 — sustainable — learner supplied`; learner statement `sức khoẻ rất ổn`; W04D01 Actual Focused Time `NOT RECORDED` and not inferred. Execution recovery remains active as recorded above; no new health/load value supplied for W04D03.
 
 ## Forward Control
 
@@ -125,8 +129,15 @@ If this file conflicts with a higher-authority source, the higher-authority sour
 - **Roadmap calendar start for Week 2:** `2026-08-17`
 - **Hard deadline:** `2026-12-14 — project v1.0`
 - **Scope cuts:** `NONE active`. If schedule lag occurs later, apply roadmap-defined cut order: cut P2 first, reduce P1 polish, preserve P0.
-- **Exact Next Action:** `BOOT W04D03 — measure PWM frequency and duty against calculations using the logic analyzer and create the annotated PWM capture`
+- **Exact Next Action:** `BOOT W04D04 — only after Project Chat independently verifies the W04D03 END DAY report; establish the Day Contract for DMA concepts/mini-lab`
 - **Files/links to inspect first:**
+  - `learning/week-04/day-03/SUBMIT_W04D03.md`
+  - `learning/week-04/day-03/PWM_MEASUREMENT_WORKSHEET_W04D03.md`
+  - `learning/week-04/day-03/TODO_W04D03_PWM_MEASUREMENT.md`
+  - `learning/week-04/day-03/Screenshot_1.png`
+  - `learning/week-04/day-03/Screenshot_2.png`
+  - `learning/week-04/day-03/Screenshot_3.png`
+  - `learning/week-04/day-03/Screenshot_4.png`
   - `learning/week-04/day-02/Screenshot_1.png`
   - `learning/week-04/day-02/Screenshot_2.png`
   - `learning/week-04/day-02/Screenshot_3.png`
@@ -141,7 +152,7 @@ If this file conflicts with a higher-authority source, the higher-authority sour
   - `roadmap-control/competency-ledger.md`
   - `roadmap-control/ai-usage-log.md`
   - `roadmap-control/daily-log.md`
-  - `docs/system/EMBEDDED_ROADMAP_V3.1.docx` — W03D07 competency-gate day card
+  - `docs/system/EMBEDDED_ROADMAP_V3.1.docx` — W04D04 day card; Foundation MCU gate remains future/not active
   - `learning/week-03/day-06/TODO_W03_D06.md`
   - `learning/week-03/day-06/DEBUG_REPORT_W03_D06.md`
   - `learning/week-03/day-07/RAW_COMPETENCY_SUBMISSION_W03D07.md`
