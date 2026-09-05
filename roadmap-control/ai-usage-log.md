@@ -1393,3 +1393,62 @@ Notes:
   or claim calibration/one proven source for the approximately 0.8% discrepancy.
 - Actual Focused Time: ~2h30m — learner estimate; no inference from timestamps.
 - Week 3 UART timing carry-over remains OPEN; W04D04 remains NOT STARTED.
+
+---
+
+## 2026-09-05 — W04D04 DMA Concepts / Mini-Lab
+
+Highest AI level:
+AI-3
+
+Chronology / what AI contributed:
+1. Learner completed the DMA pre-check reasoning independently.
+2. Learner made meaningful register-level implementation attempts before targeted code review.
+3. Project Chat reviewed the implementation after the attempt.
+4. Project Chat guided debugger setup and interpretation of the captured evidence.
+5. Learner performed register implementation, flash/debug, the success test,
+   predicted and ran the intentional `MINC=0` negative test, then restored
+   `MINC=1` in final source.
+6. Cowork generated the neutral starter scaffold before learner implementation
+   and handled END DAY validation/bookkeeping after learner work.
+
+Files/functions materially assisted:
+- `learning/week-04/day-04/TODO_W04D04_DMA.md`
+- `learning/week-04/day-04/SUBMIT_W04D04.md`
+- `firmware/stm32/w04d04-dma-mini-lab/PROVENANCE.md`
+- `roadmap-control/current-state.md`, `daily-log.md`, `ai-usage-log.md`
+- Cowork removed trailing whitespace only from `dma_m2m.c` lines 20, 21 and 68;
+  no semantic learner-source change was made.
+
+Core implementation code provided by AI:
+NO. The learner owned the DMA2 M2M register configuration, implementation,
+debugging and final restoration. Project Chat review occurred after meaningful attempts.
+
+Learner-owned contribution:
+- Source/destination, direction, increment, NDTR, normal/circular, lifetime and
+  ownership reasoning, including half-buffer/ping-pong concept transfer.
+- DMA2 M2M normal-mode implementation with static SRAM source/destination,
+  `PINC=1`, final `MINC=1`, 32-bit widths, initial `NDTR=4`, and FIFO enabled.
+- Hardware/debugger success evidence: `{10,20,30,40}`, `NDTR=0`, `EN=0`,
+  `TCIF=1`, `TEIF=0`, `FEIF=0`, `timed_out=0`.
+- Pre-execution negative prediction and confirmed `MINC=0` result
+  `{40,0,0,0}`, followed by restoration of final correct source.
+
+Gate answer revealed:
+NO ACTIVE GATE; W04D04 was normal learning and no independent competency answer was supplied.
+
+Competency affected:
+Normal assisted learning evidence only; NO new COMPETENCY_PASS.
+`W03-C-UART-FOUND — COMPETENCY_PASS` remains the latest verified competency.
+
+Special retest:
+NOT REQUIRED for this normal learning closure; no competency result was awarded.
+
+External technical help outside Project Chat / Cowork:
+NO such help reported.
+
+Notes:
+- Actual Focused Time: 2h15 — learner supplied; no inference from timestamps.
+- Planned Focused Time was not persisted at BOOT and is not reconstructed.
+- Evidence images were visually verified and retained without edits.
+- Week 3 UART timing carry-over remains OPEN; W04D05 remains NOT STARTED.

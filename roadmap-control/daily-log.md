@@ -4218,3 +4218,125 @@ W04D04 NOT STARTED. Latest competency remains W03-C-UART-FOUND — COMPETENCY_PA
 
 BOOT W04D04 only after Project Chat independently verifies this END DAY report;
 first 5–15 minutes: verify closure and establish the W04D04 Day Contract.
+
+
+---
+
+## 2026-09-05 — Week 04 / Day 04
+
+### 1. Planned Outcome
+
+Learn DMA transfer direction, normal/circular mode, NDTR/count, buffer lifetime
+and ownership; complete a DMA note OR a minimal transfer demo. The learner chose
+and completed a bounded STM32F446RE DMA2 memory-to-memory normal-mode demo.
+Canonical W04D04 date remains 2026-09-03; execution completed 2026-09-05.
+
+### 2. Actual Status
+
+GREEN / CLOSED / ARTIFACT_PASS
+
+Normal assisted learning only; W04D05 NOT STARTED; no active competency gate.
+
+### 3. Focused Time
+
+Available: 3h30 — learner supplied
+Planned: UNRECOVERABLE PROCESS VARIANCE — not persisted at BOOT; not reconstructed at closure
+Actual: 2h15 — learner supplied
+
+Health/load: UNRESOLVED — no W04D04-specific learner value was supplied; none inferred.
+External technical help outside Project Chat / Cowork: NO such help reported.
+No time or health/load value was inferred from timestamps, screenshots or Git history.
+
+### 4. Independent Work
+
+The learner completed the pre-check reasoning and made meaningful implementation
+attempts before targeted review. The learner owned DMA2 register configuration,
+hardware/debugger execution, success observation, the pre-execution prediction
+for an intentional `MINC=0` negative case, execution of that case, interpretation
+of the result, and restoration of `MINC=1` in final source.
+
+### 5. AI Usage
+
+Highest AI level used: AI-3
+What AI helped with: Project Chat supplied theory/pre-check, then post-attempt
+code review, debugger setup guidance and evidence interpretation. Cowork prepared
+neutral starter infrastructure and performed closure validation/bookkeeping.
+Core learner implementation provided by AI: NO.
+Competencies contaminated: NONE newly awarded; W04D04 is assisted artifact evidence.
+Independent retest required: NOT REQUIRED for this normal learning closure; no competency PASS awarded.
+
+### 6. Artifact Result
+
+Artifact: STM32F446RE DMA2 memory-to-memory normal-mode minimal hardware demo
+with success and intentional negative-configuration debugger evidence.
+
+Build command: `powershell -ExecutionPolicy Bypass -File .\build.ps1 -Clean`
+from `firmware/stm32/w04d04-dma-mini-lab/`.
+
+Build result: PASS / exit 0; text=1056, data=16, bss=1624, dec=2696, hex=a88;
+only inherited non-blocking `nosys` warnings `_close`, `_lseek`, `_read`, `_write`.
+
+Executor source mutation: purely mechanical trailing-whitespace removal from
+`dma_m2m.c` lines 20, 21 and 68; no token, register sequence or behavior change.
+
+### 7. Evidence
+
+Commit: SELF — containing closure commit
+
+- `learning/week-04/day-04/Screenshot_1.png` — pre-enable configuration support:
+  SRAM `PAR=0x20000000`, `M0AR=0x20000054`, `NDTR=4`, `EN=0`, `PINC=1`,
+  `MINC=1`, `DMDIS=1`.
+- `learning/week-04/day-04/Screenshot_2.png` — success post-transfer result.
+- `learning/week-04/day-04/Screenshot_3.png` — intentional `MINC=0` negative result.
+- `learning/week-04/day-04/TODO_W04D04_DMA.md` and `SUBMIT_W04D04.md` —
+  expected/observed, ownership, provenance and limitation records.
+
+All three PNGs were visually verified and retained byte-for-byte. The executor
+did not rerun the physical hardware test, edit screenshots or fabricate evidence.
+
+### 8. Measurements
+
+Success case: DMA2 M2M normal mode; SRAM source/destination; `PINC=1`, `MINC=1`,
+32-bit source/destination widths; initial `NDTR=4`; FIFO enabled/direct mode
+disabled. Expected and observed destination: `{10,20,30,40}`. Final observation:
+`NDTR=0`, `EN=0`, `TCIF=1`, `TEIF=0`, `FEIF=0`, `timed_out=0`.
+
+Intentional negative case: `MINC=0`, `PINC=1`. Learner predicted all four stores
+would overwrite `dst[0]`, producing `{40,0,0,0}` while DMA still reached Transfer
+Complete. Observed destination `{40,0,0,0}`, `NDTR=0`, `EN=0`, `TCIF=1`,
+`TEIF=0`, `FEIF=0`, `timed_out=0`. Final source restores `MINC=1`.
+
+### 9. Understanding Check
+
+Project Chat verified the learner's mental model for source/destination direction,
+increment behavior, NDTR as remaining-item count, normal/circular behavior,
+buffer lifetime and CPU/DMA ownership, including static/global versus stack
+lifetime and half-buffer/ping-pong ownership at concept level.
+
+Core lesson: Transfer Complete means DMA completed the configured transfer; it
+does not prove the application-level output is semantically correct. This was
+normal AI-3 learning, not an independent competency assessment.
+
+### 10. Defects / Failed Tests
+
+P0 blocker: NONE discovered.
+
+Known limitations/characteristics: hard-coded internal source/destination data;
+the request parameter remains unused; polling only; no DMA interrupt, circular
+implementation or production driver claim. Post-snapshot flag clearing leaves
+`HTIF` for the next invocation's initial full Stream 0 flag clear. This did not
+block the measured transfer and learner logic was not changed for cleanup.
+
+### 11. Carry-over
+
+From Week 3: exactly one P1 correct-baud UART wire-timing / logic-analyzer evidence
+item remains OPEN, due 2026-09-06. W04D04 evidence does not close it.
+From W04D04: no P0 blocker; recorded lab limitations are non-blocking.
+Recovery: ACTIVE EXECUTION RECOVERY; canonical dates and remaining sequence unchanged.
+W04D05 remains NOT STARTED. Latest competency remains W03-C-UART-FOUND — COMPETENCY_PASS.
+
+### 12. Next Action
+
+BOOT W04D05 only after Project Chat independently verifies this END DAY report;
+read the authoritative HardFault day card and establish the controlled-fault /
+diagnostic-report Day Contract before implementation.
