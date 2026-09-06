@@ -4340,3 +4340,180 @@ W04D05 remains NOT STARTED. Latest competency remains W03-C-UART-FOUND — COMPE
 BOOT W04D05 only after Project Chat independently verifies this END DAY report;
 read the authoritative HardFault day card and establish the controlled-fault /
 diagnostic-report Day Contract before implementation.
+
+---
+
+## 2026-09-06 — Week 04 / Day 05
+
+### 1. Planned Outcome
+
+Create a controlled HardFault, capture fault status and stacked execution
+context, correlate the faulting PC to source/disassembly, form an evidence-based
+root cause, apply a minimal fix, and record regression in a HardFault report.
+Canonical W04D05 date remains 2026-09-04; execution completed 2026-09-06.
+
+### 2. Actual Status
+
+GREEN / CLOSED / ARTIFACT_PASS
+
+Normal assisted learning only; W04D06 NOT STARTED; no active competency gate.
+Roadmap review remains NOT_DUE at this execution position.
+
+### 3. Focused Time
+
+Available: 5h — learner supplied
+Planned: 5h — learner supplied
+Actual: 2h30 — learner supplied
+
+The stop condition was achieved early. The unused 2h30 is not classified as
+lost or unrecoverable execution variance. Recovery remains ACTIVE because
+execution is still behind the canonical Week 4 calendar.
+
+### 4. Independent Work
+
+The learner selected and implemented a controlled 32-bit read from `0x00100000`
+on STM32F446RE, implemented the naked HardFault wrapper and C capture function,
+performed the first hardware/debugger attempt, measured fault status and the raw
+exception frame, correlated the stacked context to disassembly, formed the root
+cause, applied the minimal switch fix, ran the normal regression, and retained
+controlled-fault reproduction.
+
+The first handwritten/transcribed stacked context contained a PC/register
+inconsistency. Project Chat did not accept it as final evidence and requested a
+direct raw eight-word frame re-measurement. Corrected evidence was recorded before
+the fix.
+
+### 5. AI Usage
+
+Highest AI level used: AI-3
+What AI helped with: Project Chat supplied theory/pre-check and post-attempt
+review, detected the inconsistent first transcription, requested raw-frame
+re-measurement, and reviewed corrected evidence. The repository executor
+prepared neutral starter infrastructure and performed closure formatting,
+bookkeeping, and validation.
+Core learner implementation provided by AI: NO.
+Competencies contaminated: NONE; no competency was awarded or invalidated.
+Independent retest required: NOT REQUIRED for this normal learning closure.
+
+### 6. Artifact Result
+
+Artifact: controlled precise BusFault-to-HardFault triage report with measured
+fault status, corrected raw exception frame, disassembly correlation, minimal
+fix, normal regression, and retained controlled reproduction.
+
+Build command: `powershell -ExecutionPolicy Bypass -File .\build.ps1 -Clean`
+from `firmware/stm32/w04d05-hardfault-triage/`.
+
+Build result: PASS / exit 0; text=868, data=0, bss=1616, dec=2484, hex=9b4;
+only inherited non-blocking `nosys` warnings `_close`, `_lseek`, `_read`, `_write`.
+
+Learner source mutation by executor: NONE.
+
+### 7. Evidence
+
+- `learning/week-04/day-05/HARDFAULT_REPORT_W04D05.md`
+- `learning/week-04/day-05/SUBMIT_W04D05.md`
+- `learning/week-04/day-05/TODO_W04D05_HARDFAULT.md`
+- `learning/week-04/day-05/Screenshot_1.png`
+- Screenshot SHA-256:
+  `7CE0C019B2DC4936EBF33B2638658E26073B6498115D884E6CFB13172F8CC786`
+- `firmware/stm32/w04d05-hardfault-triage/main.c`
+- `firmware/stm32/w04d05-hardfault-triage/fault_diag.c`
+- `firmware/stm32/w04d05-hardfault-triage/fault_diag.h`
+
+`Screenshot_1.png` is fault/reproduction evidence: STM32CubeProgrammer reported
+loss of connection/core-ID access during the intentionally faulting
+configuration. It is not evidence that the normal regression remained connected.
+
+### 8. Measurements
+
+- `HFSR = 0x40000000` (`FORCED = 1`)
+- `CFSR = 0x00008200` (`PRECISERR = 1`, `BFARVALID = 1`)
+- `MMFAR = 0x00000000`, `MMFARVALID = 0`
+- `BFAR = 0x00100000`
+- handler LR / `EXC_RETURN = 0xFFFFFFF9`
+- exception-frame pointer `0x2001FFE0`
+- raw stacked R3 `0x00100000`
+- stacked PC `0x08000206`
+- `0x08000206: ldr r3, [r3, #0]`
+
+The measured status, valid BFAR, raw stacked R3, stacked PC, and disassembly
+converge on the intentional dereference in `trigger_controlled_fault()`. Because
+BusFault was not enabled separately, the precise BusFault escalated to HardFault.
+
+### 9. Understanding Check
+
+The learner used status registers, BFAR validity, raw stacked context, and
+disassembly as mutually reinforcing evidence. The inconsistent first
+transcription was not accepted; the learner measured the raw frame again before
+forming the final root-cause statement and applying the fix.
+
+#### Minimal Fix and Regression
+
+The learner changed `ENABLE_CONTROLLED_FAULT` from `1` to `0`, removing the
+intentional invalid dereference from normal execution while preserving the
+diagnostic handler and reproduction harness. Final source retains switch `0`.
+
+Clean build from `firmware/stm32/w04d05-hardfault-triage/`:
+`powershell -ExecutionPolicy Bypass -File .\build.ps1 -Clean`.
+
+Executor result: PASS / exit 0; `text=868`, `data=0`, `bss=1616`, `dec=2484`,
+`hex=9b4`; inherited non-blocking `nosys` warnings `_close`, `_lseek`, `_read`,
+and `_write` only. The learner-reported size was four text bytes lower; current
+disassembly shows two explicit initial Thumb `nop` instructions occupying four
+bytes. Learner source was preserved and actual closure size is recorded.
+
+Learner-observed normal run reached the terminal loop in `main()`, did not enter
+`HardFault_Handler`, and did not trigger the breakpoint in `fault_diag_capture()`.
+With switch `1`, the learner reproduced the same CFSR/HFSR/BFAR/stacked-R3/
+stacked-PC signature, then returned final source to switch `0`.
+
+#### Evidence Integrity
+
+- `learning/week-04/day-05/HARDFAULT_REPORT_W04D05.md`
+- `learning/week-04/day-05/SUBMIT_W04D05.md`
+- `learning/week-04/day-05/TODO_W04D05_HARDFAULT.md`
+- `learning/week-04/day-05/Screenshot_1.png`
+- Screenshot SHA-256:
+  `7CE0C019B2DC4936EBF33B2638658E26073B6498115D884E6CFB13172F8CC786`
+- `firmware/stm32/w04d05-hardfault-triage/main.c`
+- `firmware/stm32/w04d05-hardfault-triage/fault_diag.c`
+- `firmware/stm32/w04d05-hardfault-triage/fault_diag.h`
+
+`Screenshot_1.png` is fault/reproduction evidence: STM32CubeProgrammer reported
+loss of connection/core-ID access during the intentionally faulting
+configuration. It is not evidence that the normal regression remained connected.
+
+#### AI / Ownership Chronology
+
+Highest AI level used: AI-3.
+
+Project Chat provided theory/pre-check and post-attempt review, detected the
+inconsistent first transcription, requested raw-frame re-measurement, and
+reviewed the corrected evidence. The repository executor prepared neutral
+starter infrastructure and performed closure formatting, bookkeeping, and
+validation. Learner implementation, raw measurements, diagnosis, fix, and
+regression remained learner-owned.
+
+No scored gate occurred. No competency result is created or invalidated. Latest
+verified competency remains `W03-C-UART-FOUND — COMPETENCY_PASS`.
+
+### 10. Defects / Failed Tests
+
+This artifact demonstrates one controlled precise BusFault-to-HardFault triage
+path. It does not establish production-grade recovery or coverage of every
+HardFault class. Buffered-write/imprecise BusFault behavior was not part of the
+measured artifact.
+
+P0 blocker: NONE discovered.
+
+### 11. Carry-over
+
+The separate Week 3 P1 correct-baud UART wire-timing/direct-measurement evidence
+remains OPEN, due 2026-09-06. W04D05 does not close or waive it. Recovery remains
+ACTIVE; W04D06 is next and the Foundation MCU gate is not started here.
+
+### 12. Next Action
+
+BOOT W04D06 as a separate transaction after independent remote verification of
+this closure. Do not silently advance to the Foundation MCU gate.

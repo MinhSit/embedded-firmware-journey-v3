@@ -1452,3 +1452,68 @@ Notes:
 - Planned Focused Time was not persisted at BOOT and is not reconstructed.
 - Evidence images were visually verified and retained without edits.
 - Week 3 UART timing carry-over remains OPEN; W04D05 remains NOT STARTED.
+
+---
+
+## 2026-09-06 — W04D05 HardFault Triage
+
+Highest AI level:
+AI-3
+
+Learning mode:
+Normal learning; no scored competency gate.
+
+Chronology / what AI contributed:
+1. The learner selected and implemented the controlled-fault scenario and made
+   a meaningful first hardware/debugger attempt.
+2. Project Chat supplied theory/pre-check and AI-3 post-attempt review.
+3. Project Chat identified that the first transcribed PC/R3 values conflicted
+   with the supplied disassembly and requested a direct raw eight-word
+   exception-frame measurement.
+4. The learner performed the re-measurement; corrected stacked PC
+   `0x08000206`, stacked R3 `0x00100000`, and valid BFAR `0x00100000`
+   independently converged.
+5. The learner selected and applied the minimal compile-time switch fix, ran the
+   normal regression, reproduced the controlled fault again, and returned final
+   source to `ENABLE_CONTROLLED_FAULT = 0`.
+6. The repository executor formatted learner-supplied records, ran build and
+   repository validation, and performed bounded closure bookkeeping.
+
+Files/functions materially assisted:
+- `learning/week-04/day-05/HARDFAULT_REPORT_W04D05.md`
+- `learning/week-04/day-05/TODO_W04D05_HARDFAULT.md`
+- `learning/week-04/day-05/SUBMIT_W04D05.md`
+- `firmware/stm32/w04d05-hardfault-triage/PROVENANCE.md`
+- `roadmap-control/current-state.md`, `daily-log.md`, `ai-usage-log.md`
+
+Core learner implementation provided by AI:
+NO. The controlled read, naked HardFault wrapper, SCB capture, basic-frame
+extraction, measurements, diagnosis, minimal fix, and regression were learner-owned.
+
+Learner-owned contribution:
+- controlled-fault choice and implementation;
+- first hardware/debugger attempt;
+- fault-status and raw exception-frame measurements;
+- disassembly correlation and root-cause reasoning;
+- minimal fix, normal regression, and controlled reproduction.
+
+Gate answer revealed:
+NO ACTIVE GATE. W04D05 was normal learning and no independent competency answer
+was supplied.
+
+Competency affected:
+NONE. W04D05 provides AI-3 artifact evidence only. No new `COMPETENCY_PASS` is
+created and no existing competency is invalidated. `W03-C-UART-FOUND —
+COMPETENCY_PASS` remains the latest verified competency.
+
+Special retest:
+NOT REQUIRED for this normal learning closure; no competency result was awarded.
+
+Notes:
+- Available Focused Time: 5h — learner supplied.
+- Planned Focused Time: 5h — learner supplied.
+- Actual Focused Time: 2h30 — learner supplied.
+- Stop condition was achieved early; unused time is not classified as lost or
+  unrecoverable execution variance.
+- Screenshot evidence remained learner-owned and unedited.
+- Week 3 UART timing/direct-measurement carry-over remains OPEN.
