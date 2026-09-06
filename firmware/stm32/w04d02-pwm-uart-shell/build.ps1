@@ -45,6 +45,7 @@ $commonFlags = @(
     '-mfloat-abi=hard',
     '-DSTM32F446xx',
     '-Iinclude',
+    '-Ibsp',
     '-ffunction-sections',
     '-fdata-sections',
     '-Wall',
@@ -58,6 +59,9 @@ Push-Location $labRoot
 try {
     & $gcc @commonFlags '-std=gnu11' '-c' 'main.c' '-o' 'build/main.o'
     if ($LASTEXITCODE -ne 0) { throw 'main.c compilation failed.' }
+
+    & $gcc @commonFlags '-std=gnu11' '-c' 'bsp/bsp_pwm.c' '-o' 'build/bsp_pwm.o'
+    if ($LASTEXITCODE -ne 0) { throw 'bsp_pwm.c compilation failed.' }
 
     & $gcc @commonFlags '-std=gnu11' '-c' 'pwm.c' '-o' 'build/pwm.o'
     if ($LASTEXITCODE -ne 0) { throw 'pwm.c compilation failed.' }
@@ -90,6 +94,7 @@ try {
         '-static',
         'build/startup_stm32f446retx.o',
         'build/system_stm32f4xx.o',
+        'build/bsp_pwm.o',
         'build/main.o',
         'build/pwm.o',
         'build/uart_polling.o',

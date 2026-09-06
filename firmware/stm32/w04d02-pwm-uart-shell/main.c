@@ -1,4 +1,5 @@
 #include "uart_polling.h"
+#include "bsp_pwm.h"
 #include "pwm.h"
 #include <stdint.h>
 #include <stdbool.h>
@@ -42,7 +43,6 @@ static bool parse_u32(const char *s, uint32_t *out_val)
         }
         uint32_t digit = (uint32_t)(*s - '0');
 
-        /* Kiểm tra tràn uint32 trước khi thực hiện val = val * 10 + digit */
         if (val > (UINT32_MAX / 10U)) {
             return false;
         }
@@ -114,11 +114,22 @@ static void handle_pwm_command(const char *cmd)
 
 int main(void)
 {
-    /* Initialize USART2: 16 MHz APB1 peripheral clock, 115200 baud */
+    /* 1. Khởi tạo UART để đảm bảo kênh truyền thông/chẩn đoán sẵn sàng */
     uart_init(16000000U, 115200U);
 
-    /* Initialize PWM peripheral */
-    pwm_init();
+    /* 2. Khởi tạo phần cứng PWM của Board (GPIO, Clocks) */
+    bsp_pwm_hw_init();
+
+    /* 3. Lấy cấu hình phần cứng từ BSP và inject vào PWM driver */
+    TIM_TypeDef *tim_instance = bsp_pwm_get_tim_instance();
+    uint32_t tim_clock_hz = bsp_pwm_get_timer_clock_hz();
+
+    if (!pwm_init(tim_instance, tim_clock_hz)) {
+        uart_send_str("ERR: PWM init failed\r\n");
+        while (1) {
+            /* Trap an toàn ngăn shell loop chạy khi ngoại vi chưa sẵn sàng */
+        }
+    }
 
     uart_send_str("W04D02 PWM UART Shell Ready\r\n");
 
@@ -127,7 +138,7 @@ int main(void)
     bool discarding_overlong = false;
     uint8_t rx_byte = 0U;
 
-while (1) {
+    while (1) {
         if (uart_rx_get_byte(&rx_byte)) {
             if (rx_byte == '\r') {
                 continue;
@@ -135,7 +146,6 @@ while (1) {
 
             if (rx_byte == '\n') {
                 if (discarding_overlong) {
-                    /* Đã drain hết toàn bộ phần dư của dòng dài: resync hoàn tất, mới gửi phản hồi lỗi */
                     discarding_overlong = false;
                     line_len = 0U;
                     uart_send_str("ERR: Line too long\r\n");
@@ -146,14 +156,12 @@ while (1) {
                 }
             } else {
                 if (discarding_overlong) {
-                    /* Bỏ qua nhanh từng byte dư thừa mà không block TX */
                     continue;
                 }
 
                 if (line_len < (SHELL_MAX_LINE_LEN - 1U)) {
                     line_buf[line_len++] = (char)rx_byte;
                 } else {
-                    /* Phát hiện quá giới hạn: chỉ bật cờ discard, không gọi hàm TX blocking */
                     discarding_overlong = true;
                     line_len = 0U;
                 }

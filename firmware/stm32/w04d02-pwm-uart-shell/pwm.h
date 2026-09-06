@@ -3,16 +3,16 @@
 
 #include <stdbool.h>
 #include <stdint.h>
+#include "stm32f446xx.h"
 
 /*
- * W04D02 PWM Interface — Neutral Starter Stub
+ * PWM Driver Interface — Minimal Generic (Single Instance, CH1)
  *
- * All implementations, timer/channel selection, GPIO alternate-function
- * configuration, prescaler/auto-reload/compare calculations, and validation
- * policies are learner-owned.
+ * Driver độc lập hoàn toàn với BSP và App.
+ * Nhận instance ngoại vi và bus clock qua cơ chế dependency injection.
  */
 
-void pwm_init(void);
+bool pwm_init(TIM_TypeDef *tim, uint32_t timer_clock_hz);
 bool pwm_set_frequency(uint32_t frequency_hz);
 bool pwm_set_duty_cycle(uint32_t duty_percent);
 uint32_t pwm_get_frequency(void);

@@ -1517,3 +1517,79 @@ Notes:
   unrecoverable execution variance.
 - Screenshot evidence remained learner-owned and unedited.
 - Week 3 UART timing/direct-measurement carry-over remains OPEN.
+
+---
+
+## 2026-09-06 — W04D06 BSP / Driver / App Refactor and Review
+
+Highest AI level:
+AI-3
+
+Learning mode:
+Normal assisted learning; no scored competency gate.
+
+Chronology / what AI contributed:
+1. The learner chose the W04D02 PWM vertical slice and owned the initial
+   architecture reasoning, dependency invariants, and minimal-generic decision.
+2. Project Chat supplied theory/pre-check and post-attempt AI-3 review/debug
+   guidance after a meaningful learner attempt.
+3. The learner owned clock/PSC reasoning, implementation, build execution,
+   hardware PWM measurement, CMSIS/LL/HAL comparison, claim/evidence mapping,
+   limitations, self-explanation, and reviewer questions.
+4. Project Chat supplied evidence/cursor guidance and documentation/closure
+   orchestration without replacing the learner's architecture or implementation.
+5. The repository executor prepared neutral W04D06 templates, consolidated
+   learner-supplied documentation, ran source/build/evidence validation, and
+   performed closure bookkeeping.
+6. After separate precise authorization, the executor removed exactly one
+   trailing space from each of two comment lines in `bsp/bsp_pwm.c`. No token,
+   logic, or line-ending change was made.
+
+Files/functions materially assisted:
+- `learning/week-04/day-06/TODO_W04D06_REFACTOR_REVIEW.md`
+- `learning/week-04/day-06/SUBMIT_W04D06.md`
+- `learning/week-04/day-06/REVIEW_REQUEST_W04D06.md`
+- `roadmap-control/daily-log.md`
+- `roadmap-control/ai-usage-log.md`
+- `roadmap-control/current-state.md`
+- Mechanical-only trailing-space cleanup in
+  `firmware/stm32/w04d02-pwm-uart-shell/bsp/bsp_pwm.c`
+
+Core learner implementation provided by AI:
+NO. Target choice, architecture boundaries, dependency invariants, injected
+timer/clock design, clock/PSC reasoning, source/build implementation, hardware
+measurement, comparison reasoning, evidence mapping, limitations, and reviewer
+questions were learner-owned.
+
+Learner-owned contribution:
+- selected and bounded the PWM refactor target;
+- designed BSP/driver/app responsibilities and dependency direction;
+- chose minimal timer-instance and clock injection with fixed Channel 1;
+- implemented the refactor and surgical build integration;
+- ran the clean build and UART/PWM hardware checks;
+- authored CMSIS/LL/HAL reasoning, evidence claims, limitations,
+  self-explanation, and reviewer questions.
+
+Gate answer revealed:
+NO ACTIVE GATE. W04D06 was normal learning. W04D07 and CP-02 were not started,
+and no scored answer was supplied.
+
+Competency affected:
+NONE. W04D06 provides AI-3 artifact evidence only. No new `COMPETENCY_PASS` is
+created and no existing competency is invalidated. `W03-C-UART-FOUND —
+COMPETENCY_PASS` remains the latest verified competency.
+
+Special retest:
+NOT REQUIRED for this normal learning closure; no competency result was awarded.
+
+Notes:
+- Result: YELLOW / CLOSED / ARTIFACT_PASS.
+- Available Focused Time: 6h — learner supplied.
+- Planned Focused Time: 6h — learner supplied.
+- Actual Focused Time: 4h — learner supplied.
+- Variance: -2h; reason NOT SUPPLIED and not inferred.
+- External review request is READY_TO_SEND; reviewer UNASSIGNED; sent NO;
+  feedback NONE. This missing required action is the reason for YELLOW.
+- Week 3 UART wire-timing P1 remains OPEN / UNCHANGED. A measurement attempt
+  occurred, but retained evidence was insufficient for closure.
+- Screenshot evidence remained learner-owned and byte-preserved.

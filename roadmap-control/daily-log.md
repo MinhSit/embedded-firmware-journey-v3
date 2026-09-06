@@ -4517,3 +4517,160 @@ ACTIVE; W04D06 is next and the Foundation MCU gate is not started here.
 
 BOOT W04D06 as a separate transaction after independent remote verification of
 this closure. Do not silently advance to the Foundation MCU gate.
+
+---
+
+## 2026-09-06 — Week 04 / Day 06
+
+### 1. Planned Outcome
+
+Complete a bounded learner-owned `bsp` / `driver` / `app` refactor, compare
+CMSIS / LL / HAL, audit claims against evidence, and prepare external review #1.
+Canonical W04D06 date remains 2026-09-05; execution completed 2026-09-06.
+
+### 2. Actual Status
+
+YELLOW / CLOSED / ARTIFACT_PASS
+
+The technical/refactor artifact and review-request artifact are complete, but
+external review #1 was not sent because no eligible human reviewer is assigned.
+This is not a technical FAIL. W04D07 remains NOT STARTED; CP-02 was not started.
+
+### 3. Focused Time
+
+Available: 6h — learner supplied
+Planned: 6h — learner supplied
+Actual: 4h — learner supplied
+Variance: -2h versus plan
+Variance reason: NOT SUPPLIED — no reason inferred
+
+### 4. Independent Work
+
+The learner selected `firmware/stm32/w04d02-pwm-uart-shell/` and bounded the
+refactor to the PWM vertical slice. The learner owned the architecture reasoning,
+dependency invariants, minimal-generic decision, clock/PSC reasoning, source and
+build implementation, clean-build execution, UART/PWM hardware regression,
+CMSIS/LL/HAL comparison, evidence mapping, limitations, self-explanation, and
+reviewer questions.
+
+Board-specific GPIOA/PA5/AF1, TIM2 selection, RCC enables, and the current
+16 MHz timer-clock assumption are isolated in BSP. The PWM driver owns timer/PWM
+mechanism and math through injected `TIM_TypeDef *` and timer clock. `main.c`
+owns composition, startup order, UART shell orchestration, and user-facing
+`OK` / `ERR` policy.
+
+### 5. AI Usage
+
+Highest AI level used: AI-3
+What AI helped with: Project Chat supplied theory/pre-check, post-attempt AI-3
+review/debug guidance, evidence/cursor guidance, and documentation/closure
+orchestration. The repository executor supplied neutral prep, documentation and
+bookkeeping, validation, and the separately authorized two-space mechanical
+trailing-whitespace cleanup.
+Files/functions materially assisted: W04D06 learning documents and closure
+control records; no learner architecture or core refactor implementation was
+substituted.
+Competencies contaminated: NONE; this normal assisted artifact does not award
+or invalidate competency.
+Independent retest required: NOT REQUIRED for this normal learning closure; no
+new competency result was awarded.
+
+### 6. Artifact Result
+
+Artifact: bounded TIM2/Channel-1 PWM BSP/driver/app refactor, clean build,
+exercised UART/PWM regression evidence, CMSIS/LL/HAL comparison, and external
+review request in READY_TO_SEND / REVIEWER_UNASSIGNED / NOT_SENT state.
+
+Files changed:
+- `firmware/stm32/w04d02-pwm-uart-shell/build.ps1`
+- `firmware/stm32/w04d02-pwm-uart-shell/main.c`
+- `firmware/stm32/w04d02-pwm-uart-shell/pwm.c`
+- `firmware/stm32/w04d02-pwm-uart-shell/pwm.h`
+- `firmware/stm32/w04d02-pwm-uart-shell/bsp/bsp_pwm.c`
+- `firmware/stm32/w04d02-pwm-uart-shell/bsp/bsp_pwm.h`
+- `learning/week-04/day-06/TODO_W04D06_REFACTOR_REVIEW.md`
+- `learning/week-04/day-06/SUBMIT_W04D06.md`
+- `learning/week-04/day-06/REVIEW_REQUEST_W04D06.md`
+- `learning/week-04/day-06/Screenshot_1.png`
+- `learning/week-04/day-06/Screenshot_2.png`
+- `learning/week-04/day-06/Screenshot_3.png`
+
+Build command: `powershell -ExecutionPolicy Bypass -File .\build.ps1 -Clean`
+from `firmware/stm32/w04d02-pwm-uart-shell/`.
+
+Build result: PASS / exit 0; text=5168, data=0, bss=1592, dec=6760,
+hex=1a68; inherited non-blocking `nosys` warnings `_close`, `_lseek`, `_read`,
+and `_write` only. Pre-refactor baseline was 4876/0/1592/6468; observed delta
+was +292 text bytes and 0 static-RAM bytes.
+
+Test result: no regression was observed in the exercised build/UART/PWM cases.
+This does not claim full-range hardware validation or complete behavior
+preservation.
+
+### 7. Evidence
+
+Commit: SELF — containing closure commit
+Logs: clean-build result recorded above.
+Captures:
+- `learning/week-04/day-06/Screenshot_1.png` — SHA-256
+  `927D8AA0C176A835DE39A0270B5420525B18381F08E71249FCF6587FB39D065E`
+- `learning/week-04/day-06/Screenshot_2.png` — SHA-256
+  `2A9084B7C6186479755865265A401DD4D8AA2480815DE73110E4E5DA8DD15B1D`
+- `learning/week-04/day-06/Screenshot_3.png` — SHA-256
+  `5B1564ED388C7BCB83F1B3FE3C0A751866ED15A9B2A218F750F8B79524713049`
+Reports:
+- `learning/week-04/day-06/TODO_W04D06_REFACTOR_REVIEW.md`
+- `learning/week-04/day-06/SUBMIT_W04D06.md`
+- `learning/week-04/day-06/REVIEW_REQUEST_W04D06.md`
+Video/demo: NONE recorded.
+Other: reviewer UNASSIGNED; request READY_TO_SEND; sent NO; feedback NONE.
+
+### 8. Measurements
+
+Expected: nominal 1 kHz PWM and requested 25% duty for the exercised command.
+Observed: Serial Monitor showed 1000 Hz / 50%, accepted `pwm duty 25`, then
+showed 1000 Hz / 25%; `pwm duty 101` returned `ERR: Invalid duty`.
+Values/errors/timing: physical period `992.375 us`, reciprocal approximately
+`1.00768 kHz`; HIGH time `248.042 us`; measured duty approximately `25.0%`.
+Exact 1.000 kHz, zero clock error, and full-range wire validation are not claimed.
+
+### 9. Understanding Check
+
+Can explain independently: board-specific facts versus timer mechanism versus
+application policy; dependency injection at the composition root; PSC/ARR/CCR1
+ownership; direct-register versus LL/HAL trade-offs; and evidence-to-claim
+boundaries.
+Still unclear / future-facing: production lifecycle and concurrency design for a
+single static driver instance; no production-generic framework claim is made.
+
+### 10. Defects / Failed Tests
+
+IDs: W04D06-REVIEW-OPEN — external review #1 remains unsent because no eligible
+reviewer is assigned. This required action is the reason for YELLOW.
+Root cause: REVIEWER_UNASSIGNED / NOT_SENT; no fake reviewer or feedback created.
+Hypothesis: NONE recorded for this workflow dependency.
+
+Re-init/de-init lifecycle behavior is not designed or validated. The driver was
+validated only on TIM2 / Channel 1 with the current 16 MHz BSP clock assumption.
+P0 technical blocker: NONE discovered.
+
+### 11. Carry-over
+
+Task 1: External review #1 remains READY_TO_SEND / REVIEWER_UNASSIGNED / NOT_SENT.
+Closure criteria: an eligible human reviewer receives the request; feedback or
+truthful review disposition is then recorded under the governing workflow.
+
+Task 2: Week 3 P1 direct correct-baud UART wire-timing evidence remains OPEN /
+UNCHANGED. A physical UART TX waveform was located and rough bit-scale timing was
+observed, but the retained evidence was insufficient for closure.
+Closure criteria: a genuine logic-analyzer capture or equivalent direct
+measurement cleanly demonstrates configured UART baud/timing. Verified physical
+baud timing is not claimed here.
+
+Recovery remains ACTIVE EXECUTION RECOVERY. Week 4 remains ACTIVE and not closed.
+
+### 12. Next Action
+
+BOOT W04D07 as a separate transaction after independent verification of this
+closure. Preserve the Foundation MCU gate firewall; do not begin the scored gate
+inside this closure transaction.
